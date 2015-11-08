@@ -28,10 +28,18 @@
             </div>
         </div>
        		<div id="userinfo">
-            	<span id="e-name" contenteditable="<%= @editable %>" placeholder="Name"><%= @invoice.name %></span><br>
-                <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address"><%= @invoice.address_line1 %></span><br>
-                <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip"><%= @invoice.address_line2 %></span><br>
-                <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone"><%= @invoice.phone %></span>
+            	<span id="e-name" contenteditable="<%= @editable %>" placeholder="Name">
+                <%= @invoice.name %>
+              </span><br>
+              <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address">
+                <%= @invoice.address_line1 %>
+              </span><br>
+              <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip">
+                <%= @invoice.address_line2 %>
+              </span><br>
+              <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone">
+                <%= @invoice.phone %>
+              </span>
             </div>
             <div id="dateterms">
             	<table border="0" cellspacing="0" cellpadding="0">
@@ -84,18 +92,32 @@
                   <th width="10%" align="right">Rate</th>
                   <th width="18%" align="right">Amount</th>
                 </tr>
-                <tr changed="false">
-                  <td align="left" class="jobdescriptioncell"><span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description"></span></td>
-                  <td align="right" class="quantitycell"><span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity"></span></td>
-                  <td align="right" class="ratecell"><span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate"></span></td>
-                  <td align="right" class="amountcell">
-                  	<div class="amountbox"></div>
-                  	<div class="jobcontrols">
-                    	<div class="delete"></div>
-                        <div class="insert"></div>
-                    </div>
-                  </td>
-                </tr>
+                <% @invoice.jobs.each do |job| %>
+                  <tr changed="false">
+                    <td align="left" class="jobdescriptioncell">
+                      <span class="e-jobdescription" contenteditable="<%= @editable %>">
+                        <%= job.job_description %>
+                      </span>
+                    </td>
+                    <td align="right" class="quantitycell">
+                      <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+                        <%= job.job_quantity %>
+                      </span>
+                    </td>
+                    <td align="right" class="ratecell">
+                      <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
+                        <%= job.job_rate %>
+                      </span>
+                    </td>
+                    <td align="right" class="amountcell">
+                    	<div class="amountbox">$ <%= job.job_quantity * job.job_rate %></div>
+                    	<div class="jobcontrols">
+                      	<div class="delete"></div>
+                          <div class="insert"></div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
        </section>
@@ -106,13 +128,13 @@
             Total:
        </section>
        
-       <section id="notes">
-       		<div class="sectionstatus green"></div>
-       		<div class="sectiontitle">Notes:</div>
-            <span id="e-notes" contenteditable="<%= @editable %>" placeholder="Type any notes regarding the invoice here."></span>
+        <section id="notes">
+            <div class="sectiontitle notestitle">Notes:</div>
+            <div id="e-notes" contenteditable="<%= @editable %>"><%= print_multiline(@invoice.notes) %></div>
        </section>
        
     </div>
+
 </div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |

@@ -17,6 +17,7 @@
 #invoice {
 	background:#fff;
 	display:block;
+	border: 1px solid #dedede;
 }
 
 .hiddencontainer {
@@ -165,14 +166,14 @@
 
 /* Hide input fields to allow text to be sent from content editable spans */
 
-#invoicewrapper section input {
-	display:none;
-	position:absolute;
-	left:-9999px;
+#invoicewrapper section input, #invoicewrapper section textarea {
+	display:none !important;
+	position:absolute !important;
+	left:-9999px !important;
 }
 
 #invoicewrapper span {
-	min-width:25px;
+	min-width:5px;
 	display:inline-block;
 	max-width:100%;
 }
@@ -216,6 +217,8 @@ section {
 	font-weight:300;
 	line-height:1.3em;
 }
+
+
 
 section:after {
 	content:"";
@@ -339,10 +342,9 @@ section:after {
 .jobcontrols {
 	position: absolute;
     float: right;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -60px;
+    right: -58px;
     width: 60px;
+    top:0;
     padding: 15px;
     background-color: #fff;
 	-webkit-touch-callout: none;
@@ -351,6 +353,16 @@ section:after {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border-right: 1px solid #c9c9c9;
+    bottom:-1px;
+}
+
+#invoiceitems tr:nth-child(2) .jobcontrols {
+	border-top: 1px solid #c9c9c9;
+}
+
+#invoiceitems tr:last-of-type .jobcontrols {
+	border-bottom: 1px solid #c9c9c9;
 }
 
 #invoicewrapper.show .jobcontrols {
@@ -444,8 +456,26 @@ td.ratecell:before {
 
 #notes {
 	border-bottom:none;
+	padding:0;
+}
+
+#notes p {
+	margin-top:0;
+}
+
+#notes p:last-child {
+	margin-bottom:0;
 }
 
 #e-notes {
 	display:block !important;
+	padding:48px 33px 22px 33px;
+	margin:0;
+}
+
+.notestitle {
+	position: absolute;
+    z-index: 200;
+    top: 25px;
+    left: 33px;
 }

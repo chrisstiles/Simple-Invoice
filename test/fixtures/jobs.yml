@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job_description: MyText
+  job_quantity: 1
+  job_rate: 1
+  invoice_id: 
+
+two:
+  job_description: MyText
+  job_quantity: 1
+  job_rate: 1
+  invoice_id: 

@@ -25,6 +25,8 @@ class InvoicesController < ApplicationController
     @editable = "true"
     @invoice = Invoice.new
     @number = set_invoice_number
+
+    @invoice.jobs.build
   end
 
   # GET /invoices/1/edit
@@ -81,9 +83,7 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(
-        :invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name,
-        :client_address_line1, :client_address_line2)
+      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, jobs_attributes: [ :job_description, :job_quantity, :job_rate ])
     end
 
     def set_invoice_number
