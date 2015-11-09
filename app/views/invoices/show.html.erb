@@ -106,11 +106,11 @@
                     </td>
                     <td align="right" class="ratecell">
                       <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
-                        <%= job.job_rate %>
+                        <%= number_to_currency(job.job_rate, format: '%u %n') %>
                       </span>
                     </td>
                     <td align="right" class="amountcell">
-                    	<div class="amountbox">$ <%= job.job_quantity * job.job_rate %></div>
+                    	<div class="amountbox"><%= print_subtotal(job.job_quantity,job.job_rate) %></div>
                     	<div class="jobcontrols">
                       	<div class="delete"></div>
                           <div class="insert"></div>

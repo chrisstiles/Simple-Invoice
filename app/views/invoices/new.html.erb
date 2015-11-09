@@ -133,34 +133,35 @@
             </div>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tbody>
-                  <%= f.fields_for :jobs do |c| %>
                       <tr class="tableheading">
                         <th width="61%" align="left">Description</th>
                         <th width="11%" align="right">Quantity</th>
                         <th width="10%" align="right">Rate</th>
                         <th width="18%" align="right">Amount</th>
                       </tr>
-                      <tr changed="false">
-                        <td align="left" class="jobdescriptioncell">
-                              <%= c.text_area :job_description %>
-                              <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description" name="invoice[jobs][job_description]"></span>
-                        </td>
-                        <td align="right" class="quantitycell">
-                              <%= c.number_field :job_quantity %>
-                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity" name="invoice[jobs][job_quantity]"></span>
-                        </td>
-                        <td align="right" class="ratecell">
-                              <%= c.number_field :job_rate %>
-                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate" name="invoice[jobs][job_rate]"></span>
-                        </td>
-                        <td align="right" class="amountcell">
-                              <div class="amountbox"></div>
-                              <div class="jobcontrols">
-                              <div class="delete"></div>
-                              <div class="insert"></div>
-                          </div>
-                        </td>
-                      </tr>
+                      <%= f.fields_for :jobs do |c| %>
+
+                            <tr changed="false">
+                              <td align="left" class="jobdescriptioncell">
+                                    <%= c.text_area :job_description, class: "job-description-box" %>
+                                    <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description"></span>
+                              </td>
+                              <td align="right" class="quantitycell">
+                                    <%= c.number_field :job_quantity, class: "job-quantity-box" %>
+                                    <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity"></span>
+                              </td>
+                              <td align="right" class="ratecell">
+                                    <%= c.number_field :job_rate, class: "job-rate-box" %>
+                                    <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate"></span>
+                              </td>
+                              <td align="right" class="amountcell">
+                                    <div class="amountbox"></div>
+                                    <div class="jobcontrols">
+                                    <div class="delete"></div>
+                                    <div class="insert"></div>
+                                </div>
+                              </td>
+                            </tr>
                   <% end %>
               </tbody>
             </table>

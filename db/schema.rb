@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108200018) do
+ActiveRecord::Schema.define(version: 20151109014839) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "invoice_number"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(version: 20151108200018) do
     t.integer  "job_quantity"
     t.integer  "job_rate"
     t.integer  "invoice_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "will_delete",     default: false
   end
 
   add_index "jobs", ["invoice_id"], name: "index_jobs_on_invoice_id"

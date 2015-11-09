@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  after_action :remove_jobs_set_to_delete, only: [:update]
   
 
   # GET /invoices
@@ -83,7 +84,7 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, jobs_attributes: [ :job_description, :job_quantity, :job_rate ])
+      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     def set_invoice_number
@@ -92,5 +93,9 @@ class InvoicesController < ApplicationController
 
     def archive_invoice
       @invoice.update_attribute(:archived, true)
+    end
+
+    def remove_jobs_set_to_delete
+      Job.where(will_delete: true).destroy_all
     end
 end

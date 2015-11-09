@@ -116,16 +116,10 @@
        <section id="clientinformation">
        	<div class="sectionstatus green"></div>
        		<div class="sectiontitle">Bill To:</div>
-                  <%= f.text_field :client_name %>
-                  <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]">
-                  	<%= @invoice.client_name %>
-                  </span><br>
+                  <%= f.text_field :client_name %><span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
                   <%= f.text_field :client_address_line1 %>
-                  <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]">
-                  	<%= @invoice.client_address_line1 %>
-                  </span><br>
-                  <%= f.text_field :client_address_line2 %>
-                  <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
+                  <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"><%= @invoice.client_address_line1 %></span><br>
+                  <%= f.text_field :client_address_line2 %><span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
        </section>
        
        <section id="invoiceitems">
@@ -136,34 +130,41 @@
                 </div>
             </div>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <%= f.fields_for :jobs do |c| %>
                       <tr class="tableheading">
                         <th width="61%" align="left">Description</th>
                         <th width="11%" align="right">Quantity</th>
                         <th width="10%" align="right">Rate</th>
                         <th width="18%" align="right">Amount</th>
                       </tr>
-                      <tr changed="false">
-                        <td align="left" class="jobdescriptioncell">
-                              <%= c.text_area :job_description %>
-                              <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description" name="invoice[jobs][job_description]"></span>
-                        </td>
-                        <td align="right" class="quantitycell">
-                              <%= c.number_field :job_quantity %>
-                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity" name="invoice[jobs][job_quantity]"></span>
-                        </td>
-                        <td align="right" class="ratecell">
-                              <%= c.number_field :job_rate %>
-                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate" name="invoice[jobs][job_rate]"></span>
-                        </td>
-                        <td align="right" class="amountcell">
-                              <div class="amountbox"></div>
-                              <div class="jobcontrols">
-                              <div class="delete"></div>
-                              <div class="insert"></div>
-                          </div>
-                        </td>
-                      </tr>
+	                      <%= f.fields_for :jobs, @invoice.jobs do |c| %>
+	                      <tr changed="false">
+	                        <td align="left" class="jobdescriptioncell">
+	                              <%= c.text_area :job_description, class: "job-description-box" %>
+	                              <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description">
+	                              	<%= c.object.job_description %>
+	                              </span>
+	                        </td>
+	                        <td align="right" class="quantitycell">
+	                              <%= c.number_field :job_quantity, class: "job-quantity-box" %>
+	                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+									<%= c.object.job_quantity %>
+	                              </span>
+	                        </td>
+	                        <td align="right" class="ratecell">
+	                              <%= c.number_field :job_rate, class: "job-rate-box" %>
+	                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
+	                              	<%= c.object.job_rate %>
+	                              </span>
+	                        </td>
+	                        <td align="right" class="amountcell">
+	                              <div class="amountbox"></div>
+	                              <div class="jobcontrols">
+	                              <div class="delete existing"></div>
+	                              <%= c.hidden_field :will_delete, value: false %>
+	                              <div class="insert"></div>
+	                          </div>
+	                        </td>
+	                      </tr>
                   <% end %>
             </table>
        </section>

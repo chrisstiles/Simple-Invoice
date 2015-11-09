@@ -180,7 +180,7 @@ ready = function() {
 		var contentEditable = $('[contenteditable=true]');
 
 		// Change input field when content editable changes
-		contentEditable.on('keyup', function() {
+		$('#invoice').on('keyup', '[contenteditable=true]', function() {
 			var $this = $(this);
 			var value = $this.html();
 
@@ -199,6 +199,15 @@ ready = function() {
 			}
 
 		});
+
+
+		$('#invoiceitems :input').each(function() {
+			var $this = $(this);
+			var jobVal = $this.val();
+
+			$this.next('[contenteditable=true]').html(jobVal);
+
+		})
 
 		// Change content editable when input changes
 		$('input').on('keyup', function() {
@@ -325,17 +334,47 @@ ready = function() {
 			rowControls.removeClass('activerow');
 		});
 
+
+		// Update the name attributes on each of the inputs in the jobs table to ensure everything saves correctly
+
+		function updateNameValues() {
+			var i = "-1"; // Value used to set the number in the name of each input field [0], [1], etc. Start at -1 to ignore the first row
+
+			$('#invoiceitems tr').each(function() {
+				var $this = $(this);
+				$this.find('.job-description-box').attr('name','invoice[jobs_attributes][' + i + '][job_description]');
+				$this.find('.job-quantity-box').attr('name','invoice[jobs_attributes][' + i + '][job_quantity]');
+				$this.find('.job-rate-box').attr('name','invoice[jobs_attributes][' + i + '][job_rate]');
+				
+				if($this.find('.delete').hasClass('existing')) {
+					var hiddenInput = $this.find('input[type="hidden"]');
+					hiddenInput.attr('name','invoice[jobs_attributes][' + i + '][will_delete]');
+				}
+
+				i++
+			})
+		}
+
+
 		// Add a new job item row when the insert button is clicked
 
-		var afterContent = '<tr changed="false"><td align="left" class="jobdescriptioncell"><span class="e-jobdescription" contenteditable="true" placeholder="Type a job description"></span></td><td align="right" class="quantitycell"><span class="e-quantity" contenteditable="true" placeholder="Quantity"></span></td><td align="right" class="ratecell"><span class="e-rate" contenteditable="true" placeholder="Rate"></span></td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"><div class="delete"></div><div class="insert"></div></div></td></tr>';
+		var afterContent = '<tr changed="false"> <td align="left" class="jobdescriptioncell"> <textarea class="job-description-box"></textarea> <span class="e-jobdescription" contenteditable="true" placeholder="Type a job description"></span> </td><td align="right" class="quantitycell"> <input type="number" class="job-quantity-box"> <span class="e-quantity" contenteditable="true" placeholder="Quantity"></span> </td><td align="right" class="ratecell"> <input type="number" class="job-rate-box"> <span class="e-rate" contenteditable="true" placeholder="Rate"></span> </td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"> <div class="delete"></div><div class="insert"></div></div></td></tr>';
 
 		jobsTable.on('click', '.insert', function() {
 			var row = $(this).parents('tr');
 			row.after(afterContent);
 		
 			contentEditable = $('[contenteditable=true]');
+
+			updateNameValues();
 			checkLastRow();
 		});
+
+		// When editing and the delete button is clicked. Change the hidden field to true to set the item up for deletion
+
+		//$('.existing').on('click', function() {
+		//	var hiddenInput = $(this).parents('tr').children(':input');
+		//});
 
 		// Keep track of what rows have changed
 
@@ -347,12 +386,19 @@ ready = function() {
 		// Delete job item row after delete button is clicked
 
 		function deleteRow(el) {
-			el.parents('tr').remove();
+			var tableRow = el.parents('tr');
+			
+			if (el.hasClass('existing')) {
+				el.next(':input').attr('value','true');
+			}
+
+			tableRow.hide();
 		}
 
 		jobsTable.on('click', '.delete', function() {
-			var hasBeenEdited = $(this).parents('tr').attr('changed');
 			var $this = $(this);
+			var hasBeenEdited = $this.parents('tr').attr('changed');
+			
 			if ($this.hasClass('disabled')) {
 				return false;
 			} else if (hasBeenEdited === 'false') {
@@ -366,6 +412,7 @@ ready = function() {
 				}
 			}
 
+			updateNameValues();
 			checkLastRow();
 		});
 
@@ -373,7 +420,7 @@ ready = function() {
 		// Prevent the last job row from being deleted
 
 		function checkLastRow() {
-			var rowCount = $('#invoiceitems table tr').length;
+			var rowCount = $('#invoiceitems table tr:visible').length;
 			if (rowCount === 2) {
 				$('.delete').addClass('disabled');
 			} else {

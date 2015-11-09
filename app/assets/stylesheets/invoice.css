@@ -270,12 +270,15 @@ section:after {
 	font-weight:600;
 }
 
+#dateterms td {
+	padding-bottom:2px;
+}
+
 #dateterms td.invoicesetting {
 	max-width:100%;
 	width:1%;
 	white-space:nowrap;
 	padding-left:10px;
-	padding-bottom:2px;
 }
 
 .terms {
@@ -434,7 +437,7 @@ section:after {
 	background-color:transparent;
 }
 
-td.ratecell:before {
+#invoicewrapper.edit td.ratecell:before, #invoicewrapper.new td.ratecell:before {
 	display:inline;
 	content:"$";
 	font-weight:300;
