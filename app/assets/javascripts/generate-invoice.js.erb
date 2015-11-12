@@ -228,12 +228,8 @@ ready = function() {
 
 		// Prevent typing letters but allow select all with command and control
 		function isNumber(e) {
-			var a = [16, 190, 9, 37, 38, 39, 40, 46, 8];
+			var a = [16, 190, 9, 37, 38, 39, 40, 46, 8, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
 			var k = e.which;
-
-			for (var i = 48; i < 58; i++) {
-				a.push(i);
-			}
 
 			var isMeta = false;
 
@@ -256,6 +252,26 @@ ready = function() {
 			e.preventDefault();
 		});
 
+		// Prevent scientific notation
+
+		function toFixed(x) {
+		  if (Math.abs(x) < 1.0) {
+		    var e = parseInt(x.toString().split('e-')[1]);
+		    if (e) {
+		        x *= Math.pow(10,e-1);
+		        x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+		    }
+		  } else {
+		    var e = parseInt(x.toString().split('+')[1]);
+		    if (e > 20) {
+		        e -= 20;
+		        x /= Math.pow(10,e);
+		        x += (new Array(e+1)).join('0');
+		    }
+		  }
+		  return x;
+		}
+
 
 		// Calculate subtotals for amount
 
@@ -274,21 +290,34 @@ ready = function() {
 			var amountCell = $this.closest('tr').find('.amountbox');
 
 			if (!isNaN(total)) {
+				total = toFixed(total);
 				amountCell.html('$ ' + (total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")));
 			} else {
 				amountCell.empty();
 			}
 		}
 
+		// Calculate subtotal initially if editing an existing invoice.
+
+		//if (editing) {
+		//	$('.jobrow').each(function() {
+		//		var $this = $(this);
+		//
+		//		var quantity $this.find('')
+		//	});
+		//}
+
+
 		// Calculate invoice total
 
 		var totalBox = $('#invoiceamount');
+		var totalHiddenField = $('#invoice_total');
 
 		function calculateTotal() {
 			var invoiceTotal = 0,
 				addValue;
 
-			$('.amountbox').each(function() {
+			$('.amountbox').filter(':visible').each(function() {
 				addValue = Number($(this).html().replace(/[^0-9\.]+/g, ""));
 				invoiceTotal += addValue;
 			});
@@ -296,8 +325,12 @@ ready = function() {
 			invoiceTotal = parseFloat(Math.round(invoiceTotal * 100) / 100).toFixed(2);
 
 			if (!isNaN(invoiceTotal)) {
-				totalBox.html('$ ' + (invoiceTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")));
+				invoiceTotal = toFixed(invoiceTotal);
+				var totalText = invoiceTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				totalHiddenField.val(totalText);
+				totalBox.html('$ ' + totalText);
 			} else {
+				totalHiddenField.val('0.00');
 				totalBox.html('$ 0.00');
 			}
 
@@ -358,16 +391,19 @@ ready = function() {
 
 		// Add a new job item row when the insert button is clicked
 
-		var afterContent = '<tr changed="false"> <td align="left" class="jobdescriptioncell"> <textarea class="job-description-box"></textarea> <span class="e-jobdescription" contenteditable="true" placeholder="Type a job description"></span> </td><td align="right" class="quantitycell"> <input type="number" class="job-quantity-box"> <span class="e-quantity" contenteditable="true" placeholder="Quantity"></span> </td><td align="right" class="ratecell"> <input type="number" class="job-rate-box"> <span class="e-rate" contenteditable="true" placeholder="Rate"></span> </td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"> <div class="delete"></div><div class="insert"></div></div></td></tr>';
+		var afterContent = '<tr changed="false" class="jobrow"> <td align="left" class="jobdescriptioncell"> <textarea class="job-description-box"></textarea> <span class="e-jobdescription" contenteditable="true" placeholder="Type a job description"></span> </td><td align="right" class="quantitycell"> <input type="text" class="job-quantity-box"> <span class="e-quantity" contenteditable="true" placeholder="Quantity"></span> </td><td align="right" class="ratecell"> <input type="text" class="job-rate-box"> <span class="e-rate" contenteditable="true" placeholder="Rate"></span> </td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"> <div class="delete"></div><div class="insert"></div></div></td></tr>';
 
 		jobsTable.on('click', '.insert', function() {
 			var row = $(this).parents('tr');
 			row.after(afterContent);
+
+			row.next('tr').find('.e-jobdescription').focus();
 		
 			contentEditable = $('[contenteditable=true]');
 
 			updateNameValues();
 			checkLastRow();
+			setBorders();
 		});
 
 		// When editing and the delete button is clicked. Change the hidden field to true to set the item up for deletion
@@ -383,16 +419,36 @@ ready = function() {
 		});
 
 
+		// Set the first and last visible rows' jobcontrols to have correct borders
+
+		function setBorders() {
+			var jobsRows = jobsTable.find('.jobrow');
+			var visibleJobRows = jobsRows.filter(':visible');
+
+			jobsRows.each(function() {
+				$(this).removeClass('firstrow lastrow');
+			});
+
+			visibleJobRows.first().addClass('firstrow');
+			visibleJobRows.last().addClass('lastrow');
+		}
+
+		setBorders();
+
 		// Delete job item row after delete button is clicked
 
 		function deleteRow(el) {
 			var tableRow = el.parents('tr');
 			
-			if (el.hasClass('existing')) {
-				el.next(':input').attr('value','true');
+			if (editing) {
+				if (el.hasClass('existing')) {
+					el.next(':input').attr('value','true');
+				}
+				
+				tableRow.hide();
+			} else if (creating) {
+				tableRow.remove();
 			}
-
-			tableRow.hide();
 		}
 
 		jobsTable.on('click', '.delete', function() {
@@ -412,8 +468,10 @@ ready = function() {
 				}
 			}
 
+			calculateTotal();
 			updateNameValues();
 			checkLastRow();
+			setBorders();
 		});
 
 

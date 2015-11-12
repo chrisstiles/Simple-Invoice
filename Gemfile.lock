@@ -56,6 +56,8 @@ GEM
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    heroku-deflater (0.6.2)
+      rack (>= 1.4.5)
     hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.3.2)
@@ -147,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   byebug
+  heroku-deflater
   hirb
   jbuilder (~> 2.0)
   jquery-rails

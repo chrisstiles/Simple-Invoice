@@ -140,18 +140,17 @@
                         <th width="18%" align="right">Amount</th>
                       </tr>
                       <%= f.fields_for :jobs do |c| %>
-
-                            <tr changed="false">
+                            <tr changed="false" class="jobrow">
                               <td align="left" class="jobdescriptioncell">
                                     <%= c.text_area :job_description, class: "job-description-box" %>
                                     <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description"></span>
                               </td>
                               <td align="right" class="quantitycell">
-                                    <%= c.number_field :job_quantity, class: "job-quantity-box" %>
+                                    <%= c.text_field :job_quantity, class: "job-description-box"%>
                                     <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity"></span>
                               </td>
                               <td align="right" class="ratecell">
-                                    <%= c.number_field :job_rate, class: "job-rate-box" %>
+                                    <%= c.text_field :job_rate, class: "job-rate-box" %>
                                     <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate"></span>
                               </td>
                               <td align="right" class="amountcell">
@@ -170,6 +169,7 @@
        <section id="invoicetotal">
                   <div class="sectionstatus green"></div>
             <div id="invoiceamount"></div>
+            <%= f.hidden_field :total, value: '0.00' %>
             Total:
        </section>
        

@@ -137,7 +137,7 @@
                         <th width="18%" align="right">Amount</th>
                       </tr>
 	                      <%= f.fields_for :jobs, @invoice.jobs do |c| %>
-	                      <tr changed="false">
+	                      <tr changed="true" class="jobrow">
 	                        <td align="left" class="jobdescriptioncell">
 	                              <%= c.text_area :job_description, class: "job-description-box" %>
 	                              <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description">
@@ -145,19 +145,19 @@
 	                              </span>
 	                        </td>
 	                        <td align="right" class="quantitycell">
-	                              <%= c.number_field :job_quantity, class: "job-quantity-box" %>
+	                              <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) || 0) %>
 	                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
-									<%= c.object.job_quantity %>
+									<%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
 	                              </span>
 	                        </td>
 	                        <td align="right" class="ratecell">
-	                              <%= c.number_field :job_rate, class: "job-rate-box" %>
+	                              <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) || 0)  %>
 	                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
-	                              	<%= c.object.job_rate %>
+	                              	<%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
 	                              </span>
 	                        </td>
 	                        <td align="right" class="amountcell">
-	                              <div class="amountbox"></div>
+	                              <div class="amountbox"><%= number_to_currency(print_subtotal(c.object.job_quantity,c.object.job_rate), format: '%n') %></div>
 	                              <div class="jobcontrols">
 	                              <div class="delete existing"></div>
 	                              <%= c.hidden_field :will_delete, value: false %>
@@ -172,6 +172,7 @@
        <section id="invoicetotal">
        	 	<div class="sectionstatus green"></div>
             <div id="invoiceamount"></div>
+            <%= f.hidden_field :total, value: '0.00' %>
             Total:
        </section>
        

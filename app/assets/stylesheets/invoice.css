@@ -164,6 +164,8 @@
 	display:inline;
 }
 
+
+
 /* Hide input fields to allow text to be sent from content editable spans */
 
 #invoicewrapper section input, #invoicewrapper section textarea {
@@ -344,6 +346,7 @@ section:after {
 
 .jobcontrols {
 	position: absolute;
+	box-sizing:content-box;
     float: right;
     right: -58px;
     width: 60px;
@@ -360,11 +363,11 @@ section:after {
     bottom:-1px;
 }
 
-#invoiceitems tr:nth-child(2) .jobcontrols {
+#invoiceitems tr.firstrow .jobcontrols {
 	border-top: 1px solid #c9c9c9;
 }
 
-#invoiceitems tr:last-of-type .jobcontrols {
+#invoiceitems tr.lastrow td .jobcontrols {
 	border-bottom: 1px solid #c9c9c9;
 }
 

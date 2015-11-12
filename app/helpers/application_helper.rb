@@ -8,14 +8,26 @@ module ApplicationHelper
 	  field.gsub("\r\n","<br/>").html_safe
 	end
 
+	def print_number_or_na(number)
+		is_number = Float(number) != nil rescue false
+
+		if number
+			number_to_currency(number, format: '%u %n')
+		else
+			""
+		end
+
+	end
+
 	def print_subtotal(quantity, rate)
 		valid_quantity = Float(quantity) != nil rescue false
 		valid_rate = Float(rate) != nil rescue false
 
 		if valid_quantity && valid_rate
-			"$ #{quantity * rate}"
+			subtotal = quantity * rate
+			number_to_currency(subtotal, format: '%u %n')
 		else
-			"N/A"
+			""
 		end
 	end
 

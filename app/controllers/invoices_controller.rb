@@ -40,6 +40,11 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(invoice_params)
     @invoice.invoice_number = set_invoice_number
+    @jobs = @invoice.jobs
+   # @invoice.jobs.each do |job|
+   #     job.job_quantity.round(2)
+   #     job.job_rate.round(2)
+   # end
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
@@ -54,6 +59,11 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   # PATCH/PUT /invoices/1.json
   def update
+    #@invoice.jobs.each do |job|
+    #    job.job_quantity.round(2)
+    #    job.job_rate.round(2)
+    #end
+    @jobs = @invoice.jobs
     respond_to do |format|
       if @invoice.update(invoice_params)
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -77,14 +87,13 @@ class InvoicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+   
     def set_invoice
       @invoice = Invoice.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     def set_invoice_number
@@ -98,4 +107,5 @@ class InvoicesController < ApplicationController
     def remove_jobs_set_to_delete
       Job.where(will_delete: true).destroy_all
     end
+
 end

@@ -101,12 +101,12 @@
                     </td>
                     <td align="right" class="quantitycell">
                       <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
-                        <%= job.job_quantity %>
+                        <%= number_with_precision(job.job_quantity, precision: 2, strip_insignificant_zeros: true, delimiter: ",") %>
                       </span>
                     </td>
                     <td align="right" class="ratecell">
                       <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
-                        <%= number_to_currency(job.job_rate, format: '%u %n') %>
+                        <%= print_number_or_na(job.job_rate) %>
                       </span>
                     </td>
                     <td align="right" class="amountcell">
@@ -124,7 +124,7 @@
        
        <section id="invoicetotal">
        	 	<div class="sectionstatus green"></div>
-            <div id="invoiceamount"></div>
+            <div id="invoiceamount"><%= number_to_currency(@invoice.total, format: '%u %n') %></div>
             Total:
        </section>
        
