@@ -3,7 +3,7 @@
 
 body {
 	margin:0;
-	background-color:#f3f3f3;
+	background-color:#ecf0f1;
 	font-family: "Proxima Nova",sans-serif;
 }
 
@@ -13,13 +13,19 @@ body {
 /***********/
 
 header {
-	background-color:#34495e;
-	height:75px;
+	background-color:#fff;
+	height:63px;
 	position:fixed;
 	top:0;
 	left:0;
 	right:0;
 	z-index:400;
+	box-shadow: 0 3px 8px -3px rgba(0,0,0,.15);
+}
+
+#sessioninfo {
+	float:right;
+	color:#fff;
 }
 
 /***********/
@@ -28,7 +34,7 @@ header {
 
 #sidebar {
 	width:282px;
-	background-color:#fff;
+	background-color:#26323f;
 	position:fixed;
 	top:0;
 	left:0;
@@ -39,7 +45,7 @@ header {
 
 .scrollwrapper {
 	position:absolute;
-	top:75px;
+	top:63px;
 	bottom:0;
 	left:0;
 	right:0;	
@@ -47,17 +53,17 @@ header {
 }
 
 a.logo {
-	display:block;
+	display:inline-block;
 	text-align:center;
-	background-color:#2c3e50;
-	height: 75px;
+	background-color:#41a9ee;
+	height: 63px;
 	box-sizing:border-box;
-	padding-top:24px;
+	padding-top:20px;
 	width:282px;
 }
 
 a.logo:hover {
-	background-color:#233241;
+	background-color:#298dcf;
 }
 
 a.logo img {
@@ -68,21 +74,21 @@ a.logo img {
 /* Invoice Editing Controls */
 
 #controls h2 {
-	color:#34495e;
-	background-color:#f9f9f9;
+	color:#fff;
+	background-color:rgba(255,255,255,.09);
 	display:block;
 	padding:20px 22px;
 	font-weight:600;
 	font-size:17px;
 	margin:0;
-	border-bottom:1px solid #e3e3e3;
+	border-bottom:1px solid rgba(255,255,255,.1);
 }
 
 .control {
-	color:#535353;
+	color:#e4e4e4;
 	font-size:15px;
 	padding:0 22px;
-	border-bottom:1px solid #e3e3e3;
+	border-bottom:1px solid rgba(255,255,255,.08);
 	cursor:pointer;
 	-webkit-transition:all .1s;
 	        transition:all .1s;
@@ -92,11 +98,11 @@ a.logo img {
 }
 
 .control:hover {
-	background-color:#f6f6f6;
+	background-color:rgba(255,255,255,.03);
 }
 
 .control.active {
-	background-color:#f6f6f6;
+	background-color:rgba(255,255,255,.03);
 }
 
 .alignment {
@@ -118,7 +124,7 @@ a.logo img {
 	background-color:transparent;
 	font-size:15px;
 	cursor:pointer;
-	color:#34495e;
+	color:#fff;
 	width:172px;
 	height:56px;
 	margin-left:2px;

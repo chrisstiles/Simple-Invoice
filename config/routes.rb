@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  resources :invoices
+  devise_for :users
+  
+ # get '/invoices/new' => 'invoices#new', as: :new_invoice
+ # post '/invoices' => 'invoices#create'
+ # get '/invoices/:invoice_number' => 'invoices#show', as: :invoice
+ # get '/invoices/:invoice_number/edit' => 'invoices#edit', as: :edit_invoice
+  #patch '/invoices/:invoice_number' => 'invoices#update'
+  root 'invoices#index'  
+
+  patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
+  resources :invoices, param: :invoice_number
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'invoices#index'
+ 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,12 +1,11 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   after_action :remove_jobs_set_to_delete, only: [:update]
-  
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.where(archived: false)
+    @invoices = current_user.invoices.where(archived: false)
   end
 
   # GET /invoices/1
@@ -21,10 +20,14 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def not_found
+  end
+
   # GET /invoices/new
   def new
-    @editable = "true"
     @invoice = Invoice.new
+
+    @editable = "true"
     @number = set_invoice_number
 
     @invoice.jobs.build
@@ -38,8 +41,8 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-    @invoice = Invoice.new(invoice_params)
-    @invoice.invoice_number = set_invoice_number
+    @invoice = current_user.invoices.build(invoice_params)
+    @invoice.update_attribute(:invoice_number, set_invoice_number)
     @jobs = @invoice.jobs
    # @invoice.jobs.each do |job|
    #     job.job_quantity.round(2)
@@ -47,7 +50,7 @@ class InvoicesController < ApplicationController
    # end
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully created.' }
         format.json { render :show, status: :created, location: @invoice }
       else
         format.html { render :new }
@@ -66,7 +69,7 @@ class InvoicesController < ApplicationController
     @jobs = @invoice.jobs
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+        format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully updated.' }
         format.json { render :show, status: :ok, location: @invoice }
         format.js {  flash[:notice] = "Invoice was successfully updated." }
       else
@@ -89,15 +92,20 @@ class InvoicesController < ApplicationController
   private
    
     def set_invoice
-      @invoice = Invoice.find(params[:id])
+      @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
+
+      if @invoice && @invoice.archived
+        @invoice = nil
+      end
+
     end
 
     def invoice_params
-      params.require(:invoice).permit(:invoice_number, :terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     def set_invoice_number
-      Invoice.count + 1
+      current_user.invoices.count + 1
     end
 
     def archive_invoice

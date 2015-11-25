@@ -51,26 +51,6 @@
 	}
 }
 
-#invoicewrapper.show .sectionstatus {
-	display:none;
-}
-
-#invoicewrapper.edit #invoice, #invoicewrapper.new #invoice {
-	transform:translateX(0);
-	animation: slideOver .2s;
-	animation-fill-mode: forwards;
-}
-
-@keyframes slideOver {
-	from {
-		transform:translateX(0);
-	}
-
-	to {
-		transform:translateX(37px);
-	}
-}
-
 #invoicenumber .sectionstatus {
 	bottom:-1px;	
 }
@@ -182,6 +162,15 @@
 
 #invoicewrapper #e-invoicenumber {
 	display:inline;	
+}
+
+.datefield, .duedatefield {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 [contenteditable="true"] {
@@ -485,3 +474,13 @@ section:after {
     top: 25px;
     left: 33px;
 }
+
+
+
+/* PDF Code */
+
+.topbar {
+	height:100px;
+	background:red;
+}
+

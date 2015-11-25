@@ -1,17 +1,13 @@
-<p id="notice"><%= notice %></p>
+<% if @invoice.nil? %>
+  <%= render 'not_found' %>
+<% else %>
 
-<%= form_for(@invoice) do |f| %>
+<%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number)) do |f| %>
 
 <aside id="sidebar">
     <div class="scrollwrapper">
     <div id="controls">
-    	<h2>Invoice Settings</h2>
-        <div class="control">
-        	<div class="alignment">
-                <span>Invoice #</span>
-                <%= f.text_field :invoice_number %>
-            </div>
-        </div>
+    	<h2>Date and Terms</h2>
         <div class="control">
         	<div class="alignment">
                 <span>Date</span>
@@ -57,19 +53,12 @@
     <div id="invoice">
     
     	<section id="invoicenumber">
-        	<div class="sectionstatus red"></div>
        		<div>
-            	Invoice No. <span id="e-invoicenumber" contenteditable="<%= @editable %>" name="invoice[invoice_number]" placeholder="#"><%= @invoice.invoice_number %></span>
+            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
             </div>
        </section> 
        
       <section id="companyinformation">
-       	<div class="sectionstatus yellow">
-        	<div class="tooltip">
-            	<p>This is a tip</p>
-                <p>This is a second tip with two lines</p>
-            </div>
-        </div>
        		<div id="userinfo">
        			<%= f.text_field :name %>
                   <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
@@ -114,7 +103,6 @@
       </section>
       
        <section id="clientinformation">
-       	<div class="sectionstatus green"></div>
        		<div class="sectiontitle">Bill To:</div>
                   <%= f.text_field :client_name %><span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
                   <%= f.text_field :client_address_line1 %>
@@ -123,12 +111,6 @@
        </section>
        
        <section id="invoiceitems">
-         <div class="sectionstatus yellow">
-                <div class="tooltip">
-                    <p>This is a tip</p>
-                    <p>This is a second tip with two lines</p>
-                </div>
-            </div>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr class="tableheading">
                         <th width="61%" align="left">Description</th>
@@ -145,13 +127,13 @@
 	                              </span>
 	                        </td>
 	                        <td align="right" class="quantitycell">
-	                              <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) || 0) %>
+	                              <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true)) %>
 	                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
 									<%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
 	                              </span>
 	                        </td>
 	                        <td align="right" class="ratecell">
-	                              <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) || 0)  %>
+	                              <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true))  %>
 	                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
 	                              	<%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
 	                              </span>
@@ -170,7 +152,6 @@
        </section>
        
        <section id="invoicetotal">
-       	 	<div class="sectionstatus green"></div>
             <div id="invoiceamount"></div>
             <%= f.hidden_field :total, value: '0.00' %>
             Total:
@@ -185,7 +166,7 @@
     </div>
 </div>
 
-
+<% end %>
 
 <% end %>
 

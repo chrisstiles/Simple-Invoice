@@ -1,10 +1,13 @@
-<p id="notice"><%= notice %></p>
+<% if @invoice.nil? %>
+  <%= render 'not_found' %>
+<% else %>
+
 <aside id="sidebar">
     <div class="scrollwrapper">
     Show Sidebar<br>
-    <%= link_to 'edit', edit_invoice_path %>
+    <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number) %>
     <%= link_to 'Back', invoices_path %>
-    <%= link_to 'View PDF', invoice_path(@invoice, format: "pdf") %>
+    <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf") %>
     </div>
 </aside>
 
@@ -14,19 +17,12 @@
     <div id="invoice">
     
     	<section id="invoicenumber">
-        	<div class="sectionstatus red"></div>
        		<div>
-            	Invoice No. <span id="e-invoicenumber" contenteditable="<%= @editable %>" name="invoice[invoice_number]" placeholder="#"><%= @invoice.invoice_number %></span>
+            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
             </div>
        </section> 
        
       <section id="companyinformation">
-       	<div class="sectionstatus yellow">
-        	<div class="tooltip">
-            	<p>This is a tip</p>
-                <p>This is a second tip with two lines</p>
-            </div>
-        </div>
        		<div id="userinfo">
             	<span id="e-name" contenteditable="<%= @editable %>" placeholder="Name">
                 <%= @invoice.name %>
@@ -64,7 +60,6 @@
       </section>
       
        <section id="clientinformation">
-       	<div class="sectionstatus green"></div>
        		<div class="sectiontitle">Bill To:</div>
        		<span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name">
             <%= @invoice.client_name %>
@@ -78,12 +73,6 @@
        </section>
        
        <section id="invoiceitems">
-         <div class="sectionstatus yellow">
-                <div class="tooltip">
-                    <p>This is a tip</p>
-                    <p>This is a second tip with two lines</p>
-                </div>
-            </div>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tbody>
                 <tr class="tableheading">
@@ -123,7 +112,6 @@
        </section>
        
        <section id="invoicetotal">
-       	 	<div class="sectionstatus green"></div>
             <div id="invoiceamount"><%= number_to_currency(@invoice.total, format: '%u %n') %></div>
             Total:
        </section>
@@ -138,4 +126,7 @@
 </div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+
+<% end %>
+
 <%= link_to 'Back', invoices_path %>

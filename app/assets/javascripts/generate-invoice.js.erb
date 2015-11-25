@@ -43,7 +43,8 @@ ready = function() {
 		dueDateField.datepicker({
 			dateFormat: "MM d, yy",
 			altFormat: "dd-mm-yy",
-			hideIfNoPrevNext: true
+			hideIfNoPrevNext: true,
+			showAnim: "",
 		});
 
 		function setDueDate() {
@@ -515,6 +516,19 @@ ready = function() {
 				document.execCommand('selectAll', false, null);
 			}
 
+		});
+
+
+
+		// Ensure correct tab order after due date field tabbed
+
+		dueDateField.on("keydown", function(e) {
+			var keyCode = e.keyCode || e.which;
+
+			if (keyCode == 9 && !e.shiftKey) {
+				e.preventDefault();
+				$('#e-clientname').focus();
+			}
 		});
 
 
