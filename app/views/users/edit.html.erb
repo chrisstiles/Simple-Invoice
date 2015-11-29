@@ -1,0 +1,8 @@
+<br><br><br><br><br>
+<%= form_for(@user) do |f| %>
+	<%= f.text_field :name, placeholder: "name" %><br><br>
+	<%= f.text_field :address_line1, placeholder: "Address" %><br><br>
+	<%= f.text_field :address_line2, placeholder: "City, State, Zip" %><br><br>
+	<%= f.text_field :phone, placeholder: "Phone" %><br><br>
+	<%= f.submit %>
+<% end %>

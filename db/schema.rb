@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119024510) do
+ActiveRecord::Schema.define(version: 20151127223158) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "invoice_number"
@@ -59,6 +59,10 @@ ActiveRecord::Schema.define(version: 20151119024510) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

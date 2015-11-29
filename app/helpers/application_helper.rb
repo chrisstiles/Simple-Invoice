@@ -30,5 +30,14 @@ module ApplicationHelper
 			""
 		end
 	end
+	
+
+	def print_if_not_nil(data)
+		if data.nil?
+			''
+		else
+			data
+		end
+	end
 
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
   resources :invoices, param: :invoice_number
+
+  resources :users, only: [:show, :edit, :update]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

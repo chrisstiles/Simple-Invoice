@@ -4,7 +4,7 @@
 body {
 	margin:0;
 	background-color:#ecf0f1;
-	font-family: "Proxima Nova",sans-serif;
+	font-family: 'Libertad', sans-serif;
 }
 
 
@@ -58,7 +58,7 @@ a.logo {
 	background-color:#41a9ee;
 	height: 63px;
 	box-sizing:border-box;
-	padding-top:20px;
+	padding-top:16px;
 	width:282px;
 }
 
@@ -67,8 +67,8 @@ a.logo:hover {
 }
 
 a.logo img {
-	width:120px;
-	height:25px;	
+	width:108px;
+	height:27px;	
 }
 
 /* Invoice Editing Controls */
