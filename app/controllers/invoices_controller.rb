@@ -113,7 +113,7 @@ class InvoicesController < ApplicationController
     end
 
     def remove_jobs_set_to_delete
-      Job.where(will_delete: true).destroy_all
+      @invoice.jobs.where(will_delete: true).destroy_all
     end
 
 end

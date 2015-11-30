@@ -1,5 +1,12 @@
 <%= form_for(@invoice) do |f| %>
 
+<div id="toolbar">
+  <div id="toolbarcontent">
+    <%= link_to "Back to Invoices", invoices_path, class: "back" %>
+    <%= f.submit 'Create Invoice', tabindex: '-1', class: "button blue" %>
+  </div>
+</div>
+
 <aside id="sidebar">
     <div class="scrollwrapper">
     <div id="controls">
@@ -35,11 +42,6 @@
         </div>
     </div>
 
-    <br>
-    <%= f.submit 'Create Invoice', tabindex: '-1' %>
-    <br>
-    <%= link_to 'Back', invoices_path %>
-
     </div>
 </aside>
 
@@ -58,13 +60,21 @@
 
             <div id="userinfo">
                   <%= f.text_field :name, value: print_if_not_nil(current_user.name) %>
-                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= print_if_not_nil(current_user.name) %></span><br>
-                  <%= f.text_field :address_line1, value: print_if_not_nil(current_user.address_line1) %>
-                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= print_if_not_nil(current_user.address_line1) %></span><br>
-                  <%= f.text_field :address_line2, value: print_if_not_nil(current_user.address_line2) %>
-                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]"><%= print_if_not_nil(current_user.address_line2) %></span><br>
+                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]">
+                    <%= print_if_not_nil(current_user.name) %>
+                  </span><br>
+                  <%= f.text_field :address_line1, value: print_if_not_nil(current_user.address) %>
+                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]">
+                    <%= print_if_not_nil(current_user.address) %>
+                  </span><br>
+                  <%= f.text_field :address_line2, value: print_full_address(current_user.city, current_user.state, current_user.zip) %>
+                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]">
+                    <%= print_full_address(current_user.city, current_user.state, current_user.zip) %>
+                  </span><br>
                   <%= f.text_field :phone, value: print_if_not_nil(current_user.phone) %>
-                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"><%= print_if_not_nil(current_user.phone) %></span>
+                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]">
+                    <%= print_if_not_nil(current_user.phone) %>
+                  </span>
 
             </div>
             <div id="dateterms">

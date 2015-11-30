@@ -4,6 +4,13 @@
 
 <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number)) do |f| %>
 
+<div id="toolbar">
+  <div id="toolbarcontent">
+    <%= link_to "Back to Invoices", invoices_path, class: "back" %>
+    <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue" %>
+  </div>
+</div>
+
 <aside id="sidebar">
     <div class="scrollwrapper">
     <div id="controls">
@@ -39,10 +46,7 @@
         </div>
     </div>
 
-    <br>
-    <%= f.submit %>
-    <br>
-    <%= link_to 'Back', invoices_path %>
+      <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
 
     </div>
 </aside>

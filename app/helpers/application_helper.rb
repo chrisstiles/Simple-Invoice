@@ -40,4 +40,12 @@ module ApplicationHelper
 		end
 	end
 
+	def print_full_address(city, state, zip)
+		unless city.nil? || state.nil? || zip.nil?
+			"#{city}, #{state} #{zip}"
+		else
+			''
+		end
+	end
+
 end

@@ -1,10 +1,13 @@
 #invoicewrapper {
 	max-width:780px;
-	margin:150px auto;
+	margin:0 auto 45px auto;
 	position:relative;
+	top:160px;
 	left:141px;
-	z-index: 300;
 	font-size:17px;
+	-webkit-box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+	-moz-box-shadow:    0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+	box-shadow:         0px 8px 25px 0px rgba(0, 0, 0, 0.14);
 }
 
 

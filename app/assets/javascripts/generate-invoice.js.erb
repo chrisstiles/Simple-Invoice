@@ -10,6 +10,7 @@ ready = function() {
 	// Code just for the edit and new pages
 
 	if (editing || creating) {
+
 		// Set focus to textbox when control box is clicked
 		$('.control').on('click', function() {
 			$(this).find('input').focus();
@@ -536,6 +537,16 @@ ready = function() {
 
 		var notesText = $('#invoice_notes').val();
 		$('#e-notes').html(notesText);
+
+
+		$('span').each(function() {
+			var $this = $(this);
+
+			if (!$this.text().replace(/\s/g, '').length) {
+				$this.html('')
+			}
+		});
+
 	}
 
 	// Code just for the show page
@@ -548,11 +559,15 @@ ready = function() {
 
 			var $this = $(this);
 
+			if (!$this.text().replace(/\s/g, '').length) {
 
-			console.log($this.length);
+				if ($this.prev('br').length) {
+					$this.prev('br').remove();
+				} else {
+					$this.next('br').remove();
+				}
 
-			if ($.trim($(this).text()) === '') {
-				$this.prev('br').remove();
+				$this.remove();
 			}
 
 		});

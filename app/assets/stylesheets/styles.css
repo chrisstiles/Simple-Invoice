@@ -28,6 +28,117 @@ header {
 	color:#fff;
 }
 
+#toolbar {
+	height:61px;
+	background-color:#d9dbdb;
+	width:100%;
+	position:fixed;
+	top:63px;
+	z-index: 200;
+}
+
+#toolbarcontent {
+	max-width:780px;
+	margin:0 auto;
+	position:relative;
+	left:141px;
+	height:61px;
+}
+
+#toolbar .button {
+	position:relative;
+	top:50%;
+	transform:translateY(-50%);
+	float:right;
+}
+
+.back {
+	color:#5c5c5c;
+	text-decoration:none;
+	position:relative;
+	padding:15px 15px 15px 25px;
+	line-height:1;
+	top:50%;
+	transform:translateY(-50%);
+	display:inline-block;
+	font-size:18px;
+	font-weight:300;
+}
+
+.back:hover {
+	color:#41a9ee;
+}
+
+.back:before {
+	background-image: url(/assets/angle-left.svg);
+	width: 13px;
+    height: 23px;
+    background-repeat: no-repeat;
+    content: "";
+    background-size: 13px 22px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -11px;
+    opacity: .2;
+    left:0;
+}
+
+
+/***********/
+/* Buttons */
+/***********/
+
+.button {
+	padding:8px 25px;
+	background-color:#41a9ee;
+	outline:none;
+	border-radius:2px;
+	border:none;
+	color:#fff;
+	cursor: pointer;
+	font-family: 'Libertad', sans-serif;
+	font-size:15px;
+	text-decoration: none;
+	 -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+}
+
+.button.blue {
+	background-color:#41a9ee;
+}
+
+.button.blue:hover {
+	background-color:#3292d1;
+}
+
+.button.blue:active {
+	background-color:#1e6ca0;
+}
+
+.button.deleteinvoice {
+	background-color:#df4535;
+	position:absolute;
+	bottom:15px;
+	display:block;
+	left:15px;
+	right:15px;
+	width:auto;
+}
+
+.button.deleteinvoice:hover {
+	background-color:#c9392a;
+}
+
+.button.deleteinvoice:active {
+	background-color:#9f2a1e;
+}
+
 /***********/
 /* Sidebar */
 /***********/
@@ -49,7 +160,7 @@ header {
 	bottom:0;
 	left:0;
 	right:0;	
-	overflow:scroll;
+	/*overflow:scroll;*/
 }
 
 a.logo {

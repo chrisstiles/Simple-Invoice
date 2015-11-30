@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(version: 20151127223158) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
-    t.string   "address_line1"
-    t.string   "address_line2"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
     t.string   "phone"
   end
 

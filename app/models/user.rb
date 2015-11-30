@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	nilify_blanks
+	
 	has_many :invoices
 
 	# Include default devise modules. Others available are:

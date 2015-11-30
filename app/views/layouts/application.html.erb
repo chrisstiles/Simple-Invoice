@@ -9,7 +9,7 @@
 <body>
 
 <header>
-	<a href="#" class="logo"><%= image_tag("logo.png", alt: "Invoicer") %></a>
+	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
 	<div id="sessioninfo">
 		<% if user_signed_in? %>
 			Signed in as: <%= current_user.email %> | <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>

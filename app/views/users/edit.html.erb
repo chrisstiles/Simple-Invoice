@@ -1,8 +1,10 @@
 <br><br><br><br><br>
 <%= form_for(@user) do |f| %>
 	<%= f.text_field :name, placeholder: "name" %><br><br>
-	<%= f.text_field :address_line1, placeholder: "Address" %><br><br>
-	<%= f.text_field :address_line2, placeholder: "City, State, Zip" %><br><br>
+	<%= f.text_field :address, placeholder: "Address" %><br><br>
+	<%= f.text_field :city, placeholder: "City" %><br><br>
+	<%= f.select :state, options_for_select(us_states, selected: current_user.state), prompt: "Select a state" %><br><br>
+	<%= f.text_field :zip, placeholder: "Zip Code" %><br><br>
 	<%= f.text_field :phone, placeholder: "Phone" %><br><br>
 	<%= f.submit %>
 <% end %>
