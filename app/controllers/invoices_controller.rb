@@ -2,14 +2,10 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   after_action :remove_jobs_set_to_delete, only: [:update]
 
-  # GET /invoices
-  # GET /invoices.json
   def index
     @invoices = current_user.invoices.where(archived: false)
   end
 
-  # GET /invoices/1
-  # GET /invoices/1.json
   def show
     @editable = "false"
     respond_to do |format|
@@ -23,7 +19,6 @@ class InvoicesController < ApplicationController
   def not_found
   end
 
-  # GET /invoices/new
   def new
     @invoice = Invoice.new
 
@@ -33,21 +28,19 @@ class InvoicesController < ApplicationController
     @invoice.jobs.build
   end
 
-  # GET /invoices/1/edit
   def edit
     @editable = "true"
   end
 
-  # POST /invoices
-  # POST /invoices.json
+
   def create
     @invoice = current_user.invoices.build(invoice_params)
     @invoice.update_attribute(:invoice_number, set_invoice_number)
+    
+    set_client_if_not_nil
+    
     @jobs = @invoice.jobs
-   # @invoice.jobs.each do |job|
-   #     job.job_quantity.round(2)
-   #     job.job_rate.round(2)
-   # end
+
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully created.' }
@@ -67,6 +60,9 @@ class InvoicesController < ApplicationController
     #    job.job_rate.round(2)
     #end
     @jobs = @invoice.jobs
+
+    set_client_if_not_nil
+
     respond_to do |format|
       if @invoice.update(invoice_params)
         format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully updated.' }
@@ -101,7 +97,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     def set_invoice_number
@@ -114,6 +110,15 @@ class InvoicesController < ApplicationController
 
     def remove_jobs_set_to_delete
       @invoice.jobs.where(will_delete: true).destroy_all
+    end
+
+    def set_client_if_not_nil
+      client_id = params[:client_id]
+      unless client_id.empty?
+         @invoice.client = current_user.clients.find(params[:client_id])
+      else
+        @invoice.client = nil
+      end
     end
 
 end

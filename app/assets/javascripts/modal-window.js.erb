@@ -1,0 +1,171 @@
+var ready;
+ready = function() {
+
+// Links with the class of modal will open the modal window
+var modal = $('.modal');
+
+// Body for finding appended items and disabling scroll
+
+var pageBody = $('body');
+
+
+// Generate the modal window and title
+
+function showModal(title) {
+	pageBody.addClass('noscroll').append('<div id="modalwrapper"><div id="modaloverlay"></div><div id="modalwindow"><div id="modaltitle"><div class="closemodal"></div><span>' + title + '</span></div><div class="throbber-loader">Loading...</div></div></div>');
+}
+
+function addModalContent(content) {
+	$('#modalwindow').append('<div id="modalcontent"><div id="modalscroll">' + content + '</div></div>');
+}
+
+// Remove the modal window content from the DOM
+function closeModal() {
+	pageBody.removeClass('noscroll');
+	$('#modalwrapper').remove();
+}
+
+// Close modal after close button is clicked
+pageBody.on('click', '.closemodal', closeModal);
+
+// Close modal when clicking on white background
+pageBody.on('click', '#modaloverlay', closeModal);
+
+// Close modal when escape key is pressed
+$(document).on('keyup', function(e) {
+	if (e.keyCode == 27) {
+		closeModal();
+	}
+});
+
+// Displays the modal window and adds title. Must add content per individual open links with addModalContent()
+modal.on('click', function(e) {
+	e.preventDefault();
+	if(!$(this).hasClass('nomodal')) {
+		var title = $(this).data('title') || '';
+		showModal(title);
+	}
+});
+
+// Get json data and save as variable
+function getJson(url) {
+ return JSON.parse($.ajax({
+     type: 'GET',
+     url: url,
+     dataType: 'json',
+     async: false,
+     success: function(data) {
+         return data;
+     }
+ }).responseText);
+}
+
+// Grab list of clients from current user and add them as modal content
+var clientsButton = $('.clients-modal');
+
+clientsButton.on('click', function() {
+	if ($(this).hasClass('addclient')) {
+
+		// AJAX request to retrieve current user's clients
+		var clients = getJson('/clients');
+
+		// Append all clients and info to modal window
+		var clientContent = '';
+
+		$.each(clients, function(i, item) {
+			var appendedContent = '<li class="modalclient" data-client_id=' + item.id + ' data-name="' + item.name + '" data-email="' + item.email + '" data-address_line1="' + item.address + '"'
+
+			// Only add the second line of the address if they have city, state and zip added
+			if (!item.city == '' &&  !item.city == '' && !item.zip == '') {
+				appendedContent += ' data-address_line2="' + item.city + ', ' + item.state + ' ' + item.zip + '"'
+			}
+
+			appendedContent +=  ' data-phone="' + item.phone + '"><span class="client-name">' + item.name + '</span><span class="client-email">' + item.email + '</span></li>'
+
+			clientContent += appendedContent;
+		})
+
+		// Add the search box if there are more than one clients
+		if (clients.length > 1) {
+			addModalContent('<input id="modalsearch" type="text" placeholder="Filter clients"><ul id="client-content">' + clientContent + '</ul>');
+		} else {
+			addModalContent('<ul id="client-content" class="single">' + clientContent + '</ul>');
+		}
+
+	}
+	
+});
+
+
+// Add client information to invoice when clicked
+
+pageBody.on('click', '.modalclient', function() {
+	var $this = $(this);
+	$('#client_id').val($this.data('client_id'));
+
+	$('#e-clientname').html($this.data('name'));
+	$('#invoice_client_name').val($this.data('name'));
+
+	$('#e-clientaddress').html($this.data('address_line1'));
+	$('#invoice_client_address_line1').val($this.data('address_line1'));
+
+	$('#e-clientcityzip').html($this.data('address_line2'));
+	$('#invoice_client_address_line2').val($this.data('address_line2'));
+
+	setClientButton();
+
+	closeModal();
+});
+
+// Filter lists based on search criteria
+
+pageBody.on('keyup', '#modalsearch', function() {
+	var valThis = $(this).val().toLowerCase();
+    if(valThis == ""){
+        $('#client-content > li').show();           
+    } else {
+        $('#client-content > li').each(function(){
+            var text = $(this).text().toLowerCase();
+            (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
+        });
+   };
+});
+
+
+// Check is a client has been set and change the client button
+var clientId = $('#client_id');
+var clientTooltip = $('.clients-modal span');
+
+function setClientButton() {
+	if (!clientId.val() == '') {
+		clientsButton.removeClass('modal addclient').addClass('removeclient nomodal');
+		clientTooltip.text('Remove Client');
+	} else {
+		clientsButton.removeClass('removeclient nomodal').addClass('modal addclient');
+		clientTooltip.text('Add Saved Client');
+	}
+}
+
+setClientButton();
+
+// Remove client from invoice when clicked
+
+pageBody.on('click', '.removeclient', function() {
+	$('#client_id').val('');
+
+	$('#e-clientname').html('');
+	$('#invoice_client_name').val('');
+
+	$('#e-clientaddress').html('');
+	$('#invoice_client_address_line1').val('');
+
+	$('#e-clientcityzip').html('');
+	$('#invoice_client_address_line2').val('');
+
+	setClientButton();
+});
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

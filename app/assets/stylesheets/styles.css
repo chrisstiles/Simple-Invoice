@@ -5,6 +5,9 @@ body {
 	margin:0;
 	background-color:#ecf0f1;
 	font-family: 'Libertad', sans-serif;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -193,19 +196,38 @@ a.logo img {
 	font-size:17px;
 	margin:0;
 	border-bottom:1px solid rgba(255,255,255,.1);
+	border-top:1px solid rgba(255,255,255,.1);
+	position:relative;
+}
+
+#controls h2:first-child {
+	border-top:none;
+}
+
+#controls h2:nth-of-type(2) {
+	border-bottom:1px solid rgba(255,255,255,.09);
 }
 
 .control {
 	color:#e4e4e4;
 	font-size:15px;
 	padding:0 22px;
-	border-bottom:1px solid rgba(255,255,255,.08);
+	border-top:1px solid rgba(255,255,255,.08);
 	cursor:pointer;
 	-webkit-transition:all .1s;
 	        transition:all .1s;
 	height: 56px;
     box-sizing: border-box;
 	position:relative;
+}
+
+#controls > div:nth-of-type(1) {
+	border-top:none !important;
+}
+
+#controls .bonly {
+	border-bottom:1px solid rgba(255,255,255,.08);
+	border-top:none;
 }
 
 .control:hover {
@@ -218,6 +240,7 @@ a.logo img {
 
 .alignment {
 	position:absolute;
+	line-height:0;
 	top:50%;
 	-webkit-transform:translateY(-50%);
 	    -ms-transform:translateY(-50%);
@@ -240,6 +263,11 @@ a.logo img {
 	height:56px;
 	margin-left:2px;
 	font-weight:600;
+	font-family: 'Libertad', sans-serif;
+}
+
+.control input[type="text"].clientnameinput {
+	width:152px;
 }
 
 .control select {
@@ -247,6 +275,84 @@ a.logo img {
 	margin-left:4px;
 }
 
+/* Client open button */
+
+.clients-modal {
+	width:28px;
+	height:28px;
+	position:absolute;
+	border-radius:50%;
+	right:20px;
+	top:50%;
+	transform:translateY(-50%);
+	transition:all .1s;
+}
+
+.clients-modal:before, .clients-modal:after {
+	content:"";
+	display:block;
+	position:absolute;
+	height:12px;
+	width:1px;
+	background-color:#fff;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	transition:all .1s;
+}
+
+.clients-modal:after {
+	transform:translate(-50%,-50%) rotate(90deg);
+}
+
+.addclient {
+	background-color:#7ba42c;
+}
+
+.addclient:hover {
+	background-color:#60941c;
+}
+
+.removeclient {
+	background-color:#df4535;
+}
+
+.removeclient:before {
+	transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.removeclient:after {
+	transform:translate(-50%,-50%) rotate(45deg);
+}
+
+.removeclient:hover {
+	background-color:#c9392a;
+}
+
+.clients-modal span {
+	position: absolute;
+    display: block;
+    width: 115px;
+    border-radius: 2px;
+    left: 50%;
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    top: 100%;
+    font-size: 13px;
+    transform: translateX(-50%);
+    padding: 8px;
+    font-size: 13px;
+    visibility:hidden;
+    opacity:0;
+    transition: all .2s;
+}
+
+.clients-modal:hover span {
+	visibility: visible;
+	opacity:1;
+}
 
 /* Date Picker */
 

@@ -40,8 +40,20 @@
                 <%= f.text_field :due_date, class: "duedatefield", readonly: true %>
             </div>
         </div>
-    </div>
+        <h2>
+          Client
+           <a href="#" class="modal clients-modal addclient" data-title="Clients">
+             <span>Add Saved Client</span>
+           </a>
+        </h2>
+        <div class="control bonly">
+        <div class="alignment">
+            <span>Client Name</span>
+            <%= f.text_field :client_name, class: "clientnameinput" %>
+            </div>
+        </div>
 
+    </div>
     </div>
 </aside>
 
@@ -111,8 +123,8 @@
       </section>
       
        <section id="clientinformation">
+                  <%= hidden_field_tag :client_id, @client_id %>
                   <div class="sectiontitle">Bill To:</div>
-                  <%= f.text_field :client_name %>
                   <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"></span><br>
                   <%= f.text_field :client_address_line1 %>
                   <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"></span><br>

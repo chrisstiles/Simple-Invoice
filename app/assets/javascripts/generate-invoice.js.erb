@@ -184,7 +184,8 @@ ready = function() {
 		// Change input field when content editable changes
 		$('#invoice').on('keyup', '[contenteditable=true]', function() {
 			var $this = $(this);
-			var value = $this.html();
+			
+			var value = $this.text();
 
 			if (value == '' || value == '<div></div>' || value == '<br>' || value == '<br/>' || value == '<p></p>') {
 				$this.empty();
@@ -192,6 +193,14 @@ ready = function() {
 
 			var item = $this.attr('name');
 			var inputField = $this.prev(':input');
+
+			if ($this.is('#e-clientname')) {
+				inputField = $('#invoice_client_name');
+			}
+
+			if (inputField.is('textarea')) {
+				value = $this.html();
+			} 
 			//var inputField = $('[name="' + item + '"]');
 
 			inputField.val(value);

@@ -4,10 +4,13 @@
 
 <aside id="sidebar">
     <div class="scrollwrapper">
-    Show Sidebar<br>
-    <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number) %>
-    <%= link_to 'Back', invoices_path %>
-    <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf") %>
+      Show Sidebar<br>
+      <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number) %>
+      <%= link_to 'Back', invoices_path %>
+      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf") %>
+
+      <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
+
     </div>
 </aside>
 
@@ -125,8 +128,4 @@
 
 </div>
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-
 <% end %>
-
-<%= link_to 'Back', invoices_path %>

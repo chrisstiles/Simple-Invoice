@@ -14,18 +14,18 @@
 <aside id="sidebar">
     <div class="scrollwrapper">
     <div id="controls">
-    	<h2>Date and Terms</h2>
+      <h2>Date and Terms</h2>
         <div class="control">
-        	<div class="alignment">
+          <div class="alignment">
                 <span>Date</span>
                 <%= f.text_field :date, class: "datefield", 'date' => @invoice.date.strftime("%B %d, %Y"), readonly: true %>
             </div>
         </div>
         <div class="control">
-        	<div class="alignment">
+          <div class="alignment">
                 <span>Terms</span>
                 <select class="terms">
-                	<option data-term="0">Same Day</option>
+                  <option data-term="0">Same Day</option>
                     <option data-term="7">7 Days</option>
                     <option data-term="14">14 Days</option>
                     <option data-term="21">21 Days</option>
@@ -39,9 +39,21 @@
             </div>
         </div>
         <div class="control">
-        	<div class="alignment">
+          <div class="alignment">
                 <span>Due</span>
                 <%= f.text_field :due_date, class: "duedatefield", 'date' => @invoice.due_date.strftime("%B %d, %Y"), readonly: true %>
+            </div>
+        </div>
+        <h2>
+          Client
+           <a href="#" class="modal clients-modal addclient" data-title="Clients">
+             <span>Add Saved Client</span>
+           </a>
+        </h2>
+        <div class="control bonly">
+        <div class="alignment">
+            <span>Client Name</span>
+            <%= f.text_field :client_name, class: "clientnameinput" %>
             </div>
         </div>
     </div>
@@ -56,15 +68,15 @@
 <div id="invoicewrapper" class="edit">
     <div id="invoice">
     
-    	<section id="invoicenumber">
-       		<div>
-            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
+      <section id="invoicenumber">
+          <div>
+              Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
             </div>
        </section> 
        
       <section id="companyinformation">
-       		<div id="userinfo">
-       			<%= f.text_field :name %>
+          <div id="userinfo">
+            <%= f.text_field :name %>
                   <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
                   <%= f.text_field :address_line1 %>
                   <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= @invoice.address_line1 %></span><br>
@@ -74,7 +86,7 @@
                   <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"><%= @invoice.phone %></span>
             </div>
             <div id="dateterms">
-            	<table border="0" cellspacing="0" cellpadding="0">
+              <table border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
                       <td align="right">Date:</td>
@@ -83,7 +95,7 @@
                     <tr>
                       <td align="right">Terms:</td>
                       <td class="invoicesetting">
-                      	<select class="terms">
+                        <select class="terms">
                             <option data-term="0">Same Day</option>
                             <option data-term="7">7 Days</option>
                             <option data-term="14">14 Days</option>
@@ -107,8 +119,9 @@
       </section>
       
        <section id="clientinformation">
-       		<div class="sectiontitle">Bill To:</div>
-                  <%= f.text_field :client_name %><span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
+                  <%= hidden_field_tag :client_id, @client_id, value: @invoice.client_id %>
+          <div class="sectiontitle">Bill To:</div>
+                 <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
                   <%= f.text_field :client_address_line1 %>
                   <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"><%= @invoice.client_address_line1 %></span><br>
                   <%= f.text_field :client_address_line2 %><span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
@@ -122,35 +135,35 @@
                         <th width="10%" align="right">Rate</th>
                         <th width="18%" align="right">Amount</th>
                       </tr>
-	                      <%= f.fields_for :jobs, @invoice.jobs do |c| %>
-	                      <tr changed="true" class="jobrow">
-	                        <td align="left" class="jobdescriptioncell">
-	                              <%= c.text_area :job_description, class: "job-description-box" %>
-	                              <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description">
-	                              	<%= c.object.job_description %>
-	                              </span>
-	                        </td>
-	                        <td align="right" class="quantitycell">
-	                              <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true)) %>
-	                              <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
-									<%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
-	                              </span>
-	                        </td>
-	                        <td align="right" class="ratecell">
-	                              <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true))  %>
-	                              <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
-	                              	<%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
-	                              </span>
-	                        </td>
-	                        <td align="right" class="amountcell">
-	                              <div class="amountbox"><%= number_to_currency(print_subtotal(c.object.job_quantity,c.object.job_rate), format: '%n') %></div>
-	                              <div class="jobcontrols">
-	                              <div class="delete existing"></div>
-	                              <%= c.hidden_field :will_delete, value: false %>
-	                              <div class="insert"></div>
-	                          </div>
-	                        </td>
-	                      </tr>
+                        <%= f.fields_for :jobs, @invoice.jobs do |c| %>
+                        <tr changed="true" class="jobrow">
+                          <td align="left" class="jobdescriptioncell">
+                                <%= c.text_area :job_description, class: "job-description-box" %>
+                                <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description">
+                                  <%= c.object.job_description %>
+                                </span>
+                          </td>
+                          <td align="right" class="quantitycell">
+                                <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true)) %>
+                                <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+                  <%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
+                                </span>
+                          </td>
+                          <td align="right" class="ratecell">
+                                <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true))  %>
+                                <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
+                                  <%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
+                                </span>
+                          </td>
+                          <td align="right" class="amountcell">
+                                <div class="amountbox"><%= number_to_currency(print_subtotal(c.object.job_quantity,c.object.job_rate), format: '%n') %></div>
+                                <div class="jobcontrols">
+                                <div class="delete existing"></div>
+                                <%= c.hidden_field :will_delete, value: false %>
+                                <div class="insert"></div>
+                            </div>
+                          </td>
+                        </tr>
                   <% end %>
             </table>
        </section>

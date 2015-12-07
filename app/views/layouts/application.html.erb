@@ -8,8 +8,22 @@
 </head>
 <body>
 
+<!-- Modal Content
+<div id="modaloverlay">
+	<div id="modalwindow">
+		<div id="modaltitle">Clients</div>
+		<div id="modalcontent">
+			<p>Test</p>
+		</div>
+	</div>
+</div>
+-->
+
 <header>
 	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
+
+	<%= link_to "Clients", clients_path %>
+
 	<div id="sessioninfo">
 		<% if user_signed_in? %>
 			Signed in as: <%= current_user.email %> | <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
