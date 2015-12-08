@@ -11,6 +11,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+# For Heroku
+gem 'wkhtmltopdf-heroku'
+
 # Autoprefix CSS
 gem "autoprefixer-rails"
 

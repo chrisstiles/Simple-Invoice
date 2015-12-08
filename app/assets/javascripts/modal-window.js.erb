@@ -87,9 +87,9 @@ ready = function() {
 
                     // Add the search box if there are more than one clients
                     if (data.length > 1) {
-                        addModalContent('<input id="modalsearch" type="text" placeholder="Filter clients"><ul id="client-content">' + clientContent + '</ul>', true);
+                        addModalContent('<input id="modalsearch" type="text" placeholder="Filter clients"><ul id="client-content">' + clientContent + '</ul>', false);
                     } else {
-                        addModalContent('<ul id="client-content" class="single">' + clientContent + '</ul>', true);
+                        addModalContent('<ul id="client-content" class="single">' + clientContent + '</ul>', false);
                     }
 
                 }
