@@ -8,11 +8,8 @@ gem 'rails', '4.2.4'
 gem 'uglifier', '>= 1.3.0'
 
 # Generate PDFs
-gem 'wicked_pdf'
+gem 'wicked_pdf', '0.9.9'
 gem 'wkhtmltopdf-binary'
-
-# For Heroku
-gem 'wkhtmltopdf-heroku'
 
 # Autoprefix CSS
 gem "autoprefixer-rails"
