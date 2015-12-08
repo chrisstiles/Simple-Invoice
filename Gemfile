@@ -67,5 +67,6 @@ group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'heroku-deflater'
   gem 'puma'
+  gem 'wkhtmltopdf-heroku'
 end
 
