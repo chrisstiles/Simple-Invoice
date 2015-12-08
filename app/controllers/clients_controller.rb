@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
 	before_action :set_client, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@clients = current_user.clients.order('name DESC')
+		@clients = current_user.clients.order('LOWER(name) ASC')
 
 		respond_to do |format|
 			format.html
