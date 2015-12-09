@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "Invoice", :template => 'invoices/pdf_default.html.erb'
+        render pdf: "Invoice #{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb'
       end
     end
   end
