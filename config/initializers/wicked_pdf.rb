@@ -4,4 +4,4 @@ bin_location = case Rails.env
   else `which wkhtmltopdf`
 end
 
-WickedPdf.config = { :exe_path => bin_location }
+WickedPdf.config = { :exe_path => bin_location, :page_size => 'Letter' }

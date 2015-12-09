@@ -1,0 +1,293 @@
+<style>
+#invoicewrapper {
+	width:auto;
+	padding:15px;
+	position:relative;
+	font-size:17px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+	color:#000;
+}
+
+
+#invoicewrapper:after {
+	clear:both;
+	display:block;
+	content:"";
+}
+
+#invoice {
+	background:#fff;
+	display:block;
+	border: 1px solid #000;
+}
+
+.hiddencontainer {
+	display:none;
+	position:absolute;
+	left:-9999px;
+}
+
+#invoicewrapper span {
+	min-width:5px;
+	display:block;
+	max-width:100%;
+}
+
+#invoicewrapper #e-invoicenumber {
+	display:inline;	
+}
+
+section {
+	border-bottom:1px solid #000;	
+	box-sizing:border-box;
+	padding:25px 33px 22px 33px;
+	position:relative;
+	font-weight:300;
+	line-height:1.3em;
+}
+
+section:after {
+	content:"";
+	display:block;
+	clear:both;	
+}
+
+#invoicenumber {
+	border-bottom:2px solid #000;	
+	padding:30px 33px 10px 40px;
+}
+
+#invoicenumber span {
+	display:inline;
+	float:none;	
+}
+
+#invoicenumber div {
+	text-align:right;
+	font-size:23px;
+	font-weight:400;
+}
+
+#userinfo {
+	width:50%;	
+	float:left;
+	line-height:1.3em;
+}
+
+#e-invoicenumber {
+	font-weight:700;
+	min-width:15px;
+}
+
+#e-name {
+	font-weight:800;
+	font-size:28px;
+	margin-bottom:10px;
+}
+
+#dateterms {
+	width:50%;
+	float:right;	
+}
+
+#dateterms span {
+	font-weight:600;
+}
+
+#dateterms td {
+	padding-bottom:2px;
+}
+
+#dateterms td.invoicesetting {
+	max-width:100%;
+	width:1%;
+	white-space:nowrap;
+	padding-left:10px;
+}
+
+.terms {
+	width:100%;
+}
+
+.sectiontitle {
+	font-weight:800;	
+	font-size:19px;
+	display:block;
+	margin-bottom:4px;	
+}
+
+#clientinformation {
+	font-weight:300;
+}
+
+#invoiceitems {
+	font-size:16px;
+	padding-bottom:15px;
+}
+
+#invoiceitems th {
+	font-weight:800;
+	padding-bottom:10px;
+}
+
+#invoiceitems td {
+	padding:12px 0;
+	border-top:1px solid #000;
+}
+
+#invoicetotal {
+	font-size:20px;
+	font-weight:800;
+}
+
+#invoiceamount {
+	float:right;
+	text-align:right;
+	font-size:30px;	
+}
+
+#notes {
+	border-bottom:none;
+	padding:0;
+}
+
+#notes p {
+	margin-top:0;
+}
+
+#notes p:last-child {
+	margin-bottom:0;
+}
+
+#e-notes {
+	display:block !important;
+	padding:48px 33px 22px 33px;
+	margin:0;
+}
+
+.notestitle {
+	position: absolute;
+    z-index: 200;
+    top: 25px;
+    left: 33px;
+}
+
+/* PDF Code */
+
+.topbar {
+	height:100px;
+	background:red;
+}
+
+
+</style>
+
+<div id="invoicewrapper">
+    <div id="invoice">
+    
+    	<section id="invoicenumber">
+       		<div>
+            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
+            </div>
+       </section> 
+       
+      <section id="companyinformation">
+       		<div id="userinfo">
+            	<span id="e-name">
+                <%= @invoice.name %>
+              </span>
+              <span id="e-address">
+                <%= @invoice.address_line1 %>
+              </span>
+              <span id="e-cityzip">
+                <%= @invoice.address_line2 %>
+              </span>
+              <span id="e-phone">
+                <%= @invoice.phone %>
+              </span>
+            </div>
+            <div id="dateterms">
+            	<table border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td align="right">Date:</td>
+                      <td class="invoicesetting"><span id="e-date">
+                      <%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
+                    </tr>
+                    <tr>
+                      <td align="right">Terms:</td>
+                      <td class="invoicesetting">
+                      	Net <%= get_terms %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">Due Date:</td>
+                      <td class="invoicesetting"><span id="e-duedate" contenteditable="<%= @editable %>"><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+      </section>
+      
+       <section id="clientinformation">
+       		<div class="sectiontitle">Bill To:</div>
+       		<span id="e-clientname">
+            <%= @invoice.client_name %>
+          </span>
+            <span id="e-clientaddress">
+            <%= @invoice.client_address_line1 %>
+            </span>
+            <span id="e-clientcityzip">
+            <%= @invoice.client_address_line2 %>
+            </span>
+       </section>
+       
+       <section id="invoiceitems">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr class="tableheading">
+                  <th width="51%" align="left">Description</th>
+                  <th width="16%" align="right">Quantity</th>
+                  <th width="15%" align="right">Rate</th>
+                  <th width="18%" align="right">Amount</th>
+                </tr>
+                <% @invoice.jobs.each do |job| %>
+                  <tr>
+                    <td width="51%"  align="left">
+                      
+                        <%= job.job_description %>
+                      
+                    </td>
+                    <td width="16%"  align="right">
+                      
+                        <%= number_with_precision(job.job_quantity, precision: 2, strip_insignificant_zeros: true, delimiter: ",") %>
+                      
+                    </td>
+                    <td width="15%" align="right">
+                      
+                        <%= print_number_or_na(job.job_rate) %>
+                      
+                    </td>
+                    <td width="18%" align="right">
+                    	<%= print_subtotal(job.job_quantity,job.job_rate) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+       </section>
+       
+       <section id="invoicetotal">
+            <div id="invoiceamount"><%= number_to_currency(@invoice.total, format: '%u %n') %></div>
+            Total:
+       </section>
+       
+        <section id="notes">
+            <div class="sectiontitle notestitle">Notes:</div>
+            <div id="e-notes" contenteditable="<%= @editable %>"><%= print_multiline(@invoice.notes) %></div>
+       </section>
+       
+    </div>
+
+</div>

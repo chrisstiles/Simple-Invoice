@@ -79,6 +79,10 @@ body.noscroll {
 	overflow:scroll;
 }
 
+#modalcontent.withsearch {
+	top:153px;
+}
+
 #modalcontent p:first-child {
 	margin-top:0;
 }
@@ -184,7 +188,6 @@ body.noscroll {
 	margin:-25px 0 -25px -25px;
 	padding:0;
 	width: calc(100% + 50px);
-	border-top: 1px solid #ececec;
 }
 
 .modalclient {
@@ -225,10 +228,22 @@ body.noscroll {
 	content:"";
 }
 
+#modalsearchwrapper {
+	height:100px;
+	position:relative;
+	background-color:#fff;
+	border-bottom: 1px solid #ececec;
+	z-index: 9999;
+}
+
 #modalsearch {
 	margin-bottom: 50px;
     display: block;
-    width: 100%;
+    width: calc(100% - 50px);
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
     outline: none;
     padding: 14px;
     box-sizing: border-box;

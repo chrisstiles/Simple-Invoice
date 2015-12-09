@@ -16,7 +16,7 @@ ready = function() {
     }
 
     function addModalContent(content, fade) {
-    	var html = '<div id="modalcontent"><div id="modalscroll">' + content + '</div></div>'
+    	var html = content
     	if (fade) {
     		$(html).hide().appendTo('#modalwindow').fadeIn(200);
     	} else {
@@ -87,9 +87,9 @@ ready = function() {
 
                     // Add the search box if there are more than one clients
                     if (data.length > 1) {
-                        addModalContent('<input id="modalsearch" type="text" placeholder="Filter clients"><ul id="client-content">' + clientContent + '</ul>', false);
+                        addModalContent('<div id="modalsearchwrapper"><input id="modalsearch" type="text" placeholder="Filter clients"></div><div id="modalcontent" class="withsearch"><div id="modalscroll"><ul id="client-content">' + clientContent + '</ul></div></div>', false);
                     } else {
-                        addModalContent('<ul id="client-content" class="single">' + clientContent + '</ul>', false);
+                        addModalContent('<div id="modalcontent"><div id="modalscroll"><ul id="client-content" class="single">' + clientContent + '</ul></div></div>', false);
                     }
 
                 }

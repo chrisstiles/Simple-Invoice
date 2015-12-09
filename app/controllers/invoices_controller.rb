@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name", :template => 'invoices/pdf_show.html.erb'   # Excluding ".pdf" extension.
+        render pdf: "Invoice #{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb'
       end
     end
   end
