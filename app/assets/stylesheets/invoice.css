@@ -428,6 +428,10 @@ section:after {
 	background-color:#f7f7f7;
 }
 
+#invoicewrapper.show #notes:hover {
+	background-color:#fff;
+}
+
 #invoiceitems tr.tableheading:hover {
 	background-color:transparent;
 }

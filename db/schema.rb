@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20151206213959) do
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
-    t.boolean  "is_primary"
+    t.boolean  "is_primary", default: false
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "clients", ["user_id"], name: "index_clients_on_user_id"

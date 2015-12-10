@@ -8,7 +8,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :state
       t.string :zip
       t.string :phone
-      t.boolean :is_primary
+      t.boolean :is_primary, :default => false
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

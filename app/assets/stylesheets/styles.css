@@ -26,6 +26,45 @@ header {
 	box-shadow: 0 3px 8px -3px rgba(0,0,0,.15);
 }
 
+header a {
+	display:inline-block;
+	float:left;
+}
+
+header a.button {
+	position:relative;
+	top:50%;
+	transform:translateY(-50%);
+	margin-left:30px;
+}
+
+nav a {
+	border-right:1px solid #f0f0f0;
+}
+
+#sessioninfo a {
+	border-left:1px solid #f0f0f0;
+	float:right;
+}
+
+nav a, #sessioninfo a {
+	height:63px;
+	line-height:1;
+	font-size:17px;
+	text-decoration:none;
+	padding: 23px 30px 0 30px;
+	box-sizing:border-box;
+	color:#26323f;
+}
+
+nav a:hover, #sessioninfo a:hover {
+	background-color:#f3f3f3;
+}
+
+nav a:active, #sessioninfo a:active {
+	background-color:#e4e4e4;
+}
+
 #sessioninfo {
 	float:right;
 	color:#fff;
@@ -178,6 +217,10 @@ a.logo {
 
 a.logo:hover {
 	background-color:#298dcf;
+}
+
+a.logo:active {
+	background-color:#1f7bb8;
 }
 
 a.logo img {

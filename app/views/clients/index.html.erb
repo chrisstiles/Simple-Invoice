@@ -1,7 +1,15 @@
 <br><br><br>
 <% @clients.each do |client| %>
 	
-	<%= link_to client.name, client %><br>
+	<%= link_to client.name, edit_client_path(client) %>
+
+	<% if client.is_primary? %>
+
+	 Is Primary
+
+	 <% end %>
+
+	<br>
 
 <% end %>
 

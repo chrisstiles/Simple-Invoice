@@ -2,6 +2,13 @@
   <%= render 'not_found' %>
 <% else %>
 
+<div id="toolbar">
+  <div id="toolbarcontent">
+    <%= link_to "Back to Invoices", invoices_path, class: "back" %>
+    <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), tabindex: '-1', class: "button blue" %>
+  </div>
+</div>
+
 <aside id="sidebar">
     <div class="scrollwrapper">
       Show Sidebar<br>
