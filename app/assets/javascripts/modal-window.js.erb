@@ -69,27 +69,38 @@ ready = function() {
                 async: true,
                 success: function(data) {
 
-                    // Append all clients and info to modal window
-                    var clientContent = '';
+                    if (data.length == 0) {
+                        addModalContent('<div id="modalcontent"><div class="noclients"><span>No Clients Found</span><a href="/clients/new" class="button blue" target="_blank">Create your first client</a></div></div>')
+                    } else {
 
-                    $.each(data, function(i, item) {
-                        var appendedContent = '<li class="modalclient" data-client_id=' + item.id + ' data-name="' + item.name + '" data-email="' + item.email + '" data-address_line1="' + item.address + '"';
+                        // Append all clients and info to modal window
+                        var clientContent = '';
 
-                        // Only add the second line of the address if they have city, state and zip added
-                        if (!item.city == '' && !item.city == '' && !item.zip == '') {
-                            appendedContent += ' data-address_line2="' + item.city + ', ' + item.state + ' ' + item.zip + '"';
+                        $.each(data, function(i, item) {
+                            var appendedContent = '<li class="modalclient" data-client_id=' + item.id + ' data-name="' + item.name + '" data-email="' + item.email + '" data-address_line1="' + item.address + '"';
+
+                            // Only add the second line of the address if they have city, state and zip added
+                            if (!item.city == '' && !item.city == '' && !item.zip == '') {
+                                appendedContent += ' data-address_line2="' + item.city + ', ' + item.state + ' ' + item.zip + '"';
+                            }
+
+                            appendedContent += ' data-phone="' + item.phone + '"><span class="client-name">' + item.name + '</span><span class="client-email">' + item.email + '</span></li>';
+
+                            if (item.is_primary == true) {
+                                clientContent = appendedContent + clientContent
+                            } else {
+                                clientContent += appendedContent;
+                            }
+                            
+                        });
+
+                        // Add the search box if there are more than one clients
+                        if (data.length > 1) {
+                            addModalContent('<div id="modalsearchwrapper"><input id="modalsearch" type="text" placeholder="Filter clients"></div><div id="modalcontent" class="withsearch"><div id="modalscroll"><ul id="client-content">' + clientContent + '</ul></div></div>', false);
+                        } else {
+                            addModalContent('<div id="modalcontent"><div id="modalscroll"><ul id="client-content" class="single">' + clientContent + '</ul></div></div>', false);
                         }
 
-                        appendedContent += ' data-phone="' + item.phone + '"><span class="client-name">' + item.name + '</span><span class="client-email">' + item.email + '</span></li>';
-
-                        clientContent += appendedContent;
-                    });
-
-                    // Add the search box if there are more than one clients
-                    if (data.length > 1) {
-                        addModalContent('<div id="modalsearchwrapper"><input id="modalsearch" type="text" placeholder="Filter clients"></div><div id="modalcontent" class="withsearch"><div id="modalscroll"><ul id="client-content">' + clientContent + '</ul></div></div>', false);
-                    } else {
-                        addModalContent('<div id="modalcontent"><div id="modalscroll"><ul id="client-content" class="single">' + clientContent + '</ul></div></div>', false);
                     }
 
                 }
@@ -102,18 +113,34 @@ ready = function() {
 
     // Add client information to invoice when clicked
 
+    var clientId = $('#client_id'),
+        eClientName =$('#e-clientname'),
+        invoiceClientName = $('#invoice_client_name'),
+        eClientAddress = $('#e-clientaddress'),
+        invoiceClientAddressLine1 = $('#invoice_client_address_line1'),
+        eClientCityZip = $('#e-clientcityzip'),
+        invoiceClientAddressLine2 = $('#invoice_client_address_line2');
+
     pageBody.on('click', '.modalclient', function() {
         var $this = $(this);
-        $('#client_id').val($this.data('client_id'));
+        clientId.val($this.data('client_id'));
 
-        $('#e-clientname').html($this.data('name'));
-        $('#invoice_client_name').val($this.data('name'));
+        eClientName.html($this.data('name')).attr('contenteditable', false);
+        eClientName.removeClass('haserror');
 
-        $('#e-clientaddress').html($this.data('address_line1'));
-        $('#invoice_client_address_line1').val($this.data('address_line1'));
+        invoiceClientName.val($this.data('name')).prop('readonly', true);
 
-        $('#e-clientcityzip').html($this.data('address_line2'));
-        $('#invoice_client_address_line2').val($this.data('address_line2'));
+        invoiceClientName.parents('.control').addClass('hassetclient');
+
+        eClientAddress.html($this.data('address_line1'));
+        eClientAddress.removeClass('haserror');
+
+        invoiceClientAddressLine1.val($this.data('address_line1'));
+
+        eClientCityZip.html($this.data('address_line2'));
+        eClientCityZip.removeClass('haserror');
+
+        invoiceClientAddressLine2.val($this.data('address_line2'));
 
         setClientButton();
 
@@ -154,19 +181,25 @@ ready = function() {
     // Remove client from invoice when clicked
 
     pageBody.on('click', '.removeclient', function() {
-        $('#client_id').val('');
+        clientId.val('');
 
-        $('#e-clientname').html('');
-        $('#invoice_client_name').val('');
+        eClientName.html('').attr('contenteditable', true);
+        invoiceClientName.val('').prop('readonly', false);
 
-        $('#e-clientaddress').html('');
-        $('#invoice_client_address_line1').val('');
+        invoiceClientName.parents('.control').removeClass('hassetclient');
 
-        $('#e-clientcityzip').html('');
-        $('#invoice_client_address_line2').val('');
+        eClientAddress.html('');
+        invoiceClientAddressLine1.val('');
+
+        eClientCityZip.html('');
+        invoiceClientAddressLine2.val('');
 
         setClientButton();
     });
+
+    // Close modal when new client is clicked
+
+    pageBody.on('click', '.noclients a', closeModal);
 
 };
 

@@ -1,9 +1,11 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  #before_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:update]
 
   def index
     @invoices = current_user.invoices.where(archived: false)
+    @total_due = return_total_amount_currently_due
   end
 
   def show
@@ -22,6 +24,8 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
 
+    @invoice.name = "test"
+
     @editable = "true"
     @number = set_invoice_number
 
@@ -35,21 +39,29 @@ class InvoicesController < ApplicationController
 
   def create
     @invoice = current_user.invoices.build(invoice_params)
-    @invoice.update_attribute(:invoice_number, set_invoice_number)
+    @invoice.invoice_number = set_invoice_number
+    @editable = "true"
     
     set_client_if_not_nil
     
     @jobs = @invoice.jobs
 
     respond_to do |format|
+
       if @invoice.save
-        format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully created.' }
-        format.json { render :show, status: :created, location: @invoice }
+        flash[:success] = 'Invoice was successfully created!'
+        flash.keep(:success)
+
+        format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
+
+        format.html { render invoice_path(@invoice.invoice_number) }
       else
         format.html { render :new }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+        format.js 
       end
+
     end
+    
   end
 
   # PATCH/PUT /invoices/1
@@ -65,12 +77,15 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to invoice_path(@invoice.invoice_number), notice: 'Invoice was successfully updated.' }
+        format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully updated!' } }
         format.json { render :show, status: :ok, location: @invoice }
-        format.js {  flash[:notice] = "Invoice was successfully updated." }
+
+        flash[:success] = 'Invoice was successfully updated!'
+        flash.keep(:success)
+        format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
       else
         format.html { render :edit }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+        format.js 
       end
     end
   end
@@ -120,5 +135,29 @@ class InvoicesController < ApplicationController
         @invoice.client = nil
       end
     end
+
+   # def merge_client_if_name_exists
+   #   if @invoice.client_id.nil? && @invoice.client_name.present?
+   #     client = current_user.clients.find_by(name: @invoice.client_name)
+   #     if client.present?
+   #       @invoice.client = client
+   #    end
+   #   end
+   # end
+
+    def return_total_amount_currently_due
+      total_due = 0
+
+      @invoices.each do |invoice|
+        unless invoice.due_date.future?
+          total_due += invoice.total.to_f
+        end
+      end
+
+      total_due
+      
+    end
+
+
 
 end

@@ -1,0 +1,67 @@
+.success {
+	position:fixed;
+	z-index: 200;
+	bottom:25px;
+	right:25px;
+	overflow: hidden;
+	background-color:#2ecc71;
+	padding: 18px 120px 18px 22px;
+	border-radius:2px;
+	color:#fff;
+	font-weight:bold;
+	font-size:15px;
+	animation-name: slideOut;
+	animation-duration: .5s;
+	animation-fill-mode:forwards;
+	animation-delay:5s;
+}
+
+@keyframes slideOut {
+	from {
+		transform:translateX(0);
+	} to {
+		transform:translateX(120%);
+	}
+}
+
+.successtimer {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	background-color:#28ba66;
+	height:4px;
+	transform:translateX(-100%);
+	animation-name: successTimer;
+	animation-duration:5s;
+	animation-fill-mode:forwards;
+	animation-timing-function:linear;
+}
+
+@keyframes successTimer {
+	from {
+		transform:translateX(-100%);
+	} to {
+		transform:translateX(0);
+	}
+}
+
+.closesuccess {
+	display:block;
+	cursor:pointer;	
+	width:30px;
+	height:30px;
+	background-repeat:no-repeat;
+	background-size:22px 22px;
+	background-position:center center;
+	position:absolute;
+	right:15px;
+	top:50%;
+	transform:translateY(-50%);
+	border-radius:50%;
+	background-image:url(/assets/close-modal.png);
+}
+
+.closesuccess:hover {
+	background-color:#28ba66;
+}

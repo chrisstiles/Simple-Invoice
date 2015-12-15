@@ -10,6 +10,13 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+#pagewrapper {
+	max-width:1200px;
+	margin:100px auto 45px auto;
+	padding:0 45px;
+	box-sizing:content-box;
+}
+
 
 /***********/
 /* Header */
@@ -52,7 +59,7 @@ nav a, #sessioninfo a {
 	line-height:1;
 	font-size:17px;
 	text-decoration:none;
-	padding: 23px 30px 0 30px;
+	padding: 23px 35px 0 35px;
 	box-sizing:border-box;
 	color:#26323f;
 }
@@ -277,6 +284,10 @@ a.logo img {
 	background-color:rgba(255,255,255,.03);
 }
 
+.control.hassetclient:hover {
+	background-color:transparent !important;
+}
+
 .control.active {
 	background-color:rgba(255,255,255,.03);
 }
@@ -372,10 +383,11 @@ a.logo img {
 	background-color:#c9392a;
 }
 
-.clients-modal span {
+.clients-modal span, .thirdbutton span  {
 	position: absolute;
     display: block;
-    width: 115px;
+    width: auto;
+    white-space: nowrap;
     border-radius: 2px;
     left: 50%;
     margin-top: 10px;
@@ -385,14 +397,30 @@ a.logo img {
     top: 100%;
     font-size: 13px;
     transform: translateX(-50%);
-    padding: 8px;
+    padding: 8px 14px;
     font-size: 13px;
     visibility:hidden;
     opacity:0;
     transition: all .2s;
 }
 
-.clients-modal:hover span {
+.clients-modal span:before, .thirdbutton span:before {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 5px 5px 5px;
+	border-color: transparent transparent rgba(0,0,0,.8) transparent;
+	content:"";
+	display:block;
+	position:absolute;
+	border-style: inset;
+	top:-5px;
+	left:50%;
+	transform:translateX(-50%) rotate(360deg);
+
+}
+
+.clients-modal:hover span, .thirdbutton:hover span  {
 	visibility: visible;
 	opacity:1;
 }

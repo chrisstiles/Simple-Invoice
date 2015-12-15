@@ -41,8 +41,13 @@
 	<% end %>		
 </header>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if flash[:success] %>
+	<div class="success">
+	  <div class="successtimer"></div>
+	  <div class="closesuccess"></div>
+	  <span><%= flash[:success] %></span>
+	</div>
+<% end %>
 
 <%= yield %>
 

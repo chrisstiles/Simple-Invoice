@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
 	before_action :set_client, only: [:show, :edit, :update, :destroy]
-	before_action :set_non_primary_clients_to_false, only: [:create, :update]
+	after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
 		@clients = current_user.clients.order('LOWER(name) ASC')

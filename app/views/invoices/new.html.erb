@@ -1,4 +1,7 @@
-<%= form_for(@invoice) do |f| %>
+<%= form_for(@invoice, remote: true) do |f| %>
+
+<ul id="errors">
+</ul>
 
 <div id="toolbar">
   <div id="toolbarcontent">
@@ -49,7 +52,7 @@
         <div class="control bonly">
         <div class="alignment">
             <span>Client Name</span>
-            <%= f.text_field :client_name, class: "clientnameinput" %>
+            <%= f.text_field :client_name, class: "clientnameinput", autocomplete: "off" %>
             </div>
         </div>
 
@@ -71,7 +74,7 @@
       <section id="companyinformation">
 
             <div id="userinfo">
-                  <%= f.text_field :name, value: print_if_not_nil(current_user.name) %>
+                  <%= f.text_field :name, value: print_if_not_nil(current_user.name)%>
                   <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]">
                     <%= print_if_not_nil(current_user.name) %>
                   </span><br>

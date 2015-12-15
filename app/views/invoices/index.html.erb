@@ -1,28 +1,37 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Invoices</h1>
+<div id="pagewrapper">
 
-<table>
-  <thead>
-    <tr>
-      <th>Invoice number</th>
-      <th>Terms</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @invoices.each do |invoice| %>
+<div class="homeinvoice">
+<div class="homeinvoiceloader"><div class="throbber-loader">Loading...</div></div>
+  <h3><%= invoice.client_name %></h3>
+  <div class="balancesection">
+    <div class="vcenter">
+      Balance:
+      <span <%= 'class=overdue' if invoice.overdue? %>>$ <%= invoice.total %></span>
+    </div>
+  </div>
+  <div class="invoiceinfosection">
+    Invoice Number: <strong><%= invoice.invoice_number %></strong><br>
+    <%= print_days_until_due(invoice) %>
+  </div>
+  <%= link_to "View Invoice", invoice_path(invoice.invoice_number), class: "viewinvoice" %>
+  <%= link_to invoice_path(invoice.invoice_number, format: "pdf"), class: "thirdbutton file" do %>
+      <span>View PDF</span>
+  <% end %>
+  <a href="#" class="thirdbutton mail"><span>Email Invoice</span></a>
+  <a href="#" class="thirdbutton noborder pig"><span>Record Payment</span></a>
+</div>
+<% end %>
 
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr>
-        <td><%= invoice.invoice_number %></td>
-        <td><%= link_to 'Show', invoice_path(invoice.invoice_number) %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice.invoice_number) %></td>
-        <td><%= link_to 'Destroy', invoice_path(invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
+
+
+</div>
+
+<br>
+Total amount due: <%= @total_due %>
+<br>
 <br>
 
 <%= link_to 'New Invoice', new_invoice_path %>

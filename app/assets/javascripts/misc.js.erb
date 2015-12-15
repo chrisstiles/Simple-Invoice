@@ -1,0 +1,20 @@
+var ready;
+ready = function() {
+
+// Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
+
+$('.thirdbutton.file').on("click", function() {
+	$(this).siblings('.homeinvoiceloader').fadeIn(200);
+});
+
+// Remove success modal when close is clicked
+$('.closesuccess').on("click", function() {
+	$(this).parent('.success').remove();
+});
+
+
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

@@ -185,6 +185,15 @@
 	position:relative;
 }
 
+.haserror {
+	background-color:#FFC1C1 !important;
+	z-index: 2;
+}
+
+.haserror:hover {
+	background-color:#f29e9e !important;
+}
+
 [contenteditable="true"]:hover {
 	background-color:#fdeca8;
 	z-index:100;

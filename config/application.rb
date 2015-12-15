@@ -25,5 +25,7 @@ module Invoicer
 
     # Serve assets in Heroku
     config.serve_static_files = true
+
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

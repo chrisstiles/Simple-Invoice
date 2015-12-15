@@ -2,7 +2,11 @@
   <%= render 'not_found' %>
 <% else %>
 
-<%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number)) do |f| %>
+<% if @validation_failed %>
+  <% content_for :body_class, "validationfailed invoicevalidation" %>
+<% end %>
+
+<%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
 
 <div id="toolbar">
   <div id="toolbarcontent">
