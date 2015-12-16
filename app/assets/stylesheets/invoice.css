@@ -8,6 +8,50 @@
 	-webkit-box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.14);
 	-moz-box-shadow:    0px 8px 25px 0px rgba(0, 0, 0, 0.14);
 	box-shadow:         0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+	transition: all .3s;
+}
+
+
+#validationerrors {
+	display:none;
+	left:141px;
+	margin:0 auto 45px auto;
+	position:relative;
+	max-width:780px;
+	top:160px;
+	padding:25px;
+	background:#f3cacb;
+	border-radius:2px;
+	margin-bottom:35px;
+	background-color:#f3cacb;
+	border:1px solid #c47375;
+	border-radius:2px;
+	color:#791c1c;
+	box-sizing:border-box;
+	animation-name: validationSlideUp;
+	animation-duration: .3s;
+	animation-fill-mode:forwards;
+}
+
+#validationerrors p {
+	margin-top:0;
+	margin-bottom:5px;
+}
+
+#validationerrors p:last-child {
+	margin-bottom:0;
+}
+
+@keyframes validationSlideUp {
+	from {
+		opacity:0;
+		transform:translateY(50px);
+	}
+
+	to {
+		opacity:1;
+		transform:translateY(0);
+	}
 }
 
 
@@ -491,10 +535,4 @@ section:after {
     left: 33px;
 }
 
-/* PDF Code */
-
-.topbar {
-	height:100px;
-	background:red;
-}
 

@@ -1,7 +1,6 @@
 <%= form_for(@invoice, remote: true) do |f| %>
 
-<ul id="errors">
-</ul>
+<div id="validationerrors"></div>
 
 <div id="toolbar">
   <div id="toolbarcontent">
@@ -63,6 +62,7 @@
 <!-- Start Invioce -->
 
 <div id="invoicewrapper" class="new">
+
     <div id="invoice">
     
       <section id="invoicenumber">
