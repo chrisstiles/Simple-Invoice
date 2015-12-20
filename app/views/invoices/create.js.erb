@@ -2,29 +2,99 @@
 
 // Variables
 var pageBody = $('body'),
-	validationErrors = $('#validationerrors');
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
 
 
 <% @invoice.errors.each do |key, message| %>
 
-var errorInput = $("input[name='invoice[" + "<%= key %>" + "]");
-var errorContentEditable = $("*[name='invoice[" + "<%= key %>" + "]'").not(':input');
+var key = "<%= key %>"
+var message = "<%= message %>"
+
+//console.log('<%= message %>')
+
+var errorInput = $("input[name='invoice[" + key + "]");
+var errorContentEditable = $("*[name='invoice[" + key + "]'").not(':input');
+
+if (key.indexOf('jobs.') > -1) {
+	key = key.replace('jobs.', '');
+	errorContentEditable = $('.' + key);
+}
 
 errorContentEditable.addClass('haserror');
+
+if (message.indexOf('long') > -1) {
+	var maxLength = message.replace( /\D/g, '');
+	errorContentEditable.attr('data-maxlength', maxLength);
+}
+
+if (message.indexOf('blank') > -1 || message.indexOf('number')) {
+	errorContentEditable.not(':empty').removeClass('haserror');
+}
+
+//if (message.indexOf('long') > -1) {
+//	var maxLength = message.replace( /\D/g, '');
+//	var correctLength = errorContentEditable.filter(function(el) {
+//		return el.text().length <= maxLength
+//
+//	var wrongLength = errorContentEditable.filter(function(el) {
+//		return el.text().length > maxLength
+//	});
+
+//	correctLength.not(':empty').removeClass('haserror');
+//	wrongLength.addClass('haserror');
+
+	//if (errorContentEditable.text().length <= maxLength) {
+	//	errorContentEditable.not(':empty').removeClass('haserror');
+	//} else {
+	//	errorContentEditable.addClass('haserror');
+	//}
+//}
 
 //validationErrors.append('<%= key %>' + ' ' + '<%= message %>')
 
 <% end %>
 
-validationErrors.empty();
+errorHolder.empty();
+
+// Add errors to elements with too much content
+$('[data-maxlength]').each(function(i) {
+	var $this = $(this);
+	var length = $this.text().length;
+	var maxLength = $this.data('maxlength');
+	if (length > maxLength) {
+		$this.addClass('haserror');
+	} else {
+		$this.removeClass('haserror');
+	}
+});
 
 <% @invoice.errors.full_messages.each do |message| %>
 
-validationErrors.append('<p>' + '<%= message %>' + '</p>');
+var message = '<%= message %>'
+
+if (message.indexOf('Jobs ') > -1) {
+	message = message.replace('Jobs j', 'J');
+}
+
+
+errorHolder.append('<p>' + message + '</p>');
 
 <% end %>
 
 <% end %>
+
+// Remove duplicate errors
+
+var seen = {};
+
+$('#errorholder p').each(function() {
+    var txt = $(this).text();
+    if (seen[txt])
+        $(this).remove();
+    else
+        seen[txt] = true;
+});
 
 // Show the validation errors list after they are added
 
@@ -36,7 +106,7 @@ validationErrors.css({
 	'display' : 'block'
 });
 
-validationsHeight += 30;
+validationsHeight += 35;
 
 $('#invoicewrapper').css({
   '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',

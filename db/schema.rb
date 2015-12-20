@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206213959) do
+ActiveRecord::Schema.define(version: 20151220191158) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20151206213959) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "invoice_number"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.boolean  "archived",             default: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.boolean  "archived",                                      default: false
     t.date     "date"
     t.date     "due_date"
     t.string   "name"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20151206213959) do
     t.string   "client_address_line1"
     t.string   "client_address_line2"
     t.text     "notes"
-    t.string   "total"
+    t.decimal  "total",                precision: 15, scale: 4
     t.integer  "user_id"
     t.integer  "client_id"
+    t.decimal  "amount_paid",          precision: 15, scale: 4
+    t.decimal  "balance",              precision: 15, scale: 4
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"

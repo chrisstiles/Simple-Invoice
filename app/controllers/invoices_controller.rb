@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  #before_action :merge_client_if_name_exists, only: [:create, :update]
-  after_action :remove_jobs_set_to_delete, only: [:update]
+  after_action :merge_client_if_name_exists, only: [:create, :update]
+  after_action :remove_jobs_set_to_delete, only: [:create, :update]
 
   def index
     @invoices = current_user.invoices.where(archived: false)
@@ -24,8 +24,6 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
 
-    @invoice.name = "test"
-
     @editable = "true"
     @number = set_invoice_number
 
@@ -40,6 +38,8 @@ class InvoicesController < ApplicationController
   def create
     @invoice = current_user.invoices.build(invoice_params)
     @invoice.invoice_number = set_invoice_number
+    set_initial_balance
+    
     @editable = "true"
     
     set_client_if_not_nil
@@ -49,9 +49,12 @@ class InvoicesController < ApplicationController
     respond_to do |format|
 
       if @invoice.save
+        #merge_client_if_name_exists
+        format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully created!' } }
+        format.json { render :show, status: :ok, location: @invoice }
+
         flash[:success] = 'Invoice was successfully created!'
         flash.keep(:success)
-
         format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
 
         format.html { render invoice_path(@invoice.invoice_number) }
@@ -77,6 +80,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.update(invoice_params)
+        #merge_client_if_name_exists
         format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully updated!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
@@ -136,14 +140,13 @@ class InvoicesController < ApplicationController
       end
     end
 
-   # def merge_client_if_name_exists
-   #   if @invoice.client_id.nil? && @invoice.client_name.present?
-   #     client = current_user.clients.find_by(name: @invoice.client_name)
-   #     if client.present?
-   #       @invoice.client = client
-   #    end
-   #   end
-   # end
+   def merge_client_if_name_exists
+      client_id = @invoice.client_id
+      client_name = @invoice.client_name
+      client = current_user.clients.find_by(name: client_name)
+      @invoice.client = client
+      @invoice.save
+   end
 
     def return_total_amount_currently_due
       total_due = 0
@@ -158,6 +161,9 @@ class InvoicesController < ApplicationController
       
     end
 
+    def set_initial_balance
+      @invoice.balance = @invoice.total
+    end
 
 
 end

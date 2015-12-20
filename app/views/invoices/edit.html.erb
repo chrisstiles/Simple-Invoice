@@ -8,6 +8,11 @@
 
 <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
 
+<div id="validationerrors">
+  <div class="validationtitle">Please correct the following errors before saving</div>
+  <div id="errorholder"></div>
+</div>
+
 <div id="toolbar">
   <div id="toolbarcontent">
     <%= link_to "Back to Invoices", invoices_path, class: "back" %>
@@ -143,19 +148,19 @@
                         <tr changed="true" class="jobrow">
                           <td align="left" class="jobdescriptioncell">
                                 <%= c.text_area :job_description, class: "job-description-box" %>
-                                <span class="e-jobdescription" contenteditable="<%= @editable %>" placeholder="Type a job description">
+                                <span class="e-jobdescription job_description" contenteditable="<%= @editable %>" placeholder="Type a job description">
                                   <%= c.object.job_description %>
                                 </span>
                           </td>
                           <td align="right" class="quantitycell">
                                 <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true)) %>
-                                <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+                                <span class="e-quantity job_quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
                   <%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
                                 </span>
                           </td>
                           <td align="right" class="ratecell">
                                 <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true))  %>
-                                <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
+                                <span class="e-rate job_rate" contenteditable="<%= @editable %>" placeholder="Rate">
                                   <%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
                                 </span>
                           </td>

@@ -1,19 +1,74 @@
 <% if @invoice.errors.any? %>
 
+// Variables
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
+
+
 <% @invoice.errors.each do |key, message| %>
 
-var errorInput = $("input[name='invoice[" + "<%= key %>" + "]");
-var errorContentEditable = $("*[name='invoice[" + "<%= key %>" + "]'").not(':input');
+var key = "<%= key %>"
+var message = "<%= message %>"
+
+console.log('<%= message %>')
+
+var errorInput = $("input[name='invoice[" + key + "]");
+var errorContentEditable = $("*[name='invoice[" + key + "]'").not(':input');
+
+if (key.indexOf('jobs.') > -1) {
+	key = key.replace('jobs.', '');
+	errorContentEditable = $('.' + key);
+}
 
 errorContentEditable.addClass('haserror');
 
+if (message.indexOf('blank') > -1) {
+	errorContentEditable.not(':empty').removeClass('haserror');
+}
+
+//validationErrors.append('<%= key %>' + ' ' + '<%= message %>')
+
+<% end %>
+
+errorHolder.empty();
+
+<% @invoice.errors.full_messages.each do |message| %>
+
+var message = '<%= message %>'
+
+if (message.indexOf('Jobs ') > -1) {
+	message = message.replace('Jobs j', 'J');
+}
+
+
+errorHolder.append('<p>' + message + '</p>');
 
 <% end %>
 
 <% end %>
 
-var pageBody = $('body');
+// Show the validation errors list after they are added
 
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+validationsHeight += 35;
+
+$('#invoicewrapper').css({
+  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+  'transform'         : 'translateY(' + validationsHeight + 'px)'
+});
+
+// Remove red background when input is changed
 pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
 	var $this = $(this);
 	$this.removeClass('haserror');

@@ -19,7 +19,6 @@
 	position:relative;
 	max-width:780px;
 	top:160px;
-	padding:25px;
 	background:#f3cacb;
 	border-radius:2px;
 	margin-bottom:35px;
@@ -35,11 +34,27 @@
 
 #validationerrors p {
 	margin-top:0;
-	margin-bottom:5px;
+	font-size:14px;
+	font-weight:600;
+	margin-bottom:2px;
+	padding: 7px 18px;
+}
+
+#validationerrors p:nth-child(even) {
+	background-color:#e3b0b2;
 }
 
 #validationerrors p:last-child {
 	margin-bottom:0;
+}
+
+.validationtitle {
+	background: #c47375;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
 }
 
 @keyframes validationSlideUp {
@@ -199,7 +214,7 @@
 	display:none !important;
 	position:absolute !important;
 	left:-9999px !important;
-}
+} 
 
 #invoicewrapper span {
 	min-width:5px;

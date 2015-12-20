@@ -205,6 +205,8 @@ ready = function() {
 
             }
 
+
+
 		// Bind the input fields and content editable fields.
 
 		var contentEditable = $('[contenteditable=true]');
@@ -311,6 +313,7 @@ ready = function() {
 		// Prevent pasting in quantity and rate fields
 		$(document).on('paste', '.e-quantity, .e-rate', function(e) {
 			e.preventDefault();
+			$(this).text('');
 		});
 
 		// Prevent scientific notation
@@ -436,6 +439,7 @@ ready = function() {
 
 			$('#invoiceitems tr').each(function() {
 				var $this = $(this);
+
 				$this.find('.job-description-box').attr('name','invoice[jobs_attributes][' + i + '][job_description]');
 				$this.find('.job-quantity-box').attr('name','invoice[jobs_attributes][' + i + '][job_quantity]');
 				$this.find('.job-rate-box').attr('name','invoice[jobs_attributes][' + i + '][job_rate]');
@@ -452,10 +456,15 @@ ready = function() {
 
 		// Add a new job item row when the insert button is clicked
 
-		var afterContent = '<tr changed="false" class="jobrow"> <td align="left" class="jobdescriptioncell"> <textarea class="job-description-box"></textarea> <span class="e-jobdescription" contenteditable="true" placeholder="Type a job description"></span> </td><td align="right" class="quantitycell"> <input type="text" class="job-quantity-box"> <span class="e-quantity" contenteditable="true" placeholder="Quantity"></span> </td><td align="right" class="ratecell"> <input type="text" class="job-rate-box"> <span class="e-rate" contenteditable="true" placeholder="Rate"></span> </td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"> <div class="delete"></div><div class="insert"></div></div></td></tr>';
+		var afterContent = '<tr changed="false" class="jobrow"> <td align="left" class="jobdescriptioncell"> <textarea class="job-description-box"></textarea> <span class="e-jobdescription job_description" contenteditable="true" placeholder="Type a job description"></span> </td><td align="right" class="quantitycell"> <input type="text" class="job-quantity-box"> <span class="e-quantity job_quantity" contenteditable="true" placeholder="Quantity"></span> </td><td align="right" class="ratecell"> <input type="text" class="job-rate-box"> <span class="e-rate job_rate" contenteditable="true" placeholder="Rate"></span> </td><td align="right" class="amountcell"> <div class="amountbox"></div><div class="jobcontrols"> <div class="delete"></div><div class="insert"></div></div></td></tr>';
 
 		jobsTable.on('click', '.insert', function() {
-			var row = $(this).parents('tr');
+			var $this = $(this);
+			var row = $this.parents('tr');
+
+			//var descriptionContent = row.find('.e-jobdescription').text();
+			//row.find('.job-description-box').val(descriptionContent);
+
 			row.after(afterContent);
 
 			row.next('tr').find('.e-jobdescription').focus();
