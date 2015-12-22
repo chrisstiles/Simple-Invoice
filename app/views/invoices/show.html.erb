@@ -15,7 +15,12 @@
       <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number) %>
       <%= link_to 'Back', invoices_path %>
       <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf") %>
-
+      <div id="controls">
+      <h2>Record Payment</h2>
+      Current balance $<%= number_with_precision(@invoice.balance, precision: 2) %><br>
+      Amount paid so far: $<%= number_with_precision(@invoice.amount_paid, precision: 2) %><br>
+      
+      </div>
       <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
 
     </div>

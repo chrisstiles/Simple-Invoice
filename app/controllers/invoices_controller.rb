@@ -39,7 +39,7 @@ class InvoicesController < ApplicationController
     @invoice = current_user.invoices.build(invoice_params)
     @invoice.invoice_number = set_invoice_number
     set_initial_balance
-    
+
     @editable = "true"
     
     set_client_if_not_nil
@@ -132,11 +132,13 @@ class InvoicesController < ApplicationController
     end
 
     def set_client_if_not_nil
-      client_id = params[:client_id]
-      unless client_id.empty?
-         @invoice.client = current_user.clients.find(params[:client_id])
-      else
-        @invoice.client = nil
+      if params.include?(:client_id)
+        client_id = params[:client_id]
+        unless client_id.empty?
+           @invoice.client = current_user.clients.find(params[:client_id])
+        else
+          @invoice.client = nil
+        end
       end
     end
 
@@ -153,7 +155,7 @@ class InvoicesController < ApplicationController
 
       @invoices.each do |invoice|
         unless invoice.due_date.future?
-          total_due += invoice.total.to_f
+          total_due += invoice.balance
         end
       end
 
@@ -163,6 +165,7 @@ class InvoicesController < ApplicationController
 
     def set_initial_balance
       @invoice.balance = @invoice.total
+      @invoice.amount_paid = 0
     end
 
 
