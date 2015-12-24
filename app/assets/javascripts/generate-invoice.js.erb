@@ -391,7 +391,7 @@ ready = function() {
 			if (!isNaN(invoiceTotal)) {
 				invoiceTotal = toFixed(invoiceTotal);
 				var totalText = invoiceTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				totalHiddenField.val(totalText);
+				totalHiddenField.val(invoiceTotal);
 				totalBox.html('$ ' + totalText);
 			} else {
 				totalHiddenField.val('0.00');

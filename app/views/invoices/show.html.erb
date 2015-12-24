@@ -11,15 +11,17 @@
 
 <aside id="sidebar">
     <div class="scrollwrapper">
-      Show Sidebar<br>
-      <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number) %>
-      <%= link_to 'Back', invoices_path %>
-      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf") %>
       <div id="controls">
+      <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
+      <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number), class: "button blue" %>
+      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "button blue" %>
       <h2>Record Payment</h2>
-      Current balance $<%= number_with_precision(@invoice.balance, precision: 2) %><br>
+      Current balance $<%= number_with_precision(@invoice.balance, precision: 2) %>
       Amount paid so far: $<%= number_with_precision(@invoice.amount_paid, precision: 2) %><br>
-      
+      <%= form_for(@invoice) do |f| %>
+        <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
+        <%= f.submit %>
+      <% end %>
       </div>
       <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
 

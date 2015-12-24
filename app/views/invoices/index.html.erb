@@ -8,7 +8,7 @@
   <div class="balancesection">
     <div class="vcenter">
       Balance:
-      <span <%= 'class=overdue' if invoice.overdue? %>>$ <%= number_with_precision(invoice.total, precision: 2) %></span>
+      <span <%= 'class=overdue' if invoice.overdue? %>>$ <%= number_with_precision(invoice.balance, precision: 2) %></span>
     </div>
   </div>
   <div class="invoiceinfosection">

@@ -2,6 +2,7 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
+  after_action :set_invoice_balance, only: [:update]
 
   def index
     @invoices = current_user.invoices.where(archived: false)
@@ -55,7 +56,7 @@ class InvoicesController < ApplicationController
 
         flash[:success] = 'Invoice was successfully created!'
         flash.keep(:success)
-        format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
+        format.js { render js: "window.location = '#{invoice_url(@invoice.invoice_number)}'" }
 
         format.html { render invoice_path(@invoice.invoice_number) }
       else
@@ -77,11 +78,12 @@ class InvoicesController < ApplicationController
     @jobs = @invoice.jobs
 
     set_client_if_not_nil
+    #set_invoice_balance
 
     respond_to do |format|
       if @invoice.update(invoice_params)
         #merge_client_if_name_exists
-        format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully updated!' } }
+        format.html { redirect_to invoice_url(@invoice.invoice_number), flash: { success: 'Payment Recorded!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
         flash[:success] = 'Invoice was successfully updated!'
@@ -116,7 +118,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     def set_invoice_number
@@ -168,5 +170,13 @@ class InvoicesController < ApplicationController
       @invoice.amount_paid = 0
     end
 
+    def set_invoice_balance
+      if @invoice.amount_paid.present? && @invoice.amount_paid > 0
+        @invoice.balance = @invoice.total - @invoice.amount_paid
+      else
+        @invoice.amount_paid = 0
+        @invoice.balance = @invoice.total
+      end
+    end
 
 end

@@ -17,7 +17,6 @@ body {
 	box-sizing:content-box;
 }
 
-
 /***********/
 /* Header */
 /***********/
@@ -239,6 +238,8 @@ a.logo img {
 
 #controls h2 {
 	color:#fff;
+	white-space: nowrap;
+    text-overflow: ellipsis;
 	background-color:rgba(255,255,255,.09);
 	display:block;
 	padding:20px 22px;
@@ -248,6 +249,15 @@ a.logo img {
 	border-bottom:1px solid rgba(255,255,255,.1);
 	border-top:1px solid rgba(255,255,255,.1);
 	position:relative;
+}
+
+#controls h2.showinvoicenumber {
+	overflow: hidden;
+}
+
+#controls .blue {
+	display:block;
+	margin:15px;
 }
 
 #controls h2:first-child {
