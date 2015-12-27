@@ -18,7 +18,7 @@ class Invoice < ActiveRecord::Base
 	validate :amount_paid_less_than_or_equal_to_total
 
 	def amount_paid_less_than_or_equal_to_total
-	  if self.amount_paid && (self.amount_paid >= self.total)
+	  if self.amount_paid && (Float(self.amount_paid) >= Float(self.total))
 	  	errors.add(:amount_paid, "Amount Paid cannot be greater than the invoice total")
 	  end
 	end
