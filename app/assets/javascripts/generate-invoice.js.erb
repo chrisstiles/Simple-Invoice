@@ -6,8 +6,163 @@ ready = function() {
 	var editing = invoiceWrapper.hasClass('edit');
 	var creating = invoiceWrapper.hasClass('new');
 	var showing = invoiceWrapper.hasClass('show');
+	var pageBody = $('body');
 
-	// Code just for the edit and new pages
+	// Code for all page
+
+	// Add loading content to buttons on press
+	pageBody.on('click', '.willload', function() {
+		var $this = $(this);
+
+		$this.addClass('hasloadingtext');
+
+		var oldContent = ''
+
+		if ($(this).is('input')) {
+			oldContent = $this.val();
+		} else {
+			oldContent = $this.text();
+		}
+
+		pageBody.append('<div class="hidden buttoncontent">' + oldContent + '</div>');
+		
+		$this.addClass('loading');
+		$this.val('Loading...');
+
+		$this.text('Loading...');
+	});
+
+	// Function to prevent pasting formatted text in content editable
+
+		var _onPaste_StripFormatting_IEPaste = false;
+
+            function OnPaste_StripFormatting(elem, e) {
+
+                if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+                    e.preventDefault();
+                    var text = e.originalEvent.originalEvent.clipboardData.getData('text/plain');
+                    window.document.execCommand('insertText', false, text);
+                }
+                else if (e.clipboardData && e.clipboardData.getData) {
+                    e.preventDefault();
+                    var text = e.clipboardData.getData('text/plain');
+                    window.document.execCommand('insertText', false, text);
+                }
+                else if (window.clipboardData && window.clipboardData.getData) {
+                    // Stop stack overflow
+                    if (!_onPaste_StripFormatting_IEPaste) {
+                        _onPaste_StripFormatting_IEPaste = true;
+                        e.preventDefault();
+                        window.document.execCommand('ms-pasteTextOnly', false);
+                    }
+                    _onPaste_StripFormatting_IEPaste = false;
+                }
+
+            }
+
+
+
+		// Bind the input fields and content editable fields.
+
+		var contentEditable = $('[contenteditable=true]');
+
+		// Prevent pasting with formatting
+
+		var editables = document.querySelectorAll('[contenteditable=true]');
+
+		[].forEach.call(editables, function(e) {
+
+			e.addEventListener("paste", function(e) {
+
+			// cancel paste
+			e.preventDefault();
+
+			// get text representation of clipboard
+			var text = e.clipboardData.getData("text/plain");
+
+			// insert text manually
+			document.execCommand("insertHTML", false, text);
+			
+			});
+
+		});
+
+
+		// Change input field when content editable changes
+		$(document).on('keyup', '[contenteditable=true]', function() {
+			var $this = $(this);
+			
+			var value = $this.text();
+
+			if (value == '' || value == '<div></div>' || value == '<br>' || value == '<br/>' || value == '<p></p>') {
+				$this.empty();
+			}
+
+			var item = $this.attr('name');
+			var inputField = $this.prev(':input');
+
+			if ($this.is('#e-clientname')) {
+				inputField = $('#invoice_client_name');
+			}
+
+			if (inputField.is('textarea')) {
+				value = $this.html();
+			} 
+			//var inputField = $('[name="' + item + '"]');
+
+			inputField.val(value);
+
+			if (inputField.is('textarea')) {
+				inputField.val().replace(/<br>/gi,"\n")
+			}
+
+		});
+
+
+		$('#invoiceitems :input').each(function() {
+			var $this = $(this);
+			var jobVal = $this.val();
+
+			$this.next('[contenteditable=true]').html(jobVal);
+
+		})
+
+		// Change content editable when input changes
+		$('input').on('keyup', function() {
+			var value = $(this).val();
+			var item = $(this).attr('name');
+			var inputField = $('*[name="' + item + '"]');
+
+			inputField.html(value);
+		});
+
+		// Prevent typing letters but allow select all with command and control
+		function isNumber(e) {
+			var a = [16, 190, 9, 37, 38, 39, 40, 46, 8, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
+			var k = e.which;
+
+			var isMeta = false;
+
+			if (e.metaKey || e.ctrlKey) {
+				isMeta = true;
+			}
+
+			if (!isMeta && !(a.indexOf(k) >= 0)) {
+				e.preventDefault();
+			}
+		}
+
+		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid', function(e) {
+			return isNumber(e);
+		});
+
+
+		// Prevent pasting in quantity and rate fields
+		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid', function(e) {
+			e.preventDefault();
+			$(this).text('');
+		});
+
 
 	if (editing || creating) {
 
@@ -177,110 +332,7 @@ ready = function() {
 			dueDateField.datepicker('show');
 		});
 
-		// Function to prevent pasting formatted text in content editable
-
-		var _onPaste_StripFormatting_IEPaste = false;
-
-            function OnPaste_StripFormatting(elem, e) {
-
-                if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
-                    e.preventDefault();
-                    var text = e.originalEvent.originalEvent.clipboardData.getData('text/plain');
-                    window.document.execCommand('insertText', false, text);
-                }
-                else if (e.clipboardData && e.clipboardData.getData) {
-                    e.preventDefault();
-                    var text = e.clipboardData.getData('text/plain');
-                    window.document.execCommand('insertText', false, text);
-                }
-                else if (window.clipboardData && window.clipboardData.getData) {
-                    // Stop stack overflow
-                    if (!_onPaste_StripFormatting_IEPaste) {
-                        _onPaste_StripFormatting_IEPaste = true;
-                        e.preventDefault();
-                        window.document.execCommand('ms-pasteTextOnly', false);
-                    }
-                    _onPaste_StripFormatting_IEPaste = false;
-                }
-
-            }
-
-
-
-		// Bind the input fields and content editable fields.
-
-		var contentEditable = $('[contenteditable=true]');
-
-		// Prevent pasting with formatting
-
-		var editables = document.querySelectorAll('[contenteditable=true]');
-
-		[].forEach.call(editables, function(e) {
-
-			e.addEventListener("paste", function(e) {
-
-			// cancel paste
-			e.preventDefault();
-
-			// get text representation of clipboard
-			var text = e.clipboardData.getData("text/plain");
-
-			// insert text manually
-			document.execCommand("insertHTML", false, text);
-			
-			});
-
-		});
-
-
-		// Change input field when content editable changes
-		$('#invoice').on('keyup', '[contenteditable=true]', function() {
-			var $this = $(this);
-			
-			var value = $this.text();
-
-			if (value == '' || value == '<div></div>' || value == '<br>' || value == '<br/>' || value == '<p></p>') {
-				$this.empty();
-			}
-
-			var item = $this.attr('name');
-			var inputField = $this.prev(':input');
-
-			if ($this.is('#e-clientname')) {
-				inputField = $('#invoice_client_name');
-			}
-
-			if (inputField.is('textarea')) {
-				value = $this.html();
-			} 
-			//var inputField = $('[name="' + item + '"]');
-
-			inputField.val(value);
-
-			if (inputField.is('textarea')) {
-				inputField.val().replace(/<br>/gi,"\n")
-			}
-
-		});
-
-
-		$('#invoiceitems :input').each(function() {
-			var $this = $(this);
-			var jobVal = $this.val();
-
-			$this.next('[contenteditable=true]').html(jobVal);
-
-		})
-
-		// Change content editable when input changes
-		$('input').on('keyup', function() {
-			var value = $(this).val();
-			var item = $(this).attr('name');
-			var inputField = $('*[name="' + item + '"]');
-
-			inputField.html(value);
-		});
-
+		
 		// Set focus to content editable when td is clicked
 
 		var jobsTable = $('#invoiceitems table');
@@ -289,32 +341,6 @@ ready = function() {
 			$(this).children('[contenteditable=true]').trigger('focus');
 		});
 
-		// Prevent typing letters but allow select all with command and control
-		function isNumber(e) {
-			var a = [16, 190, 9, 37, 38, 39, 40, 46, 8, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
-			var k = e.which;
-
-			var isMeta = false;
-
-			if (e.metaKey || e.ctrlKey) {
-				isMeta = true;
-			}
-
-			if (!isMeta && !(a.indexOf(k) >= 0)) {
-				e.preventDefault();
-			}
-		}
-
-		$(document).on('keydown', '.e-quantity, .e-rate', function(e) {
-			return isNumber(e);
-		});
-
-
-		// Prevent pasting in quantity and rate fields
-		$(document).on('paste', '.e-quantity, .e-rate', function(e) {
-			e.preventDefault();
-			$(this).text('');
-		});
 
 		// Prevent scientific notation
 
@@ -621,7 +647,25 @@ ready = function() {
 
 	if (showing) {
 
+		// $(document).on('click', '.recordpaymentbutton', function() {
+
+		// });
+
 		// Delete <br> tag in show if the span is empty
+
+		$('.amountpaidrow').on('click', function() {
+			$(this).find('span').focus();
+		});
+
+		var amountPaid = $('#e-amountpaid');
+
+		amountPaid.on('focus', function() {
+			$(this).closest('.row').addClass('active');
+		});
+
+		amountPaid.on('blur', function() {
+			$(this).closest('.row').removeClass('active');
+		});
 
 		$('span').each(function() {
 

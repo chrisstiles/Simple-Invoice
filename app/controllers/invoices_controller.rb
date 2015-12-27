@@ -56,6 +56,7 @@ class InvoicesController < ApplicationController
 
         flash[:success] = 'Invoice was successfully created!'
         flash.keep(:success)
+
         format.js { render js: "window.location = '#{invoice_url(@invoice.invoice_number)}'" }
 
         format.html { render invoice_path(@invoice.invoice_number) }
@@ -86,11 +87,17 @@ class InvoicesController < ApplicationController
         format.html { redirect_to invoice_url(@invoice.invoice_number), flash: { success: 'Payment Recorded!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
-        flash[:success] = 'Invoice was successfully updated!'
-        flash.keep(:success)
+        if params[:invoice][:amount_paid].present?
+          flash[:success] = 'Payment Recorded!'
+          flash.keep(:success)
+        else
+          flash[:success] = 'Invoice was successfully updated!'
+          flash.keep(:success)
+        end
+
         format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
       else
-        format.html { render :edit }
+        format.html { render :show }
         format.js 
       end
     end

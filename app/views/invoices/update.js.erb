@@ -1,5 +1,21 @@
 <% if @invoice.errors.any? %>
 
+
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+	button.val(oldContent);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+}, 200);
+
+
+
 // Variables
 var pageBody = $('body'),
 	validationErrors = $('#validationerrors'),
@@ -98,6 +114,8 @@ $('#errorholder p').each(function() {
 
 // Show the validation errors list after they are added
 
+if ($('#invoicewrapper').hasClass('edit')) {
+
 var validationsHeight = validationErrors.outerHeight(),
 	negativeValidationsHeight = -1 * validationsHeight;
 
@@ -125,5 +143,28 @@ pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
 		$('#e-clientname').removeClass('haserror');
 	}
 });
+
+} else {
+	var amountPaid = $('#e-amountpaid');
+	var amountPaidWidth = amountPaid.outerWidth();
+	var amountPaidLocation = amountPaid.offset();
+
+	validationErrors.offset({
+		top: amountPaidLocation.top,
+		left: amountPaidLocation.left + amountPaidWidth + 20
+	});
+
+	validationErrors.show();
+
+	var validationsHeight = validationErrors.outerHeight() / 4
+
+	validationErrors.css({
+	  '-webkit-transform' : 'translateY(-' + validationsHeight + 'px)',
+	  '-moz-transform'    : 'translateY(-' + validationsHeight + 'px)',
+	  '-ms-transform'     : 'translateY(-' + validationsHeight + 'px)',
+	  '-o-transform'      : 'translateY(-' + validationsHeight + 'px)',
+	  'transform'         : 'translateY(-' + validationsHeight + 'px)'
+	});
+}
 
 

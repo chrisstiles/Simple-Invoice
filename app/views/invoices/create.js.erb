@@ -1,5 +1,18 @@
 <% if @invoice.errors.any? %>
 
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+	button.val(oldContent);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+}, 200)
+
 // Variables
 var pageBody = $('body'),
 	validationErrors = $('#validationerrors'),

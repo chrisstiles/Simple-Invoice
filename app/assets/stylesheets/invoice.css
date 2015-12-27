@@ -32,6 +32,32 @@
 	animation-fill-mode:forwards;
 }
 
+#validationerrors.amountpaidvalidation {
+	position:fixed;
+	z-index: 9999;
+	margin:0;
+	left:0;
+	top:0;
+	max-width:250px;
+	animation-name: validationFadeIn;
+	transform:translateY(20px);
+	transition:all .3s;
+}
+
+#validationerrors.amountpaidvalidation:before {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 7.5px 8px 7.5px 0;
+	border-color: transparent #c47375 transparent transparent;
+	display:block;
+	content:"";
+	position:absolute;
+	left:-8px;
+	top:50%;
+	transform:translateY(-50%);
+}
+
 #validationerrors p {
 	margin-top:0;
 	font-size:14px;
@@ -69,6 +95,15 @@
 	}
 }
 
+@keyframes validationFadeIn {
+	from {
+		opacity:0;
+	}
+
+	to {
+		opacity:1;
+	}
+}
 
 #invoicewrapper:after {
 	clear:both;
@@ -210,7 +245,7 @@
 
 /* Hide input fields to allow text to be sent from content editable spans */
 
-#invoicewrapper section input, #invoicewrapper section textarea {
+#invoicewrapper section input, #invoicewrapper section textarea, #invoice_amount_paid, .hidden {
 	display:none !important;
 	position:absolute !important;
 	left:-9999px !important;

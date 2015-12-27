@@ -10,6 +10,6 @@ class Job < ActiveRecord::Base
 
   # Length
   validates :job_description, length: { maximum: 500 }
-  validates :job_quantity, :job_rate, length: { maximum: 30 }
+  validates :job_quantity, :job_rate, length: { maximum: 10 }
 
 end

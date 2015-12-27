@@ -2,6 +2,15 @@
   <%= render 'not_found' %>
 <% else %>
 
+<div id="validationerrors" class="amountpaidvalidation">
+  <div class="validationtitle">Please correct the following errors</div>
+  <div id="errorholder">
+    
+    <p>asdfasdf</p>
+  </div>
+</div>
+
+
 <div id="toolbar">
   <div id="toolbarcontent">
     <%= link_to "Back to Invoices", invoices_path, class: "back" %>
@@ -15,14 +24,36 @@
       <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
       <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number), class: "button blue" %>
       <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "button blue" %>
-      <h2>Record Payment</h2>
-      Current balance $<%= number_with_precision(@invoice.balance, precision: 2) %>
-      Amount paid so far: $<%= number_with_precision(@invoice.amount_paid, precision: 2) %><br>
-      <%= form_for(@invoice) do |f| %>
-        <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
-        <%= f.submit %>
-      <% end %>
+      <h2>
+        Record Payment
+        <span class="showduedate"><%= print_days_until_due(@invoice) %></span>
+      </h2>
+      <%= form_for(@invoice, remote: true) do |f| %>
+
+      <div id="showrecordpayment">
+        <div class="row">
+          <div class="cell">Invoice Total</div>
+          <div class="cell"><%= number_to_currency(@invoice.total) %></div>
+        </div>
+        <div class="row amountpaidrow">
+          <div class="cell amountpaidlabel">- Amount Paid</div>
+          <div class="cell">
+             <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
+             <span id="e-amountpaid" contenteditable="true" name="invoice[amount_paid]">
+              <%= number_with_precision(@invoice.amount_paid, precision: 2) %>
+              </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">Invoice Balance</div>
+          <div class="cell"><%= number_to_currency(@invoice.balance) %></div>
+        </div>
       </div>
+       <%= f.submit 'Record Payment', class: "button small greenbutton recordpaymentbutton willload" %>
+        </div>
+       
+      <% end %>
+
       <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
 
     </div>

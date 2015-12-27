@@ -155,6 +155,32 @@ nav a:active, #sessioninfo a:active {
     -ms-user-select: none;
     user-select: none;
     text-align: center;
+    position:relative;
+}
+
+.button.loading {
+	background-color:#5e6771 !important;
+	content:"Loading";
+	cursor:default !important;
+}
+
+.button.small {
+	font-size: 13px;
+	padding: 8px 12px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.button.greenbutton {
+	background-color:#7ba42c;
+}
+
+.button.greenbutton:hover {
+	background-color:#60941c;
+}
+
+.button.greenbutton:active {
+	background-color:#507c15;
 }
 
 .button.blue {
@@ -255,6 +281,15 @@ a.logo img {
 	overflow: hidden;
 }
 
+#controls h2 .showduedate {
+	position:absolute;
+	top:50%;
+	transform:translateY(-50%);
+	right:22px;
+	font-weight:300;
+	font-size:13px;
+}
+
 #controls .blue {
 	display:block;
 	margin:15px;
@@ -298,7 +333,7 @@ a.logo img {
 	background-color:transparent !important;
 }
 
-.control.active {
+.control.active, .row.active {
 	background-color:rgba(255,255,255,.03);
 }
 
@@ -722,4 +757,80 @@ ui-datepicker-prev {
 .ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
 	border-right-width: 0;
 	border-left-width: 1px;
+}
+
+/* Show Page Record Payment */
+
+#showrecordpayment {
+	display:table;
+	width:100%;
+	color:#fff;
+	font-size:14px;
+}
+
+.row {
+	display:table-row;
+	font-weight:400;
+}
+
+.row > div:last-of-type {
+	font-weight:600;
+	text-align:right;
+}
+
+.cell {
+	display:table-cell;
+	width:50%;
+	padding:0 22px;
+	height:39px;
+	vertical-align: middle;
+	border-bottom:1px solid #4d5761;
+	position:relative;
+	box-sizing:border-box;
+	white-space:nowrap;
+}
+
+.cell.amountpaidlabel {
+	padding-left:13px;
+}
+
+.row.amountpaidrow {
+	cursor: pointer;
+}
+
+.row.amountpaidrow:hover {
+	background-color:rgba(255,255,255,.03);
+}
+
+#e-amountpaid {
+    white-space: nowrap;
+    display: block;
+    float: right;
+    min-width: 74px;
+    height:40px;
+    background-color:#5e6771;
+    margin:0 -22px 0 0;
+    text-align:left;
+    padding:12px 22px 0 22px;
+    box-sizing:border-box;
+    max-width:120px;
+} 
+
+#e-amountpaid:hover, #e-amountpaid:focus {
+	background-color:#727a82;
+}
+
+#e-amountpaid br {
+    display:none;
+
+}
+
+#e-amountpaid * {
+    display:inline;
+    white-space:nowrap;
+}
+
+.recordpaymentbutton {
+	float:right;
+	margin:12px;
 }
