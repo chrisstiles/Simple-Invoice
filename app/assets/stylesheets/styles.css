@@ -805,6 +805,7 @@ ui-datepicker-prev {
 #e-amountpaid {
     white-space: nowrap;
     display: block;
+    overflow:hidden;
     float: right;
     min-width: 74px;
     height:40px;
@@ -815,6 +816,10 @@ ui-datepicker-prev {
     box-sizing:border-box;
     max-width:120px;
 } 
+
+#e-amountpaid.toomuch {
+	color:rgb(255, 87, 70) !important;
+}
 
 #e-amountpaid:hover, #e-amountpaid:focus {
 	background-color:#727a82;

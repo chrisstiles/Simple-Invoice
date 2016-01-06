@@ -17,6 +17,9 @@ gem "autoprefixer-rails"
 # Hirb for database viewing in console
 gem "hirb"
 
+# Pagination
+gem 'will_paginate', '~> 3.0.6'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

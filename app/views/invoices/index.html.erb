@@ -1,32 +1,20 @@
 
 <div id="pagewrapper">
 
-<% @invoices.each do |invoice| %>
-<div class="homeinvoice">
-<div class="homeinvoiceloader"><div class="throbber-loader">Loading...</div></div>
-  <h3><%= invoice.client_name %></h3>
-  <div class="balancesection">
-    <div class="vcenter">
-      Balance:
-      <span <%= 'class=overdue' if invoice.overdue? %>><%= number_to_currency(invoice.balance) %></span>
-    </div>
-  </div>
-  <div class="invoiceinfosection">
-    Invoice Number: <strong><%= invoice.invoice_number %></strong><br>
-    <%= print_days_until_due(invoice) %>
-  </div>
-  <%= link_to "View Invoice", invoice_path(invoice.invoice_number), class: "viewinvoice" %>
-  <%= link_to invoice_path(invoice.invoice_number, format: "pdf"), class: "thirdbutton file" do %>
-      <span>View PDF</span>
-  <% end %>
-  <a href="#" class="thirdbutton mail"><span>Email Invoice</span></a>
-  <a href="#" class="thirdbutton noborder pig"><span>Record Payment</span></a>
+<% if current_user.invoices.any? %>
+
+<form accept-charset="UTF-8" action="/invoices" method="get">
+  <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
+  <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
+</form>
+
+<br clear="all" /><br>
+
+<div id="searchresults">
+  <%= render 'list' %>
 </div>
+
 <% end %>
-
-
-
-
 </div>
 
 <br>

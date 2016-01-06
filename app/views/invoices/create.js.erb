@@ -11,7 +11,9 @@ setTimeout(function() {
 	}
 
 	button.removeClass('loading hasloadingtext');
-}, 200)
+	$('.buttoncontent').remove();
+	
+}, 200);
 
 // Variables
 var pageBody = $('body'),

@@ -12,6 +12,8 @@ setTimeout(function() {
 	}
 
 	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').remove();
+
 }, 200);
 
 
@@ -145,26 +147,33 @@ pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
 });
 
 } else {
-	var amountPaid = $('#e-amountpaid');
-	var amountPaidWidth = amountPaid.outerWidth();
-	var amountPaidLocation = amountPaid.offset();
 
-	validationErrors.offset({
-		top: amountPaidLocation.top,
-		left: amountPaidLocation.left + amountPaidWidth + 20
-	});
+	if (!validationErrors.hasClass('hastransformed')) {
 
-	validationErrors.show();
+		var amountPaid = $('#e-amountpaid');
+		var amountPaidWidth = amountPaid.outerWidth();
+		var amountPaidLocation = amountPaid.offset();
 
-	var validationsHeight = validationErrors.outerHeight() / 4
+		validationErrors.offset({
+			top: amountPaidLocation.top,
+			left: amountPaidLocation.left + amountPaidWidth + 20
+		});
 
-	validationErrors.css({
-	  '-webkit-transform' : 'translateY(-' + validationsHeight + 'px)',
-	  '-moz-transform'    : 'translateY(-' + validationsHeight + 'px)',
-	  '-ms-transform'     : 'translateY(-' + validationsHeight + 'px)',
-	  '-o-transform'      : 'translateY(-' + validationsHeight + 'px)',
-	  'transform'         : 'translateY(-' + validationsHeight + 'px)'
-	});
+		validationErrors.show();
+
+		var validationsHeight = validationErrors.outerHeight() / 4
+
+		validationErrors.css({
+		  '-webkit-transform' : 'translateY(-' + validationsHeight + 'px)',
+		  '-moz-transform'    : 'translateY(-' + validationsHeight + 'px)',
+		  '-ms-transform'     : 'translateY(-' + validationsHeight + 'px)',
+		  '-o-transform'      : 'translateY(-' + validationsHeight + 'px)',
+		  'transform'         : 'translateY(-' + validationsHeight + 'px)'
+		});
+
+		validationErrors.addClass('hastransformed');
+
+	}
 }
 
 

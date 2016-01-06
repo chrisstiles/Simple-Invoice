@@ -651,7 +651,7 @@ ready = function() {
 
 		// });
 
-		// Delete <br> tag in show if the span is empty
+		// Focus amount paid box when row is clicked
 
 		$('.amountpaidrow').on('click', function() {
 			$(this).find('span').focus();
@@ -666,6 +666,22 @@ ready = function() {
 		amountPaid.on('blur', function() {
 			$(this).closest('.row').removeClass('active');
 		});
+
+		// Prevent amount paid entered from being higher than invoice total
+
+		amountPaid.on('keyup', function(e) {
+			var $this = $(this);
+			var amountPaid = parseFloat($this.text(), 10);
+			var invoiceTotal =  parseFloat(Number( $('.invoicetotalcell').text().replace(/[^0-9\.]+/g,"")), 10);
+
+			if (amountPaid > invoiceTotal) {
+				$this.addClass('toomuch');
+			} else {
+				$this.removeClass('toomuch');
+			}
+		});
+
+		// Delete <br> tag in show if the span is empty
 
 		$('span').each(function() {
 

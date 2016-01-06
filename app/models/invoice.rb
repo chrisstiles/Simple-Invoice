@@ -1,9 +1,17 @@
 class Invoice < ActiveRecord::Base
+	# Relationships
 	belongs_to :user
 	belongs_to :client
 	
 	has_many :jobs
 	accepts_nested_attributes_for :jobs, :client
+
+	# Number of invoices to show per page with pagination
+	self.per_page = 5
+
+	# Filtering
+	scope :client_name, -> (client_name) { where("client_name like ?", "#{client_name}%")}
+	scope :invoice_number, -> (invoice_number) { where("invoice_number like ?", "#{invoice_number}%")}
 
 	# Validations
 
@@ -32,5 +40,6 @@ class Invoice < ActiveRecord::Base
 			true
 		end
 	end
+
 
 end
