@@ -10,8 +10,8 @@ class Invoice < ActiveRecord::Base
 	self.per_page = 5
 
 	# Filtering
-	scope :client_name, -> (client_name) { where("client_name like ?", "#{client_name}%")}
-	scope :invoice_number, -> (invoice_number) { where("invoice_number like ?", "#{invoice_number}%")}
+	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
+	scope :invoice_number, -> (invoice_number) { where("LOWER(invoice_number) like ?", "#{invoice_number.downcase}%")}
 
 	# Validations
 
