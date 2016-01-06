@@ -11,7 +11,7 @@ class Invoice < ActiveRecord::Base
 
 	# Filtering
 	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
-	scope :invoice_number, -> (invoice_number) { where("LOWER(invoice_number) like ?", "#{invoice_number.downcase}%")}
+	scope :invoice_number, -> (invoice_number) { where("cast(invoice_number as text) like ?", "#{invoice_number.downcase}%")}
 
 	# Validations
 
