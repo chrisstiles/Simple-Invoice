@@ -193,20 +193,24 @@ a.noborder {
 
 #homeside {
 	position:fixed;
-	width:263px;
+	width:270px;
 	padding-right:32px;
 	box-sizing:content-box;
 	top:100px;
 	right:100px;
 	border-left:1px solid #c9c9c9;
-	height:600px;
 	transform:translateX(-100%);
 	color:#26323f;
 	z-index: 300;
 }
 
 .homesidesection {
-	padding:32px 0 32px 32px;
+	padding:25px 0 25px 25px;
+	border-bottom:1px solid #c9c9c9;
+}
+
+#homeside > div:last-child {
+	border-bottom:none !important;	
 }
 
 .homesidesection * {
@@ -221,6 +225,27 @@ a.noborder {
 	font-size:16px;
 	font-weight:700;
 	margin-bottom:10px;
+}
+
+.homesortoptions {
+	margin-top:17px;
+	margin-bottom:15px;
+}
+
+.homesideborders {
+	padding: 12px 0 17px 0px;
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+}
+
+.homesidesection h4 {
+	font-size:13px;
+	font-weight:700;
+	margin-bottom:0;
+}
+
+.invoice_sorted_by {
+	width:100%;
 }
 
 .homefilter input[type="text"] {
@@ -291,4 +316,46 @@ input[type="checkbox"]:checked + label span:before {
 	transform:translate(-50%,-50%);
 	color:#fff;
 
+}
+
+#invoicesoverview {
+	font-size: 15px;
+    font-weight: 600;
 } 
+
+#invoicesoverview .homesideborders {
+	border-bottom:none;
+	margin-top:15px;
+	font-size:23px;
+	padding-bottom:0;
+	font-weight:300;
+	margin-bottom:0;
+}
+
+#invoicesoverview .homesideborders span {
+	color:#41a9ee;
+	font-weight:600;
+}
+
+.homesidesection .button {
+	display:block;
+}
+
+#homepagination {
+	position:fixed;
+	top:63px;
+	background-color:#ecf0f1;
+	padding: 40px 15px 15px 115px;
+    box-sizing: border-box;
+}
+
+#homepagination:after {
+	position:absolute;
+	left:100px;
+	right:0;
+	bottom:0;
+	height:1px;
+	content:"";
+	display:block;
+	background-color:#c9c9c9;
+}

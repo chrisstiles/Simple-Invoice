@@ -12,4 +12,21 @@ module InvoicesHelper
 		end 
 	end
 
+	def number_of_due_invoices
+		current_user.invoices.where('archived = ? AND due_date <= ? AND balance > ?', false, Date.today, 0).count
+	end
+
+	def total_amount_due
+      total_due = 0
+
+      current_user.invoices.where(archived: false).each do |invoice|
+        unless invoice.due_date.future?
+          total_due += invoice.balance
+        end
+      end
+
+      total_due
+      
+    end
+
 end

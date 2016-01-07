@@ -5,13 +5,12 @@ class InvoicesController < ApplicationController
   after_action :set_invoice_balance, only: [:update]
 
   def index
-   @invoices = current_user.invoices.where(archived: false).page(params[:page]).order('created_at DESC')
+   @invoices = current_user.invoices.where(archived: false).page(params[:page])
 
+   @invoices = @invoices.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
    @invoices = @invoices.client_name(params[:client_name]) if params[:client_name].present?
    @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
    @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
-
-   @total_due = return_total_amount_currently_due
 
   end
 
@@ -164,19 +163,6 @@ class InvoicesController < ApplicationController
       @invoice.client = client
       @invoice.save
    end
-
-    def return_total_amount_currently_due
-      total_due = 0
-
-      @invoices.each do |invoice|
-        unless invoice.due_date.future?
-          total_due += invoice.balance
-        end
-      end
-
-      total_due
-      
-    end
 
     def set_initial_balance
       @invoice.balance = @invoice.total

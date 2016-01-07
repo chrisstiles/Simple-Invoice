@@ -21,7 +21,7 @@ function searchInvoice(){
   });
 };
 
-var keycodes = [8,9,13,32,189,186,190,191,222]
+var keycodes = [8,13,32,189,186,190,191,222]
 
 for (var i = 46; i < 105; i++) {
   keycodes.push(i);

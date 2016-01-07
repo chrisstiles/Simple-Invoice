@@ -10,6 +10,8 @@ class Invoice < ActiveRecord::Base
 	self.per_page = 5
 
 	# Filtering
+	default_scope { order(created_at: :desc) }
+
 	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
 	scope :invoice_number, -> (invoice_number) { where("cast(invoice_number as text) like ?", "#{invoice_number.downcase}%")}
 	scope :currently_due, -> (currently_due) {
@@ -17,6 +19,19 @@ class Invoice < ActiveRecord::Base
 			where("due_date <= ?", Date.today).where("balance > ?", 0)
 		end
 		#here("client_name like ?", "VendCentral")
+	}
+
+	scope :sorted_by, -> (sort_option) { 
+	  # extract the sort direction from the param value.
+	  direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+	  case sort_option.to_s
+	  when /^created_at_/
+	    reorder("invoices.created_at #{ direction }")
+	  when /^client_name_/
+	    reorder("LOWER(invoices.client_name) #{ direction }")
+	  else
+	    raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+	  end
 	}
 
 	# Validations

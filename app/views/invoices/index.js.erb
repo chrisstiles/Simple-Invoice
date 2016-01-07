@@ -1,2 +1,30 @@
 <% js = escape_javascript(render 'list') %>
 $("#searchresults").html("<%= js %>");
+var homePageWrapper = $('#pagewrapper');
+var homeSide = $('#homeside');
+var searchResults = $('#searchresults');
+
+// Set position of pagination if it exists
+var pagination = $('#homepagination');
+
+function setHomePagination() {
+	var leftPosition = $('.homeinvoice').first().offset().left - 100;
+	var rightPosition = $(window).width() - homeSide.offset().left;
+
+	pagination.css({
+		'left' : leftPosition,
+		'right' : rightPosition
+	});
+
+	if ($('.pagination').length) {
+		pagination.show();
+		searchResults.css('padding-top', '75px');
+	} else {
+		searchResults.css('padding-top', '0');
+		pagination.hide();
+	}
+}
+
+if (homePageWrapper.length) {
+	setHomePagination();
+}

@@ -28,9 +28,33 @@ if (homePageWrapper.length) {
 	setSidebarPosition();
 }
 
+// Set position of pagination if it exists
+
+function setHomePagination() {
+	var pagination = $('#homepagination');
+	var leftPosition = $('.homeinvoice').first().offset().left - 100;
+	var rightPosition = $(window).width() - homeSide.offset().left;
+
+	pagination.css({
+		'left' : leftPosition,
+		'right' : rightPosition
+	});
+
+	if ($('.pagination').length) {
+		$('#searchresults').css('padding-top', '75px');
+	}
+}
+
+if (homePageWrapper.length) {
+	setHomePagination();
+}
+
+
+// Changed fixed positions on window resize
 $( window ).resize(function() {
 	if (homePageWrapper.length) {
 		setSidebarPosition();
+		setHomePagination();
 	}
 });
 

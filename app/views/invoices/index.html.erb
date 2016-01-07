@@ -9,16 +9,39 @@
     <form accept-charset="UTF-8" action="/invoices" method="get" class="homefilter">
       <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
       <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
+      <div class="homesortoptions homesideborders">
+      <h4>Sort Invoices By:</h4>
+      <select class="search invoice_sorted_by" name="sorted_by">
+          <option value="created_at_desc" selected="selected">Created at (newest first)</option>
+          <option value="created_at_asc">Created at (oldest first)</option>
+          <option value="client_name_asc">Client Name (a-z)</option>
+          <option value="client_name_desc">Client Name (z-a)</option>
+        </select>
+      </div>
+    
 
       <div class="checkboxholder">
         <input type="checkbox" id="c1" name="currently_due" class="search invoice_show_currently_due" />
         <label for="c1"><span></span>
           <div>Only show invoices currently due and not paid in full.</div>
         </label>
-        <!-- <input type="checkbox" name="currently_due" class="search invoice_show_currently_due" id="checkbox"> -->
       </div>
-    </form>
+      </form>
   </div>
+
+  <div id="invoicesoverview" class="homesidesection">
+    <%= pluralize(number_of_due_invoices, 'invoice') %> due and not paid in full.
+
+    <div class="homesideborders">
+    Total Due: <span <%= 'class=overdue' if total_amount_due > 0 %>><%= number_to_currency(total_amount_due) %>
+    </div>
+
+  </div>
+
+  <div class="homesidesection">
+    <%= link_to "New Invoice", new_invoice_path, class: "button blue" %>
+  </div>
+
 </div>
 <div id="searchresultswrapper">
 <div id="loadingspinner">
@@ -34,7 +57,7 @@
 </div>
 
 <br>
-Total amount due: <%= @total_due %>
+Total amount due: <%= total_amount_due %>
 <br>
 <br>
 
