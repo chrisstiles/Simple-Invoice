@@ -1,11 +1,12 @@
 var ready;
 ready = function() {
 
+
 function searchInvoice(){
   var form = $('.search').parents("form"),
       url = form.attr("action");
   // turn on spinner
-  showLoader()
+ showLoader();
   // Submit ajax request
   $.ajax({
     url: url,
@@ -13,13 +14,33 @@ function searchInvoice(){
     type: 'GET',
     dataType: 'script'
   }).done(function( msg ) {
-    loadingBox.hide();
+    clearTimeout(timer);
+    setTimeout(function() {
+      loadingBox.hide();
+    }, 300)
   });
 };
 
-$('.search').on('keyup change', searchInvoice);
+var keycodes = [8,9,13,32,189,186,190,191,222]
 
-var loadingBox = $('#loadingspinner')
+for (var i = 46; i < 105; i++) {
+  keycodes.push(i);
+}
+
+var searchBoxes = $('.search');
+
+searchBoxes.on('keyup', function(e){
+  var keyCode = e.which;
+
+  if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
+    searchInvoice();
+  }
+
+});
+
+searchBoxes.on('change', searchInvoice);
+
+var loadingBox = $('#loadingspinner'), timer;
 
 function showLoader() {
   var resultsWrapper = $('#searchresultswrapper');
@@ -27,8 +48,15 @@ function showLoader() {
 
   $('#loadingcircle').css('left', leftPosition);
 
-  loadingBox.show();
+  timer && clearTimeout(timer);
+   timer = setTimeout(function()
+        {
+            loadingBox.show();
+        },
+        200);
+  
 }
+
 
 };
 
