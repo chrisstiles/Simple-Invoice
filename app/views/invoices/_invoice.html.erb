@@ -4,7 +4,7 @@
   <div class="balancesection">
     <div class="vcenter">
       Balance:
-      <span <%= 'class=overdue' if invoice.overdue? %>><%= number_to_currency(invoice.balance) %></span>
+      <span <%= 'class=overdue' if invoice.overdue? && invoice.not_paid_off? %>><%= number_to_currency(invoice.balance) %></span>
     </div>
   </div>
   <div class="invoiceinfosection">

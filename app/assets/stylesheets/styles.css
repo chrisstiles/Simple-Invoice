@@ -14,7 +14,13 @@ body {
 	max-width:1200px;
 	margin:100px auto 45px auto;
 	padding:0 45px;
-	box-sizing:content-box;
+	box-sizing:border-box;
+	position:relative;
+}
+
+#pagewrapper.widthfixedsidebar {
+	padding-right:340px;
+	padding-left:29px;
 }
 
 /***********/

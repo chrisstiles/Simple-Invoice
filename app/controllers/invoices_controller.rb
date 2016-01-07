@@ -9,6 +9,7 @@ class InvoicesController < ApplicationController
 
    @invoices = @invoices.client_name(params[:client_name]) if params[:client_name].present?
    @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
+   @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
 
    @total_due = return_total_amount_currently_due
 

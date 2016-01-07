@@ -3,7 +3,7 @@ ready = function() {
 
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
-$('.thirdbutton.file').on("click", function() {
+$('body').on('click', '.thirdbutton.file', function() {
 	$(this).siblings('.homeinvoiceloader').fadeIn(200);
 });
 
@@ -13,6 +13,26 @@ $('.closesuccess').on("click", function() {
 });
 
 
+// Set position of home page sidebar
+var homePageWrapper = $('#pagewrapper');
+var homeSide = $('#homeside');
+
+function setSidebarPosition() {
+	
+	var leftPosition = homePageWrapper.offset().left + homePageWrapper.outerWidth();
+	homeSide.css('left', leftPosition);
+
+}
+
+if (homePageWrapper.length) {
+	setSidebarPosition();
+}
+
+$( window ).resize(function() {
+	if (homePageWrapper.length) {
+		setSidebarPosition();
+	}
+});
 
 };
 

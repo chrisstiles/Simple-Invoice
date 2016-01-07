@@ -5,7 +5,7 @@ function searchInvoice(){
   var form = $('.search').parents("form"),
       url = form.attr("action");
   // turn on spinner
- // $('.filterrific_spinner').show();
+  showLoader()
   // Submit ajax request
   $.ajax({
     url: url,
@@ -13,11 +13,22 @@ function searchInvoice(){
     type: 'GET',
     dataType: 'script'
   }).done(function( msg ) {
-    //$('.filterrific_spinner').hide();
+    loadingBox.hide();
   });
 };
 
-$('.search').on('keyup', searchInvoice);
+$('.search').on('keyup change', searchInvoice);
+
+var loadingBox = $('#loadingspinner')
+
+function showLoader() {
+  var resultsWrapper = $('#searchresultswrapper');
+  var leftPosition = resultsWrapper.offset().left + (resultsWrapper.outerWidth() / 2);
+
+  $('#loadingcircle').css('left', leftPosition);
+
+  loadingBox.show();
+}
 
 };
 

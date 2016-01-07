@@ -1,19 +1,35 @@
 
-<div id="pagewrapper">
+<div id="pagewrapper" class="widthfixedsidebar">
 
 <% if current_user.invoices.any? %>
 
-<form accept-charset="UTF-8" action="/invoices" method="get">
-  <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
-  <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
-</form>
+<div id="homeside">
+  <div class="homesidesection">
+    <h3>Filter Invoices</h3>
+    <form accept-charset="UTF-8" action="/invoices" method="get" class="homefilter">
+      <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
+      <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
 
-<br clear="all" /><br>
-
+      <div class="checkboxholder">
+        <input type="checkbox" id="c1" name="currently_due" class="search invoice_show_currently_due" />
+        <label for="c1"><span></span>
+          <div>Only show invoices currently due and not paid in full.</div>
+        </label>
+        <!-- <input type="checkbox" name="currently_due" class="search invoice_show_currently_due" id="checkbox"> -->
+      </div>
+    </form>
+  </div>
+</div>
+<div id="searchresultswrapper">
+<div id="loadingspinner">
+  <div id="loadingcircle">
+    <div class="throbber-loader">Loading...</div>
+    </div>
+  </div>
 <div id="searchresults">
   <%= render 'list' %>
 </div>
-
+</div>
 <% end %>
 </div>
 

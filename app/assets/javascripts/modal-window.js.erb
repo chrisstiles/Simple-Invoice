@@ -110,6 +110,24 @@ ready = function() {
 
     });
 
+    
+    // Loop through clients and set every other row as grey after filtering
+
+    // function setRowBgs() {
+    //     var visibleRows = $('.modalclient:visible');
+
+    //     visibleRows.each(function(i) {
+    //         var $this = $(this);
+
+    //         if (i % 2 == 0) {
+    //             $this.css('background-color', '#ffffff');
+    //         } else {
+    //             $this.css('background-color', '#f6f6f6');
+    //         }
+
+    //     });
+    // }
+
 
     // Add client information to invoice when clicked
 
@@ -152,13 +170,32 @@ ready = function() {
     pageBody.on('keyup', '#modalsearch', function() {
         var valThis = $(this).val().toLowerCase();
         if (valThis == "") {
-            $('#client-content > li').show();
+            $('#client-content > li').removeAttr('style').show();
         } else {
+            var counter = 1;
             $('#client-content > li').each(function() {
-                var text = $(this).text().toLowerCase();
-                (text.indexOf(valThis) >= 0) ? $(this).show(): $(this).hide();
+                var $this = $(this);
+                var text = $this.text().toLowerCase();
+                if (text.indexOf(valThis) >= 0) {
+                    if (counter % 2 == 0) {
+                        $this.css('background-color', '#ffffff');
+                    } else {
+                        $this.css('background-color', '#f6f6f6');
+                    }
+
+                    $(this).show();
+
+                    counter++
+                } else {
+                    $(this).hide();
+
+                }
+                
+                //(text.indexOf(valThis) >= 0) ? $(this).show(): $(this).hide();
             });
         }
+        //setRowBgs();  
+         
     });
 
 

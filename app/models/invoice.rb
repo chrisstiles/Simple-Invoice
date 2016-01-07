@@ -12,6 +12,12 @@ class Invoice < ActiveRecord::Base
 	# Filtering
 	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
 	scope :invoice_number, -> (invoice_number) { where("cast(invoice_number as text) like ?", "#{invoice_number.downcase}%")}
+	scope :currently_due, -> (currently_due) {
+		if currently_due 
+			where("due_date <= ?", Date.today).where("balance > ?", 0)
+		end
+		#here("client_name like ?", "VendCentral")
+	}
 
 	# Validations
 
@@ -26,7 +32,7 @@ class Invoice < ActiveRecord::Base
 	validate :amount_paid_less_than_or_equal_to_total
 
 	def amount_paid_less_than_or_equal_to_total
-	  if self.amount_paid && (Float(self.amount_paid) >= Float(self.total))
+	  if self.amount_paid && (Float(self.amount_paid) > Float(self.total))
 	  	errors.add(:amount_paid, "Amount Paid cannot be greater than the invoice total")
 	  end
 	end
@@ -41,5 +47,20 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
+	def paid_off?
+		if self.balance <= 0
+			true
+		else
+			false
+		end
+	end
+
+	def not_paid_off?
+		if self.balance > 0 
+			true
+		else
+			false
+		end
+	end
 
 end

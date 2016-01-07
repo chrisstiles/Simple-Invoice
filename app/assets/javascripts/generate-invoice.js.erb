@@ -152,13 +152,13 @@ ready = function() {
 			}
 		}
 
-		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid', function(e) {
+		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid, .invoice_number_search', function(e) {
 			return isNumber(e);
 		});
 
 
 		// Prevent pasting in quantity and rate fields
-		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid', function(e) {
+		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid, .invoice_number_search', function(e) {
 			e.preventDefault();
 			$(this).text('');
 		});
