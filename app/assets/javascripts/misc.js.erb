@@ -1,9 +1,11 @@
 var ready;
 ready = function() {
 
+var pageBody = $('body');
+
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
-$('body').on('click', '.thirdbutton.file', function() {
+pageBody.on('click', '.thirdbutton.file', function() {
 	$(this).siblings('.homeinvoiceloader').fadeIn(200);
 });
 
@@ -29,6 +31,7 @@ if (homePageWrapper.length) {
 }
 
 // Set position of pagination if it exists
+var searchResults = $('#searchresults');
 
 function setHomePagination() {
 	var pagination = $('#homepagination');
@@ -40,8 +43,13 @@ function setHomePagination() {
 		'right' : rightPosition
 	});
 
+	
 	if ($('.pagination').length) {
-		$('#searchresults').css('padding-top', '75px');
+		pagination.show();
+		searchResults.css('padding-top', '70px');
+	} else {
+		searchResults.css('padding-top', '0');
+		pagination.hide();
 	}
 }
 
@@ -54,7 +62,9 @@ if (homePageWrapper.length) {
 $( window ).resize(function() {
 	if (homePageWrapper.length) {
 		setSidebarPosition();
-		setHomePagination();
+		if ($('.homeinvoice').length) {
+			setHomePagination();
+		}
 	}
 });
 

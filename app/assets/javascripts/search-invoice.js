@@ -14,12 +14,21 @@ function searchInvoice(){
     type: 'GET',
     dataType: 'script'
   }).done(function( msg ) {
-    clearTimeout(timer);
-    setTimeout(function() {
-      loadingBox.hide();
-    }, 300)
+    seachNoInvoices.hide();
+    hideLoader();
+  }).fail(function(msg){
+    showNoInvoices();
   });
 };
+
+// Hide the loading box and clear timer
+
+function hideLoader() {
+   clearTimeout(timer);
+    setTimeout(function() {
+      loadingBox.hide();
+    }, 300);
+}
 
 var keycodes = [8,13,32,189,186,190,191,222]
 
@@ -48,14 +57,53 @@ function showLoader() {
 
   $('#loadingcircle').css('left', leftPosition);
 
-  timer && clearTimeout(timer);
+   timer && clearTimeout(timer);
    timer = setTimeout(function()
         {
             loadingBox.show();
         },
-        200);
+    200);
   
 }
+
+
+// Hide the pagination div if there is no need for pagination
+
+function checkPagination() {
+  var paginationWrapper = $('#homepagination');
+  if ($('.pagination').length) {
+    paginationWrapper.show();
+  } else {
+    paginationWrapper.hide();
+  }
+}
+
+checkPagination();
+
+// Function to hide the spinner and show no invoices found if the ajax call fails
+
+var seachNoInvoices = $('#searchnoinvoices');
+
+function showNoInvoices() {
+  hideLoader()
+  seachNoInvoices.show();
+}
+
+// Scroll the user to the top of the page when they click a pagination link
+
+var pageBody = $('body');
+
+pageBody.on('click', '.pagination a', function() {
+  pageBody.removeClass('hasfinishedloading')
+
+  setTimeout(function() {
+    if (!pageBody.hasClass('hasfinishedloading')) {
+      showLoader();
+    }    
+  }, 300);
+
+  
+});
 
 
 };

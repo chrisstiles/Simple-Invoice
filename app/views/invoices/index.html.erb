@@ -44,6 +44,12 @@
 
 </div>
 <div id="searchresultswrapper">
+
+<div id="searchnoinvoices" class="noinvoices">
+  <p>No Invoices Found</p>
+  <%= link_to "New Invoice", new_invoice_path, class: "button blue" %>
+</div>
+
 <div id="loadingspinner">
   <div id="loadingcircle">
     <div class="throbber-loader">Loading...</div>
@@ -55,10 +61,3 @@
 </div>
 <% end %>
 </div>
-
-<br>
-Total amount due: <%= total_amount_due %>
-<br>
-<br>
-
-<%= link_to 'New Invoice', new_invoice_path %>

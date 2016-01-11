@@ -1,5 +1,19 @@
 <% js = escape_javascript(render 'list') %>
 $("#searchresults").html("<%= js %>");
+
+$('#loadingspinner').hide();
+
+$('body').addClass('hasfinishedloading');
+
+window.scrollTo(0, 0);
+
+var paginationWrapper = $('#homepagination');
+if ($('.pagination').length) {
+	paginationWrapper.show();
+} else {
+	paginationWrapper.hide();
+}
+
 var homePageWrapper = $('#pagewrapper');
 var homeSide = $('#homeside');
 var searchResults = $('#searchresults');
@@ -17,8 +31,8 @@ function setHomePagination() {
 	});
 
 	if ($('.pagination').length) {
-		pagination.show();
-		searchResults.css('padding-top', '75px');
+		pagination.show()
+		searchResults.css('padding-top', '70px');
 	} else {
 		searchResults.css('padding-top', '0');
 		pagination.hide();
