@@ -23,11 +23,12 @@ function searchInvoice(){
 
 // Hide the loading box and clear timer
 
-var loadingBox = $('#loadingspinner'), timer;
+var loadingBox = $('#loadingspinner'), timer, timer2;
 
 function hideLoader() {
   pageBody.addClass('hasfinishedloading');
    clearTimeout(timer);
+   clearTimeout(timer2);
     //setTimeout(function() {
       loadingBox.hide();
     //}, 300);
@@ -100,7 +101,8 @@ var pageBody = $('body');
 pageBody.on('click', '.pagination a', function() {
   pageBody.removeClass('hasfinishedloading')
 
-  setTimeout(function() {
+  timer2 && clearTimeout(timer2);
+  timer2 = setTimeout(function() {
     if (!pageBody.hasClass('hasfinishedloading')) {
       showLoader();
     }    
