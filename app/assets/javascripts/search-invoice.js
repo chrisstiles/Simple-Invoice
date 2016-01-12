@@ -6,7 +6,7 @@ function searchInvoice(){
   var form = $('.search').parents("form"),
       url = form.attr("action");
   // turn on spinner
- showLoader();
+ //showLoader();
   // Submit ajax request
   $.ajax({
     url: url,
@@ -15,7 +15,7 @@ function searchInvoice(){
     dataType: 'script'
   }).done(function( msg ) {
     seachNoInvoices.hide();
-    hideLoader();
+  //  hideLoader();
   }).fail(function(msg){
     showNoInvoices();
   });
@@ -61,12 +61,12 @@ function showLoader() {
 
   $('#loadingcircle').css('left', leftPosition);
 
-   timer && clearTimeout(timer);
-   timer = setTimeout(function()
-        {
-            loadingBox.show();
-        },
-    200);
+   // timer && clearTimeout(timer);
+   // timer = setTimeout(function()
+   //      {
+   //          loadingBox.show();
+   //      },
+   //  200);
   
 }
 
@@ -101,14 +101,30 @@ var pageBody = $('body');
 pageBody.on('click', '.pagination a', function() {
   pageBody.removeClass('hasfinishedloading')
 
-  timer2 && clearTimeout(timer2);
-  timer2 = setTimeout(function() {
-    if (!pageBody.hasClass('hasfinishedloading')) {
-      showLoader();
-    }    
-  }, 300);
+ // // timer2 && clearTimeout(timer2);
+ // // timer2 = setTimeout(function() {
+ //    if (!pageBody.hasClass('hasfinishedloading')) {
+ //      showLoader();
+ //    }    
+ //  }, 300);
 
   
+});
+
+
+var $loading = loadingBox.hide();
+var timeOutHandler;
+
+$(document)
+  .ajaxStart(function () {
+   timeOutHandler = setTimeout(function(){
+    showLoader();
+    $loading.show();
+  }, 300);
+})
+.ajaxStop(function () {
+   clearTimeout(timeOutHandler);
+   $loading.hide();
 });
 
 
