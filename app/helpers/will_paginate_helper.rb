@@ -20,7 +20,6 @@ module WillPaginateHelper
   end
 
   def js_will_paginate(collection, options = {})
-    sleep 0.8
     will_paginate(collection, options.merge(:renderer => WillPaginateHelper::WillPaginateJSLinkRenderer))
   end
 end
