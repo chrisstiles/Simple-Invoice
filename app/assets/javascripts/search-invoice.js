@@ -25,9 +25,9 @@ function searchInvoice(){
 
 function hideLoader() {
    clearTimeout(timer);
-    setTimeout(function() {
+    //setTimeout(function() {
       loadingBox.hide();
-    }, 300);
+    //}, 300);
 }
 
 var keycodes = [8,13,32,189,186,190,191,222]
