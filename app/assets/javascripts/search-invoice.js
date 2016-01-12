@@ -23,7 +23,10 @@ function searchInvoice(){
 
 // Hide the loading box and clear timer
 
+var loadingBox = $('#loadingspinner'), timer;
+
 function hideLoader() {
+  pageBody.addClass('hasfinishedloading');
    clearTimeout(timer);
     //setTimeout(function() {
       loadingBox.hide();
@@ -49,7 +52,7 @@ searchBoxes.on('keyup', function(e){
 
 searchBoxes.on('change', searchInvoice);
 
-var loadingBox = $('#loadingspinner'), timer;
+
 
 function showLoader() {
   var resultsWrapper = $('#searchresultswrapper');
@@ -85,6 +88,7 @@ checkPagination();
 var seachNoInvoices = $('#searchnoinvoices');
 
 function showNoInvoices() {
+  pageBody.addClass('hasfinishedloading');
   hideLoader()
   seachNoInvoices.show();
 }
