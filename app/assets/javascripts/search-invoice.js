@@ -124,7 +124,9 @@ $(document)
 })
 .ajaxStop(function () {
    clearTimeout(timeOutHandler);
-   $loading.hide();
+   setTimeout(function() {
+    $loading.hide();
+  }, 200);
 });
 
 
