@@ -117,10 +117,12 @@ var timeOutHandler;
 
 $(document)
   .ajaxStart(function () {
-   timeOutHandler = setTimeout(function(){
-    showLoader();
-    $loading.show();
-  }, 300);
+    if(!pageBody.hasClass('homerecordclicked')) {
+      timeOutHandler = setTimeout(function(){
+        showLoader();
+        $loading.show();
+      }, 300);
+    }
 })
 .ajaxStop(function () {
    clearTimeout(timeOutHandler);

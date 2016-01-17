@@ -8,6 +8,8 @@ var pageBody = $('body'),
 // Find which invoice submitted the remote form
 var homeInvoice = $('*[data-invoice-number="<%= @invoice.invoice_number %>"]');
 
+pageBody.removeClass('homerecordclicked');
+
 setTimeout(function() {
 	var oldContent = $('.buttoncontent').text();
 	var button = $('.hasloadingtext');

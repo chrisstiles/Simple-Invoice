@@ -14,6 +14,9 @@ pageBody.on('click', '.closesuccess', function() {
 	$(this).parent('.success').remove();
 });
 
+pageBody.on('click', '.homerecordpayment', function() {
+	pageBody.addClass('homerecordclicked');
+});
 
 // Set position of home page sidebar
 var homePageWrapper = $('#pagewrapper');
