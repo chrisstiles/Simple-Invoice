@@ -100,7 +100,12 @@ class InvoicesController < ApplicationController
           flash.keep(:success)
         end
 
-        format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
+        if params[:from_index_page]
+          format.js #{ render js: "window.location = '#{invoices_path}'" }
+        else
+          format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
+        end
+        
       else
         format.html { render :show }
         format.js 

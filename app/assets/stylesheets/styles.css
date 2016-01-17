@@ -253,13 +253,13 @@ a.logo {
 	width:282px;
 }
 
-a.logo:hover {
+/*a.logo:hover {
 	background-color:#298dcf;
 }
 
 a.logo:active {
 	background-color:#1f7bb8;
-}
+}*/
 
 a.logo img {
 	width:108px;
@@ -808,7 +808,7 @@ ui-datepicker-prev {
 	background-color:rgba(255,255,255,.03);
 }
 
-#e-amountpaid {
+.e-amountpaid {
     white-space: nowrap;
     display: block;
     overflow:hidden;
@@ -823,20 +823,20 @@ ui-datepicker-prev {
     max-width:120px;
 } 
 
-#e-amountpaid.toomuch {
+.e-amountpaid.toomuch {
 	color:rgb(255, 87, 70) !important;
 }
 
-#e-amountpaid:hover, #e-amountpaid:focus {
+.e-amountpaid:hover, .e-amountpaid:focus {
 	background-color:#727a82;
 }
 
-#e-amountpaid br {
+.e-amountpaid br {
     display:none;
 
 }
 
-#e-amountpaid * {
+.e-amountpaid * {
     display:inline;
     white-space:nowrap;
 }

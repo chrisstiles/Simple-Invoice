@@ -152,13 +152,13 @@ ready = function() {
 			}
 		}
 
-		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid, .invoice_number_search', function(e) {
+		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search', function(e) {
 			return isNumber(e);
 		});
 
 
 		// Prevent pasting in quantity and rate fields
-		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid, .invoice_number_search', function(e) {
+		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search', function(e) {
 			e.preventDefault();
 			$(this).text('');
 		});
@@ -651,35 +651,35 @@ ready = function() {
 
 		// });
 
-		// Focus amount paid box when row is clicked
+		// // Focus amount paid box when row is clicked
 
-		$('.amountpaidrow').on('click', function() {
-			$(this).find('span').focus();
-		});
+		// $('.amountpaidrow').on('click', function() {
+		// 	$(this).find('span').focus();
+		// });
 
-		var amountPaid = $('#e-amountpaid');
+		// var amountPaid = $('.e-amountpaid');
 
-		amountPaid.on('focus', function() {
-			$(this).closest('.row').addClass('active');
-		});
+		// amountPaid.on('focus', function() {
+		// 	$(this).closest('.row').addClass('active');
+		// });
 
-		amountPaid.on('blur', function() {
-			$(this).closest('.row').removeClass('active');
-		});
+		// amountPaid.on('blur', function() {
+		// 	$(this).closest('.row').removeClass('active');
+		// });
 
-		// Prevent amount paid entered from being higher than invoice total
+		// // Prevent amount paid entered from being higher than invoice total
 
-		amountPaid.on('keyup', function(e) {
-			var $this = $(this);
-			var amountPaid = parseFloat($this.text(), 10);
-			var invoiceTotal =  parseFloat(Number( $('.invoicetotalcell').text().replace(/[^0-9\.]+/g,"")), 10);
+		// amountPaid.on('keyup', function(e) {
+		// 	var $this = $(this);
+		// 	var amountPaid = parseFloat($this.text(), 10);
+		// 	var invoiceTotal =  parseFloat(Number( $('.invoicetotalcell').text().replace(/[^0-9\.]+/g,"")), 10);
 
-			if (amountPaid > invoiceTotal) {
-				$this.addClass('toomuch');
-			} else {
-				$this.removeClass('toomuch');
-			}
-		});
+		// 	if (amountPaid > invoiceTotal) {
+		// 		$this.addClass('toomuch');
+		// 	} else {
+		// 		$this.removeClass('toomuch');
+		// 	}
+		// });
 
 		// Delete <br> tag in show if the span is empty
 

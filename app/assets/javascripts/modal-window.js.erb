@@ -177,16 +177,17 @@ ready = function() {
                 var $this = $(this);
                 var text = $this.text().toLowerCase();
                 if (text.indexOf(valThis) >= 0) {
-                    if (counter % 2 == 0) {
-                        $this.css('background-color', '#ffffff');
-                    } else {
-                        $this.css('background-color', '#f6f6f6');
-                    }
+                //     if (counter % 2 == 0) {
+                //         $this.css('background-color', '#f6f6f6');
+                //     } else {
+                //         $this.css('background-color', '#ffffff');
+                //     }
 
                     $(this).show();
 
                     counter++
                 } else {
+
                     $(this).hide();
 
                 }

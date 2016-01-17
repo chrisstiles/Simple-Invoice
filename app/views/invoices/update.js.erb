@@ -1,5 +1,12 @@
-<% if @invoice.errors.any? %>
+// Variables
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
 
+	$('.homeamountpaiderror').hide();
+
+// Find which invoice submitted the remote form
+var homeInvoice = $('*[data-invoice-number="<%= @invoice.invoice_number %>"]');
 
 setTimeout(function() {
 	var oldContent = $('.buttoncontent').text();
@@ -16,12 +23,7 @@ setTimeout(function() {
 
 }, 200);
 
-
-
-// Variables
-var pageBody = $('body'),
-	validationErrors = $('#validationerrors'),
-	errorHolder = $('#errorholder');
+<% if @invoice.errors.any? %>
 
 
 <% @invoice.errors.each do |key, message| %>
@@ -100,6 +102,23 @@ errorHolder.append('<p>' + message + '</p>');
 
 <% end %>
 
+<% else %> // No Errors
+
+// Code for home page submissions
+if ($('.homeinvoice').length) {
+
+	$('.success').remove();
+
+	pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+	<% flash.discard %>
+
+
+	homeInvoice.find('.homeinvoicebalance').find('span').text('<%= number_to_currency(@invoice.total - @invoice.amount_paid) %>')
+
+	homeInvoice.find('.homeamountpaiderror').hide();
+	
+}
+
 <% end %>
 
 // Remove duplicate errors
@@ -150,16 +169,43 @@ pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
 
 	if (!validationErrors.hasClass('hastransformed')) {
 
-		var amountPaid = $('#e-amountpaid');
+		validationErrors.removeAttr('style');
+
+
+		if ($('.homeinvoice').length) {
+			var amountPaid = homeInvoice.find('.e-amountpaid');
+		} else {
+			var amountPaid = $('.e-amountpaid');
+		}
+		
 		var amountPaidWidth = amountPaid.outerWidth();
 		var amountPaidLocation = amountPaid.offset();
+		//var amountPaidPosition = amountPaid.position();
+		var invoiceOffset = homeInvoice.offset();
+		//var invoicesWrapperOffset = $('#invoiceswrapper').offset();
 
-		validationErrors.offset({
-			top: amountPaidLocation.top,
-			left: amountPaidLocation.left + amountPaidWidth + 20
-		});
+		var searchResultsOffset = $('#searchresults').offset()
 
-		validationErrors.show();
+		if ($('.homeinvoice').length) {
+			var errorBox = amountPaid.siblings('.homeamountpaiderror');
+
+			validationErrors.detach().prependTo(errorBox);
+			
+			<% if @invoice.errors.any? %>
+				errorBox.show();
+			<% end %>
+
+		} else {
+			validationErrors.offset({
+				top: amountPaidLocation.top,
+				left: amountPaidLocation.left + amountPaidWidth + 20
+			});
+		}
+		
+
+		if ($('#invoicewrapper').hasClass('show')) {
+
+		validationErrors.show();	
 
 		var validationsHeight = validationErrors.outerHeight() / 4
 
@@ -171,7 +217,9 @@ pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
 		  'transform'         : 'translateY(-' + validationsHeight + 'px)'
 		});
 
-		validationErrors.addClass('hastransformed');
+		
+			validationErrors.addClass('hastransformed');
+		}
 
 	}
 }

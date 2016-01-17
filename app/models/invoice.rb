@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
 	accepts_nested_attributes_for :jobs, :client
 
 	# Number of invoices to show per page with pagination
-	self.per_page = 5
+	self.per_page = 9
 
 	# Filtering
 	default_scope { order(created_at: :desc) }
@@ -48,7 +48,7 @@ class Invoice < ActiveRecord::Base
 
 	def amount_paid_less_than_or_equal_to_total
 	  if self.amount_paid && (Float(self.amount_paid) > Float(self.total))
-	  	errors.add(:amount_paid, "Amount Paid cannot be greater than the invoice total")
+	  	errors.add(:amount_paid, "cannot be greater than the invoice total")
 	  end
 	end
 

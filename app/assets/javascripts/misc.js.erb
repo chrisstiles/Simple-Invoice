@@ -10,7 +10,7 @@ pageBody.on('click', '.thirdbutton.file', function() {
 });
 
 // Remove success modal when close is clicked
-$('.closesuccess').on("click", function() {
+pageBody.on('click', '.closesuccess', function() {
 	$(this).parent('.success').remove();
 });
 
@@ -56,6 +56,73 @@ function setHomePagination() {
 if (homePageWrapper.length) {
 	setHomePagination();
 }
+
+
+// Show home page amount paid form
+
+pageBody.on('click', '.pig', function(e) {
+	e.preventDefault();
+	var $this = $(this);
+	$this.siblings('.homeinvoiceinfowrapper').children().addClass('active');
+	$this.addClass('homeclose');
+	$this.find('span').text('Cancel Recording Payment');
+});
+
+pageBody.on('click', '.homeclose', function(e) {
+	var $this = $(this);
+	$this.removeClass('homeclose');
+	$this.siblings('.homeinvoiceinfowrapper').children().removeClass('active');
+	$this.find('span').text('Record Payment');
+});
+
+
+
+
+// Focus amount paid box when row is clicked
+
+pageBody.on('click', '.amountpaidrow', function() {
+	$(this).find('span').focus();
+});
+
+var amountPaid = $('.e-amountpaid');
+
+pageBody.on('focus', '.e-amountpaid', function() {
+	$(this).closest('.row').addClass('active');
+});
+
+pageBody.on('blur', '.e-amountpaid', function() {
+	$(this).closest('.row').removeClass('active');
+});
+
+// Prevent amount paid entered from being higher than invoice total
+
+pageBody.on('keyup', '.e-amountpaid', function(e) {
+	var $this = $(this);
+	var amountPaid = parseFloat($this.text(), 10);
+	var parentRow = $this.parents('.row');
+	var invoiceTotalCell = parentRow.siblings('.invoicetotalrow').find('.invoicetotalcell');
+	var invoiceBalanceCell = parentRow.siblings('.balancerow').find('.balancecell');
+	var invoiceTotal =  parseFloat(Number( invoiceTotalCell.text().replace(/[^0-9\.]+/g,"")), 10);
+
+	if (amountPaid > invoiceTotal) {
+		$this.addClass('toomuch');
+	} else {
+		$this.removeClass('toomuch');
+		$this.siblings('.homeamountpaiderror').hide();
+	}
+
+	var invoiceBalance = invoiceTotal - amountPaid;
+
+	if (isNaN(invoiceBalance)) {
+		invoiceBalanceCell.text('$' + invoiceTotal.toFixed(2));
+	} else {
+		invoiceBalanceCell.text('$' + invoiceBalance.toFixed(2));
+	}
+
+});
+
+
+
 
 
 // Changed fixed positions on window resize

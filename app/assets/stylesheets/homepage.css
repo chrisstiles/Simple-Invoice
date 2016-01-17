@@ -1,6 +1,7 @@
 #invoiceswrapper {
 	transform:translateY(0);
 	transition: transform .3s;
+	position:relative;
 }
 
 #invoiceswrapper.moved {
@@ -30,8 +31,71 @@
 	bottom:0;
 	background-color:rgba(255,255,255,.87);
 	border-radius:2px;
-	top: 44px;
+	top: 40px;
 	display:none;
+}
+
+.homeupdatebalance {
+	position:absolute;
+	z-index: 100;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	transform:translateX(-100%);
+	transition: all .3s;
+	text-align:left;
+}
+
+.homerecordtable {
+	display:table;
+	width:100%;
+}
+
+.homerecordtable .cell {
+	font-size:14px;
+	height:36px;
+	padding: 0 15px;
+	border-bottom:1px solid #ececec;
+	max-width:100px;
+}
+
+.homerecordtable .row > div:last-of-type {
+	color:#41a9ee;
+}
+
+.homerecordtable .amountpaidrow:hover {
+	background-color:#f9f9f9 !important;
+}
+
+.homerecordtable .amountpaidrow.active {
+	background-color:#f7f7f7;
+}
+
+.homerecordtable .e-amountpaid {
+	height:37px;
+	margin:0 -15px 0 0;
+	min-width:60px;
+	padding:10px 15px 0 15px;
+	background-color:#f3f3f3;
+	max-width:78px;
+	float:right;
+}
+
+.homerecordtable .e-amountpaid:hover, .homerecordtable .e-amountpaid:focus {
+	background-color:#e7e7e7;
+}
+
+.homeinvoiceinfo {
+	transition: all .3s;
+}
+
+.homeupdatebalance.active {
+	transform:translateX(0);
+}
+
+.homeinvoiceinfo.active {
+	transform:translateX(100%);
 }
 
 .homeinvoiceloader .throbber-loader {
@@ -49,6 +113,13 @@
 	border-top-left-radius:2px;
 	border-top-right-radius:2px;
 	white-space: nowrap;
+	overflow:hidden;
+	position:relative;
+	z-index: 300;
+}
+
+.homeinvoiceinfowrapper {
+	position:relative;
 	overflow:hidden;
 }
 
@@ -86,7 +157,6 @@
 	font-size:15px;
 	text-align:left;
 	line-height:19px;
-	border-bottom:1px solid #d4d4d4;
 }
 
 .invoiceinfosection strong {
@@ -109,6 +179,7 @@
 a.viewinvoice {
 	padding:13px 0 13px 0;
 	border-bottom:1px solid #d4d4d4;
+	border-top:1px solid #d4d4d4;
 	display:block;
 	text-decoration:none;
 	font-size:15px;
@@ -146,13 +217,108 @@ a.thirdbutton {
 }
 
 .pig {
+	border-bottom-right-radius:2px;
+	position:relative;
+}
+
+.overflowcontainer, .amountpaidbutton {
+	position:absolute;
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	overflow:hidden;
+}
+
+.amountpaidbutton {
+	transition: all .3s;
+	background-position:center center;
+	background-repeat: no-repeat;
+}
+
+.showamountpaid {
 	background-image: url(/assets/pig.png);
 	background-size:28px 26px;
-	border-bottom-right-radius:2px;
+}
+
+.closeamountpaid {
+	background-image: url(/assets/close-payment.png);
+	background-size:22px 22px;
+	transform:translateX(-100%);
+}
+
+.homeclose .showamountpaid {
+	transform:translateX(100%);
+}
+
+.homeclose .closeamountpaid {
+	transform:translateX(0);
+}
+
+.homeamountpaiderror {
+	width:16px;
+	height:14px;
+	background-image: url(/assets/red.png);
+	background-repeat: no-repeat;
+	background-size:16px 14px;
+	float:right;
+	position:relative;
+	top:11px;
+	margin-right:10px;
+	display:none;
+}
+
+.homeamountpaiderror:after {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 7px 8px 7px;
+	border-color: transparent transparent #c47375 transparent;
+	display:block;
+	content:"";
+	position:absolute;
+	bottom:-12px;
+	left:50%;
+	transform:translateX(-50%);
+	border-style: inset;
+	display:none;
+	visibility:none;
+    opacity:0;
+    transition:opacity .3s;
+}
+
+.homeamountpaiderror:hover:after, .homeamountpaiderror:hover #validationerrors.amountpaidvalidation.indexpage {
+	display:block;
+	visibility:visible;
+    opacity:1;
+}
+
+#validationerrors.amountpaidvalidation.indexpage {
+    left: 50%;
+    transform: translate(-50%, 72px);
+    word-wrap: normal;
+    min-width: 0;
+    white-space:normal !important;
+    width:210px;
+    visibility:none;
+    opacity:0;
+}
+
+#validationerrors.amountpaidvalidation.indexpage:before {
+	display:none;
+}
+
+#validationerrors.amountpaidvalidation.indexpage .validationtitle {
+	font-size:11px;
+}
+
+#validationerrors.amountpaidvalidation.indexpage p {
+	font-size:11px;
 }
 
 #searchresultswrapper {
 	position:relative;
+	z-index: 301;
 }
 
 #searchresultswrapper:after {

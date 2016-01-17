@@ -207,12 +207,12 @@ body.noscroll {
 }
 
 .modalclient:hover {
-	background-color:#e7e7e7 !important;
+	background-color:#f0f0f0 !important;
 }
 
-.modalclient:nth-child(even) {
+/*.modalclient:nth-child(even) {
 	background-color:#f6f6f6;
-}
+}*/
 
 .modalclient .client-name {
 	float:left;

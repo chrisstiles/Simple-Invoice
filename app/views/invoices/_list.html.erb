@@ -1,4 +1,13 @@
-<div id="invoiceswrapper"><%= render @invoices %></div>
+<div id="invoiceswrapper">
+<div id="validationerrors" class="amountpaidvalidation indexpage">
+  <div class="validationtitle">Please correct the following errors</div>
+  <div id="errorholder">
+    
+
+  </div>
+</div>
+
+<%= render @invoices %></div>
 <div id="homepagination">
 	<%= js_will_paginate @invoices %>
 </div>

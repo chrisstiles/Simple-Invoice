@@ -30,6 +30,7 @@
 	animation-name: validationSlideUp;
 	animation-duration: .3s;
 	animation-fill-mode:forwards;
+	min-width:248px;
 }
 
 #validationerrors.amountpaidvalidation {
@@ -43,6 +44,7 @@
 	transform:translateY(20px);
 	transition:all .3s;
 }
+
 
 #validationerrors.amountpaidvalidation:before {
 	width: 0;
@@ -64,6 +66,7 @@
 	font-weight:600;
 	margin-bottom:2px;
 	padding: 7px 18px;
+	text-align:left;
 }
 
 #validationerrors p:nth-child(even) {
