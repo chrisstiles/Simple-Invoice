@@ -1,0 +1,60 @@
+var pageBody = $('body');
+
+<% if @client.errors.any? %>
+
+<% else %>
+
+pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+	<% flash.discard %>
+
+// Render updated list of clients
+<% js = escape_javascript(render 'list') %>
+$("#searchresults").html("<%= js %>");
+
+ $.ajax({
+	type: 'GET',
+	url: '/clients/' + '<%= @client_id %>' + '/edit',
+	dataType: 'script',
+	async: true
+	}).done(function( msg ) {
+	//console.log(msg)
+	//  hideLoader();
+	}).fail(function(msg){
+	console.log(msg)
+});
+
+var pageBody = $('body');
+var pageWrapper = $('#pagewrapper');
+var clientFilter = $('#clientfiltering');
+var clientContainer = $('#clientscontainer');
+var clientSearch = $('#clientsearch');
+var clientsSidebar = $('#clientssidebar');
+
+function setClientFilter() {
+	var width = clientContainer.outerWidth();
+	var clientContainerPosition = clientContainer.offset();
+
+	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight() + 63);
+
+	clientSearch.css({
+		'left': clientContainerPosition.left,
+		'width': width
+	});
+
+	clientFilter.css({
+		'left': clientContainerPosition.left,
+		'width': width,
+		'top': clientSearch.outerHeight() + 63
+	});
+
+	clientsSidebar.css({
+		'left': clientContainerPosition.left + width,
+		'width': width
+	});
+
+}
+
+setClientFilter();
+
+
+<% end %>

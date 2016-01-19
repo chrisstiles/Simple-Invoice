@@ -3,12 +3,16 @@ class ClientsController < ApplicationController
 	after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
-		@clients = current_user.clients.order('LOWER(name) ASC')
+		@clients = current_user.clients.page(params[:page])
+		@clients = @clients.client_name(params[:client_name]) if params[:client_name].present?
+		@client = Client.new
 
 		respond_to do |format|
 			format.html
 			format.json { render json: @clients }
+			format.js
 		end
+
 	end
 
 	def show
@@ -21,28 +25,36 @@ class ClientsController < ApplicationController
 	def create
 		@client = current_user.clients.build(client_params)
 		respond_to do |format|
-			if @client.save
-				format.html { redirect_to clients_path, notice: 'Client was successfully created.' }
-				format.json { render :show, status: :created, location: @client }
+			if @client.update(client_params)
+				flash[:success] = 'Client was successfully created!'
+          		flash.keep(:success)
+          		@clients = current_user.clients.page(params[:page])
+          		@client_id = @client.id
+				format.js
 			else
-				format.html { render :new }
-				format.json { render json: @client.errors, status: :unprocessable_entity }
+				format.js
 			end
 		end
 	end
 
 	def edit
-		
+		respond_to do |format|
+			format.html
+			format.js do
+				return @client
+			end
+		end
 	end
 
 	def update
 		respond_to do |format|
 			if @client.update(client_params)
-				format.html { redirect_to clients_path, notice: 'Client was successfully created.' }
-				format.json { render :show, status: :created, location: @client }
+				flash[:success] = 'Client Updated!'
+          		flash.keep(:success)
+          		@clients = current_user.clients.page(params[:page])
+				format.js
 			else
-				format.html { render :new }
-				format.json { render json: @client.errors, status: :unprocessable_entity }
+				format.js
 			end
 		end
 	end

@@ -1,16 +1,42 @@
-<br><br><br>
-<% @clients.each do |client| %>
-	
-	<%= link_to client.name, edit_client_path(client) %>
 
-	<% if client.is_primary? %>
+<div id="pagewrapper" class="clientspage">
 
-	 Is Primary
+<div id="clientscontainer">
 
-	 <% end %>
+<div id="searchresultswrapper">
 
-	<br>
+<div id="loadingspinner">
+  <div id="loadingcircle">
+    <div class="throbber-loader">Loading...</div>
+    </div>
+  </div>
 
-<% end %>
+<div id="clientsearch">
+	<h3>Filter Clients</h3>
+	<form accept-charset="UTF-8" action="/clients" method="get" class="homefilter">
+		<input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
+	</form>
+</div>
 
-<%= link_to "New Client", new_client_path %>
+	<div id="searchresults">
+
+	  <%= render 'list' %>
+	</div>
+</div>
+
+</div>
+
+<div id="clientssidebar">
+
+	<div id="newclientbox">
+		<a href="#" class="button blue">New Client</a>
+	</div>
+
+	<div class="clientsformwrapper">
+		<%= render 'form' %>
+	</div>
+
+</div>
+
+
+</div>

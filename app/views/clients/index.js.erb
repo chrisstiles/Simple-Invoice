@@ -1,0 +1,46 @@
+<% js = escape_javascript(render 'list') %>
+$("#searchresults").html("<%= js %>");
+
+var pageBody = $('body');
+var pageWrapper = $('#pagewrapper');
+var clientFilter = $('#clientfiltering');
+var clientContainer = $('#clientscontainer');
+var clientSearch = $('#clientsearch');
+var clientsSidebar = $('#clientssidebar');
+
+function setClientFilter() {
+	var width = clientContainer.outerWidth();
+	var clientContainerPosition = clientContainer.offset();
+
+	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight() + 63);
+
+	clientSearch.css({
+		'left': clientContainerPosition.left,
+		'width': width
+	});
+
+	clientFilter.css({
+		'left': clientContainerPosition.left,
+		'width': width,
+		'top': clientSearch.outerHeight() + 63
+	});
+
+	clientsSidebar.css({
+		'left': clientContainerPosition.left + width,
+		'width': width
+	});
+
+}
+
+setClientFilter();
+
+
+// Add selected class to client after pagination
+var id = $('.edit_client').attr('data-id');
+$('.client[data-id=' + id + ']').addClass('selected');
+
+
+// Changed fixed positions on window resize
+$( window ).resize(function() {
+	setClientFilter();
+});

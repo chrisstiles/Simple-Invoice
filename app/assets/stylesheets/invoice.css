@@ -39,7 +39,7 @@
 	margin:0;
 	left:0;
 	top:0;
-	max-width:250px;
+	max-width:280px;
 	animation-name: validationFadeIn;
 	transform:translateY(20px);
 	transition:all .3s;
@@ -84,6 +84,24 @@
     font-weight: bold;
     color: #fff;
     font-size: 14px;
+}
+
+.closeerrors {
+	display: block;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    margin-top:-3px;
+    background-position: center center;
+    float:right;
+    border-radius: 50%;
+    background-image: url(/assets/close-modal.png);
+}
+
+.closeerrors:hover {
+	background-color:#9E5557;
 }
 
 @keyframes validationSlideUp {

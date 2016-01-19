@@ -1,6 +1,7 @@
 var ready;
 ready = function() {
 
+var pageBody = $('body');
 
 function searchInvoice(){
   var form = $('.search').parents("form"),
@@ -12,7 +13,7 @@ function searchInvoice(){
     url: url,
     data: form.serialize(),
     type: 'GET',
-    dataType: 'script'
+    dataType: 'script',
   }).done(function( msg ) {
     seachNoInvoices.hide();
   //  hideLoader();
@@ -42,7 +43,7 @@ for (var i = 46; i < 105; i++) {
 
 var searchBoxes = $('.search');
 
-searchBoxes.on('keyup', function(e){
+pageBody.on('keyup', '.search', function(e) {
   var keyCode = e.which;
 
   if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
@@ -50,8 +51,6 @@ searchBoxes.on('keyup', function(e){
   }
 
 });
-
-searchBoxes.on('change', searchInvoice);
 
 
 
@@ -95,8 +94,6 @@ function showNoInvoices() {
 }
 
 // Scroll the user to the top of the page when they click a pagination link
-
-var pageBody = $('body');
 
 pageBody.on('click', '.pagination a', function() {
   pageBody.removeClass('hasfinishedloading')

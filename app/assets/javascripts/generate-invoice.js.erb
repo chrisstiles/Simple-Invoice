@@ -14,22 +14,26 @@ ready = function() {
 	pageBody.on('click', '.willload', function() {
 		var $this = $(this);
 
-		$this.addClass('hasloadingtext');
+		if (!$this.hasClass('hasloadingtext')) {
 
-		var oldContent = ''
+			$this.addClass('hasloadingtext');
 
-		if ($(this).is('input')) {
-			oldContent = $this.val();
-		} else {
-			oldContent = $this.text();
+			var oldContent = ''
+
+			if ($(this).is('input')) {
+				oldContent = $this.val();
+			} else {
+				oldContent = $this.text();
+			}
+
+			pageBody.append('<div class="hidden buttoncontent">' + oldContent + '</div>');
+			
+			$this.addClass('loading');
+			$this.val('Loading...');
+
+			$this.text('Loading...');
+
 		}
-
-		pageBody.append('<div class="hidden buttoncontent">' + oldContent + '</div>');
-		
-		$this.addClass('loading');
-		$this.val('Loading...');
-
-		$this.text('Loading...');
 	});
 
 	// Function to prevent pasting formatted text in content editable

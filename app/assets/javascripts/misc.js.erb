@@ -18,6 +18,14 @@ pageBody.on('click', '.homerecordpayment', function() {
 	pageBody.addClass('homerecordclicked');
 });
 
+// Close validation errors on close button
+pageBody.on('click', '.closeerrors', function() {
+	$(this).parents('#validationerrors').removeAttr('style').removeClass('hastransformed').hide();
+	if (!pageBody.hasClass('show')) {
+		$('#invoicewrapper').removeAttr('style');
+	}
+});
+
 // Set position of home page sidebar
 var homePageWrapper = $('#pagewrapper');
 var homeSide = $('#homeside');
@@ -38,21 +46,26 @@ var searchResults = $('#searchresults');
 
 function setHomePagination() {
 	var pagination = $('#homepagination');
-	var leftPosition = $('.homeinvoice').first().offset().left - 100;
-	var rightPosition = $(window).width() - homeSide.offset().left;
+	var homeInvoice = $('.homeinvoice');
+	if (homeInvoice.length) {
+		var leftPosition = homeInvoice.first().offset().left - 100;
+		
+		var rightPosition = $(window).width() - homeSide.offset().left;
 
-	pagination.css({
-		'left' : leftPosition,
-		'right' : rightPosition
-	});
+		pagination.css({
+			'left' : leftPosition,
+			'right' : rightPosition
+		});
 
-	
-	if ($('.pagination').length) {
-		pagination.show();
-		searchResults.css('padding-top', '70px');
-	} else {
-		searchResults.css('padding-top', '0');
-		pagination.hide();
+		
+		if ($('.pagination').length) {
+			pagination.show();
+			searchResults.css('padding-top', '70px');
+		} else {
+			searchResults.css('padding-top', '0');
+			pagination.hide();
+		}
+
 	}
 }
 
@@ -100,6 +113,7 @@ pageBody.on('blur', '.e-amountpaid', function() {
 // Prevent amount paid entered from being higher than invoice total
 
 pageBody.on('keyup', '.e-amountpaid', function(e) {
+	
 	var $this = $(this);
 	var amountPaid = parseFloat($this.text(), 10);
 	var parentRow = $this.parents('.row');
