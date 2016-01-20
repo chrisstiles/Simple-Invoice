@@ -17,14 +17,8 @@ gem "autoprefixer-rails"
 # Hirb for database viewing in console
 gem "hirb"
 
-# Sass
-gem 'sass-rails'
-
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
-
-# Loading bar with turbolinks
-gem 'nprogress-rails'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

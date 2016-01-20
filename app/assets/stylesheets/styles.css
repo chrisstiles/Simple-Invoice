@@ -11,13 +11,14 @@ body {
 }
 
 /* Loading bar */
-#nprogress .bar {
-	z-index: 999999;
-	background:#41A9EE !important;
+html.turbolinks-progress-bar::before {
+  background-color: #2479b1 !important;
+  height: 2px !important;
+  z-index: 9999;
 }
 
 #nprogress .peg {
-	box-shadow: 0 0 10px #41A9EE, 0 0 5px #41A9EE !important;
+	box-shadow: 0 0 10px #41A9EE, 0 0 5px #26323F !important;
 }
 
 #pagewrapper {
