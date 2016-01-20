@@ -102,3 +102,38 @@
 	right:20px;
 	font-size:14px;
 }
+
+/* Forms */
+
+.clientsformwrapper {
+	padding:25px 30px;
+}
+
+.clientsformwrapper input[type="text"], .clientsformwrapper select {
+	margin-bottom: 22px;
+    display: block;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    border: 1px solid #d2cccc;
+    font-weight: 300;
+    font-family: 'Libertad', sans-serif;
+    color: #26323f;
+    width: 100%;
+    font-size: 15px;
+    float:left;
+}
+
+.clientsformwrapper input[type="text"]:focus {
+	border: 1px solid #41a9ee;
+}
+
+.clientsformwrapper input.half, .clientsformwrapper select {
+	width:calc(50% - 11px);
+	margin-right:22px;
+}
+
+.clientsformwrapper input.nomargin {
+	margin-right:0;
+}

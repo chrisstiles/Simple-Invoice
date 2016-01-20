@@ -10,8 +10,21 @@ pageBody.append('<div class="success"> <div class="successtimer"></div><div clas
 // Update
 // Render updated list of clients
 
-<% js = escape_javascript(render 'list') %>
-$("#searchresults").html("<%= js %>");
+var currentPage = $('em.current').text();
+var clientNameText = $('.client_name_search').val();
+
+
+ $.ajax({
+	type: 'GET',
+	url: '/clients/?client_name=' + clientNameText + '&page=' + currentPage,
+	dataType: 'script',
+	async: true
+	}).done(function( msg ) {
+	//console.log(msg)
+	//  hideLoader();
+	}).fail(function(msg){
+	console.log(msg)
+});
 
 // Add selected class to client after pagination
 var id = $('.edit_client').attr('data-id');

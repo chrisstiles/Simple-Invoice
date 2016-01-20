@@ -1,12 +1,20 @@
+<%= show_edit_or_new_client(@client) %>
+
 <%= form_for(@client, html: { 'data-id' => "#{client_id_or_zero(@client)}" }, remote: true) do |f| %>
-	<%= f.text_field :name, placeholder: "Client Name" %><br><br>
-	<%= f.text_field :email, placeholder: "Email" %><br><br>
-	<%= f.text_field :phone, placeholder: "Phone Number" %><br><br>
-	<%= f.text_field :address, placeholder: "Address" %><br><br>
-	<%= f.text_field :city, placeholder: "City" %><br><br>
-	<%= f.select :state, options_for_select(us_states, selected: @client.state), prompt: "Select a state" %><br><br>
-	<%= f.text_field :zip, placeholder: "Zip Code" %><br><br>
-	Primary Client?
-	<%= f.check_box :is_primary %><br>
+	<%= f.label :name %>
+	<%= f.text_field :name, placeholder: "Client Name" %>
+	<%= f.text_field :email, placeholder: "Email", class: "half" %>
+	<%= f.text_field :phone, placeholder: "Phone Number", class: "half nomargin" %>
+	<%= f.text_field :address, placeholder: "Address", class: "half" %>
+	<%= f.text_field :city, placeholder: "City", class: "half nomargin" %>
+	<%= f.select :state, options_for_select(us_states, selected: @client.state), prompt: "Select a state", class: "half" %>
+	<%= f.text_field :zip, placeholder: "Zip Code", class: "half nomargin" %>
+	<br clear="all" />
+	<div class="checkboxholder">
+		<%= f.check_box :is_primary %>
+        <label for="client_is_primary"><span></span>
+          <div>Primary Client?</div>
+        </label>
+      </div>
 	<%= f.submit %>
 <% end %>

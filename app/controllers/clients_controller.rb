@@ -49,7 +49,6 @@ class ClientsController < ApplicationController
 			if @client.update(client_params)
 				flash[:success] = 'Client Updated!'
           		flash.keep(:success)
-          		@clients = current_user.clients.page(params[:page])
 				format.js
 			else
 				format.js
