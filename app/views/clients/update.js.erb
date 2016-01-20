@@ -7,8 +7,16 @@ var pageBody = $('body');
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 	<% flash.discard %>
 
+// Update
+// Render updated list of clients
+
 <% js = escape_javascript(render 'list') %>
 $("#searchresults").html("<%= js %>");
+
+// Add selected class to client after pagination
+var id = $('.edit_client').attr('data-id');
+$('.client[data-id=' + id + ']').addClass('selected');
+
 
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');

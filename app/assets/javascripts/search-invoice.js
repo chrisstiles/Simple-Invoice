@@ -52,6 +52,8 @@ pageBody.on('keyup', '.search', function(e) {
 
 });
 
+pageBody.on('change', '.searchchange', searchInvoice);
+
 
 
 function showLoader() {

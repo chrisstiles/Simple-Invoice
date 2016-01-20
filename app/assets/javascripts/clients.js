@@ -50,7 +50,6 @@ $( window ).resize(function() {
 
 
 pageWrapper.on('click', '.client', function() {
-	console.log('clicked');
 	var $this = $(this);
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected')) {

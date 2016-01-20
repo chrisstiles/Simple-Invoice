@@ -1,4 +1,4 @@
 var clientsFormWrapper = $('.clientsformwrapper');
 
-<% js = escape_javascript(render 'form', locals: { client: @client }) %>
+<% js = escape_javascript(render 'form') %>
 clientsFormWrapper.html("<%= js %>");

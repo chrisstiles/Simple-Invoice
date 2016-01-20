@@ -10,6 +10,16 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Loading bar */
+#nprogress .bar {
+	z-index: 999999;
+	background:#41A9EE !important;
+}
+
+#nprogress .peg {
+	box-shadow: 0 0 10px #41A9EE, 0 0 5px #41A9EE !important;
+}
+
 #pagewrapper {
 	max-width:1200px;
 	margin:100px auto 45px auto;

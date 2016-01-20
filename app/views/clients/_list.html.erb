@@ -1,7 +1,7 @@
 <div id="clientfiltering">
 
 <div id="clientpagination">
-	<%= js_will_paginate @clients %>
+	<%= js_will_paginate @clients, :params => {:id=>nil, :method=>'get', :controller=>'clients', :action=>'index'} %> 
 </div>
 
 </div>

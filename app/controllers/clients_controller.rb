@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
 	def create
 		@client = current_user.clients.build(client_params)
 		respond_to do |format|
-			if @client.update(client_params)
+			if @client.save
 				flash[:success] = 'Client was successfully created!'
           		flash.keep(:success)
           		@clients = current_user.clients.page(params[:page])
@@ -40,9 +40,7 @@ class ClientsController < ApplicationController
 	def edit
 		respond_to do |format|
 			format.html
-			format.js do
-				return @client
-			end
+			format.js
 		end
 	end
 

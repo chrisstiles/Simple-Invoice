@@ -7,6 +7,8 @@ var pageBody = $('body');
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 	<% flash.discard %>
 
+
+// Create
 // Render updated list of clients
 <% js = escape_javascript(render 'list') %>
 $("#searchresults").html("<%= js %>");
