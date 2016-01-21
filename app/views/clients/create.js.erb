@@ -11,20 +11,38 @@ pageBody.append('<div class="success"> <div class="successtimer"></div><div clas
 // Create
 // Render updated list of clients
 var currentPage = $('em.current').text();
-var clientNameText = $('.client_name_search').val();
+var clientCount = parseInt('<%= @clients_count %>')
+var perPage = parseInt('<%= @per_page %>');
 
+$('.client_name_search').val('');
 
- $.ajax({
-	type: 'GET',
-	url: '/clients/?client_name=' + clientNameText + '&page=' + currentPage,
-	dataType: 'script',
-	async: true
-	}).done(function( msg ) {
-	//console.log(msg)
-	//  hideLoader();
-	}).fail(function(msg){
-	console.log(msg)
-});
+if (clientCount > perPage) {
+	$.ajax({
+		type: 'GET',
+		url: '/clients/?page=<%= @pagination_page %>',
+		dataType: 'script',
+		async: true
+		}).done(function( msg ) {
+		//console.log(msg)
+		//  hideLoader();
+		setClientSelected();
+		}).fail(function(msg){
+		console.log(msg)
+	});
+} else {
+	$.ajax({
+		type: 'GET',
+		url: '/clients',
+		dataType: 'script',
+		async: true
+		}).done(function( msg ) {
+		//console.log(msg)
+		//  hideLoader();
+		setClientSelected();
+		}).fail(function(msg){
+		console.log(msg)
+	});
+}
 
  $.ajax({
 	type: 'GET',
@@ -44,6 +62,13 @@ var clientFilter = $('#clientfiltering');
 var clientContainer = $('#clientscontainer');
 var clientSearch = $('#clientsearch');
 var clientsSidebar = $('#clientssidebar');
+
+// Add selected class to client after pagination
+
+function setClientSelected() {
+	$('.client[data-id=<%= @client_id %>]').addClass('selected');
+}
+
 
 function setClientFilter() {
 	var width = clientContainer.outerWidth();

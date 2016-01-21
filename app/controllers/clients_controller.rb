@@ -30,6 +30,9 @@ class ClientsController < ApplicationController
           		flash.keep(:success)
           		@clients = current_user.clients.page(params[:page])
           		@client_id = @client.id
+          		@pagination_page = return_client_page_pagination(@client)
+          		@per_page = Client::PER_PAGE
+          		@clients_count = current_user.clients.count
 				format.js
 			else
 				format.js
@@ -76,4 +79,23 @@ class ClientsController < ApplicationController
 				puts "IT WAS FALSE"
 			end
 		end
+
+
+		def return_client_page_pagination(client)
+			# Replace 5 with however many clients per page
+			clientPages = (current_user.clients.count / Client::PER_PAGE.to_f).ceil
+			client_page = 0
+
+			for i in 1..clientPages
+				current_user.clients.page(i).each do |client_test|
+					if client == client_test
+						client_page = i
+					end
+				end
+			end
+
+			client_page
+
+		end
+
 end
