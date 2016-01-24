@@ -58,9 +58,16 @@
         </div>
         <h2>
           Client
-           <a href="#" class="modal clients-modal addclient" data-title="Clients">
+          <% if @invoice.client_id.nil? %>
+            <a href="#" class="modal clients-modal addclient" data-title="Clients">
              <span>Add Saved Client</span>
            </a>
+          <% else %>
+            <a href="#" class="clients-modal removeclient nomodal" data-title="Clients">
+             <span>Add Saved Client</span>
+           </a>
+          <% end %>
+           
         </h2>
         <div class="control bonly">
         <div class="alignment">

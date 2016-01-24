@@ -1,6 +1,51 @@
-var pageBody = $('body');
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
 
 <% if @client.errors.any? %>
+
+
+<% @client.errors.each do |key, message| %>
+
+var key = "<%= key %>"
+var message = "<%= message %>"
+
+//console.log('<%= message %>')
+
+var errorInput = $("input[name='client[" + key + "]']");
+errorInput.addClass('haserror');
+
+<% end %>
+
+errorHolder.empty();
+
+<% @client.errors.full_messages.each do |message| %>
+
+var message = '<%= message %>'
+
+errorHolder.append('<p>' + message + '</p>');
+
+<% end %>
+
+// Show the validation errors list after they are added
+
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+validationsHeight += 15;
+
+$('.formholder').css({
+  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+  'transform'         : 'translateY(' + validationsHeight + 'px)'
+});
 
 <% else %>
 

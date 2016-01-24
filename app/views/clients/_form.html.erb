@@ -1,20 +1,66 @@
-<%= show_edit_or_new_client(@client) %>
+<div class="loadingspinner">
+	<div class="loadingcircle">
+		<div class="throbber-loader">Loading...</div>
+	</div>
+</div>
 
-<%= form_for(@client, html: { 'data-id' => "#{client_id_or_zero(@client)}" }, remote: true) do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name, placeholder: "Client Name" %>
-	<%= f.text_field :email, placeholder: "Email", class: "half" %>
-	<%= f.text_field :phone, placeholder: "Phone Number", class: "half nomargin" %>
-	<%= f.text_field :address, placeholder: "Address", class: "half" %>
-	<%= f.text_field :city, placeholder: "City", class: "half nomargin" %>
-	<%= f.select :state, options_for_select(us_states, selected: @client.state), prompt: "Select a state", class: "half" %>
-	<%= f.text_field :zip, placeholder: "Zip Code", class: "half nomargin" %>
-	<br clear="all" />
-	<div class="checkboxholder">
-		<%= f.check_box :is_primary %>
-        <label for="client_is_primary"><span></span>
-          <div>Primary Client?</div>
-        </label>
-      </div>
-	<%= f.submit %>
-<% end %>
+<div class="clientformtitle">
+	<%= show_edit_or_new_client(@client) %>
+</div>
+
+<div id="validationerrors" class="clienterrors">
+	<div class="validationtitle">
+		<div class="closeerrors"></div>
+		Please correct the following errors before saving
+	</div>
+	<div id="errorholder"></div>
+</div>
+
+<div class="formholder">
+	<%= form_for(@client, html: { 'data-id' => "#{client_id_or_zero(@client)}" }, remote: true) do |f| %>
+		<%= f.label :name %>
+		<%= f.text_field :name, placeholder: "Client Name" %>
+
+		<div class="half">
+			<%= f.label :email %>
+			<%= f.text_field :email, placeholder: "Email" %>
+		</div>
+
+		<div class="half nomargin">
+			<%= f.label :phone %>
+			<%= f.text_field :phone, placeholder: "Phone Number" %>
+		</div>
+
+		<div class="half">
+			<%= f.label :address %>
+			<%= f.text_field :address, placeholder: "Address" %>
+		</div>
+
+		<div class="half nomargin">
+			<%= f.label :city %>
+			<%= f.text_field :city, placeholder: "City" %>
+		</div>
+
+		<div class="half">
+			<%= f.label :state %>
+			<%= f.select :state, options_for_select(us_states, selected: @client.state), prompt: "Select a state", class: "half" %>
+		</div>
+
+		<div class="half nomargin">
+			<%= f.label :zip %>
+			<%= f.text_field :zip, placeholder: "Zip Code" %>
+		</div>
+
+		<div class="half">
+			<% unless @client.id.nil? %>
+		 		<div class="button deleteclient" data-clientid="<%= @client.id %>">Delete Client</div>
+			<% end %>
+		</div>
+
+		<div class="half nomargin">
+			<%= f.submit class: "button blue" %>
+		</div>
+
+	<% end %>
+
+</div>

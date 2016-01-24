@@ -10,6 +10,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+html {
+	overflow-y:scroll;
+}
+
 /* Loading bar */
 html.turbolinks-progress-bar::before {
   background-color: #2479b1 !important;
@@ -212,7 +216,7 @@ nav a:active, #sessioninfo a:active {
 	background-color:#1e6ca0;
 }
 
-.button.deleteinvoice {
+.button.deleteinvoice, .button.deleteclient {
 	background-color:#df4535;
 	position:absolute;
 	bottom:15px;
@@ -222,11 +226,18 @@ nav a:active, #sessioninfo a:active {
 	width:auto;
 }
 
-.button.deleteinvoice:hover {
+.button.deleteclient {
+	position:relative;
+	float:left;
+	position:static;
+	margin-top:13px;
+}
+
+.button.deleteinvoice:hover, .button.deleteclient:hover {
 	background-color:#c9392a;
 }
 
-.button.deleteinvoice:active {
+.button.deleteinvoice:active, .button.deleteclient:active  {
 	background-color:#9f2a1e;
 }
 

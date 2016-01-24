@@ -7,8 +7,9 @@
 	position: fixed;
     top: 63px;
     background-color: #ecf0f1;
-    padding: 40px 15px 0px 0px;
-    box-sizing: border-box;
+    padding: 40px 0 0px 20px;
+    margin-left:-20px;
+    box-sizing: content-box;
     z-index: 200;
 }
 
@@ -18,7 +19,17 @@
 
 #clientfiltering {
 	padding-top:0;
-	border-bottom:1px solid #c9c9c9;
+}
+
+#clientfiltering:after {
+	display:block;
+	height:1px;
+	background-color:#c9c9c9;
+	bottom:0;
+	left:20px;
+	right:0;
+	content:"";
+	position:absolute;
 }
 
 #pagewrapper.clientspage {
@@ -48,18 +59,19 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
-	bottom:45px;
+	bottom:35px;
 	border-left:1px solid #c9c9c9;
 }
 
 #newclientbox {
-	padding:25px 30px 37px 30px;
-	border-bottom:1px solid #c9c9c9;
-
+	padding: 0 30px 20px 30px;
+    border-bottom: 1px solid #c9c9c9;
+    text-align: right;
 }
 
 #newclientbox .button {
 	padding:8px 35px;
+	display:inline-block;
 }
 
 .client {
@@ -103,14 +115,43 @@
 	font-size:14px;
 }
 
+.clientformtitle {
+	font-size:20px;
+	font-weight:400;
+	margin-bottom:10px;
+}
+
 /* Forms */
 
 .clientsformwrapper {
+	position:relative;
 	padding:25px 30px;
 }
 
-.clientsformwrapper input[type="text"], .clientsformwrapper select {
-	margin-bottom: 22px;
+.formholder {
+	position:relative;
+	transition:all .3s;
+}
+
+.clientsformwrapper:after {
+	display:block;
+	content:"";
+	clear:both;
+}
+
+.clientsformwrapper label {
+	font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 3px;
+    display: block;
+}
+
+.clientsformwrapper select {
+	width:100%;
+}
+
+.clientsformwrapper input[type="text"] {
+	margin-bottom: 10px;
     display: block;
     outline: none;
     padding: 8px;
@@ -122,18 +163,63 @@
     color: #26323f;
     width: 100%;
     font-size: 15px;
-    float:left;
 }
 
 .clientsformwrapper input[type="text"]:focus {
 	border: 1px solid #41a9ee;
 }
 
-.clientsformwrapper input.half, .clientsformwrapper select {
-	width:calc(50% - 11px);
-	margin-right:22px;
+.clientsformwrapper input[type="text"].haserror {
+	border:1px solid #c47375;
+	background-color:#fff !important;
 }
 
-.clientsformwrapper input.nomargin {
+.clientsformwrapper input[type="text"].haserror:focus {
+	border:1px solid #df4535;
+}
+
+.clientsformwrapper .half {
+	width:calc(50% - 11px);
+	margin-right:22px;
+	float:left;
+	display:block;
+	height:64px;
+}
+
+.clientsformwrapper .nomargin {
 	margin-right:0;
+}
+
+.clientsformwrapper .checkboxholder {
+	margin-top:0;
+}
+
+.clientsformwrapper .button {
+	margin-top:13px;
+	float:right;
+}
+
+#validationerrors.clienterrors {
+	left:0;
+	top:0;
+	margin-bottom:0;
+}
+
+#validationerrors.clienterrors .validationtitle {
+	padding:6px;
+}
+
+#validationerrors.clienterrors p {
+	padding:6px 15px;
+}
+
+#validationerrors.clienterrors p, #validationerrors.clienterrors .validationtitle {
+	font-size:13px;
+}
+
+#validationerrors.clienterrors .closeerrors {
+	width:21px;
+	height:21px;
+	background-size:15px 15px;
+	margin-top:-3px;
 }

@@ -1,4 +1,9 @@
 var clientsFormWrapper = $('.clientsformwrapper');
+$('body').removeClass('loadingclientform');
+
+if (!$('#newclientbox').length) {
+	$('#clientssidebar').prepend('<div id="newclientbox"><a href="#" class="button blue newclientbutton">New Client</a></div>');
+}
 
 <% js = escape_javascript(render 'form') %>
 clientsFormWrapper.html("<%= js %>");

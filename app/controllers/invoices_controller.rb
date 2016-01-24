@@ -117,8 +117,11 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1.json
   def destroy
     archive_invoice
+    flash[:success] = 'Invoice deleted!'
+    flash.keep(:success)
+
     respond_to do |format|
-      format.html { redirect_to invoices_url, notice: 'Invoice was successfully destroyed.' }
+      format.js { render js: "window.location = '#{invoices_path}'" }
       format.json { head :no_content }
     end
   end
@@ -164,7 +167,11 @@ class InvoicesController < ApplicationController
    def merge_client_if_name_exists
       client_id = @invoice.client_id
       client_name = @invoice.client_name
-      client = current_user.clients.find_by(name: client_name)
+      client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
+      #client = current_user.clients.find_by(name: client_name)
+      unless client.nil?
+        @invoice.client_name = client.name
+      end
       @invoice.client = client
       @invoice.save
    end

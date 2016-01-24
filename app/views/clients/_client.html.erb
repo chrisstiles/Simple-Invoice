@@ -1,17 +1,11 @@
 <div class="client" data-id="<%= client.id %>">
 
-<div class="clientname">
-	<%= client.name %>
+	<div class="clientname">
+		<%= client.name %>
+	</div>
+
+	<div class="clientemail">
+		<%= client.email %>
+	</div>
+
 </div>
-
-<div class="clientemail">
-	<%= client.email %>
-</div>
-
-<% if client.is_primary? %>
-
- Is Primary
-
- <% end %>
-
- </div>

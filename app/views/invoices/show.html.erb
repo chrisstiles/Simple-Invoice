@@ -57,7 +57,7 @@
        
       <% end %>
 
-      <%= link_to "Delete Invoice", invoice_path(@invoice.invoice_number), method: :delete, data: { confirm: 'Are you sure?' }, class: "button deleteinvoice" %>
+      <div class="button deleteinvoice" data-invoicenumber="<%= @invoice.invoice_number %>">Delete Invoice</div>
 
     </div>
 </aside>

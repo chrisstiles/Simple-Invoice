@@ -24,7 +24,7 @@ function searchInvoice(){
 
 // Hide the loading box and clear timer
 
-var loadingBox = $('#loadingspinner'), timer, timer2;
+var timer, timer2;
 
 function hideLoader() {
   pageBody.addClass('hasfinishedloading');
@@ -44,6 +44,8 @@ for (var i = 46; i < 105; i++) {
 var searchBoxes = $('.search');
 
 pageBody.on('keyup', '.search', function(e) {
+  pageBody.addClass('loadingsearchresults');
+
   var keyCode = e.which;
 
   if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
@@ -54,13 +56,24 @@ pageBody.on('keyup', '.search', function(e) {
 
 pageBody.on('change', '.searchchange', searchInvoice);
 
-
+var $loading;
 
 function showLoader() {
-  var resultsWrapper = $('#searchresultswrapper');
+
+  if (pageBody.hasClass('loadingclientform')) {
+     var resultsWrapper = $('.clientsformwrapper');
+     var loadingBox = $('.clientsformwrapper .loadingspinner');
+  } else {
+     var resultsWrapper = $('#searchresultswrapper');
+     var loadingBox = $('.loadingspinner').first();
+  }
+ 
   var leftPosition = resultsWrapper.offset().left + (resultsWrapper.outerWidth() / 2);
 
-  $('#loadingcircle').css('left', leftPosition);
+  $('.loadingcircle').css('left', leftPosition);
+
+  $loading = loadingBox.hide();
+  $loading.show();
 
    // timer && clearTimeout(timer);
    // timer = setTimeout(function()
@@ -110,20 +123,19 @@ pageBody.on('click', '.pagination a', function() {
   
 });
 
-
-var $loading = loadingBox.hide();
 var timeOutHandler;
+var $loading;
 
 $(document)
   .ajaxStart(function () {
     if(!pageBody.hasClass('homerecordclicked')) {
       timeOutHandler = setTimeout(function(){
         showLoader();
-        $loading.show();
       }, 300);
     }
 })
 .ajaxStop(function () {
+    pageBody.removeClass('loadingsearchresults');
    clearTimeout(timeOutHandler);
    setTimeout(function() {
     $loading.hide();

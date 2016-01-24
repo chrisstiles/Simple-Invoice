@@ -35,8 +35,8 @@ var message = "<%= message %>"
 
 //console.log('<%= message %>')
 
-var errorInput = $("input[name='invoice[" + key + "]");
-var errorContentEditable = $("*[name='invoice[" + key + "]'").not(':input');
+var errorInput = $("input[name='invoice[" + key + "]']");
+var errorContentEditable = $("*[name='invoice[" + key + "]']").not(':input');
 
 if (key.indexOf('jobs.') > -1) {
 	key = key.replace('jobs.', '');

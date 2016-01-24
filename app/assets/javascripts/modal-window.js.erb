@@ -2,7 +2,7 @@ var ready;
 ready = function() {
 
     // Links with the class of modal will open the modal window
-    var modal = $('.modal');
+    //var modal = $('.modal');
 
     // Body for finding appended items and disabling scroll
 
@@ -44,7 +44,7 @@ ready = function() {
     });
 
     // Displays the modal window and adds title. Must add content per individual open links with addModalContent()
-    modal.on('click', function(e) {
+    pageBody.on('click', '.modal', function(e) {
         e.preventDefault();
         if (!$(this).hasClass('nomodal')) {
             var title = $(this).data('title') || '';
@@ -64,7 +64,7 @@ ready = function() {
             // Get json data and save as variable
             $.ajax({
                 type: 'GET',
-                url: '/clients',
+                url: '/clients?allclients=true',
                 dataType: 'json',
                 async: true,
                 success: function(data) {
@@ -208,6 +208,8 @@ ready = function() {
         if (!clientId.val() == '') {
             clientsButton.removeClass('modal addclient').addClass('removeclient nomodal');
             clientTooltip.text('Remove Client');
+            eClientName.attr('contenteditable', false);
+            invoiceClientName.prop('readonly', true);
         } else {
             clientsButton.removeClass('removeclient nomodal').addClass('modal addclient');
             clientTooltip.text('Add Saved Client');

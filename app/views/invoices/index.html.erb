@@ -1,6 +1,6 @@
 <div id="pagewrapper" class="widthfixedsidebar">
 
-<% if current_user.invoices.any? %>
+<% if current_user.invoices.where(archived: false).any? %>
 
 <div id="homeside">
   <div class="homesidesection">

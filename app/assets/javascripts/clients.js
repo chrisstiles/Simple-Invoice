@@ -41,15 +41,31 @@ function setClientFilter() {
 
 setClientFilter();
 
+// Add overflow scroll if the box is too large for the screen
+function checkWrapperHeight() {
+	var sidebar = $('#clientssidebar');
+	var formHeight = $('.clientsformwrapper').outerHeight();
+	var wrapperHeight = sidebar.outerHeight() - $('#newclientbox').outerHeight();
 
+	if (formHeight > wrapperHeight) {
+		sidebar.css('overflow-y', 'scroll');
+	} else {
+		sidebar.css('overflow-y', 'auto');
+	}
+}
+
+checkWrapperHeight();
 
 // Changed fixed positions on window resize
 $( window ).resize(function() {
 	setClientFilter();
+	checkWrapperHeight();
 });
 
-
+// Add selected class and perform ajax request for edit form
 pageWrapper.on('click', '.client', function() {
+	pageBody.addClass('loadingclientform');
+
 	var $this = $(this);
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected')) {
@@ -60,7 +76,6 @@ pageWrapper.on('click', '.client', function() {
 
 	}
 });
-
 
 function getClient(id) {
     $.ajax({
@@ -76,6 +91,61 @@ function getClient(id) {
 	  });
 }
 
+// Remove error class when input changes
+var compareVal;
+
+pageBody.on('keydown', '.haserror', function() {
+	var $this = $(this);
+	compareVal = $this.val();
+});
+
+pageBody.on('keyup', '.haserror', function() {
+	var $this = $(this);
+	var newVal = $this.val();
+
+	if (compareVal != newVal) {
+		$this.removeClass('haserror');
+	}
+
+});
+
+
+// Get html for new form and render it when the new form button is pressed.
+
+var newFormHtml = $('#clientssidebar').html();
+
+pageBody.on('click', '.newclientbutton', function(e) {
+	e.preventDefault();
+	pageBody.find('#clientssidebar').html(newFormHtml);
+	$('.selected').removeClass('selected');
+});
+
+// Change the client name in title form as user types
+pageBody.on('keyup', '#client_name', function() {
+	var text = $(this).val();
+	$('.clientnameheading').text(text);
+});
+
+
+// Ajax call to delete client when button is pressed
+pageBody.on('click', '.deleteclient', function() {
+	var clientId = $(this).attr('data-clientid');
+	var confirmation = confirm('Are you sure you would like to delete this client?')
+
+	if(confirmation) {
+	    $.ajax({
+	        type: 'delete',
+	        url: '/clients/' + clientId,
+	        dataType: 'script',
+	        async: true
+	        }).done(function( msg ) {
+	        	pageBody.find('#clientssidebar').html(newFormHtml);
+		  	}).fail(function(msg){
+		   	 //console.log(msg)
+		  });
+	}
+
+});
 
 
 }

@@ -1,0 +1,22 @@
+var currentPage = $('em.current').text() || 1;
+var clientNameText = $('.client_name_search').val();
+
+
+ $.ajax({
+	type: 'GET',
+	url: '/clients/?client_name=' + clientNameText + '&page=' + currentPage,
+	dataType: 'script',
+	async: true
+	}).done(function( msg ) {
+	//console.log(msg)
+	//  hideLoader();
+	}).fail(function(msg){
+	console.log(msg)
+});
+
+
+pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+<% flash.discard %>
+
+<% js = escape_javascript(render 'form') %>
+clientsFormWrapper.html("<%= js %>");

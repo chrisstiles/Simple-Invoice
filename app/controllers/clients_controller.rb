@@ -3,8 +3,13 @@ class ClientsController < ApplicationController
 	after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
-		@clients = current_user.clients.page(params[:page])
-		@clients = @clients.client_name(params[:client_name]) if params[:client_name].present?
+		if params[:allclients].present?
+			@clients = current_user.clients
+		else
+			@clients = current_user.clients.page(params[:page])
+			@clients = @clients.client_name(params[:client_name]) if params[:client_name].present?
+		end
+
 		@client = Client.new
 
 		respond_to do |format|
@@ -13,9 +18,6 @@ class ClientsController < ApplicationController
 			format.js
 		end
 
-	end
-
-	def show
 	end
 
 	def new
@@ -60,6 +62,14 @@ class ClientsController < ApplicationController
 	end
 
 	def destroy
+		@client.destroy
+
+		flash[:success] = 'Client deleted!'
+    	flash.keep(:success)
+
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	private

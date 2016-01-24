@@ -1,3 +1,8 @@
+// Variables
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
+
 <% if @invoice.errors.any? %>
 
 setTimeout(function() {
@@ -15,21 +20,14 @@ setTimeout(function() {
 	
 }, 200);
 
-// Variables
-var pageBody = $('body'),
-	validationErrors = $('#validationerrors'),
-	errorHolder = $('#errorholder');
-
-
 <% @invoice.errors.each do |key, message| %>
 
-var key = "<%= key %>"
-var message = "<%= message %>"
+var key = "<%= key %>";
+var message = "<%= message %>";
 
-//console.log('<%= message %>')
+//var errorInput = $("input[name='invoice[" + key + "]");
+var errorContentEditable = $("*[name='invoice[" + key + "]']").not(':input');
 
-var errorInput = $("input[name='invoice[" + key + "]");
-var errorContentEditable = $("*[name='invoice[" + key + "]'").not(':input');
 
 if (key.indexOf('jobs.') > -1) {
 	key = key.replace('jobs.', '');
@@ -47,33 +45,13 @@ if (message.indexOf('blank') > -1 || message.indexOf('number')) {
 	errorContentEditable.not(':empty').removeClass('haserror');
 }
 
-//if (message.indexOf('long') > -1) {
-//	var maxLength = message.replace( /\D/g, '');
-//	var correctLength = errorContentEditable.filter(function(el) {
-//		return el.text().length <= maxLength
-//
-//	var wrongLength = errorContentEditable.filter(function(el) {
-//		return el.text().length > maxLength
-//	});
-
-//	correctLength.not(':empty').removeClass('haserror');
-//	wrongLength.addClass('haserror');
-
-	//if (errorContentEditable.text().length <= maxLength) {
-	//	errorContentEditable.not(':empty').removeClass('haserror');
-	//} else {
-	//	errorContentEditable.addClass('haserror');
-	//}
-//}
-
-//validationErrors.append('<%= key %>' + ' ' + '<%= message %>')
 
 <% end %>
 
 errorHolder.empty();
 
 // Add errors to elements with too much content
-$('[data-maxlength]').each(function(i) {
+$('[data-maxlength]').each(function() {
 	var $this = $(this);
 	var length = $this.text().length;
 	var maxLength = $this.data('maxlength');
@@ -86,7 +64,8 @@ $('[data-maxlength]').each(function(i) {
 
 <% @invoice.errors.full_messages.each do |message| %>
 
-var message = '<%= message %>'
+
+var message = '<%= message %>';
 
 if (message.indexOf('Jobs ') > -1) {
 	message = message.replace('Jobs j', 'J');
@@ -105,10 +84,12 @@ var seen = {};
 
 $('#errorholder p').each(function() {
     var txt = $(this).text();
-    if (seen[txt])
+    if (seen[txt]) {
         $(this).remove();
-    else
+    }
+    else {
         seen[txt] = true;
+    }
 });
 
 // Show the validation errors list after they are added
