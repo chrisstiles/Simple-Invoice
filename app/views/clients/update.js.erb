@@ -52,6 +52,10 @@ $('.formholder').css({
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 	<% flash.discard %>
 
+validationErrors.removeAttr('style').removeClass('hastransformed').hide();
+$('.formholder').removeAttr('style');
+
+
 // Update
 // Render updated list of clients
 
