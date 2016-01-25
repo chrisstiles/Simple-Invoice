@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
   after_action :set_invoice_balance, only: [:update]
@@ -21,6 +21,19 @@ class InvoicesController < ApplicationController
       format.pdf do
         render pdf: "Invoice #{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb'
       end
+    end
+  end
+
+  def email_invoice
+    puts @invoice
+
+    InvoiceMailer.email_invoice(@invoice).deliver_now
+
+    flash[:success] = 'Invoice was successfully emailed!'
+    flash.keep(:success)
+
+    respond_to do |format|
+      format.js
     end
   end
 

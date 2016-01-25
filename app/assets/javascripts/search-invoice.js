@@ -31,7 +31,7 @@ function hideLoader() {
    clearTimeout(timer);
    clearTimeout(timer2);
     //setTimeout(function() {
-      loadingBox.hide();
+    $('.loadingspinner').hide();
     //}, 300);
 }
 
@@ -74,6 +74,8 @@ function showLoader() {
 
   $loading = loadingBox.hide();
   $loading.show();
+
+  //return $loading
 
    // timer && clearTimeout(timer);
    // timer = setTimeout(function()

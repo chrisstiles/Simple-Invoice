@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
   resources :invoices, param: :invoice_number
 
+  # Email Invoice
+  post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :email_invoice
+
   resources :users, only: [:show, :edit, :update]
   resources :clients
 
