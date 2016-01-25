@@ -33,6 +33,7 @@ class InvoicesController < ApplicationController
     flash.keep(:success)
 
     respond_to do |format|
+      format.html { redirect_to invoices_path}
       format.js
     end
   end

@@ -140,7 +140,7 @@ $(document)
     pageBody.removeClass('loadingsearchresults');
    clearTimeout(timeOutHandler);
    setTimeout(function() {
-    $loading.hide();
+    $('.loadingspinner').hide();
   }, 200);
 });
 
