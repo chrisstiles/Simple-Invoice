@@ -5,8 +5,9 @@ class InvoiceMailer < ApplicationMailer
   #
   #   en.invoice_mailer.email_invoice.subject
   #
-  def email_invoice(invoice)
+  def email_invoice(invoice, recipient)
   	@invoice = invoice
+    @recipient = recipient
 
   	attachments["invoice.pdf"] = WickedPdf.new.pdf_from_string(
     	render_to_string(:pdf => "invoice",:template => 'invoices/pdf_default.html.erb')
@@ -16,7 +17,7 @@ class InvoiceMailer < ApplicationMailer
     @greeting = "Invoice Number: #{@invoice.invoice_number}"
 
     self.instance_variable_set(:@_lookup_context, nil)
-  	mail :subject => "Your Invoice", :to => "chris_stiles015@yahoo.com"
+  	mail :subject => "Your Invoice", :to => @recipient
   	
   end
 end

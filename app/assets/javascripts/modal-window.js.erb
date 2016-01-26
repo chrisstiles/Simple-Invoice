@@ -110,6 +110,27 @@ ready = function() {
 
     });
 
+
+    pageBody.on('click', '.thirdbutton.mail', function(e) {
+        e.preventDefault();
+        var invoiceNumber = $(this).parents('.homeinvoice').attr('data-invoice-number');
+        showModal('Email Invoice #' + invoiceNumber)
+            // Get json data and save as variable
+            $.ajax({
+                type: 'GET',
+                url: '/invoices/' + invoiceNumber + '/send',
+                dataType: 'html',
+                async: true,
+                success: function(data) {
+                    addModalContent('<div id="modalcontent">' + data + '</div>', false);
+                },
+                error: function(data) {
+                    addModalContent('<div id="modalcontent">Error. Could not retrieve invoice.</div>', false);
+                }
+            })
+
+    })
+
     
     // Loop through clients and set every other row as grey after filtering
 

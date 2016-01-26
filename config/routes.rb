@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :invoices, param: :invoice_number
 
   # Email Invoice
-  post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :email_invoice
+  post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :send_email_invoice
+  get 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :show_email_invoice
 
   resources :users, only: [:show, :edit, :update]
   resources :clients, except: [:new]

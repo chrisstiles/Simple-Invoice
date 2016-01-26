@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 	nilify_blanks
 	
-	has_many :invoices
-	has_many :clients
+	has_many :invoices, dependent: :destroy
+	has_many :clients, dependent: :destroy
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable

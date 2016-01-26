@@ -71,11 +71,7 @@
   <%= link_to invoice_path(invoice.invoice_number, format: "pdf"), class: "thirdbutton file" do %>
       <span>View PDF</span>
   <% end %>
-
-  <%= link_to email_invoice_path(invoice.invoice_number), method: :post, class: "thirdbutton mail" do %>
-    <span>Email Invoice</span>
-  <% end %>
-  <!-- a href="#" class="thirdbutton mail"><span>Email Invoice</span></a> -->
+  <a href="#" class="thirdbutton mail"><span>Email Invoice</span></a>
   <a href="#" class="thirdbutton noborder pig">
 
   <div class="overflowcontainer">

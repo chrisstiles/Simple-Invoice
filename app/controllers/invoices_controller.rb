@@ -25,15 +25,18 @@ class InvoicesController < ApplicationController
   end
 
   def email_invoice
-    puts @invoice
 
-    InvoiceMailer.email_invoice(@invoice).deliver_now
+    if request.format.js?
 
-    flash[:success] = 'Invoice was successfully emailed!'
-    flash.keep(:success)
+      InvoiceMailer.email_invoice(@invoice, params[:recipient]).deliver_now
+
+      flash[:success] = 'Invoice was successfully emailed!'
+      flash.keep(:success)
+
+    end
 
     respond_to do |format|
-      format.html { redirect_to invoices_path}
+      format.html { render partial: '/invoices/email_invoice.html.erb' }
       format.js
     end
   end
@@ -153,6 +156,10 @@ class InvoicesController < ApplicationController
     def invoice_params
       params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
+
+    # def email_invoice_params
+    #   params.permit(:recipient, :cc, :message)
+    # end
 
     def set_invoice_number
       current_user.invoices.count + 1
