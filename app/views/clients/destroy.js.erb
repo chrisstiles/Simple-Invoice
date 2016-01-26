@@ -1,6 +1,8 @@
 var currentPage = $('em.current').text() || 1;
 var clientNameText = $('.client_name_search').val();
 
+<% js = escape_javascript(render 'form') %>
+clientsFormWrapper.html("<%= js %>");
 
  $.ajax({
 	type: 'GET',
@@ -17,6 +19,3 @@ var clientNameText = $('.client_name_search').val();
 
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 <% flash.discard %>
-
-<% js = escape_javascript(render 'form') %>
-clientsFormWrapper.html("<%= js %>");

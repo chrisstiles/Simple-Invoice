@@ -136,7 +136,6 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.js { render js: "window.location = '#{invoices_path}'" }
-      format.json { head :no_content }
     end
   end
 
