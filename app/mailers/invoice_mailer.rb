@@ -5,19 +5,19 @@ class InvoiceMailer < ApplicationMailer
   #
   #   en.invoice_mailer.email_invoice.subject
   #
-  def email_invoice(invoice, recipient)
+  def email_invoice(invoice, recipient, cc, message)
   	@invoice = invoice
     @recipient = recipient
+    @cc = cc.split(",")
+    @message = message
 
-  	attachments["invoice.pdf"] = WickedPdf.new.pdf_from_string(
-    	render_to_string(:pdf => "invoice",:template => 'invoices/pdf_default.html.erb')
+  	attachments["invoice_#{@invoice.invoice_number}.pdf"] = WickedPdf.new.pdf_from_string(
+    	render_to_string(:pdf => "invoice_#{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb')
   	)
 
 
-    @greeting = "Invoice Number: #{@invoice.invoice_number}"
-
     self.instance_variable_set(:@_lookup_context, nil)
-  	mail :subject => "Your Invoice", :to => @recipient
+  	mail :subject => "Your Invoice", :to => @recipient, :cc => @cc
   	
   end
 end

@@ -28,7 +28,7 @@ class InvoicesController < ApplicationController
 
     if request.format.js?
 
-      InvoiceMailer.email_invoice(@invoice, params[:recipient]).deliver_now
+      InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message]).deliver_now
 
       flash[:success] = 'Invoice was successfully emailed!'
       flash.keep(:success)

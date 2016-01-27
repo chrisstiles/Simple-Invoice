@@ -5,6 +5,8 @@
 	CC. Separate with comma<br>
 	<input type="text" name="cc" class="emailcc emailtags" placeholder="CC"><br>
 
+	<%= text_area_tag :message %>
+
 	<%= f.submit "Email Invoice", class: "emailinvoicebutton button blue willload" %>
 
 <% end %>

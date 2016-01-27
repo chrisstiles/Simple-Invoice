@@ -1,6 +1,8 @@
 class ClientsController < ApplicationController
 	before_action :set_client, only: [:show, :edit, :update, :destroy]
-	after_action :set_non_primary_clients_to_false, only: [:create, :update]
+	after_action :add_new_client_to_existing_invoices, only: [:create]
+	after_action :update_client_name_on_invoices, only: [:update]
+	#after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
 		if params[:allclients].present?
@@ -83,14 +85,30 @@ class ClientsController < ApplicationController
 			params.require(:client).permit(:name, :email, :address, :city, :state, :zip, :phone, :is_primary)
 		end
 
-		def set_non_primary_clients_to_false
-			if params[:client][:is_primary] == "1"
-				current_user.clients.where("id <> ?", @client.id).update_all(is_primary: false)
-			else 
-				puts "IT WAS FALSE"
+		# def set_non_primary_clients_to_false
+		# 	if params[:client][:is_primary] == "1"
+		# 		current_user.clients.where("id <> ?", @client.id).update_all(is_primary: false)
+		# 	else 
+		# 		puts "IT WAS FALSE"
+		# 	end
+		# end
+
+		def add_new_client_to_existing_invoices
+			matched_invoices = current_user.invoices.where('lower(client_name) = ?', @client.name.downcase)
+			
+			matched_invoices.each do |invoice|
+				invoice.client = @client
+				invoice.client_name = @client.name
+				invoice.save
 			end
+
 		end
 
+		def update_client_name_on_invoices
+			clients_invoices = current_user.invoices.where('client_id = ?', @client.id)
+
+			clients_invoices.update_all(client_name: @client.name)
+		end
 
 		def return_client_page_pagination(client)
 			# Replace 5 with however many clients per page
