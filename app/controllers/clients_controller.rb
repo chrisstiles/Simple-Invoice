@@ -63,6 +63,7 @@ class ClientsController < ApplicationController
 
 	def destroy
 		@client.destroy
+		@client = Client.new
 
 		flash[:success] = 'Client deleted!'
     	flash.keep(:success)

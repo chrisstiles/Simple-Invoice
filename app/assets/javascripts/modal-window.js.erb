@@ -123,6 +123,16 @@ ready = function() {
                 async: true,
                 success: function(data) {
                     addModalContent('<div id="modalcontent">' + data + '</div>', false);
+                    $('.emailtags').selectize({
+                        delimiter: ',',
+                        persist: false,
+                        create: function(input) {
+                            return {
+                                value: input,
+                                text: input
+                            }
+                        }
+                    });
                 },
                 error: function(data) {
                     addModalContent('<div id="modalcontent">Error. Could not retrieve invoice.</div>', false);
