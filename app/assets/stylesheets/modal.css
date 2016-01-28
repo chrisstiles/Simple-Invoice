@@ -369,8 +369,8 @@ body.noscroll {
 .selectize-dropdown,
 .selectize-input,
 .selectize-input input {
-  color: #333333;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #26323f;
+  font-family: 'Libertad', sans-serif;
   font-size: 14px;
   line-height: 20px;
   -webkit-font-smoothing: inherit;
@@ -419,7 +419,7 @@ body.noscroll {
 .selectize-control.multi .selectize-input > div {
   cursor: pointer;
   margin: 0 3px 3px 0;
-  padding: 1px 3px;
+  padding: 3px 10px;
   background: #e6e6e6;
   color: #333333;
   border: 1px solid #cccccc;
@@ -449,6 +449,7 @@ body.noscroll {
   -webkit-user-select: auto !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+  height:24px !important;
 }
 .selectize-input > input::-ms-clear {
   display: none;
@@ -673,27 +674,18 @@ body.noscroll {
 }
 
 .selectize-control.multi .selectize-input.has-items {
-  padding-left: 7px;
-  padding-right: 7px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 .selectize-control.multi .selectize-input > div {
-  color: #333333;
+  color: #fff;
   text-shadow: none;
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  background-color:#41a9ee;
+  border:1px solid #41a9ee;
   *background-color: #e6e6e6;
-  border: 1px solid #cccccc;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
 }
 .selectize-control.multi .selectize-input > div.active {
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
