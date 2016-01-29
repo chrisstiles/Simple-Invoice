@@ -299,6 +299,66 @@ body.noscroll {
  * @author Brian Reavis <brian@thirdroute.com>
  */
 
+ .sendemailform {
+ 	padding:5px 12px;
+ }
+
+ .emailclientname {
+ 	float:right;
+ 	color:#26323f;
+ 	font-size:19px;
+ 	max-width:260px;
+ 	text-overflow: ellipsis;
+ 	text-align: right;
+ 	white-space: nowrap;
+ }
+
+input[type="text"].modalinput {
+	height:42px;
+	max-width:245px;
+}
+
+ .modalinput {
+    display: block;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    border: 1px solid #d2cccc;
+    font-weight: 300;
+    font-family: 'Libertad', sans-serif;
+    color: #26323f;
+    width: 100%;
+    font-size: 16px;
+ }
+
+.modalinput:focus {
+	border:1px solid #41a9ee
+}
+
+.sendemailform label {
+	color: #26323F;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.sendemailform textarea {
+	height:124px;
+	font-size:13px;
+	line-height: 1.5em;
+	padding:9px 13px;
+}
+
+.sendemailform label.messagelabel {
+	margin-top:-3px;
+}
+
+.emailinvoicebutton {
+	float: right;
+    margin-top: 22px;
+}
 
 .selectize-dropdown {
 	display:none !important;
@@ -386,6 +446,7 @@ body.noscroll {
   padding: 8px;
   display: inline-block;
   width: 100%;
+  max-width:450px;
   overflow: hidden;
   position: relative;
   z-index: 1;

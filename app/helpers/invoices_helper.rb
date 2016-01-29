@@ -29,4 +29,12 @@ module InvoicesHelper
       
     end
 
+    def return_client_email_or_blank(invoice)
+    	if invoice.client && invoice.client.email
+    		invoice.client.email
+    	else
+    		""
+    	end
+    end
+
 end
