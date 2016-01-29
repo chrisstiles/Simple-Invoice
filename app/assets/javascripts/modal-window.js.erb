@@ -111,9 +111,9 @@ ready = function() {
     });
 
 
-    pageBody.on('click', '.thirdbutton.mail', function(e) {
+    pageBody.on('click', '.emailmodal', function(e) {
         e.preventDefault();
-        var invoiceNumber = $(this).parents('.homeinvoice').attr('data-invoice-number');
+        var invoiceNumber = $(this).attr('data-invoice-number');
         showModal('Email Invoice #' + invoiceNumber)
             // Get json data and save as variable
             $.ajax({
