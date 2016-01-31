@@ -1,3 +1,15 @@
+<div id="modalvalidaitonerrors" class="emailinvoicevalidation">
+  <div class="validationtitle">
+  <div class="closeerrors"></div>
+    Please correct the following errors
+  </div>
+  <div class="errorholder">
+    
+
+  </div>
+</div>
+
+<div class="formholder">
 <%= form_for @invoice, :url => url_for(:controller => 'invoices', :action => 'email_invoice'), method: "post", remote: true do |f|  %>
 <div class="sendemailform">
 	<div class="emailclientname"><%= @invoice.client_name %></div>
@@ -14,3 +26,5 @@
 </div>	
 
 <% end %>
+
+</div>

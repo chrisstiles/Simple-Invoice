@@ -20,7 +20,9 @@ ready = function() {
 
 			var oldContent = ''
 
-			if ($(this).is('input')) {
+			if ($this.is('input')) {
+				$this.prop('disabled', true);
+				$this.parents('form').submit();
 				oldContent = $this.val();
 			} else {
 				oldContent = $this.text();

@@ -1,4 +1,80 @@
-var pageBody = $('body');
+var pageBody = $('body'),
+	validationErrors = $('#modalvalidaitonerrors'),
+	errorHolder = $('.errorholder');
+
+<% if @email.errors.any? %>
+
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+		button.val(oldContent);
+		button.prop('disabled', false);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').remove();
+	
+}, 200);
+
+
+<% @email.errors.each do |key, message| %>
+
+var key = "<%= key %>"
+var message = "<%= message %>"
+
+var errorInput = $("input[name=<%= key %>]");
+errorInput.addClass('haserror');
+
+if (key == "cc") {
+	var selectize = $('.selectize-input');
+	selectize.addClass('haserror');
+	selectize.find('input').addClass('haserror');
+}
+
+<% end %>
+
+errorHolder.empty();
+
+<% @email.errors.full_messages.each do |message| %>
+
+var message = '<%= message %>'
+
+errorHolder.append('<p>' + message + '</p>');
+
+<% end %>
+
+// Show the validation errors list after they are added
+
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+validationsHeight += 15;
+
+$('.formholder').css({
+  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+  'transform'         : 'translateY(' + validationsHeight + 'px)'
+});
+
+<% else %>
+
+$('.buttoncontent').remove();
+
+$('#modalwrapper').remove();
 
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 <% flash.discard %>
+
+<% end %>
+

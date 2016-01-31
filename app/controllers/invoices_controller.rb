@@ -25,14 +25,20 @@ class InvoicesController < ApplicationController
   end
 
   def email_invoice
-
+    
     if request.format.js?
 
-      InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message]).deliver_now
+      @email = InvoiceEmail.new(params)
 
-      flash[:success] = 'Invoice was successfully emailed!'
-      flash.keep(:success)
+      if @email.valid?
+        puts "Valid Email!"
+        InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message]).deliver_now
 
+        flash[:success] = 'Invoice was successfully emailed!'
+        flash.keep(:success)
+      else
+        puts "Invalid email"
+      end
     end
 
     respond_to do |format|

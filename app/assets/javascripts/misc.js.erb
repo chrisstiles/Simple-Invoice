@@ -20,9 +20,38 @@ pageBody.on('click', '.homerecordpayment', function() {
 	pageBody.addClass('homerecordclicked');
 });
 
+// Remove error class when input changes
+var compareVal;
+
+pageBody.on('keydown', '.haserror', function() {
+	var $this = $(this);
+	compareVal = $this.val();
+});
+
+pageBody.on('keyup', '.haserror', function() {
+	var $this = $(this);
+	var newVal = $this.val();
+
+	if (compareVal != newVal) {
+		$this.removeClass('haserror');
+	}
+
+	$this.parents('.selectize-input').removeClass('haserror');
+
+});
+
 // Close validation errors on close button
 pageBody.on('click', '.closeerrors', function() {
-	$(this).parents('#validationerrors').removeAttr('style').removeClass('hastransformed').hide();
+	var $this = $(this);
+	var parentEl;
+	if ($this.parents('#validationerrors').length) {
+		parentEl = $this.parents('#validationerrors');
+	} else {
+		parentEl = $this.parents('#modalvalidaitonerrors');
+		parentEl.parents('#modalcontent').scrollTop(0);
+	}
+	
+	parentEl.removeAttr('style').removeClass('hastransformed').hide();
 	if (!pageBody.hasClass('show')) {
 		$('#invoicewrapper').removeAttr('style');
 		$('.formholder').removeAttr('style');
@@ -154,9 +183,9 @@ pageBody.on('keyup', '.e-amountpaid', function(e) {
 	var invoiceBalance = invoiceTotal - amountPaid;
 
 	if (isNaN(invoiceBalance)) {
-		invoiceBalanceCell.text('$' + invoiceTotal.toFixed(2));
+		invoiceBalanceCell.text('$' + invoiceTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	} else {
-		invoiceBalanceCell.text('$' + invoiceBalance.toFixed(2));
+		invoiceBalanceCell.text('$' + invoiceBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	}
 
 });

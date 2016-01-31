@@ -12,7 +12,7 @@
 }
 
 
-#validationerrors {
+#validationerrors, #modalvalidaitonerrors {
 	display:none;
 	left:141px;
 	margin:0 auto 45px auto;
@@ -60,7 +60,7 @@
 	transform:translateY(-50%);
 }
 
-#validationerrors p {
+#validationerrors p, #modalvalidaitonerrors p {
 	margin-top:0;
 	font-size:14px;
 	font-weight:600;
@@ -69,11 +69,11 @@
 	text-align:left;
 }
 
-#validationerrors p:nth-child(even) {
+#validationerrors p:nth-child(even), #modalvalidaitonerrors p:nth-child(even) {
 	background-color:#e3b0b2;
 }
 
-#validationerrors p:last-child {
+#validationerrors p:last-child, #modalvalidaitonerrors p:last-child {
 	margin-bottom:0;
 }
 

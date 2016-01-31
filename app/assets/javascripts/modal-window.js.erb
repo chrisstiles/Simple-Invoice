@@ -7,12 +7,20 @@ ready = function() {
     // Body for finding appended items and disabling scroll
 
     var pageBody = $('body');
-
+    var pageHtml = $('html');
 
     // Generate the modal window and title
 
     function showModal(title) {
-        pageBody.addClass('noscroll').append('<div id="modalwrapper"><div id="modaloverlay"></div><div id="modalwindow"><div id="modaltitle"><div class="closemodal"></div><span>' + title + '</span></div><div class="throbber-loader">Loading...</div></div></div>');
+        var scrollAmount = $(document).scrollTop();
+
+        if ($(document).height() > $(window).height()) {
+             var scrollTop = ($('html').scrollTop()) ? $('html').scrollTop() : $('body').scrollTop(); // Works for Chrome, Firefox, IE...
+             $('html').addClass('noscroll').css('top',-scrollTop);         
+        }
+
+        pageBody.append('<div id="modalwrapper"><div id="modaloverlay"></div><div id="modalwindow"><div id="modaltitle"><div class="closemodal"></div><span>' + title + '</span></div><div class="throbber-loader">Loading...</div></div></div>');
+
     }
 
     function addModalContent(content, fade) {
@@ -26,7 +34,11 @@ ready = function() {
 
     // Remove the modal window content from the DOM
     function closeModal() {
-        pageBody.removeClass('noscroll');
+        
+        var scrollTop = parseInt($('html').css('top'));
+        $('html').removeClass('noscroll');
+        $('html,body').scrollTop(-scrollTop);
+
         $('#modalwrapper').remove();
     }
 
@@ -122,7 +134,7 @@ ready = function() {
                 dataType: 'html',
                 async: true,
                 success: function(data) {
-                    addModalContent('<div id="modalcontent">' + data + '</div>', false);
+                    addModalContent('<div id="modalcontent" class="emailformmodal">' + data + '</div>', false);
 
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' + '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
@@ -153,21 +165,21 @@ ready = function() {
                             regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
                             match = input.match(regex);
 
-                            if (match) {
+                            //if (match) {
                                 return {
                                     value: input,
                                     text: input
                                 }
-                            } else {
-                                return false
-                            }
+                            //} else {
+                            //    return false
+                            //}
 
                             
                         }
                     });
                 },
                 error: function(data) {
-                    addModalContent('<div id="modalcontent">Error. Could not retrieve invoice.</div>', false);
+                    addModalContent('<div id="modalcontent" class="emailformmodal">Error. Could not retrieve invoice.</div>', false);
                 }
             })
 

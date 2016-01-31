@@ -169,13 +169,18 @@
 	border: 1px solid #41a9ee;
 }
 
-.clientsformwrapper input[type="text"].haserror {
+.clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror {
 	border:1px solid #c47375;
 	background-color:#fff !important;
 }
 
-.clientsformwrapper input[type="text"].haserror:focus {
-	border:1px solid #df4535;
+.clientsformwrapper input[type="text"].haserror:focus, .sendemailform input[type="text"].haserror:focus, #modalcontent .selectize-input.input-active.haserror {
+	border:1px solid #df4535 !important;
+}
+
+#modalcontent .selectize-input input {
+	border:none !important;
+	background-color:#fff !Important;
 }
 
 .clientsformwrapper .half {
@@ -199,7 +204,7 @@
 	float:right;
 }
 
-#validationerrors.clienterrors {
+#validationerrors.clienterrors, #modalvalidaitonerrors.emailinvoicevalidation {
 	left:0;
 	top:0;
 	margin-bottom:0;

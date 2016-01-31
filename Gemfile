@@ -20,6 +20,12 @@ gem "hirb"
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
 
+# Validations for non ActiveRecord models
+gem 'active_attr'
+
+# Allow completely custom error messages
+gem 'custom_error_message'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

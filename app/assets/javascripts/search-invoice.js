@@ -130,7 +130,7 @@ var $loading;
 
 $(document)
   .ajaxStart(function () {
-    if(!pageBody.hasClass('homerecordclicked')) {
+    if(!pageBody.hasClass('homerecordclicked') && !pageBody.hasClass('noscroll')) {
       timeOutHandler = setTimeout(function(){
         showLoader();
       }, 300);
