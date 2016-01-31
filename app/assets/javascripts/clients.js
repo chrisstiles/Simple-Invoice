@@ -91,24 +91,6 @@ function getClient(id) {
 	  });
 }
 
-// Remove error class when input changes
-var compareVal;
-
-pageBody.on('keydown', '.haserror', function() {
-	var $this = $(this);
-	compareVal = $this.val();
-});
-
-pageBody.on('keyup', '.haserror', function() {
-	var $this = $(this);
-	var newVal = $this.val();
-
-	if (compareVal != newVal) {
-		$this.removeClass('haserror');
-	}
-
-});
-
 
 // Get html for new form and render it when the new form button is pressed.
 

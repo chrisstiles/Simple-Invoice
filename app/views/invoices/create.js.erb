@@ -10,7 +10,8 @@ setTimeout(function() {
 	var button = $('.hasloadingtext');
 
 	if (button.is('input')) {
-	button.val(oldContent);
+		button.val(oldContent);
+		button.prop('disabled', false);
 	} else {
 	button.text(oldContent);
 	}

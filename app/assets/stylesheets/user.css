@@ -1,0 +1,9 @@
+/*#pagewrapper.userpage .clientsformwrapper {
+	width:50%;
+	padding:0;
+}*/
+
+.halfpage {
+	width:50%;
+	border-right:1px solid #c9c9c9;
+}

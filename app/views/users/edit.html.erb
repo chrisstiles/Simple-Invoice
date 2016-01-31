@@ -1,10 +1,67 @@
-<br><br><br><br><br>
-<%= form_for(@user) do |f| %>
-	<%= f.text_field :name, placeholder: "name" %><br><br>
-	<%= f.text_field :address, placeholder: "Address" %><br><br>
-	<%= f.text_field :city, placeholder: "City" %><br><br>
-	<%= f.select :state, options_for_select(us_states, selected: current_user.state), prompt: "Select a state" %><br><br>
-	<%= f.text_field :zip, placeholder: "Zip Code" %><br><br>
-	<%= f.text_field :phone, placeholder: "Phone" %><br><br>
-	<%= f.submit %>
-<% end %>
+
+<div id="pagewrapper" class="userpage">
+
+<div class="halfpage">
+
+	<div class="clientsformwrapper">
+
+		<div class="clientformtitle">Your Profile</div>
+
+			<div id="validationerrors" class="clienterrors">
+				<div class="validationtitle">
+					<div class="closeerrors"></div>
+					Please correct the following errors before saving
+				</div>
+				<div id="errorholder"></div>
+			</div>
+
+		<div class="formholder">
+
+			<%= form_for(@user, remote: true) do |f| %>
+				<%= f.text_field :name, placeholder: "Name" %>
+				
+				<div class="half">
+					<%= f.label :email %>
+					<%= f.text_field :email, placeholder: "Email" %>
+				</div>
+
+				<div class="half nomargin">
+					<%= f.label :phone %>
+					<%= f.text_field :phone, placeholder: "Phone Number" %>
+				</div>
+
+				<div class="half">
+					<%= f.label :address %>
+					<%= f.text_field :address, placeholder: "Address" %>
+				</div>
+
+				<div class="half nomargin">
+					<%= f.label :city %>
+					<%= f.text_field :city, placeholder: "City" %>
+				</div>
+
+				<div class="half">
+					<%= f.label :state %>
+					<%= f.select :state, options_for_select(us_states, selected: @user.state), prompt: "Select a state", class: "half" %>
+				</div>
+
+				<div class="half nomargin">
+					<%= f.label :zip %>
+					<%= f.text_field :zip, placeholder: "Zip Code" %>
+				</div>
+
+				<div class="half"></div>
+
+				<div class="half nomargin">
+					<%= f.submit class: "button blue" %>
+				</div>
+
+			<% end %>
+
+		</div>
+
+	</div>
+
+</div>
+
+</div>
