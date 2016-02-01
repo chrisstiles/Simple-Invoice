@@ -64,4 +64,18 @@
 
 </div>
 
+
+<div class="halfpage">
+User Logo<br>
+
+<%= image_tag @user.logo.url if @user.logo? %>
+
+<%= form_for(@user, html: { multipart: true }) do |f| %>
+	<%= f.file_field :logo, accept: 'image/jpeg,image/gif,image/png' %>
+	<%= f.submit "Add Logo" %>
+<% end %>
+
+</div>
+
+
 </div>

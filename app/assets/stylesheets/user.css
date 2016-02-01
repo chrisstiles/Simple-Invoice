@@ -1,9 +1,16 @@
-/*#pagewrapper.userpage .clientsformwrapper {
-	width:50%;
-	padding:0;
-}*/
+#pagewrapper.userpage .clientsformwrapper {
+	padding-top:0;
+	padding-left:0;
+}
 
 .halfpage {
 	width:50%;
 	border-right:1px solid #c9c9c9;
+	display:inline-block;
+	float:left;
+	box-sizing:border-box;
+}
+
+#pagewrapper.userpage > div:nth-of-type(2) {
+	border-right:none;
 }

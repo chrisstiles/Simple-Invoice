@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update(user_params)
-			redirect_to invoices_path
+			redirect_to edit_user_path
 		end
 	end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone)
+			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo)
 		end
 
 		#def normalize_blank_values

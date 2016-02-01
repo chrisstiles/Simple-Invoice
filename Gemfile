@@ -29,6 +29,11 @@ gem 'custom_error_message'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Upload images
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.36.0'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -79,5 +84,6 @@ group :production do
   gem 'heroku-deflater'
   gem 'puma'
   gem 'wkhtmltopdf-heroku'
+  gem 'sass-rails'
 end
 
