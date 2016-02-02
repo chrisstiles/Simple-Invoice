@@ -165,14 +165,14 @@ ready = function() {
                             regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
                             match = input.match(regex);
 
-                            //if (match) {
+                            if (match) {
                                 return {
                                     value: input,
                                     text: input
                                 }
-                            //} else {
-                            //    return false
-                            //}
+                            } else {
+                                return false
+                            }
 
                             
                         }

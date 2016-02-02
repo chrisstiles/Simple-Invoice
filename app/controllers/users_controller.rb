@@ -10,8 +10,12 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update(user_params)
-			redirect_to edit_user_path
+		respond_to do |format|
+			if @user.update(user_params)
+				format.html { redirect_to edit_user_path }
+				format.js
+				format.json { render nothing: true, status: 200 }
+			end
 		end
 	end
 
