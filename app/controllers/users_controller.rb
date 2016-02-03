@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@logo = Logo.new
 	end
 
 	def update
@@ -23,11 +24,13 @@ class UsersController < ApplicationController
 
 		def set_user
 			@user = current_user
+			@user_logo = @user.logos.where(current_logo: true).first.image unless @user.logos.empty?
 		end
 
 		def user_params
 			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo)
 		end
+
 
 		#def normalize_blank_values
 		 # attributes.each do |column, value|

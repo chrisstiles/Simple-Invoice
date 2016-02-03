@@ -3,12 +3,13 @@ class User < ActiveRecord::Base
 	
 	has_many :invoices, dependent: :destroy
 	has_many :clients, dependent: :destroy
+	has_many :logos, dependent: :destroy
 
 	# Carrierwave uploader
-	mount_uploader :logo, LogoUploader
+	#mount_uploader :logo, LogoUploader
 
 	# Validations
-	validate :logo_size
+	#validate :logo_size
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,12 +17,12 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 
-	private
+	# private
 
-		def logo_size
-			if logo.size > 5.megabytes
-				errors.add(:logo, "should be less than 5MB")
-			end
-		end
+	# 	def logo_size
+	# 		if logo.size > 5.megabytes
+	# 			errors.add(:logo, "should be less than 5MB")
+	# 		end
+	# 	end
 
 end

@@ -68,9 +68,9 @@
 <div class="halfpage">
 User Logo<br>
 
-<%= image_tag @user.logo.url(:screen) if @user.logo? %>
+<%= image_tag @user_logo.url(:screen) unless @user.logos.empty? %>
 	
-<%= form_for(@user, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
+<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
 
 <% end %>
 

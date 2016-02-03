@@ -15,8 +15,13 @@ Rails.application.routes.draw do
   post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :send_email_invoice
   get 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :show_email_invoice
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :update]
+
+get '/settings' => 'users#edit', as: :settings
+
   resources :clients, except: [:new]
+
+  resources :logos, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
