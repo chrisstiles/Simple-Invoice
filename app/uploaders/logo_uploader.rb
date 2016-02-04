@@ -34,7 +34,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   # end
 
   version :screen do
-    process resize_to_limit: [350,100]
+    process resize_to_limit: [890,490]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

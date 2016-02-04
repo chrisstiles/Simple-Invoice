@@ -66,13 +66,16 @@
 
 
 <div class="halfpage">
-User Logo<br>
 
-<%= image_tag @user_logo.url(:screen) unless @user.logos.empty? %>
-	
-<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
+	<div class="logosection">
 
-<% end %>
+		User Logo<br>
+			
+		<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
+			<%= image_tag @user_logo.url(:screen), class: "userlogo" unless @user.logos.empty? %>
+		<% end %>
+
+	</div>
 
 </div>
 
