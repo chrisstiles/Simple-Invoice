@@ -545,9 +545,14 @@ ready = function() {
 			if (editing) {
 				if (el.hasClass('existing')) {
 					el.next(':input').attr('value','true');
+					tableRow.hide();
+				} else {
+					tableRow.remove();
 				}
+
 				
-				tableRow.hide();
+				//tableRow.find(':input').val('1');
+				
 			} else if (creating) {
 				tableRow.remove();
 			}
