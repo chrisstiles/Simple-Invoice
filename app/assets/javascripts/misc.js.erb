@@ -25,12 +25,22 @@ var compareVal;
 
 pageBody.on('keydown', '.haserror', function() {
 	var $this = $(this);
-	compareVal = $this.val();
+	if ($this.is(':input')) {
+		compareVal = $this.val();
+	} else {
+		compareVal = $this.text();
+	}
+	
 });
 
 pageBody.on('keyup', '.haserror', function() {
 	var $this = $(this);
-	var newVal = $this.val();
+
+	if ($this.is(':input')) {
+		var newVal = $this.val();
+	} else {
+		var newVal = $this.text();
+	}
 
 	if (compareVal != newVal) {
 		$this.removeClass('haserror');
@@ -85,7 +95,7 @@ var homeSide = $('#homeside');
 function setSidebarPosition() {
 	
 	var leftPosition = homePageWrapper.offset().left + homePageWrapper.outerWidth();
-	homeSide.css('left', leftPosition);
+	$('#homeside').css('left', leftPosition);
 
 }
 
@@ -102,7 +112,7 @@ function setHomePagination() {
 	if (homeInvoice.length) {
 		var leftPosition = homeInvoice.first().offset().left - 100;
 		
-		var rightPosition = $(window).width() - homeSide.offset().left;
+		var rightPosition = $(window).width() - $('#homeside').offset().left;
 
 		pagination.css({
 			'left' : leftPosition,

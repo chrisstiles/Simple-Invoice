@@ -60,7 +60,7 @@ var $loading;
 
 function showLoader() {
 
-if (!('html').hasClass('noscroll')) {
+if (!$('html').hasClass('noscroll')) {
   if (pageBody.hasClass('loadingclientform')) {
      var resultsWrapper = $('.clientsformwrapper');
      var loadingBox = $('.clientsformwrapper .loadingspinner');

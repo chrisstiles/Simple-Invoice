@@ -137,7 +137,7 @@
                   <tr changed="false">
                     <td align="left" class="jobdescriptioncell">
                       <span class="e-jobdescription" contenteditable="<%= @editable %>">
-                        <%= job.job_description %>
+                        <%= print_multiline(job.job_description) %>
                       </span>
                     </td>
                     <td align="right" class="quantitycell">

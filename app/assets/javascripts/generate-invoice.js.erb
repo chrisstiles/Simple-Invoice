@@ -95,7 +95,7 @@ ready = function() {
 
 
 		// Change input field when content editable changes
-		$(document).on('keyup', '[contenteditable=true]', function() {
+		$(document).on('keydown keyup', '[contenteditable=true]', function() {
 			var $this = $(this);
 			
 			var value = $this.text();
@@ -434,12 +434,12 @@ ready = function() {
 
 		calculateTotal();
 
-		jobsTable.on('keyup', '.quantitycell', function() {
+		jobsTable.on('keyup blur', '.quantitycell', function() {
 			calculateSubtotal('quantity', $(this));
 			calculateTotal();
 		});
 
-		jobsTable.on('keyup', '.ratecell', function() {
+		jobsTable.on('keyup blur', '.ratecell', function() {
 			calculateSubtotal('rate', $(this));
 			calculateTotal();
 		});

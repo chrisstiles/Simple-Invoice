@@ -5,10 +5,10 @@ class Job < ActiveRecord::Base
   validates :job_description, presence: true, allow_blank: false
 
   validates :job_quantity, presence: true, 
-	            numericality: { greater_than_or_equal_to: 0, message: "must be a number greater than or equal to 0" }
+	            numericality: { greater_than_or_equal_to: 0, message: "^Job quantity must be a number greater than or equal to 0", allow_blank: true }
 
   validates :job_rate, presence: true, 
-	            numericality: { greater_than_or_equal_to: 0, message: "must be a number greater than or equal to $0.00" }
+	            numericality: { greater_than_or_equal_to: 0, message: "^ Job Description must be a number greater than or equal to $0.00", allow_blank: true }
 
   # Length
   validates :job_description, length: { maximum: 500 }

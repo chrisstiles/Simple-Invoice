@@ -158,15 +158,15 @@ $('#invoicewrapper').css({
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
 
-// Remove red background when input is changed
-pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
-	var $this = $(this);
-	$this.removeClass('haserror');
+// // Remove red background when input is changed
+// pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
+// 	var $this = $(this);
+// 	$this.removeClass('haserror');
 
-	if ($this.hasClass('clientnameinput')) {
-		$('#e-clientname').removeClass('haserror');
-	}
-});
+// 	if ($this.hasClass('clientnameinput')) {
+// 		$('#e-clientname').removeClass('haserror');
+// 	}
+// });
 
 } else {
 

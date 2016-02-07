@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
+  #before_action :set_number_of_jobs_not_to_be_deleted, only: [:create, :update]
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
   after_action :set_invoice_balance, only: [:update]
@@ -72,8 +73,8 @@ class InvoicesController < ApplicationController
     @editable = "true"
     
     set_client_if_not_nil
-    
-    @jobs = @invoice.jobs
+    set_number_of_jobs_not_to_be_deleted
+    #@jobs = @invoice.jobs
 
     respond_to do |format|
 
@@ -104,9 +105,10 @@ class InvoicesController < ApplicationController
     #    job.job_quantity.round(2)
     #    job.job_rate.round(2)
     #end
-    @jobs = @invoice.jobs
+    #@jobs = @invoice.jobs
 
     set_client_if_not_nil
+    set_number_of_jobs_not_to_be_deleted
     #set_invoice_balance
 
     respond_to do |format|
@@ -160,7 +162,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :numjobs, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     # def email_invoice_params
@@ -177,6 +179,19 @@ class InvoicesController < ApplicationController
 
     def remove_jobs_set_to_delete
       @invoice.jobs.where(will_delete: true).destroy_all
+    end
+
+    def set_number_of_jobs_not_to_be_deleted
+      num_jobs = 0
+
+      params[:invoice][:jobs_attributes].each do |job, value|
+        unless params[:invoice][:jobs_attributes][job][:will_delete] == "true"
+          num_jobs += 1
+        end
+      end
+
+      @invoice.num_jobs = num_jobs
+
     end
 
     def set_client_if_not_nil

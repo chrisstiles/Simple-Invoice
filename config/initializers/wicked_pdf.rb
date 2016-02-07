@@ -4,4 +4,12 @@ bin_location = case Rails.env
   else `which wkhtmltopdf`
 end
 
-WickedPdf.config = { :exe_path => bin_location, :page_size => 'Letter' }
+WickedPdf.config = { 
+	:exe_path 		  => bin_location, 
+	:page_size		  => 'Letter',
+	:dpi              => '300',
+	:margin           => { :top    => 13, # default 10 (mm)
+	                  :bottom => 13,
+	                  :left   => 0,
+	                  :right  => 0 }
+}

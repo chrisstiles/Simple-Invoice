@@ -1,25 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+
 <style>
-#invoicewrapper {
-	width:auto;
-	padding:15px;
-	position:relative;
-	font-size:17px;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-	color:#000;
+
+body {
+  margin:0 !important;
+  padding: 0 !important;
 }
 
+#pdfinvoicewrapper {
+	width:8.5in;
+  height:11in;
+  top:0;
+  right:0;
+  left:0;
+  page-break-after: auto;
+	position:absolute;
+  box-sizing:border-box;
+}
 
-#invoicewrapper:after {
+#pdfinvoicewrapper:after {
 	clear:both;
 	display:block;
 	content:"";
 }
 
+.bottomhider, .tophider  {
+  position:fixed;
+  left:0;
+  z-index: 200;
+  width:8.5in;
+  background:red;
+  opacity:.5;
+}
+
+.tophider {
+  height: 30px;
+}
+
+.pagebreak { 
+  display:block; 
+  clear:both; 
+  page-break-after:always;
+  background:red;
+}
+
+.pagebreakafter:after {
+  display:block;
+  page-break-after:always; 
+  content:"";
+}
+
+tr  { 
+  page-break-inside:avoid; 
+  position:relative;
+}
+
+tr.firstrow td {
+  border-top:none !important;
+}
+
+tr.lastrow td {
+  border-bottom:none !important;
+}
+
+/* Default theme code */
+
 #invoice {
 	background:#fff;
 	display:block;
-	border: 1px solid #000;
+  font-size:17px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+  color:#000;
+  position:absolute;
+  margin: 0 50px;
 }
 
 .hiddencontainer {
@@ -28,13 +85,13 @@
 	left:-9999px;
 }
 
-#invoicewrapper span {
+#invoice span {
 	min-width:5px;
 	display:block;
 	max-width:100%;
 }
 
-#invoicewrapper #e-invoicenumber {
+#invoice #e-invoicenumber {
 	display:inline;	
 }
 
@@ -55,7 +112,7 @@ section:after {
 
 #invoicenumber {
 	border-bottom:2px solid #000;	
-	padding:30px 33px 10px 40px;
+	padding:0px 33px 10px 40px;
 }
 
 #invoicenumber span {
@@ -173,19 +230,17 @@ section:after {
     left: 33px;
 }
 
-/* PDF Code */
-
-.topbar {
-	height:100px;
-	background:red;
-}
-
 
 </style>
 
-<div id="invoicewrapper">
+<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" %>
+
+</head>
+
+<body>
+
+<div id="pdfinvoicewrapper">
     <div id="invoice">
-    
     	<section id="invoicenumber">
        		<div>
             	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
@@ -256,7 +311,7 @@ section:after {
                   <tr>
                     <td width="51%"  align="left">
                       
-                        <%= job.job_description %>
+                        <%= print_multiline(job.job_description) %>
                       
                     </td>
                     <td width="16%"  align="right">
@@ -270,6 +325,7 @@ section:after {
                       
                     </td>
                     <td width="18%" align="right">
+                      <span class="pagenum"></span>
                     	<%= print_subtotal(job.job_quantity,job.job_rate) %>
                     </td>
                   </tr>
@@ -283,11 +339,18 @@ section:after {
             Total:
        </section>
        
-        <section id="notes">
-            <div class="sectiontitle notestitle">Notes:</div>
-            <div id="e-notes" contenteditable="<%= @editable %>"><%= print_multiline(@invoice.notes) %></div>
-       </section>
+       <% unless @invoice.notes.blank? %>
+          <section id="notes">
+              <div class="sectiontitle notestitle">Notes:</div>
+              <div id="e-notes" contenteditable="<%= @editable %>"><%= print_multiline(@invoice.notes) %></div>
+         </section>
+       <% end %>
        
     </div>
 
 </div>
+
+
+<%= wicked_pdf_javascript_include_tag "pdf/configure_pdf.js" %>
+</body>
+</html>

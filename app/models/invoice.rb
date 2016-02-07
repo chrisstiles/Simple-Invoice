@@ -9,6 +9,9 @@ class Invoice < ActiveRecord::Base
 	# Number of invoices to show per page with pagination
 	self.per_page = 9
 
+	# Store number of jobs not to be deleted
+	attr_accessor :num_jobs
+
 	# Filtering
 	default_scope { order(created_at: :desc) }
 
@@ -50,6 +53,15 @@ class Invoice < ActiveRecord::Base
 	  if self.amount_paid && (Float(self.amount_paid) > Float(self.total))
 	  	errors.add(:amount_paid, "cannot be greater than the invoice total")
 	  end
+	end
+
+
+	# Validate number of jobs in the invoice
+
+	validate :validate_number_of_jobs
+
+	def validate_number_of_jobs
+		errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.") if self.num_jobs > 45
 	end
 
 

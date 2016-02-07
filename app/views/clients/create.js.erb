@@ -4,6 +4,22 @@ var pageBody = $('body'),
 
 <% if @client.errors.any? %>
 
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+		button.val(oldContent);
+		button.prop('disabled', false);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').remove();
+	
+}, 200);
+
 
 <% @client.errors.each do |key, message| %>
 
@@ -49,6 +65,7 @@ $('.formholder').css({
 
 <% else %>
 
+$('.success').remove();
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 	<% flash.discard %>
 
