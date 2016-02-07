@@ -184,6 +184,26 @@
       },
       resize: function(file) {
         var info, srcRatio, trgRatio;
+
+        // Updated resize function
+        // drawImage(image, srcX, srcY, srcWidth, srcHeight, trgX, trgY, trgWidth, trgHeight) takes an image, clips it to
+        // the rectangle (srcX, srcY, srcWidth, srcHeight), scales it to dimensions (trgWidth, trgHeight), and draws it
+        // on the canvas at coordinates (trgX, trgY).
+    //     info = {
+    //         srcX:0,
+    //         srcY:0,
+    //         srcWidth: file.width,
+    //         srcHeight: file.height,
+    //         trgX:0,
+    //         trgY:0,
+    //         trgWidth: this.options.thumbnailWidth,
+    //         trgHeight: parseInt(this.options.thumbnailWidth * file.height / file.width)
+    //     }
+
+    //     return info;
+    // },
+
+
         info = {
           srcX: 0,
           srcY: 0,
@@ -1679,7 +1699,8 @@
   drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
     var vertSquashRatio;
     vertSquashRatio = detectVerticalSquash(img);
-    return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+    //return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+    return ctx.drawImage(img, 0, 0);
   };
 
 

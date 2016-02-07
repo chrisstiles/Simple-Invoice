@@ -221,21 +221,72 @@ $( window ).resize(function() {
 });
 
 
-// Fix Dropzone
+// Dropzone
+
 // disable auto discover
 Dropzone.autoDiscover = false;
 
-// grap our upload form by its id
-$(".logouploader").dropzone({
-	// restrict image size to a maximum 1MB
-	maxFilesize: 1,
-	dictDefaultMessage: "Drop your logo here to upload",
-	// changed the passed param to one accepted by
-	// our rails app
-	paramName: "logo[image]",
-	// show remove links on each image upload
-	addRemoveLinks: true
-});	
+// Grab upload form, set initial settings
+var logoUploader = $(".logouploader").dropzone({
+		// restrict image size to a maximum 1MB
+		maxFilesize: 5,
+		dictDefaultMessage: "Drop your logo here to upload",
+		// changed the passed param to one accepted by
+		// our rails app
+		paramName: "logo[image]",
+		// show remove links on each image upload
+		addRemoveLinks: false,
+		thumbnailWidth: null,
+      	thumbnailHeight: null,
+		previewTemplate: " <div class=\"dz-image\"><img data-dz-thumbnail width='' height='' /></div>",
+		resize: function(file) {
+        var resizeInfo = {
+            srcX: 0,
+            srcY: 0,
+            trgX: 0,
+            trgY: 0,
+            srcWidth: file.width,
+            srcHeight: file.height,
+            trgWidth: file.width,
+            trgHeight: file.height
+        };
+
+        return resizeInfo;
+    },
+    init: function() {
+    	this.on("addedfile", function(file, dataUrl) {
+            //$('.dz-image').empty();
+            //showThumbnail(file);
+
+        });
+    }
+	});	
+
+logoUploader.on("drop", function(e) {
+	$('.userlogo').remove();
+	
+});
+
+
+
+logoUploader.on("addedfile", function(file) {
+	alert('test');
+	 var img = $(file.previewTemplate).find("img");
+	    img[0].onload = function () {
+	        var max = this.width > this.height ? this.width : this.height;
+	        var ratio = 300.0 / max;
+
+	        var width = this.width * ratio;
+	        var height = this.height * ratio;
+
+	        img.css({
+	            width: width + "px",
+	            height: height + "px",
+	            top: ((100 - height) / 2) + "px",
+	            left: ((100 - width) / 2) + "px"
+	        });
+	    };
+})
 
 
 };

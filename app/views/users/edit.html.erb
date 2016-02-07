@@ -53,7 +53,7 @@
 				<div class="half"></div>
 
 				<div class="half nomargin">
-					<%= f.submit class: "button blue" %>
+					<%= f.submit class: "button blue willload" %>
 				</div>
 
 			<% end %>
@@ -72,7 +72,7 @@
 		User Logo<br>
 			
 		<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
-			<%= image_tag @user_logo.url(:screen), class: "userlogo" unless @user.logos.empty? %>
+			<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>
 		<% end %>
 
 	</div>

@@ -16,7 +16,7 @@ class Client < ActiveRecord::Base
 
 	# Length
 	validates :email, length: { maximum: 80 }
-	validates :name, :email, :address, :city, :state, :zip, :phone, length: { maximum: 255 }
+	validates :name, :email, :address, :city, :state, :zip, :phone, length: { maximum: 100 }
 
 	default_scope { order('LOWER(name) ASC') }
 	scope :client_name, -> (client_name) { where("LOWER(name) like ?", "#{client_name.downcase}%")}

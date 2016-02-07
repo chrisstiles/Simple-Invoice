@@ -1,0 +1,80 @@
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
+
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+		button.val(oldContent);
+		button.prop('disabled', false);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').remove();
+	
+}, 200);
+
+<% if @user.errors.any? %>
+
+
+<% @user.errors.each do |key, message| %>
+
+var key = "<%= key %>"
+var message = "<%= message %>"
+
+var errorInput = $("input[name='user[" + key + "]']");
+errorInput.addClass('haserror');
+
+<% end %>
+
+errorHolder.empty();
+
+<% @user.errors.full_messages.each do |message| %>
+
+var message = '<%= message %>'
+
+errorHolder.append('<p>' + message + '</p>');
+
+<% end %>
+
+// Show the validation errors list after they are added
+
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+validationsHeight += 15;
+
+$('.formholder').css({
+  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+  'transform'         : 'translateY(' + validationsHeight + 'px)'
+});
+
+<% else %>
+
+$('.success').remove();
+pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+	<% flash.discard %>
+
+validationErrors.removeAttr('style').removeClass('hastransformed').hide();
+$('.formholder').removeAttr('style');
+
+
+var pageBody = $('body');
+var pageWrapper = $('#pagewrapper');
+
+
+
+
+<% end %>
