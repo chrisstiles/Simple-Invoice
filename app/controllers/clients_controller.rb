@@ -45,6 +45,7 @@ class ClientsController < ApplicationController
 	end
 
 	def edit
+		sleep 2.0
 		respond_to do |format|
 			format.html
 			format.js

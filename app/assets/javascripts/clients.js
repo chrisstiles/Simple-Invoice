@@ -64,11 +64,12 @@ $( window ).resize(function() {
 
 // Add selected class and perform ajax request for edit form
 pageWrapper.on('click', '.client', function() {
-	pageBody.addClass('loadingclientform');
 
 	var $this = $(this);
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected')) {
+		pageBody.addClass('loadingclientform');
+
 		$('.selected').removeClass('selected');
 		$this.addClass('selected');
 		
@@ -84,6 +85,7 @@ function getClient(id) {
         dataType: 'script',
         async: true
         }).done(function( msg ) {
+        	pageBody.removeClass('loadingclientform');
 	    //console.log(msg)
 	  //  hideLoader();
 	  }).fail(function(msg){
