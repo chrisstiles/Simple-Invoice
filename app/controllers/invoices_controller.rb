@@ -184,10 +184,14 @@ class InvoicesController < ApplicationController
     def set_number_of_jobs_not_to_be_deleted
       num_jobs = 0
 
-      params[:invoice][:jobs_attributes].each do |job, value|
-        unless params[:invoice][:jobs_attributes][job][:will_delete] == "true"
-          num_jobs += 1
+      unless params[:invoice][:jobs_attributes].nil?
+
+        params[:invoice][:jobs_attributes].each do |job, value|
+          unless params[:invoice][:jobs_attributes][job][:will_delete] == "true"
+            num_jobs += 1
+          end
         end
+
       end
 
       @invoice.num_jobs = num_jobs

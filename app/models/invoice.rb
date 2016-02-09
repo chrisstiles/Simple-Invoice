@@ -61,7 +61,8 @@ class Invoice < ActiveRecord::Base
 	validate :validate_number_of_jobs
 
 	def validate_number_of_jobs
-		errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.") if self.num_jobs > 45
+		num_jobs = self.num_jobs || 1
+		errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.") if num_jobs > 45
 	end
 
 
