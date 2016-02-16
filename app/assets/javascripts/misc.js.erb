@@ -238,6 +238,7 @@ var logoUploader = $(".logouploader").dropzone({
 		addRemoveLinks: false,
 		thumbnailWidth: null,
       	thumbnailHeight: null,
+      	clickable: "#dropzoneclickable",
 		previewTemplate: "<div class=\"dz-preview dz-file-preview\"><div class=\"dz-image\"><img data-dz-thumbnail /></div><div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div></div>",
 		resize: function(file) {
         var resizeInfo = {
@@ -254,13 +255,13 @@ var logoUploader = $(".logouploader").dropzone({
         return resizeInfo;
     },
     init: function() {
-    	this.on("drop", function(e) {
-    		$('.userlogo').remove();
-			$('.dz-success').remove();
-    	});
+   //  	this.on("drop", function(e) {
+   //  		$('.userlogo').remove();
+			// $('.dz-success').remove();
+   //  	});
     	this.on("addedfile", function(file, dataUrl) {
-            //$('.dz-image').empty();
-            //showThumbnail(file);
+            $('.userlogo').remove();
+			$('.dz-success').remove();
 
         });
         this.on("success", function(file, response) {
