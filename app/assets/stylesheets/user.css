@@ -24,9 +24,7 @@
   width: 100%;
 }
 .dropzone .dz-preview .dz-progress {
-  border: 1px solid #aaa;
   display: block;
-  height: 15px;
 }
 .dropzone .dz-preview .dz-progress .dz-upload {
   background: green;
@@ -261,7 +259,7 @@
   min-height:150px;
   background: #f2f4f4;
   border: 3px dashed #959595;
-  padding: 28px 0 0 0;
+  padding: 28px 0 20px 0;
   box-sizing:border-box;
   text-align:center;
   border-radius:3px;
@@ -307,15 +305,12 @@
   vertical-align: top;
 }
 .dropzone .dz-preview:hover {
-  z-index: 1000;
+  z-index: 200;
 }
 .dropzone .dz-preview:hover .dz-details {
   opacity: 1;
 }
-.dropzone .dz-preview.dz-file-preview .dz-image {
-  background: #999;
-  background: linear-gradient(to bottom, #eee, #ddd);
-}
+
 .dropzone .dz-preview.dz-file-preview .dz-details {
   opacity: 1;
 }
@@ -436,14 +431,14 @@
   webkit-animation: pulse 6s ease infinite;
 }
 .dropzone .dz-preview .dz-progress {
-  height: 12px;
-  left: 0;
+  height: 8px;
+  left: 1px;
   opacity: 1;
   overflow: hidden;
   pointer-events: none;
   position: absolute;
-  bottom:0;
-  right:0;
+  bottom:-19px;
+  right:1px;
   webkit-transform: scale(1);
   z-index: 1000;
 }

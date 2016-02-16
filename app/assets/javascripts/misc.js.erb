@@ -254,39 +254,26 @@ var logoUploader = $(".logouploader").dropzone({
         return resizeInfo;
     },
     init: function() {
+    	this.on("drop", function(e) {
+    		$('.userlogo').remove();
+			$('.dz-success').remove();
+    	});
     	this.on("addedfile", function(file, dataUrl) {
             //$('.dz-image').empty();
             //showThumbnail(file);
 
         });
+        this.on("success", function(file, response) {
+        	$('.success').remove();
+        	setTimeout(function() {
+        		pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
+        	}, 100)
+        	
+        });
     }
-	});	
-
-logoUploader.on("drop", function(e) {
-	$('.userlogo').remove();
-	
-});
+});	
 
 
-
-logoUploader.on("addedfile", function(file) {
-	alert('test');
-	 var img = $(file.previewTemplate).find("img");
-	    img[0].onload = function () {
-	        var max = this.width > this.height ? this.width : this.height;
-	        var ratio = 300.0 / max;
-
-	        var width = this.width * ratio;
-	        var height = this.height * ratio;
-
-	        img.css({
-	            width: width + "px",
-	            height: height + "px",
-	            top: ((100 - height) / 2) + "px",
-	            left: ((100 - width) / 2) + "px"
-	        });
-	    };
-})
 
 
 };
