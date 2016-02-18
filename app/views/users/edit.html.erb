@@ -72,10 +72,11 @@
 		User Logo<br>
 			
 		<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
+			<div id="imageloading"><div class="throbber-loader">Loading...</div></div>
 			<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>
 		<% end %>
-
-		<div id="dropzoneclickable">Or click here to upload</div>
+		<br>
+		<div id="dropzoneclickable" class="button blue">Or click here to upload</div>
 
 	</div>
 

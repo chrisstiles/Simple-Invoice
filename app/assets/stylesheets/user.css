@@ -271,6 +271,8 @@
   max-width:400px;
   height:auto;
   margin:0 auto 10px auto;
+  position:relative;
+  z-index: 100;
 }
 
 .dropzone.dz-clickable {
@@ -493,5 +495,14 @@
   position: absolute;
   top: -6px;
   width: 0;
+}
+
+#imageloading {
+  position:absolute;
+  top:45%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index: 1;
+  display:none;
 }
 

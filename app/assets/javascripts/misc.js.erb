@@ -226,6 +226,8 @@ $( window ).resize(function() {
 // disable auto discover
 Dropzone.autoDiscover = false;
 
+var thumbnailLoading = $('#imageloading');
+
 // Grab upload form, set initial settings
 var logoUploader = $(".logouploader").dropzone({
 		// restrict image size to a maximum 1MB
@@ -259,6 +261,12 @@ var logoUploader = $(".logouploader").dropzone({
    //  		$('.userlogo').remove();
 			// $('.dz-success').remove();
    //  	});
+		this.on("drop", function(e) {
+			thumbnailLoading.show();
+		});
+		this.on("thumbnail", function(e) {
+			thumbnailLoading.hide();
+		});
     	this.on("addedfile", function(file, dataUrl) {
             $('.userlogo').remove();
 			$('.dz-success').remove();
