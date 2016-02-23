@@ -267,16 +267,22 @@ var logoUploader = $(".logouploader").dropzone({
 		this.on("thumbnail", function(e) {
 			thumbnailLoading.hide();
 		});
+		this.on("processing", function() {
+			$('.dz-message').remove();
+			$('.dropzone').append('<div class="dz-default dz-message"><span>Drop your logo here to upload</span></div>');
+			$('.dz-message').show();
+
+			var offsetDistance = -19 - $('.dz-message').outerHeight();
+			$('.dz-progress').css('bottom', offsetDistance);
+		});
     	this.on("addedfile", function(file, dataUrl) {
             $('.userlogo').remove();
+            thumbnailLoading.show();
 			$('.dz-success').remove();
-
         });
         this.on("success", function(file, response) {
         	$('.success').remove();
         	pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
-        	
-        	
         });
     }
 });	
