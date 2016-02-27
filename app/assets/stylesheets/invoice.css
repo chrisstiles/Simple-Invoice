@@ -366,7 +366,7 @@ section:after {
 }
 
 #invoicelogo {
-	width:calc(100% - 400px);
+	width:calc(100% - 380px);
 	float:left;
 	margin-top:2px;
 }
