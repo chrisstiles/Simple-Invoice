@@ -94,16 +94,12 @@
        </section> 
        
       <section id="companyinformation">
-          <div id="userinfo">
-            <%= f.text_field :name %>
-                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
-                  <%= f.text_field :address_line1 %>
-                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= @invoice.address_line1 %></span><br>
-                  <%= f.text_field :address_line2 %>
-                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]"><%= @invoice.address_line2 %></span><br>
-                  <%= f.text_field :phone %>
-                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"><%= @invoice.phone %></span>
+
+            <div id="invoicelogo">
+              <%= f.hidden_field :logo, value: @invoice.logo %>
+              <%= image_tag @invoice.logo unless @invoice.logo.blank? %>
             </div>
+         
             <div id="dateterms">
               <table border="0" cellspacing="0" cellpadding="0">
                   <tbody>
@@ -138,12 +134,26 @@
       </section>
       
        <section id="clientinformation">
+
+         <div id="userinfo">
+            <%= f.text_field :name %>
+                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
+                  <%= f.text_field :address_line1 %>
+                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= @invoice.address_line1 %></span><br>
+                  <%= f.text_field :address_line2 %>
+                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]"><%= @invoice.address_line2 %></span><br>
+                  <%= f.text_field :phone %>
+                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"><%= @invoice.phone %></span>
+            </div>
+
+             <div id="clientinfo">
                   <%= hidden_field_tag :client_id, @client_id, value: @invoice.client_id %>
           <div class="sectiontitle">Bill To:</div>
                  <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
                   <%= f.text_field :client_address_line1 %>
                   <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"><%= @invoice.client_address_line1 %></span><br>
                   <%= f.text_field :client_address_line2 %><span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
+          </div>
        </section>
        
        <section id="invoiceitems">

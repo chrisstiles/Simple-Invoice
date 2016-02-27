@@ -15,4 +15,12 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 
+	def display_logo
+		unless self.logos.empty?
+			self.logos.where(current_logo: true).first.image
+		else
+			''
+		end
+	end
+
 end

@@ -75,20 +75,11 @@
        </section> 
        
       <section id="companyinformation">
-       		<div id="userinfo">
-            	<span id="e-name" contenteditable="<%= @editable %>" placeholder="Name">
-                <%= @invoice.name %>
-              </span><br>
-              <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address">
-                <%= @invoice.address_line1 %>
-              </span><br>
-              <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip">
-                <%= @invoice.address_line2 %>
-              </span><br>
-              <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone">
-                <%= @invoice.phone %>
-              </span>
+
+            <div id="invoicelogo">
+              <%= image_tag @invoice.logo unless @invoice.logo.blank? %>
             </div>
+       		
             <div id="dateterms">
             	<table border="0" cellspacing="0" cellpadding="0">
                   <tbody>
@@ -112,16 +103,34 @@
       </section>
       
        <section id="clientinformation">
-       		<div class="sectiontitle">Bill To:</div>
-       		<span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name">
-            <%= @invoice.client_name %>
-          </span><br>
-            <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address">
-            <%= @invoice.client_address_line1 %>
+
+          <div id="userinfo">
+            <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name">
+              <%= @invoice.name %>
             </span><br>
-            <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip">
-            <%= @invoice.client_address_line2 %>
+            <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address">
+              <%= @invoice.address_line1 %>
             </span><br>
+            <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip">
+              <%= @invoice.address_line2 %>
+            </span><br>
+            <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone">
+              <%= @invoice.phone %>
+            </span>
+          </div>
+
+          <div id="clientinfo">
+         		<div class="sectiontitle">Bill To:</div>
+         		<span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name">
+              <%= @invoice.client_name %>
+            </span><br>
+              <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address">
+              <%= @invoice.client_address_line1 %>
+              </span><br>
+              <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip">
+              <%= @invoice.client_address_line2 %>
+              </span><br>
+            </div>
        </section>
        
        <section id="invoiceitems">

@@ -258,7 +258,7 @@
 }
 
 .dropzone {
-  min-height:150px;
+  min-height:80px;
   background: #f2f4f4;
   border: 3px dashed #959595;
   padding: 28px 0 0 0;

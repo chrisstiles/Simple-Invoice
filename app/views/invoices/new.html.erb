@@ -79,25 +79,11 @@
        
       <section id="companyinformation">
 
-            <div id="userinfo">
-                  <%= f.text_field :name, value: print_if_not_nil(current_user.name)%>
-                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]">
-                    <%= print_if_not_nil(current_user.name) %>
-                  </span><br>
-                  <%= f.text_field :address_line1, value: print_if_not_nil(current_user.address) %>
-                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]">
-                    <%= print_if_not_nil(current_user.address) %>
-                  </span><br>
-                  <%= f.text_field :address_line2, value: print_full_address(current_user.city, current_user.state, current_user.zip) %>
-                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]">
-                    <%= print_full_address(current_user.city, current_user.state, current_user.zip) %>
-                  </span><br>
-                  <%= f.text_field :phone, value: print_if_not_nil(current_user.phone) %>
-                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]">
-                    <%= print_if_not_nil(current_user.phone) %>
-                  </span>
-
+            <div id="invoicelogo">
+              <%= f.hidden_field :logo, value: current_user.display_logo.url %>
+              <%= image_tag current_user.display_logo.url unless current_user.logos.empty? %>
             </div>
+
             <div id="dateterms">
                   <table border="0" cellspacing="0" cellpadding="0">
                   <tbody>
@@ -132,6 +118,28 @@
       </section>
       
        <section id="clientinformation">
+
+           <div id="userinfo">
+                  <%= f.text_field :name, value: print_if_not_nil(current_user.name)%>
+                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]">
+                    <%= print_if_not_nil(current_user.name) %>
+                  </span><br>
+                  <%= f.text_field :address_line1, value: print_if_not_nil(current_user.address) %>
+                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]">
+                    <%= print_if_not_nil(current_user.address) %>
+                  </span><br>
+                  <%= f.text_field :address_line2, value: print_full_address(current_user.city, current_user.state, current_user.zip) %>
+                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]">
+                    <%= print_full_address(current_user.city, current_user.state, current_user.zip) %>
+                  </span><br>
+                  <%= f.text_field :phone, value: print_if_not_nil(current_user.phone) %>
+                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]">
+                    <%= print_if_not_nil(current_user.phone) %>
+                  </span>
+
+            </div>
+
+            <div id="clientinfo">
                   <%= hidden_field_tag :client_id, @client_id %>
                   <div class="sectiontitle">Bill To:</div>
                   <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"></span><br>
@@ -139,6 +147,7 @@
                   <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"></span><br>
                   <%= f.text_field :client_address_line2 %>
                   <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"></span><br>
+            </div>
        </section>
        
        <section id="invoiceitems">

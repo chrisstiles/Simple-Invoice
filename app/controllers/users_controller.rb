@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
 		def set_user
 			@user = current_user
-			@user_logo = @user.logos.where(current_logo: true).first.image unless @user.logos.empty?
+			@user_logo = current_user.display_logo
 		end
 
 		def user_params
