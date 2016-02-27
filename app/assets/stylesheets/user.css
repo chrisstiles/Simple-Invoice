@@ -253,6 +253,8 @@
 .logosection {
   padding:0 0 30px 30px;
   border-bottom:1px solid #c9c9c9;
+  border-left:1px solid #c9c9c9;
+  margin-left:-1px;
 }
 
 .dropzone {

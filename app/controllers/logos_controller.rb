@@ -9,6 +9,8 @@ class LogosController < ApplicationController
 				format.html { redirect_to edit_user_path }
 				format.js
 				format.json { render nothing: true, status: 200 }
+			else
+				format.json { render json: { error: @logo.errors.full_messages.join(',') }, :status => 400 }
 			end
 		end
 

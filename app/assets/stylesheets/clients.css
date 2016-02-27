@@ -129,7 +129,7 @@
 	padding:25px 30px;
 }
 
-.formholder {
+.formholder, .logoformholder {
 	position:relative;
 	transition:all .3s;
 }
@@ -206,7 +206,7 @@
 	float:right;
 }
 
-#validationerrors.clienterrors, #modalvalidaitonerrors.emailinvoicevalidation {
+#validationerrors.clienterrors, #modalvalidationerrors.emailinvoicevalidation, #modalvalidationerrors.logovalidation {
 	left:0;
 	top:0;
 	margin-bottom:0;

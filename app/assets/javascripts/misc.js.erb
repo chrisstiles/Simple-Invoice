@@ -57,7 +57,7 @@ pageBody.on('click', '.closeerrors', function() {
 	if ($this.parents('#validationerrors').length) {
 		parentEl = $this.parents('#validationerrors');
 	} else {
-		parentEl = $this.parents('#modalvalidaitonerrors');
+		parentEl = $this.parents('#modalvalidationerrors');
 		parentEl.parents('#modalcontent').scrollTop(0);
 	}
 	
@@ -228,10 +228,13 @@ Dropzone.autoDiscover = false;
 
 var thumbnailLoading = $('#imageloading');
 
+// Store original HTML inside Dropzone div
+var dropzoneContent;
+
 // Grab upload form, set initial settings
 var logoUploader = $(".logouploader").dropzone({
 		// restrict image size to a maximum 1MB
-		maxFilesize: 5,
+		maxFilesize: 1000,
 		dictDefaultMessage: "Drop your logo here to upload",
 		// changed the passed param to one accepted by
 		// our rails app
@@ -257,14 +260,14 @@ var logoUploader = $(".logouploader").dropzone({
         return resizeInfo;
     },
     init: function() {
-   //  	this.on("drop", function(e) {
-   //  		$('.userlogo').remove();
-			// $('.dz-success').remove();
-   //  	});
+    	dropzoneContent = $('.dropzone').html();
+
 		this.on("drop", function(e) {
+			$('.dz-message').hide();
 			thumbnailLoading.show();
 		});
 		this.on("thumbnail", function(e) {
+			
 			thumbnailLoading.hide();
 		});
 		this.on("processing", function() {
@@ -276,19 +279,71 @@ var logoUploader = $(".logouploader").dropzone({
 			$('.dz-progress').css('bottom', offsetDistance);
 		});
     	this.on("addedfile", function(file, dataUrl) {
+    		$('.dz-message').hide();
             $('.userlogo').remove();
             thumbnailLoading.show();
 			$('.dz-success').remove();
         });
         this.on("success", function(file, response) {
-        	$('.success').remove();
-        	pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
+        	uploadSuccessful();
+        });
+        this.on("error", function(file, jsonResponse) {
+        	addErrors(jsonResponse);
         });
     }
 });	
 
 
 
+
+
+// Function for adding and hiding errors. As we receive JSON back for Dropzone this needs to be custom.
+var validationErrors = $('#modalvalidationerrors'),
+	errorHolder = $('#logoerrorholder'),
+	validationsHeight, negativeValidationsHeight;
+
+function addErrors(response) {
+	$(".dropzone").html(dropzoneContent);
+	thumbnailLoading = $('#imageloading');
+
+	$('dz-error').remove();
+
+	errorHolder.empty();
+	errorHolder.append('<p>' + response["error"] + '</p>');
+
+	validationsHeight = validationErrors.outerHeight();
+	negativeValidationsHeight = -1 * validationsHeight;
+
+	validationErrors.css({
+		'margin-bottom' : negativeValidationsHeight,
+		'display' : 'block'
+	});
+
+	$(".dz-progress").hide();
+
+	validationsHeight += 15;
+
+	$('.logoformholder').css({
+	  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+	  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+	  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+	  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+	  'transform'         : 'translateY(' + validationsHeight + 'px)',
+	  'margin-bottom' : validationsHeight
+	});
+
+	$('.dz-message').show();
+	
+}
+
+function uploadSuccessful() {
+	dropzoneContent = $('.dropzone').html();
+	$('.dz-message').show();
+	validationErrors.removeAttr('style').removeClass('hastransformed').hide();
+	$('.logoformholder').removeAttr('style');
+	$('.success').remove();
+    pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
+}
 
 };
 

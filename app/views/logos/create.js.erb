@@ -1,0 +1,13 @@
+<% if @logo.errors.any? %>
+
+<% @logo.errors.each do |key, message| %>
+	console.log('test1');
+	console.log('<%= message %>');
+<% end %>
+
+<% @logo.errors.full_messages.each do |message| %>
+	console.log('test2');
+	console.log('<%= message %>');
+<% end %>
+
+<% end %>

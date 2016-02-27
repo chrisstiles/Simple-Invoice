@@ -12,7 +12,7 @@
 }
 
 
-#validationerrors, #modalvalidaitonerrors {
+#validationerrors, #modalvalidationerrors {
 	display:none;
 	left:141px;
 	margin:0 auto 45px auto;
@@ -31,6 +31,10 @@
 	animation-duration: .3s;
 	animation-fill-mode:forwards;
 	min-width:248px;
+}
+
+#logoerrorholder p {
+	color:#791c1c;
 }
 
 #validationerrors.amountpaidvalidation {
@@ -60,7 +64,7 @@
 	transform:translateY(-50%);
 }
 
-#validationerrors p, #modalvalidaitonerrors p {
+#validationerrors p, #modalvalidationerrors p {
 	margin-top:0;
 	font-size:14px;
 	font-weight:600;
@@ -69,11 +73,11 @@
 	text-align:left;
 }
 
-#validationerrors p:nth-child(even), #modalvalidaitonerrors p:nth-child(even) {
+#validationerrors p:nth-child(even), #modalvalidationerrors p:nth-child(even) {
 	background-color:#e3b0b2;
 }
 
-#validationerrors p:last-child, #modalvalidaitonerrors p:last-child {
+#validationerrors p:last-child, #modalvalidationerrors p:last-child {
 	margin-bottom:0;
 }
 

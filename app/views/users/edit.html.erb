@@ -72,13 +72,22 @@
 		<div class="clientformtitle">Logo</div>
 		<p>Upload a logo to display on your invoices.</p>
 			
-		<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
-			<div id="imageloading"><div class="throbber-loader">Loading...</div></div>
-			<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>
-		<% end %>
-		<br>
-		<div id="dropzoneclickable" class="button blue">Or click here to upload</div>
+		<div id="modalvalidationerrors" class="logovalidation">
+			<div class="validationtitle">
+				<div class="closeerrors"></div>
+				Please correct the following errors
+			</div>
+			<div id="logoerrorholder"></div>
+		</div>
 
+		<div class="logoformholder">
+			<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
+				<div id="imageloading"><div class="throbber-loader">Loading...</div></div>
+				<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>
+			<% end %>
+			<br>
+			<div id="dropzoneclickable" class="button blue">Or click here to upload</div>
+		</div>
 	</div>
 
 </div>
