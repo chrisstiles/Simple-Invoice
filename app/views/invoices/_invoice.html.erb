@@ -54,7 +54,7 @@
     <div class="vcenter">
       Balance:
       <div class="homeinvoicebalance">
-       <span <%= 'class=overdue' if invoice.overdue? && invoice.not_paid_off? %>><%= number_to_currency(invoice.balance) %></span>
+       <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
       </div>
     </div>
   </div>

@@ -335,6 +335,11 @@ a.noborder {
 	color:#df4535 !important;
 }
 
+.paidinfull, .balancesection span.paidinfull {
+	color:#7ba42c !important;
+	font-weight:bold;
+}
+
 .loadingspinner {
 	position:absolute;
 	top:0;

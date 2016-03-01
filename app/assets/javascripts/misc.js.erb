@@ -50,6 +50,25 @@ pageBody.on('keyup', '.haserror', function() {
 
 });
 
+var clientName = $('#e-clientname');
+
+pageBody.on('keydown', '#invoice_client_name', function() {
+	if (clientName.hasClass('haserror')) {
+		compareVal = $(this).val();
+	}
+});
+
+pageBody.on('keyup', '#invoice_client_name', function() {
+	if (clientName.hasClass('haserror')) {
+		var newVal = $(this).val();
+
+		if (compareVal != newVal) {
+			clientName.removeClass('haserror');
+		}
+
+	}
+});
+
 // Close validation errors on close button
 pageBody.on('click', '.closeerrors', function() {
 	var $this = $(this);
@@ -64,7 +83,14 @@ pageBody.on('click', '.closeerrors', function() {
 	parentEl.removeAttr('style').removeClass('hastransformed').hide();
 	if (!pageBody.hasClass('show')) {
 		$('#invoicewrapper').removeAttr('style');
-		$('.formholder').removeAttr('style');
+
+		if (parentEl.hasClass('logovalidation')) {
+			console.log('yes');
+			$('.logoformholder').removeAttr('style');
+		} else {
+			$('.formholder').removeAttr('style');
+		}
+		
 	}
 });
 
@@ -267,13 +293,13 @@ var logoUploader = $(".logouploader").dropzone({
 			thumbnailLoading.show();
 		});
 		this.on("thumbnail", function(e) {
-			
+			$('.dz-message').show();
 			thumbnailLoading.hide();
 		});
 		this.on("processing", function() {
 			$('.dz-message').remove();
 			$('.dropzone').append('<div class="dz-default dz-message"><span>Drop your logo here to upload</span></div>');
-			$('.dz-message').show();
+			$('.dz-message').hide();
 
 			var offsetDistance = -19 - $('.dz-message').outerHeight();
 			$('.dz-progress').css('bottom', offsetDistance);
