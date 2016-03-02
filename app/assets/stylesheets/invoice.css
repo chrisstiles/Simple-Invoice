@@ -369,11 +369,32 @@ section:after {
 	width:calc(100% - 380px);
 	float:left;
 	margin-top:2px;
+	position:relative;
 }
 
 #invoicelogo img {
 	max-width:100%;
 	height:auto;
+}
+
+#nologo {
+	display:none;
+}
+
+#removelogobutton {
+	left:-47px;
+	top:50%;
+	cursor: pointer;
+	transform:translateY(-50%);
+}
+
+#removelogobutton span {
+	min-width:0;
+	display:block;
+	max-width:300px;
+	font-size:13px;
+	font-weight:600;
+	line-height:14px;
 }
 
 #userinfo {

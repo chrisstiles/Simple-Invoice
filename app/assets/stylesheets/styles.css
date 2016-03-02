@@ -404,7 +404,7 @@ a.logo img {
 
 /* Client open button */
 
-.clients-modal {
+.clients-modal, .removelogo {
 	width:28px;
 	height:28px;
 	position:absolute;
@@ -415,7 +415,7 @@ a.logo img {
 	transition:all .1s;
 }
 
-.clients-modal:before, .clients-modal:after {
+.clients-modal:before, .clients-modal:after, .removelogo:before, .removelogo:after {
 	content:"";
 	display:block;
 	position:absolute;
@@ -428,7 +428,7 @@ a.logo img {
 	transition:all .1s;
 }
 
-.clients-modal:after {
+.clients-modal:after, .removelogo:after {
 	transform:translate(-50%,-50%) rotate(90deg);
 }
 
@@ -440,23 +440,23 @@ a.logo img {
 	background-color:#60941c;
 }
 
-.removeclient {
+.removeclient, .removelogo  {
 	background-color:#df4535;
 }
 
-.removeclient:before {
+.removeclient:before, .removelogo:before {
 	transform:translate(-50%,-50%) rotate(-45deg);
 }
 
-.removeclient:after {
+.removeclient:after, .removelogo:after {
 	transform:translate(-50%,-50%) rotate(45deg);
 }
 
-.removeclient:hover {
+.removeclient:hover, .removelogo:hover {
 	background-color:#c9392a;
 }
 
-.clients-modal span, .thirdbutton span  {
+.clients-modal span, .thirdbutton span, .removelogo span  {
 	position: absolute;
     display: block;
     width: auto;
@@ -477,7 +477,7 @@ a.logo img {
     transition: all .2s;
 }
 
-.clients-modal span:before, .thirdbutton span:before {
+.clients-modal span:before, .thirdbutton span:before, .removelogo span:before {
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -493,7 +493,7 @@ a.logo img {
 
 }
 
-.clients-modal:hover span, .thirdbutton:hover span  {
+.clients-modal:hover span, .thirdbutton:hover span, .removelogo:hover span  {
 	visibility: visible;
 	opacity:1;
 }

@@ -79,10 +79,21 @@
        
       <section id="companyinformation">
 
-            <div id="invoicelogo">
-              <%= f.hidden_field :logo, value: current_user.display_logo.url %>
-              <%= image_tag current_user.display_logo.url unless current_user.logos.empty? %>
-            </div>
+            <% unless current_user.logos.empty? %>
+              <div id="invoicelogo">
+                  <%= f.hidden_field :logo, value: current_user.display_logo.url %>
+                  
+                  <div id="haslogo">
+                  <%= image_tag current_user.display_logo.url %>
+                  <div id="removelogobutton" class="removelogo">
+                    <span>Remove Logo</span>
+                  </div>
+                </div>
+                <div id="nologo">
+                  <div class="button blue addlogobutton">Add Logo</div>
+                </div>
+              </div>
+            <% end %>
 
             <div id="dateterms">
                   <table border="0" cellspacing="0" cellpadding="0">

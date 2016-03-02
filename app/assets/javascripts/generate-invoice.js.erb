@@ -652,6 +652,40 @@ ready = function() {
 			}
 		});
 
+
+		// Hide the logo section when delete button pressed
+
+		if ($('#invoicelogo').length) {
+
+			var hasLogo = $('#haslogo'),
+				noLogo = $('#nologo');
+
+			// Save logo URL
+			var logoField = $('#invoice_logo');
+			var logoURL = logoField.val();
+
+			$('.removelogo').on('click', function() {
+
+				hasLogo.hide();
+				noLogo.show();
+				logoField.val('');
+
+			});
+
+			$('.addlogobutton').on('click', function() {
+
+				hasLogo.show();
+				noLogo.hide();
+				logoField.val(logoURL);
+
+			})
+
+
+		}
+
+		$('.removelogo')
+
+
 	}
 
 	// Code just for the show page
