@@ -277,7 +277,7 @@ section:after {
       <section id="companyinformation">
 
             <div id="invoicelogo">  
-              <%= wicked_pdf_image_tag @invoice.logo unless @invoice.logo.blank? %>
+              <%= wicked_pdf_image_tag(URI.join(@invoice.logo)) unless @invoice.logo.blank? %>
             </div>
        		
             <div id="dateterms">
