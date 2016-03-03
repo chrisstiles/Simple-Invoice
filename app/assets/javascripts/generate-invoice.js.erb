@@ -660,6 +660,8 @@ ready = function() {
 			var hasLogo = $('#haslogo'),
 				noLogo = $('#nologo');
 
+			var currentLogo = $('.addlogobutton').attr('data-logo-url');
+
 			// Save logo URL
 			var logoField = $('#invoice_logo');
 			var logoURL = logoField.val();
@@ -676,6 +678,10 @@ ready = function() {
 
 				hasLogo.show();
 				noLogo.hide();
+
+				$('#haslogo img').attr('src', currentLogo);
+				logoURL = currentLogo;
+
 				logoField.val(logoURL);
 
 			})

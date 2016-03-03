@@ -381,6 +381,18 @@ section:after {
 	display:none;
 }
 
+#nologo .button {
+	max-width:150px;
+}
+
+#noinvoicelogo #haslogo {
+	display:none;
+}
+
+#noinvoicelogo #nologo {
+	display:block;
+}
+
 #removelogobutton {
 	left:-47px;
 	top:50%;

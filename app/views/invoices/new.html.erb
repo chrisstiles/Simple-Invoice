@@ -82,7 +82,7 @@
             <% unless current_user.logos.empty? %>
               <div id="invoicelogo">
                   <%= f.hidden_field :logo, value: current_user.display_logo.url %>
-                  
+
                   <div id="haslogo">
                   <%= image_tag current_user.display_logo.url %>
                   <div id="removelogobutton" class="removelogo">
@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <div id="nologo">
-                  <div class="button blue addlogobutton">Add Logo</div>
+                  <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo.url %>">Add Logo</div>
                 </div>
               </div>
             <% end %>
