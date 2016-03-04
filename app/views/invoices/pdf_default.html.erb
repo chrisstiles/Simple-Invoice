@@ -276,8 +276,8 @@ section:after {
        
       <section id="companyinformation">
 
-            <div id="invoicelogo">  
-              <%= wicked_pdf_image_tag_for_public @invoice.logo unless @invoice.logo.blank? %>
+            <div id="invoicelogo"> 
+              <%= image_tag @invoice.logo.gsub('https', 'http') unless @invoice.logo.blank? %>
             </div>
        		
             <div id="dateterms">
