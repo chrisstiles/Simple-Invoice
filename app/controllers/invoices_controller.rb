@@ -171,11 +171,11 @@ class InvoicesController < ApplicationController
     # end
 
     def set_invoice_number
-      base_invoice_number = current_user.setting.base_invoice_number
+      base_invoice_number = current_user.setting.base_invoice_number || 1
       max_current_invoice_number = current_user.invoices.maximum("invoice_number") || 0
 
       if current_user.invoices.empty?
-        return 1
+        return base_invoice_number
       end
 
       if base_invoice_number > max_current_invoice_number
