@@ -50,10 +50,18 @@
 					<%= f.text_field :zip, placeholder: "Zip Code" %>
 				</div>
 
-				<div class="half"></div>
+				<div class="clientformtitle">Preferences</div>
 
-				<div class="half nomargin">
-					<%= f.submit class: "button blue willload" %>
+				<div id="userpreferences">
+					<div class="half">
+						<%= f.fields_for :setting, @setting do |c| %>
+							<%= c.label :base_invoice_number %>
+							<%= c.text_field :base_invoice_number, class: "onlynumber" %>
+						<% end %>
+					</div>
+					<div class="half nomargin">
+						<%= f.submit "Update Profile", class: "button blue willload" %>
+					</div>
 				</div>
 
 			<% end %>
@@ -80,7 +88,7 @@
 			<div id="logoerrorholder"></div>
 		</div>
 
-		<div class="logoformholder">
+		<div class="logoformholder<%= " nologos" if @user.logos.empty? %>">
 			<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
 				<div id="imageloading"><div class="throbber-loader">Loading...</div></div>
 				<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>

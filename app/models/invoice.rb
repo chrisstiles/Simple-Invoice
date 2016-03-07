@@ -32,6 +32,8 @@ class Invoice < ActiveRecord::Base
 	    reorder("invoices.created_at #{ direction }")
 	  when /^client_name_/
 	    reorder("LOWER(invoices.client_name) #{ direction }")
+	  when /^invoice_number/
+	    reorder("invoices.invoice_number #{ direction }")
 	  else
 	    raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
 	  end
@@ -41,6 +43,9 @@ class Invoice < ActiveRecord::Base
 
 	# Required Fields
 	validates :invoice_number, :date, :due_date, :name, :client_name, :total, presence: true, allow_blank: false
+
+	# Invoice Number Uniqueness
+	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }
 
 	# Length
 	validates :name, :date, :due_date, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line1, length: { maximum: 255 }

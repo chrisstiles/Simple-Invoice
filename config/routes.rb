@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  #devise_for :users
+   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   
  # get '/invoices/new' => 'invoices#new', as: :new_invoice
  # post '/invoices' => 'invoices#create'
@@ -17,11 +18,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update]
 
-get '/settings' => 'users#edit', as: :settings
+  get '/settings' => 'users#edit', as: :settings
 
   resources :clients, except: [:new]
 
   resources :logos, only: [:create, :destroy]
+
+  resources :settings, only: [:update]
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

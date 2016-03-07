@@ -249,6 +249,21 @@ $( window ).resize(function() {
 
 // Dropzone
 
+// Add or remove nologos class to center dropzone mesage
+
+var logoFormHolder = $('.logoformholder');
+
+function correctMessagePosition() {
+	
+	if (logoFormHolder.find('img').length > 0) {
+		logoFormHolder.removeClass('nologos');
+	} else {
+		logoFormHolder.addClass('nologos');
+	}
+}
+
+correctMessagePosition();
+
 // disable auto discover
 Dropzone.autoDiscover = false;
 
@@ -287,6 +302,7 @@ var logoUploader = $(".logouploader").dropzone({
     },
     init: function() {
     	dropzoneContent = $('.dropzone').html();
+    	correctMessagePosition();
 
 		this.on("drop", function(e) {
 			$('.dz-message').hide();
@@ -294,6 +310,7 @@ var logoUploader = $(".logouploader").dropzone({
 		});
 		this.on("thumbnail", function(e) {
 			$('.dz-message').show();
+			logoFormHolder.removeClass('nologos');
 			thumbnailLoading.hide();
 		});
 		this.on("processing", function() {
@@ -318,9 +335,6 @@ var logoUploader = $(".logouploader").dropzone({
         });
     }
 });	
-
-
-
 
 
 // Function for adding and hiding errors. As we receive JSON back for Dropzone this needs to be custom.
@@ -359,12 +373,15 @@ function addErrors(response) {
 	});
 
 	$('.dz-message').show();
+	correctMessagePosition();
+
 	
 }
 
 function uploadSuccessful() {
 	dropzoneContent = $('.dropzone').html();
 	$('.dz-message').show();
+	correctMessagePosition();
 	validationErrors.removeAttr('style').removeClass('hastransformed').hide();
 	$('.logoformholder').removeAttr('style');
 	$('.success').remove();

@@ -4,6 +4,7 @@ class InvoicesController < ApplicationController
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
   after_action :set_invoice_balance, only: [:update]
+  before_action :authenticate_user!
 
   def index
    @invoices = current_user.invoices.where(archived: false).page(params[:page])
@@ -170,7 +171,31 @@ class InvoicesController < ApplicationController
     # end
 
     def set_invoice_number
-      current_user.invoices.count + 1
+      base_invoice_number = current_user.setting.base_invoice_number
+      max_current_invoice_number = current_user.invoices.maximum("invoice_number") || 0
+
+      if current_user.invoices.empty?
+        return 1
+      end
+
+      if base_invoice_number > max_current_invoice_number
+        return base_invoice_number
+      elsif base_invoice_number == max_current_invoice_number
+        return base_invoice_number + 1
+      end
+
+      if base_invoice_number < max_current_invoice_number
+        used_invoice_numbers = current_user.invoices.where("invoice_number >= ?", base_invoice_number).pluck(:invoice_number).sort
+
+        for num in base_invoice_number..max_current_invoice_number
+          unless used_invoice_numbers.include?(num)
+            puts "#{num}"
+            return num
+          end
+        end
+      end
+
+      max_current_invoice_number + 1
     end
 
     def archive_invoice

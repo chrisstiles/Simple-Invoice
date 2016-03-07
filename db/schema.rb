@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227210152) do
+ActiveRecord::Schema.define(version: 20160306203047) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20160227210152) do
   end
 
   add_index "logos", ["user_id"], name: "index_logos_on_user_id"
+
+  create_table "settings", force: :cascade do |t|
+    t.integer  "base_invoice_number", default: 1
+    t.integer  "user_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "settings", ["user_id"], name: "index_settings_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

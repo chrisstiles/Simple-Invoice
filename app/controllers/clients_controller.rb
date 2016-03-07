@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
 	before_action :set_client, only: [:show, :edit, :update, :destroy]
 	after_action :add_new_client_to_existing_invoices, only: [:create, :update]
 	after_action :update_client_name_on_invoices, only: [:update]
+	before_action :authenticate_user!
 	#after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index

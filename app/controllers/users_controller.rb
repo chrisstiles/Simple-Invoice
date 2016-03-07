@@ -1,13 +1,16 @@
 class UsersController < ApplicationController
 
 	before_action :set_user
+	before_action :authenticate_user!
 	#before_action :normalize_blank_values
 
 	def show
 	end
 
+
 	def edit
 		@logo = Logo.new
+		@setting = current_user.setting
 	end
 
 	def update
@@ -33,9 +36,8 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo)
+			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, setting_attributes: [:id, :base_invoice_number])
 		end
-
 
 		#def normalize_blank_values
 		 # attributes.each do |column, value|

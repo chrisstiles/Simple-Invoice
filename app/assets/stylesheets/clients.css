@@ -3,6 +3,11 @@
 	padding-top:32px;
 }
 
+#clientscontainer #searchresults {
+	border-right:1px solid #c9c9c9;
+	margin-right:-1px;
+}
+
 #clientfiltering, #clientsearch {
 	position: fixed;
     top: 63px;
@@ -59,7 +64,7 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
-	bottom:35px;
+	/*bottom:35px;*/
 	border-left:1px solid #c9c9c9;
 }
 

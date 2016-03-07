@@ -10,10 +10,12 @@ module ApplicationHelper
 	end
 
 	def pdf_image_tag(image)
-		if Rails.env.production?
-			image_tag image.logo.gsub('https', 'http')
-		else
-			wicked_pdf_image_tag image.logo.gsub('https', 'http')
+		unless image.logo.blank?
+			if Rails.env.production?
+				image_tag image.logo.gsub('https', 'http')
+			else
+				wicked_pdf_image_tag image.logo.gsub('https', 'http')
+			end
 		end
 	end
 
