@@ -34,7 +34,7 @@ class InvoicesController < ApplicationController
 
       if @email.valid?
         puts "Valid Email!"
-
+  
         InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message], current_user.email).deliver_now
 
         flash[:success] = 'Invoice was successfully emailed!'
@@ -163,7 +163,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :logo, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :numjobs, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :logo, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     # def email_invoice_params

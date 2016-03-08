@@ -64,7 +64,7 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
-	/*bottom:35px;*/
+	bottom:35px;
 	border-left:1px solid #c9c9c9;
 }
 

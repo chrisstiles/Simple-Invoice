@@ -116,7 +116,9 @@ if ($('.homeinvoice').length) {
 	<% flash.discard %>
 
 
-	homeInvoice.find('.homeinvoicebalance').find('span').text('<%= number_to_currency(@invoice.total - @invoice.amount_paid) %>')
+	homeInvoice.find('.homeinvoicebalance').find('span').removeAttr('class').addClass('<%= @invoice.invoice_status_class %>').text('<%= number_to_currency(@invoice.total - @invoice.amount_paid) %>')
+
+	homeInvoice.find('.invoicestatus').html("<%= @invoice.print_days_until_due %>");
 
 	homeInvoice.find('.homeamountpaiderror').hide();
 	

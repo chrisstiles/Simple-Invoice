@@ -60,7 +60,7 @@
   </div>
   <div class="invoiceinfosection">
     Invoice Number: <strong><%= invoice.invoice_number %></strong><br>
-    <%= print_days_until_due(invoice) %>
+    <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
   </div>
 
 </div>

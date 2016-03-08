@@ -81,7 +81,7 @@ class Invoice < ActiveRecord::Base
 	end
 
 	def paid_off?
-		if self.balance <= 0
+		if self.total - self.amount_paid <= 0
 			true
 		else
 			false
@@ -89,7 +89,7 @@ class Invoice < ActiveRecord::Base
 	end
 
 	def not_paid_off?
-		if self.balance > 0 
+		if self.total - self.amount_paid > 0 
 			true
 		else
 			false
@@ -107,6 +107,24 @@ class Invoice < ActiveRecord::Base
 
 		else
 			''
+		end
+	end
+
+	include ActionView::Helpers::TextHelper
+
+	def print_days_until_due
+		if self.total - self.amount_paid > 0
+			if self.due_date > Date.today
+				days = pluralize((self.due_date - Date.today).to_i, 'day')
+				raw("Due in: <strong>#{days}</strong>")
+			elsif self.due_date == Date.today
+				raw("<strong class='overdue'>Due today</strong>")
+			else self.due_date < Date.today
+				days = pluralize((Date.today - self.due_date).to_i, 'day')
+				raw("<span class='overdue'>Overdue by: <strong>#{days}</strong></span>")
+			end
+		else
+			raw("<span class='paidinfull'>Paid in full</span>")
 		end
 	end
 

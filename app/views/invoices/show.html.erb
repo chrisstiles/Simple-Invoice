@@ -30,7 +30,7 @@
       <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "button blue" %>
       <h2>
         Record Payment
-        <span class="showduedate"><%= print_days_until_due(@invoice) %></span>
+        <span class="showduedate"><%= @invoice.print_days_until_due %></span>
       </h2>
       <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
 

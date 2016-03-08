@@ -20,6 +20,15 @@ pageBody.on('click', '.homerecordpayment', function() {
 	pageBody.addClass('homerecordclicked');
 });
 
+// Submit form on record payment enter pressed
+
+pageBody.on('keyup', '.e-amountpaid', function(e) {
+	if(e.which == 13) {
+	   $(this).parents('form').submit();
+	}
+});
+
+
 // Remove error class when input changes
 var compareVal;
 

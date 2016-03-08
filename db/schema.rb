@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306203047) do
+ActiveRecord::Schema.define(version: 20160307032132) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 20160306203047) do
     t.decimal  "amount_paid",          precision: 15, scale: 4
     t.decimal  "balance",              precision: 15, scale: 4
     t.string   "logo",                                          default: ""
+    t.boolean  "has_tax"
+    t.decimal  "tax",                                           default: 0.0
+    t.boolean  "tax_included"
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"
