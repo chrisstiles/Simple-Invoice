@@ -27,6 +27,9 @@ gem 'active_attr'
 # Allow completely custom error messages
 gem 'custom_error_message'
 
+# Set user's timezone
+gem 'browser-timezone-rails'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
