@@ -259,8 +259,11 @@ ready = function() {
 				d2 = dueDateField.datepicker('getDate');
 
 			// Get the difference between the two dates and then divide by the number of milliseconds in a day	
-			var diff = Math.floor((d2.getTime() - d1.getTime()) / 86400000);
+			//var diff = Math.floor((d2.getTime() - d1.getTime()) / 86400000);
 
+			// Get the difference between two dates
+			var timeDiff = Math.abs(d2.getTime() - d1.getTime());
+			var diff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
 			// Function to set difference as selected
 			function setSelected() {
@@ -318,12 +321,12 @@ ready = function() {
 
 			var invoiceDueDate = dueDateField.attr('date');
 			dueDateField.datepicker('setDate', invoiceDueDate);
+			setTerms();
 
 		} else {
 			setDueDate();
 		}
 
-		setTerms();
 
 		eDate.html(dateField.val());
 		eDueDate.html(dueDateField.val());
