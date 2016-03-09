@@ -114,13 +114,13 @@ class Invoice < ActiveRecord::Base
 
 	def print_days_until_due
 		if self.total - self.amount_paid > 0
-			if self.due_date > Date.today
-				days = pluralize((self.due_date - Date.today).to_i, 'day')
+			if self.due_date > Time.zone.today
+				days = pluralize((self.due_date - Time.zone.today).to_i, 'day')
 				raw("Due in: <strong>#{days}</strong>")
-			elsif self.due_date == Date.today
+			elsif self.due_date == Time.zone.today
 				raw("<strong class='overdue'>Due today</strong>")
-			else self.due_date < Date.today
-				days = pluralize((Date.today - self.due_date).to_i, 'day')
+			else self.due_date < Time.zone.today
+				days = pluralize((Time.zone.today - self.due_date).to_i, 'day')
 				raw("<span class='overdue'>Overdue by: <strong>#{days}</strong></span>")
 			end
 		else
