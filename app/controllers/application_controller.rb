@@ -5,11 +5,20 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  before_filter :set_timezone 
-
-	def set_timezone  
-		min = request.cookies["time_zone"].to_i
-		Time.zone = ActiveSupport::TimeZone[-min.minutes]
-	end 
+  around_filter :set_time_zone
+                                                                                 
+	private
+	                                                                             
+		def set_time_zone
+			old_time_zone = Time.zone
+			Time.zone = browser_timezone if browser_timezone.present?
+			yield
+		ensure
+			Time.zone = old_time_zone
+		end
+	                                                                             
+		def browser_timezone
+			cookies["browser.timezone"]
+		end
   
 end
