@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 
 	accepts_nested_attributes_for :setting
 
+	# Remember user by default
+	def remember_me
+		true
+	end
+
 	# Length
 	validates :email, length: { maximum: 80 }
 	validates :name, :email, :address, :city, :state, :zip, :phone, length: { maximum: 100 }
