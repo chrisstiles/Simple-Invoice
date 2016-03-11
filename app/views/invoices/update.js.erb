@@ -121,6 +121,10 @@ if ($('.homeinvoice').length) {
 	homeInvoice.find('.invoicestatus').html("<%= @invoice.print_days_until_due %>");
 
 	homeInvoice.find('.homeamountpaiderror').hide();
+
+	homeInvoice.find('.homeclose span').text('Record Payment');
+	homeInvoice.find('.homeclose').removeClass('homeclose');
+	homeInvoice.find('.homeinvoiceinfowrapper').children().removeClass('active');
 	
 }
 

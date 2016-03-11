@@ -60,6 +60,7 @@
   </div>
   <div class="invoiceinfosection">
     Invoice Number: <strong><%= invoice.invoice_number %></strong><br>
+    Invoice Date: <strong><%= invoice.date.strftime("%B %-d, %Y") %></strong><br>
     <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
   </div>
 
