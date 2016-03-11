@@ -13,6 +13,15 @@ class User < ActiveRecord::Base
 		true
 	end
 
+	def is_admin?
+		puts self.is_admin
+		if self.is_admin == true
+			true
+		else
+			false
+		end
+	end
+
 	# Length
 	validates :email, length: { maximum: 80 }
 	validates :name, :email, :address, :city, :state, :zip, :phone, length: { maximum: 100 }

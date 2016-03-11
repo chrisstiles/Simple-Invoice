@@ -30,6 +30,12 @@ gem 'custom_error_message'
 # Set user's timezone
 gem 'browser-timezone-rails'
 
+# Admin panel
+gem 'rails_admin'
+
+# Authorization
+gem 'cancancan', '~> 1.10'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

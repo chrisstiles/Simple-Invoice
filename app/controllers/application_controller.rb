@@ -6,8 +6,16 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   around_filter :set_time_zone
+
+  # rescue_from CanCan::AccessDenied do |exception|
+  #   redirect_to main_app.root_path, :alert => exception.message
+  # end
                                                                                  
 	private
+
+		def get_module_name
+			@module_name = self.class.name.split("::").first
+		end
 	                                                                             
 		def set_time_zone
 			old_time_zone = Time.zone
