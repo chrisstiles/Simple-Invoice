@@ -6,14 +6,14 @@ class ClientsController < ApplicationController
 	#after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
+		@client = Client.new
+		
 		if params[:allclients].present?
 			@clients = current_user.clients
 		else
 			@clients = current_user.clients.page(params[:page])
 			@clients = @clients.client_name(params[:client_name]) if params[:client_name].present?
 		end
-
-		@client = Client.new
 
 		respond_to do |format|
 			format.html

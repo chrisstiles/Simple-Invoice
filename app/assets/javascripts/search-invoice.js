@@ -144,6 +144,9 @@ $(document)
    setTimeout(function() {
     $('.loadingspinner').hide();
   }, 200);
+
+   $('form').removeAttr('disabled');
+
 });
 
 

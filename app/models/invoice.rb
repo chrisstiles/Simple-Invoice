@@ -97,17 +97,15 @@ class Invoice < ActiveRecord::Base
 	end
 
 	def invoice_status_class
-		if self.overdue?
 
-			if self.paid_off?
-				'paidinfull'
-			else
-				'overdue'
-			end
-
+		if self.paid_off?
+			'paidinfull'
+		elsif self.overdue?
+			'overdue'
 		else
 			''
 		end
+			
 	end
 
 	include ActionView::Helpers::TextHelper

@@ -13,6 +13,18 @@ set_time_zone_offset();
 
 var pageBody = $('body');
 
+// Prevent double submitting form
+
+pageBody.on('submit', 'form', function(e) {
+	var $this = $(this);
+	if ($this.attr('disabled') === 'disabled') {
+		e.preventDefault();
+		return false
+	} else {
+		$this.attr('disabled', 'disabled');
+	}
+});
+
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
 pageBody.on('click', '.thirdbutton.file', function() {
@@ -36,6 +48,14 @@ pageBody.on('keyup', '.e-amountpaid', function(e) {
 	}
 });
 
+// Don't submit form when user presses enter from text field in sidebar
+
+pageBody.on('keydown', '#sidebar input', function(e) {
+	if(e.which == 13) {
+	   e.preventDefault();
+	   return false
+	}
+});
 
 // Remove error class when input changes
 var compareVal;
