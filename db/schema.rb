@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20160311033422) do
     t.decimal  "amount_paid",          precision: 15, scale: 4
     t.decimal  "balance",              precision: 15, scale: 4
     t.string   "logo",                                          default: ""
-    t.boolean  "has_tax"
+    t.boolean  "has_tax",                                       default: false
     t.decimal  "tax",                                           default: 0.0
-    t.boolean  "tax_included"
+    t.boolean  "tax_included",                                  default: false
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"

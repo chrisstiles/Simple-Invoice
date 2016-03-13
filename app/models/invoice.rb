@@ -44,6 +44,15 @@ class Invoice < ActiveRecord::Base
 	# Required Fields
 	validates :invoice_number, :date, :due_date, :name, :client_name, :total, presence: true, allow_blank: false
 
+	# Total must be between 0 and 10,000,000
+	validate :invoice_total_in_range
+
+	def invoice_total_in_range
+		unless (0..999999999).include?(self.total)
+			errors.add(:total, "^Invoice total cannot exceed $999,999,999.00")
+		end
+	end
+
 	# Invoice Number Uniqueness
 	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }
 
@@ -58,6 +67,24 @@ class Invoice < ActiveRecord::Base
 	  if self.amount_paid && (Float(self.amount_paid) > Float(self.total))
 	  	errors.add(:amount_paid, "cannot be greater than the invoice total")
 	  end
+	end
+
+	validates :tax, presence: true, 
+	            numericality: { message: "^Tax % must be a number with no more than 10 digits", }
+
+	validate :tax_only_max_digits
+
+	def tax_only_max_digits
+		number_of_digits = self.tax.to_s.gsub('.', '').length
+		if self.tax == self.tax.floor
+			if number_of_digits > 11
+				errors.add(:tax, "^Tax % must be a number with no more than 10 digits")
+			end
+		else 
+			if number_of_digits > 10
+				errors.add(:tax, "^Tax % must be a number with no more than 10 digits")
+			end
+		end
 	end
 
 
@@ -106,6 +133,18 @@ class Invoice < ActiveRecord::Base
 			''
 		end
 			
+	end
+
+	def tax_included_text
+		if self.has_tax
+			if self.tax_included
+				'Included in total'
+			else
+				''
+			end
+		else
+			''
+		end
 	end
 
 	include ActionView::Helpers::TextHelper

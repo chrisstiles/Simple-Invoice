@@ -171,6 +171,18 @@
               </tbody>
             </table>
        </section>
+
+       <section id="invoicetax">
+    
+          <div id="taxinformation">
+            <div class="taxamount">
+              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= @invoice.tax %></span><span class="percentage">%</span>
+            </div>
+            <div class="taxincluded">
+              <%= @invoice.tax_included_text %>
+            </div>
+          </div>
+       </section>
        
        <section id="invoicetotal">
             <div id="invoiceamount"><%= number_to_currency(@invoice.total, format: '%u %n') %></div>

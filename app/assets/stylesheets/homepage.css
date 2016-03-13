@@ -124,13 +124,19 @@
 }
 
 .balancesection {
-	height:98px;
+	height:90px;
 	position:relative;
 	border-bottom:1px solid #d4d4d4;
-	color:#2c2c2c;
-	font-size:15px;
 	line-height:1;
 	overflow:hidden;
+}
+
+.balancetitle {
+	color:#2c2c2c;
+	font-size:15px;
+	font-weight:400;
+	display: block;
+    margin-bottom: 2px;
 }
 
 .vcenter {
@@ -141,22 +147,32 @@
 	transform:translateY(-50%);
 }
 
-.balancesection span {
-	display: block;
+.balancesection {
     color: #41a9ee;
     font-weight: 600;
     font-size: 33px;
     padding-top: 3px;
 }
 
+.balancesection .vcenter {
+	margin-top:1px;
+}
+
+.homeinvoicebalance {
+	max-width: 85%;
+    overflow: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .invoiceinfosection {
 	padding:16px 22px 17px 22px;
-	line-height:1;
 	color:#636363;
 	font-weight:300;
-	font-size:15px;
+	font-size:14px;
 	text-align:left;
-	line-height:19px;
+	line-height:18px;
 }
 
 .invoiceinfosection strong {
@@ -559,6 +575,7 @@ input[type="checkbox"]:checked + label span:before {
 	padding:8px 15px;
 	display:table-cell;
 	border:1px solid #c9c9c9;
+	background-clip:padding-box;
 	color:#26323f;
 	font-size:14px;
 	font-weight:bold;

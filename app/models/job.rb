@@ -12,6 +12,23 @@ class Job < ActiveRecord::Base
 
   # Length
   validates :job_description, length: { maximum: 500 }
-  validates :job_quantity, :job_rate, length: { maximum: 10 }
+
+  # Rate and Quantity below 1,000,000,000
+  validate :total_in_range
+
+  def total_in_range
+    check_total(self.job_quantity, "quantity")
+    check_total(self.job_rate, "rate")
+  end
+
+  def check_total(number, name)
+    unless (0..999999999).include?(number)
+      if name == "quantity"
+        errors.add(:job_quantity, "^Job Quantity cannot exceed 999,999,999")
+      else
+        errors.add(:job_rate, "^Job Rate cannot exceed $999,999,999.00")
+      end
+    end
+  end
 
 end

@@ -226,6 +226,31 @@
                   <% end %>
             </table>
        </section>
+
+       <section id="invoicetax">
+          <div id="hastaxwrapper">
+            <div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
+            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round" %>
+            <%= f.label :has_tax, '', class: "cmn-toggle-1" %>
+          </div>
+          <div id="taxinformation">
+            <div class="taxamount">
+              <%= f.text_field :tax, class: "tax-rate-box onlynumber" %>
+              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= @invoice.tax %></span> <span class="percentage">%</span>
+            </div>
+            <div class="taxincluded">
+              <div class="checkboxholder">
+                <%= f.check_box :tax_included %>
+                <label for="invoice_tax_included"><span></span>
+                  <div>
+                    <div>Tax Inclusive:</div>
+                    <div class="inclusiontext">Not Included</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+       </section>
        
        <section id="invoicetotal">
             <div id="invoiceamount"></div>

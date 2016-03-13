@@ -396,15 +396,104 @@ ready = function() {
 			}
 		}
 
-		// Calculate subtotal initially if editing an existing invoice.
+		// Tax section
 
-		//if (editing) {
-		//	$('.jobrow').each(function() {
-		//		var $this = $(this);
-		//
-		//		var quantity $this.find('')
-		//	});
-		//}
+		// Toggle things when tax box is checked
+
+		var hasTaxToggle = $('#invoice_has_tax'),
+			hasTaxHiddenField = $('*[name="invoice[has_tax]"]:not(:checkbox)'),
+			hasTaxText = $('.hastaxtext'),
+			taxSection = $('#taxinformation'),
+			taxTextField = $('.tax-rate-box'),
+			taxAmount = $('.e-taxamount'),
+			taxInclusionCheckbox = $('#invoice_tax_included'),
+			taxInclusionHiddenField = $('*[name="invoice[tax_included]"]:not(:checkbox)');
+
+		function toggleTax() {
+			if (hasTaxToggle.is(':checked')) {
+				taxSection.show();
+				hasTaxText.text('Has Tax');
+				setInclusionText();
+				calculateTotal();
+			} else {
+				taxSection.hide();
+				setTaxDefaults();
+				hasTaxText.text('No Tax');
+				calculateTotal();
+			}
+		}
+
+		function setTaxDefaults() {
+			taxAmount.html('0.0');
+			taxTextField.val('0.0');
+			taxInclusionCheckbox.attr('checked', false);
+			taxInclusionHiddenField.val('0');
+			setInclusionText();
+		}
+
+		var inclusionText = $('.inclusiontext');
+
+		function setInclusionText() {
+			if (taxInclusionCheckbox.is(':checked')) {
+				inclusionText.text('Included');
+			} else {
+				inclusionText.text('Not Included');
+			}
+		}
+
+		taxInclusionCheckbox.on('change', function() {
+			setInclusionText();
+			calculateTotal();
+		});
+
+		hasTaxToggle.on('change', toggleTax);
+
+		// Select all content for number divs
+		pageBody.on('click', '.selectall, .e-quantity, .e-rate, .e-taxamount', function() {
+			document.execCommand('selectAll', false, null);
+		});
+
+		// Set tax value
+		function setTaxBounds() {
+			var taxValue = parseFloat(taxAmount.text());
+			if (taxValue < 0 || isNaN(taxValue) || taxValue === '') {
+				taxAmount.html('0.0');
+				taxTextField.val('0.0')
+			}
+		}
+
+		taxAmount.on('keyup', function() {
+			setTaxBounds();
+			calculateTotal();
+		});
+
+		taxTextField.on('change keyup', function() {
+			setTaxBounds();
+			calculateTotal();
+		});
+
+		// Max length for tax box
+
+		function checkMaxLength() {
+			var newLength = $.trim(taxAmount.text().replace('.', '')).length
+
+			if (newLength > 10) {
+				return true
+			} else {
+				return false
+			}
+		}
+
+		taxAmount.on('keypress', function(e) {
+			var keyCode = e.keyCode || e.which;
+			if (checkMaxLength()) {
+				if (keyCode == 190 || keyCode == 110 || keyCode == 46) {
+					return true
+				} else {
+					e.preventDefault();
+				}
+			}
+		});
 
 
 		// Calculate invoice total
@@ -421,6 +510,11 @@ ready = function() {
 				invoiceTotal += addValue;
 			});
 
+			if (hasTaxToggle.is(':checked') && !taxInclusionCheckbox.is(':checked')) {
+				var taxValue = (parseFloat(taxAmount.text()) / 100) + 1
+				invoiceTotal *= taxValue;
+			}
+
 			invoiceTotal = parseFloat(Math.round(invoiceTotal * 100) / 100).toFixed(2);
 
 			if (!isNaN(invoiceTotal)) {
@@ -436,6 +530,7 @@ ready = function() {
 		}
 
 		calculateTotal();
+		toggleTax();
 
 		jobsTable.on('keyup blur', '.quantitycell', function() {
 			calculateSubtotal('quantity', $(this));

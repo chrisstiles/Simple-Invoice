@@ -666,4 +666,158 @@ section:after {
     left: 33px;
 }
 
+/* Rounded checkbox styles */
+
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+
+.cmn-toggle + label, .cmn-toggle {
+	margin-left:-1px;
+}
+
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 60px;
+  height: 28px;
+  background-color: #dddddd;
+  border-radius: 60px;
+  text-indent: -9999px;
+  color:#fff;
+}
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 28px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: margin 0.2s;
+}
+input.cmn-toggle-round:checked + label, input.cmn-toggle-round:checked + label:before {
+  background-color: #41a9ee;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 34px;
+}
+
+/* Tax information */
+
+#invoicetax {
+	min-height:113px;
+}
+
+#invoicewrapper.show #invoicetax {
+	min-height:0;
+}
+
+#hastaxwrapper {
+	width:50%;
+	float:left;
+}
+
+.hastaxtitle {
+	line-height:1;
+	font-size:15px;
+	color:#26323f;
+	font-weight:600;
+	margin-bottom:10px;
+}
+
+.hastaxtext {
+	color:#888888;
+	font-weight:400;
+}
+
+#taxinformation {
+	width:50%;
+	float:right;
+	display:none;
+	text-align: right;
+}
+
+#invoicewrapper.show #taxinformation {
+	display:block;
+}
+
+.taxamount {
+	color:#686666;
+	font-weight:600;
+}
+
+.e-taxamount, .percentage {
+	margin: 0;
+	font-weight:300;
+	color:#818080;
+}
+
+.e-taxamount[contenteditable="true"] {
+	margin-left:3px;
+}
+
+.taxincluded .checkboxholder {
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.taxincluded input[type="checkbox"] + label {
+	font-size:17px;
+}
+
+.taxincluded input[type="checkbox"] + label span {
+	width:24px;
+	height:24px;
+	margin:2px 0 0 0;
+}
+
+.taxincluded input[type="checkbox"] + label > div {
+	left:auto;
+	right:34px;
+	line-height:1;
+}
+
+.taxincluded input[type="checkbox"] + label > div div {
+	position:static;
+	font-size:13px;
+	color:#26323f;
+	font-weight:600;
+	text-align: left;
+	margin-bottom:1px;
+}
+
+.taxincluded input[type="checkbox"] + label > div div.inclusiontext {
+	color:#888888;
+	font-weight:400;
+	margin-bottom:0;
+}
+
+#invoicewrapper.show .taxincluded {
+	font-size:13px;
+	color:#686666;
+	font-weight:400;
+	line-height:1;
+}
 

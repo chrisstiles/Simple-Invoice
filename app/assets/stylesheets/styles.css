@@ -27,8 +27,8 @@ html.turbolinks-progress-bar::before {
 
 #pagewrapper {
 	max-width:1200px;
-	margin:100px auto 45px auto;
-	padding:0 45px;
+	margin:100px auto 0 auto;
+	padding:0 45px 45px 45px;
 	box-sizing:border-box;
 	position:relative;
 }
@@ -818,6 +818,22 @@ ui-datepicker-prev {
 	white-space:nowrap;
 }
 
+#showrecordpayment .cell {
+	display:inline-block;
+	line-height:1;
+	text-overflow: ellipsis;
+}
+
+#showrecordpayment .row > div:first-of-type {
+	float:left;
+	padding-top:11px;
+}
+
+#showrecordpayment .row > div:last-of-type {
+	float:right;
+	padding-top:12px;
+}
+
 .cell.amountpaidlabel {
 	padding-left:13px;
 }
@@ -836,9 +852,9 @@ ui-datepicker-prev {
     overflow:hidden;
     float: right;
     min-width: 74px;
-    height:40px;
+    height:39px;
     background-color:#5e6771;
-    margin:0 -22px 0 0;
+    margin:-12px -22px 0 0;
     text-align:left;
     padding:12px 22px 0 22px;
     box-sizing:border-box;
