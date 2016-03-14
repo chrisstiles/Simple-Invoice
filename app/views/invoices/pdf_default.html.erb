@@ -218,6 +218,7 @@ section:after {
 #invoiceitems td {
 	padding:12px 0;
 	border-top:1px solid #000;
+  white-space: nowrap;
 }
 
 #invoicetotal {
@@ -225,10 +226,45 @@ section:after {
 	font-weight:800;
 }
 
+#invoicetotal span {
+  float:left;
+  line-height:1;
+  display:static;
+}
+
 #invoiceamount {
 	float:right;
+  white-space: nowrap;
 	text-align:right;
-	font-size:30px;	
+	font-size:30px;
+  margin-top:-2px;
+}
+
+#invoicetax {
+  padding-top:21px;
+  line-height:1;
+}
+
+#taxinformation {
+  width:50%;
+  float:right;
+  display:none;
+  text-align: right;
+}
+
+#taxinformation span {
+  display:inline;
+}
+
+.taxincluded {
+  font-size:13px;
+  color:#686666;
+  font-weight:400;
+  line-height:1;
+}
+
+#taxinformation {
+  display:block;
 }
 
 #notes {
@@ -369,10 +405,23 @@ section:after {
               </tbody>
             </table>
        </section>
+
+       <section id="invoicetax">
+    
+          <div id="taxinformation">
+            <div class="taxamount">
+              <strong>Tax:</strong> <span class="e-taxamount onlynumber"><%= @invoice.tax %></span><span class="percentage">%</span>
+            </div>
+            <div class="taxincluded">
+              <%= @invoice.tax_included_text %>
+            </div>
+          </div>
+
+       </section>
        
        <section id="invoicetotal">
+            <span>Total:</span>
             <div id="invoiceamount"><%= number_to_currency(@invoice.total, format: '%u %n') %></div>
-            Total:
        </section>
        
        <% unless @invoice.notes.blank? %>
