@@ -17,8 +17,12 @@ class Job < ActiveRecord::Base
   validate :total_in_range
 
   def total_in_range
-    check_total(self.job_quantity, "quantity")
-    check_total(self.job_rate, "rate")
+    unless self.job_quantity.blank?
+      check_total(self.job_quantity, "quantity")
+    end
+    unless self.job_rate.blank?
+      check_total(self.job_rate, "rate")
+    end
   end
 
   def check_total(number, name)

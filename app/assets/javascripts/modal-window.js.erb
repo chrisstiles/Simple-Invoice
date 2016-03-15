@@ -45,10 +45,16 @@ ready = function() {
     }
 
     // Close modal after close button is clicked
-    pageBody.on('click', '.closemodal', closeModal);
+    pageBody.on('click', '.closemodal', function(e) {
+        e.preventDefault();
+        closeModal()
+    });
 
     // Close modal when clicking on white background
-    pageBody.on('click', '#modaloverlay', closeModal);
+    pageBody.on('click', '#modaloverlay', function(e) {
+        e.preventDefault();
+        closeModal()
+    });
 
     // Close modal when escape key is pressed
     $(document).on('keyup', function(e) {
@@ -297,7 +303,8 @@ ready = function() {
 
     // Remove client from invoice when clicked
 
-    pageBody.on('click', '.removeclient', function() {
+    pageBody.on('click', '.removeclient', function(e) {
+        e.preventDefault();
         clientId.val('');
 
         eClientName.html('').attr('contenteditable', true);

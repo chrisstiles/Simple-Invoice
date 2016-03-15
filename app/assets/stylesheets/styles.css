@@ -5,12 +5,13 @@ body {
 	margin:0;
 	background-color:#ecf0f1;
 	font-family: 'Libertad', sans-serif;
-	-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
 	overflow-y:scroll;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* Loading bar */
