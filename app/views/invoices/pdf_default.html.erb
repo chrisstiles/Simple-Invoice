@@ -315,7 +315,7 @@ section:after {
     <div id="invoice">
     	<section id="invoicenumber">
        		<div>
-            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
+            	Invoice No. <span id="e-invoicenumber"><strong><%= @invoice.invoice_number %></strong></span>
             </div>
        </section> 
        
@@ -445,6 +445,6 @@ section:after {
 </div>
 
 
-<%= wicked_pdf_javascript_include_tag "pdf/configure_pdf.js" %>
+<!-- wicked_pdf_javascript_include_tag "pdf/configure_pdf.js" -->
 </body>
 </html>
