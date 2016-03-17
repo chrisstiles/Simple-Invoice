@@ -293,9 +293,11 @@ ready = function() {
             clientTooltip.text('Remove Client');
             eClientName.attr('contenteditable', false);
             invoiceClientName.prop('readonly', true);
+            invoiceClientName.parents('.control').addClass('readonly');
         } else {
             clientsButton.removeClass('removeclient nomodal').addClass('modal addclient');
             clientTooltip.text('Add Saved Client');
+            invoiceClientName.parents('.control').removeClass('readonly');
         }
     }
 

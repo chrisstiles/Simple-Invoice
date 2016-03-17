@@ -357,6 +357,15 @@ a.logo img {
 	background-color:rgba(255,255,255,.03);
 }
 
+.control.readonly:hover {
+	background-color:transparent !important;
+	cursor: default !important;
+}
+
+.control.readonly .clientnameinput {
+	cursor: default !important;
+}
+
 .control.hassetclient:hover {
 	background-color:transparent !important;
 }
