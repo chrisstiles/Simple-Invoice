@@ -41,6 +41,12 @@ for (var i = 46; i < 105; i++) {
   keycodes.push(i);
 }
 
+
+//setup before functions
+var typingTimer;                //timer identifier
+var doneTypingInterval = 150;  //time in ms, 5 second for example
+var $input = $('#myInput');
+
 var searchBoxes = $('.search');
 
 pageBody.on('keyup', '.search', function(e) {
@@ -49,9 +55,15 @@ pageBody.on('keyup', '.search', function(e) {
   var keyCode = e.which;
 
   if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
-    searchInvoice();
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(searchInvoice, doneTypingInterval);
   }
 
+});
+
+//on keydown, clear the countdown 
+pageBody.on('keydown', function() {
+  clearTimeout(typingTimer);
 });
 
 pageBody.on('change', '.searchchange', searchInvoice);

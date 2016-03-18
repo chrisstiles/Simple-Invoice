@@ -174,14 +174,20 @@ ready = function() {
 
 		// Set focus to textbox when control box is clicked
 		$('.control').on('click', function() {
-			$(this).find('input').focus();
+			var inputField = $(this).find('input');
+			inputField.focus();
 		});
 
 		// Add active class when element is in focus
 		var invoiceSetting = $('input');
 
 		invoiceSetting.on('focus', function() {
-			$(this).closest('.control').addClass('active');
+			var $this = $(this);
+
+			if (!$this.is('[readonly]')) {
+				$(this).closest('.control').addClass('active');
+			}
+			
 		});
 
 		invoiceSetting.on('blur', function() {
