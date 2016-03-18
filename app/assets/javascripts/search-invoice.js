@@ -44,7 +44,7 @@ for (var i = 46; i < 105; i++) {
 
 //setup before functions
 var typingTimer;                //timer identifier
-var doneTypingInterval = 150;  //time in ms, 5 second for example
+var doneTypingInterval = 80;  //time in ms, 5 second for example
 var $input = $('#myInput');
 
 var searchBoxes = $('.search');
