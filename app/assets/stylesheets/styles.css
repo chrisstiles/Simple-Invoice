@@ -296,7 +296,7 @@ a.logo img {
     text-overflow: ellipsis;
 	background-color:rgba(255,255,255,.09);
 	display:block;
-	padding:20px 22px;
+	padding:19px 22px;
 	font-weight:600;
 	font-size:17px;
 	margin:0;
@@ -372,6 +372,26 @@ a.logo img {
 
 .control.active, .row.active {
 	background-color:rgba(255,255,255,.03);
+}
+
+.showbutton {
+	display:block;
+	color:#fff;
+	font-weight:600;
+	font-size:14px;
+	text-decoration: none;
+	padding:13px 22px 14px 22px;
+	border-top:1px solid rgba(255,255,255,.08);
+	line-height:1;
+}
+
+.firstshowbutton {
+	border-top:none;
+}
+
+.showbutton:hover {
+	background-color:rgba(255,255,255,.03);
+	color:#41a9ee;
 }
 
 .alignment {

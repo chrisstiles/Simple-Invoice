@@ -25,9 +25,9 @@
     <div class="scrollwrapper">
       <div id="controls">
       <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
-      <%= link_to 'edit', edit_invoice_path(@invoice.invoice_number), class: "button blue" %>
-      <a href="#" class="emailmodal button blue" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
-      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "button blue" %>
+      <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton" %>
+      <a href="#" class="emailmodal showbutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
+      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton" %>
       <h2>
         Record Payment
         <span class="showduedate"><%= @invoice.print_days_until_due %></span>
