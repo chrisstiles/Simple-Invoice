@@ -101,7 +101,7 @@
     background-position: center center;
     float:right;
     border-radius: 50%;
-    background-image: url(/assets/close-modal.png);
+    background-image: url(/assets/close-modal.svg);
 }
 
 .closeerrors:hover {
