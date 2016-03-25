@@ -1,3 +1,5 @@
+@import "variables";
+
 body.noscroll {
     position: fixed; 
     overflow-y: scroll;
@@ -110,7 +112,7 @@ html.noscroll {
 	top:50%;
 	transform:translateY(-50%);
 	border-radius:50%;
-	background-image:url(/assets/close-modal.svg);
+	background-image:$white-close-icon;
 }
 
 .closemodal:hover {
