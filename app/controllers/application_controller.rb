@@ -3,13 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_p3p
 
   around_filter :set_time_zone
 
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   redirect_to main_app.root_path, :alert => exception.message
-  # end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_path, :alert => exception.message
+  end
                                                                                  
 	private
 
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
 	                                                                             
 		def browser_timezone
 			cookies["browser.timezone"]
+		end
+
+		def set_p3p
+			response.headers["P3P"]='CP="CAO PSA OUR"'
 		end
   
 end
