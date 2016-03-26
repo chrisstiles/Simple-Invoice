@@ -1,8 +1,5 @@
 Turbolinks.enableProgressBar();
 
-var ready;
-ready = function() {
-
 // Cookie user's timezone
 function set_time_zone_offset() {
     var current_time = new Date();
@@ -10,6 +7,9 @@ function set_time_zone_offset() {
 }
 
 set_time_zone_offset();
+
+var ready;
+ready = function() {
 
 var pageBody = $('body');
 
