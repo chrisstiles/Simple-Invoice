@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
 	accepts_nested_attributes_for :setting
 
 	# Remember user by default
-	def remember_me
-		true
-	end
+	# def remember_me
+	# 	true
+	# end
 
 	def is_admin?
 		puts self.is_admin

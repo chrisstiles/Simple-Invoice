@@ -17,11 +17,13 @@ var pageBody = $('body');
 
 pageBody.on('submit', 'form', function(e) {
 	var $this = $(this);
-	if ($this.attr('disabled') === 'disabled') {
-		e.preventDefault();
-		return false
-	} else {
-		$this.attr('disabled', 'disabled');
+	if ($this.attr('data-remote') == "true") {
+		if ($this.attr('disabled') === 'disabled') {
+			e.preventDefault();
+			return false
+		} else {
+			$this.attr('disabled', 'disabled');
+		}
 	}
 });
 

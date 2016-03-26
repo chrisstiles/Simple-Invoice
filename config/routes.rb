@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :users
-   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+   devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations" }
   
  # get '/invoices/new' => 'invoices#new', as: :new_invoice
  # post '/invoices' => 'invoices#create'
