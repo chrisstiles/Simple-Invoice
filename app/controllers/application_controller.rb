@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
-  before_action :set_p3p
 
   around_filter :set_time_zone
 
@@ -28,10 +27,6 @@ class ApplicationController < ActionController::Base
 	                                                                             
 		def browser_timezone
 			cookies["browser.timezone"]
-		end
-
-		def set_p3p
-			response.headers["P3P"]='CP="CAO PSA OUR"'
 		end
   
 end
