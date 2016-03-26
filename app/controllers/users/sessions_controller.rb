@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     params[:user].merge!(remember_me: 1)
-    response.headers['X-CSRF-Token'] = form_authenticity_token
+    #response.headers['X-CSRF-Token'] = form_authenticity_token
     super
   end
 
