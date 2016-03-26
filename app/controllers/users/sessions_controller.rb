@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
 # before_filter :configure_sign_in_params, only: [:create]
-after_filter :set_csrf_headers, only: [:create]
+after_filter :set_csrf_headers, only: [:create, :destroy]
 
   # GET /resource/sign_in
   # def new
