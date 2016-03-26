@@ -181,13 +181,13 @@
 
 .green {
 	background-color:rgba(103,159,24,.14);
-	background-image: url(/assets/green.png);
+	// background-image: url(/assets/green.png);
 	background-size:24px 24px;
 }
 
 .yellow {
 	background-color:rgba(241,196,15,.2);	
-	background-image:url(/assets/yellow.png);
+	// background-image:url(/assets/yellow.png);
 	background-size:27px 24px;	
 }
 
@@ -197,7 +197,7 @@
 
 .red {
 	background-color:rgba(231,76,60,.28);
-	background-image:url(/assets/red.png);
+	// background-image:url(/assets/red.png);
 	background-size:27px 24px;	
 }
 
@@ -571,7 +571,7 @@ section:after {
 }
 
 .delete {
-	background-image:url(/assets/delete.png);
+	background-image:$delete-icon;
 }
 
 .delete:hover {
@@ -594,7 +594,7 @@ section:after {
 }
 
 .insert {
-	background-image:url(/assets/insert.png);
+	background-image:$insert-icon;
 }
 
 #invoiceitems tr:after {

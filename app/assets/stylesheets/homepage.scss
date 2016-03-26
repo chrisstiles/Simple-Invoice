@@ -224,13 +224,13 @@ a.thirdbutton {
 /* Tooltip CSS for .thirdbutton is in style.css */
 
 .file {
-	background-image: url(/assets/file.png);
+	background-image: $file-icon;
 	background-size:17px 23px;
 	border-bottom-left-radius:2px;
 }
 
 .mail {
-	background-image: url(/assets/mail.png);
+	background-image: $mail-icon;
 	background-size:25px 16px;
 }
 
@@ -255,12 +255,12 @@ a.thirdbutton {
 }
 
 .showamountpaid {
-	background-image: url(/assets/pig.png);
+	background-image: $pig-icon;
 	background-size:28px 26px;
 }
 
 .closeamountpaid {
-	background-image: url(/assets/close-payment.png);
+	background-image: $grey-close-icon;
 	background-size:22px 22px;
 	transform:translateX(-100%);
 }
@@ -274,14 +274,14 @@ a.thirdbutton {
 }
 
 .homeamountpaiderror {
-	width:16px;
-	height:14px;
-	background-image: url(/assets/red.png);
+	width:17px;
+	height:15px;
+	background-image: $red-icon;
 	background-repeat: no-repeat;
-	background-size:16px 14px;
+	background-size:17px 15px;
 	float:right;
 	position:relative;
-	top:11px;
+	top:10px;
 	margin-right:10px;
 	display:none;
 }

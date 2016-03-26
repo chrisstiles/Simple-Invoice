@@ -140,7 +140,7 @@ nav a:active, #sessioninfo a:active {
 }
 
 .back:before {
-	background-image: url(/assets/angle-left.svg);
+	background-image: $back-icon;
 	width: 13px;
     height: 23px;
     background-repeat: no-repeat;
@@ -637,7 +637,7 @@ a.logo img {
     height: 100%;
 	width: 30px;
 	background-repeat:no-repeat;
-	background-size:8px 13px;
+	background-size:9px 14px;
 	background-position:center center;
 	 -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -651,7 +651,7 @@ a.logo img {
 	right:0;	
 }
 
-ui-datepicker-prev {
+.ui-datepicker-prev {
 	left:0;	
 }
 
@@ -660,10 +660,10 @@ ui-datepicker-prev {
 	background-color:#f6f6f6;
 }
 .ui-datepicker .ui-datepicker-prev {
-	background-image:url(/assets/date-left.png);
+	background-image:$date-left-icon;
 }
 .ui-datepicker .ui-datepicker-next {
-	background-image:url(/assets/date-right.png);
+	background-image:$date-right-icon;
 }
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span {
