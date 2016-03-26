@@ -10,7 +10,7 @@ after_filter :set_csrf_headers, only: [:create, :destroy]
   # POST /resource/sign_in
   def create
     params[:user].merge!(remember_me: 1)
-    #response.headers['X-CSRF-Token'] = form_authenticity_token
+    response.headers['X-CSRF-Token'] = form_authenticity_token
     super
   end
 
