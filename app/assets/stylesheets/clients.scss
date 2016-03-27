@@ -5,8 +5,9 @@
 	padding-top:32px;
 }
 
-#clientscontainer #searchresults {
+#clientscontainer #searchresultswrapper {
 	border-right:1px solid #c9c9c9;
+	padding-bottom:35px;
 	margin-right:-1px;
 }
 
@@ -66,7 +67,7 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
-	bottom:35px;
+	//bottom:35px;
 	border-left:1px solid #c9c9c9;
 }
 
@@ -138,6 +139,7 @@
 
 .formholder, .logoformholder {
 	position:relative;
+	transform:translate3d(0,0,0);
 	transition:all .3s;
 }
 
@@ -198,6 +200,16 @@
 	float:left;
 	display:block;
 	height:64px;
+}
+
+.full {
+	width:100%;
+}
+
+.full:before, .full:after {
+	content:"";
+	display:block;
+	clear:both;
 }
 
 .clientsformwrapper .nomargin {

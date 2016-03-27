@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
 	private
 
 		def setting_params
-			params.require(:setting).permit(:base_invoice_number)
+			params.require(:setting).permit(:base_invoice_number, :has_tax, :tax, :tax_included)
 		end
 
 end

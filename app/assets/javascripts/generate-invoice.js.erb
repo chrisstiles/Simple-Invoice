@@ -6,6 +6,7 @@ ready = function() {
 	var editing = invoiceWrapper.hasClass('edit');
 	var creating = invoiceWrapper.hasClass('new');
 	var showing = invoiceWrapper.hasClass('show');
+	var profileEditing = $('#pagewrapper').hasClass('userpage');
 	var pageBody = $('body');
 
 	// Code for all page
@@ -168,6 +169,149 @@ ready = function() {
 			e.preventDefault();
 			$(this).text('');
 		});
+
+
+		// Tax section
+
+		// Toggle things when tax box is checked
+
+		var hasTaxToggle = $('.taxtoggle'),
+			hasTaxHiddenField = $('*[name="invoice[has_tax]"]:not(:checkbox)'),
+			hasTaxText = $('.hastaxtext'),
+			taxSection = $('#taxinformation'),
+			taxTextField = $('.tax-rate-box'),
+			taxAmount = $('.e-taxamount'),
+			taxInclusionCheckbox = $('.includedtoggle'),
+			taxInclusionHiddenField;
+
+		if (editing || creating) {
+			taxInclusionHiddenField = $('*[name="invoice[tax_included]"]:not(:checkbox)');
+		} else {
+			taxInclusionHiddenField = $('*[name="user[setting_attributes][tax_included]"]:not(:checkbox)');
+		}
+
+		function toggleTax() {
+			if (hasTaxToggle.is(':checked')) {
+				taxSection.show();
+				if (creating || editing) {
+					hasTaxText.text('Has Tax');
+				} else {
+					hasTaxText.text('Add tax to invoice by default');
+				}
+				setInclusionText();
+				creatingOrEditingCalculateTotal();
+			} else {
+				taxSection.hide();
+				setTaxDefaults();
+				if (creating || editing) {
+					hasTaxText.text('No Tax');
+				} else {
+					hasTaxText.text('Do not add tax to invoice by default');
+				}
+				creatingOrEditingCalculateTotal();
+			}
+		}
+
+		function setTaxDefaults() {
+			taxAmount.html('0.0');
+			taxTextField.val('0.0');
+			taxInclusionCheckbox.attr('checked', false);
+			taxInclusionHiddenField.val('0');
+			setInclusionText();
+		}
+
+		var inclusionText = $('.inclusiontext');
+
+		function setInclusionText() {
+			if (taxInclusionCheckbox.is(':checked')) {
+				if (creating || editing) {
+					inclusionText.text('Included');
+				} else {
+					inclusionText.text('Do not include tax in invoice total price');
+				}
+				
+			} else {
+				if (creating || editing) {
+					inclusionText.text('Not Included');
+				} else {
+					inclusionText.text('Include tax in invoice total price');
+				}
+				
+			}
+		}
+
+
+		taxInclusionCheckbox.on('change', function() {
+			setInclusionText();
+			creatingOrEditingCalculateTotal();
+		});
+
+		hasTaxToggle.on('change', toggleTax);
+
+		// Select all content for number divs
+		pageBody.on('click', '.selectall, .e-quantity, .e-rate, .e-taxamount', function() {
+			document.execCommand('selectAll', false, null);
+		});
+
+		// Set tax value
+		function setTaxBounds() {
+			var taxValue;
+
+			if (creating || editing) {
+				taxValue = parseFloat(taxAmount.text());
+			} else {
+				taxValue = parseFloat(taxTextField.val());
+			}
+
+			if (taxValue < 0 || isNaN(taxValue) || taxValue === '') {
+				taxAmount.html('0.0');
+				taxTextField.val('0.0')
+			}
+		}
+
+		taxAmount.on('keyup', function() {
+			setTaxBounds();
+			creatingOrEditingCalculateTotal();
+		});
+
+		taxTextField.on('change keyup', function() {
+			setTaxBounds();
+			creatingOrEditingCalculateTotal();
+		});
+
+		function creatingOrEditingCalculateTotal() {
+			if (editing || creating) {
+				calculateTotal();
+			} 
+		}
+
+		if (profileEditing) {
+			toggleTax();
+		}
+
+		// Max length for tax box
+
+		function checkMaxLength() {
+			var newLength = $.trim(taxAmount.text().replace('.', '')).length
+
+			if (newLength > 10) {
+				return true
+			} else {
+				return false
+			}
+		}
+
+		taxAmount.on('keypress', function(e) {
+			var keyCode = e.keyCode || e.which;
+			if (checkMaxLength()) {
+				if (keyCode == 190 || keyCode == 110 || keyCode == 46) {
+					return true
+				} else {
+					e.preventDefault();
+				}
+			}
+		});
+
 
 
 	if (editing || creating) {
@@ -402,104 +546,6 @@ ready = function() {
 			}
 		}
 
-		// Tax section
-
-		// Toggle things when tax box is checked
-
-		var hasTaxToggle = $('#invoice_has_tax'),
-			hasTaxHiddenField = $('*[name="invoice[has_tax]"]:not(:checkbox)'),
-			hasTaxText = $('.hastaxtext'),
-			taxSection = $('#taxinformation'),
-			taxTextField = $('.tax-rate-box'),
-			taxAmount = $('.e-taxamount'),
-			taxInclusionCheckbox = $('#invoice_tax_included'),
-			taxInclusionHiddenField = $('*[name="invoice[tax_included]"]:not(:checkbox)');
-
-		function toggleTax() {
-			if (hasTaxToggle.is(':checked')) {
-				taxSection.show();
-				hasTaxText.text('Has Tax');
-				setInclusionText();
-				calculateTotal();
-			} else {
-				taxSection.hide();
-				setTaxDefaults();
-				hasTaxText.text('No Tax');
-				calculateTotal();
-			}
-		}
-
-		function setTaxDefaults() {
-			taxAmount.html('0.0');
-			taxTextField.val('0.0');
-			taxInclusionCheckbox.attr('checked', false);
-			taxInclusionHiddenField.val('0');
-			setInclusionText();
-		}
-
-		var inclusionText = $('.inclusiontext');
-
-		function setInclusionText() {
-			if (taxInclusionCheckbox.is(':checked')) {
-				inclusionText.text('Included');
-			} else {
-				inclusionText.text('Not Included');
-			}
-		}
-
-		taxInclusionCheckbox.on('change', function() {
-			setInclusionText();
-			calculateTotal();
-		});
-
-		hasTaxToggle.on('change', toggleTax);
-
-		// Select all content for number divs
-		pageBody.on('click', '.selectall, .e-quantity, .e-rate, .e-taxamount', function() {
-			document.execCommand('selectAll', false, null);
-		});
-
-		// Set tax value
-		function setTaxBounds() {
-			var taxValue = parseFloat(taxAmount.text());
-			if (taxValue < 0 || isNaN(taxValue) || taxValue === '') {
-				taxAmount.html('0.0');
-				taxTextField.val('0.0')
-			}
-		}
-
-		taxAmount.on('keyup', function() {
-			setTaxBounds();
-			calculateTotal();
-		});
-
-		taxTextField.on('change keyup', function() {
-			setTaxBounds();
-			calculateTotal();
-		});
-
-		// Max length for tax box
-
-		function checkMaxLength() {
-			var newLength = $.trim(taxAmount.text().replace('.', '')).length
-
-			if (newLength > 10) {
-				return true
-			} else {
-				return false
-			}
-		}
-
-		taxAmount.on('keypress', function(e) {
-			var keyCode = e.keyCode || e.which;
-			if (checkMaxLength()) {
-				if (keyCode == 190 || keyCode == 110 || keyCode == 46) {
-					return true
-				} else {
-					e.preventDefault();
-				}
-			}
-		});
 
 
 		// Calculate invoice total

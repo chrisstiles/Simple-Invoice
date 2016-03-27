@@ -53,13 +53,38 @@
 				<div class="clientformtitle">Preferences</div>
 
 				<div id="userpreferences">
-					<div class="half">
-						<%= f.fields_for :setting, @setting do |c| %>
+					<%= f.fields_for :setting, @setting do |c| %>
+						<div class="half">
 							<%= c.label :base_invoice_number %>
 							<%= c.text_field :base_invoice_number, class: "onlynumber" %>
-						<% end %>
-					</div>
-					<div class="half nomargin">
+						</div>
+						
+						<div id="profiletax" class="full">
+							<div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
+							<div id="hastaxwrapper">
+					            <%= c.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>
+					            <%= c.label :has_tax, '', class: "cmn-toggle-1" %>
+					          </div>
+					          <div id="taxinformation">
+					            <div class="taxamount">
+					            	<%= c.label :tax, 'Tax Amount' %>
+					             	<%= c.text_field :tax, class: "tax-rate-box onlynumber", maxlength: 11  %>
+					            </div>
+					            <div class="taxincluded">
+					              <div class="checkboxholder">
+					                <%= c.check_box :tax_included, class: "includedtoggle" %>
+					                <label for="user_setting_attributes_tax_included"><span></span>
+					                  <div>
+					                    <div>Tax Inclusive:</div><br>
+					                    <div class="inclusiontext">Do not include tax in invoice total</div>
+					                  </div>
+					                </label>
+					              </div>
+					            </div>
+					          </div>
+						</div>
+					<% end %>
+					<div class="full">
 						<%= f.submit "Update Profile", class: "button blue willload" %>
 					</div>
 				</div>

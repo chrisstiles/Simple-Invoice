@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, setting_attributes: [:id, :base_invoice_number])
+			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, setting_attributes: [:id, :base_invoice_number, :has_tax, :tax, :tax_included])
 		end
 
 		#def normalize_blank_values

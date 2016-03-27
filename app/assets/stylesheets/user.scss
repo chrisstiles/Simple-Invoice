@@ -535,3 +535,52 @@
   margin-top:0;
 }
 
+#userpreferences #hastaxwrapper, #userpreferences #taxinformation, #userpreferences .taxamount, #userpreferences .taxincluded {
+  float:left;
+  width:auto;
+  text-align: left;
+}
+
+#profiletax {
+  min-height:150px;
+}
+
+#userpreferences #hastaxwrapper {
+  margin-right:15px;
+}
+
+#userpreferences .hastaxtitle {
+  margin-top:5px;
+}
+
+#userpreferences .hastaxtitle, #userpreferences .hastaxtitle span {
+  font-size:13px;
+  color:#26323f;
+}
+
+#userpreferences .taxamount {
+  margin-right:15px;
+}
+
+#userpreferences .taxincluded {
+  margin-top:13px;
+}
+
+#userpreferences .taxincluded input[type="checkbox"] + label span {
+  float:left;
+  margin-right:8px;
+}
+
+#userpreferences input[type="checkbox"] + label div {
+  position:static;
+  float:left;
+}
+
+#user_setting_attributes_tax {
+  margin-bottom:0;
+}
+
+
+
+
+

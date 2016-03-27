@@ -208,7 +208,7 @@ a.thirdbutton {
 	display:inline-block;
 	box-sizing:border-box;
 	border-right:1px solid #d4d4d4;
-	width:33.333333333%;
+	width:33%;
 	float:left;
 	height:66px;
 	background-repeat: no-repeat;
@@ -232,6 +232,7 @@ a.thirdbutton {
 .mail {
 	background-image: $mail-icon;
 	background-size:25px 16px;
+	width:34% !important;
 }
 
 .pig {
@@ -492,6 +493,7 @@ input[type="checkbox"] + label div {
 
 input[type="checkbox"] + label span {
     display:inline-block;
+    font-weight:400;
     width:19px;
     height:19px;
     margin:-1px 4px 0 0;

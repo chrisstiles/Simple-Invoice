@@ -230,7 +230,7 @@
        <section id="invoicetax">
           <div id="hastaxwrapper">
             <div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
-            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round" %>
+            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>
             <%= f.label :has_tax, '', class: "cmn-toggle-1" %>
           </div>
           <div id="taxinformation">
@@ -240,7 +240,7 @@
             </div>
             <div class="taxincluded">
               <div class="checkboxholder">
-                <%= f.check_box :tax_included %>
+                <%= f.check_box :tax_included, class: "includedtoggle" %>
                 <label for="invoice_tax_included"><span></span>
                   <div>
                     <div>Tax Inclusive:</div>

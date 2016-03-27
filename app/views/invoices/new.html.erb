@@ -200,17 +200,17 @@
        <section id="invoicetax">
           <div id="hastaxwrapper">
             <div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
-            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round" %>
+            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle", checked: current_user.setting.has_tax %>
             <%= f.label :has_tax, '', class: "cmn-toggle-1" %>
           </div>
           <div id="taxinformation">
             <div class="taxamount">
-              <%= f.text_field :tax, class: "tax-rate-box onlynumber" %>
-              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= @invoice.tax %></span> <span class="percentage">%</span>
+              <%= f.text_field :tax, class: "tax-rate-box onlynumber", value: current_user.setting.tax %>
+              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= current_user.setting.tax %></span> <span class="percentage">%</span>
             </div>
             <div class="taxincluded">
               <div class="checkboxholder">
-                <%= f.check_box :tax_included %>
+                <%= f.check_box :tax_included, class: "includedtoggle", checked: current_user.setting.tax_included %>
                 <label for="invoice_tax_included"><span></span>
                   <div>
                     <div>Tax Inclusive:</div>
