@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
 		def set_user
 			@user = current_user
-			@user_logo = current_user.display_logo
+			@user_logo = current_user.display_logo if user_signed_in?
 		end
 
 		def user_params
