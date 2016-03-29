@@ -17,7 +17,7 @@ module InvoicesHelper
 	end
 
 	def number_of_due_invoices
-		current_user.invoices.where('archived = ? AND due_date <= ? AND balance > ?', false, Date.today, 0).count
+		current_user.invoices.where('archived = ? AND due_date <= ? AND total - amount_paid > ?', false, Date.today, 0).count
 	end
 
 	def total_amount_due
@@ -25,7 +25,7 @@ module InvoicesHelper
 
       current_user.invoices.where(archived: false).each do |invoice|
         unless invoice.due_date.future?
-          total_due += invoice.balance
+          total_due += (invoice.total - invoice.amount_paid)
         end
       end
 

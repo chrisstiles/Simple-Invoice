@@ -31,9 +31,10 @@
   </div>
 
   <div id="invoicesoverview" class="homesidesection">
-    <%= pluralize(number_of_due_invoices, 'invoice') %> due and not paid in full.
+    
+    <span class="homenumberdue"><%= pluralize(number_of_due_invoices, 'invoice') %> due and not paid in full.</span>
 
-    <div class="homesideborders">
+    <div id="hometotaldue" class="homesideborders">
     Total Due: <span <%= 'class=overdue' if total_amount_due > 0 %>><%= number_to_currency(total_amount_due) %>
     </div>
 

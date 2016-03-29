@@ -26,7 +26,7 @@ setTimeout(function() {
 var key = "<%= key %>";
 var message = "<%= message %>";
 
-//var errorInput = $("input[name='invoice[" + key + "]");
+
 var errorContentEditable = $("*[name='invoice[" + key + "]']").not(':input');
 
 
@@ -112,15 +112,5 @@ $('#invoicewrapper').css({
   '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
-
-// // Remove red background when input is changed
-// pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
-// 	var $this = $(this);
-// 	$this.removeClass('haserror');
-
-// 	if ($this.hasClass('clientnameinput')) {
-// 		$('#e-clientname').removeClass('haserror');
-// 	}
-// });
 
 

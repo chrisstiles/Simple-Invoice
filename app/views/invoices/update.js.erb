@@ -34,8 +34,6 @@ setTimeout(function() {
 var key = "<%= key %>"
 var message = "<%= message %>"
 
-//console.log('<%= message %>')
-
 var errorInput = $("input[name='invoice[" + key + "]']");
 var errorContentEditable = $("*[name='invoice[" + key + "]']").not(':input');
 
@@ -54,27 +52,6 @@ if (message.indexOf('long') > -1) {
 if (message.indexOf('blank') > -1 || message.indexOf('number')) {
 	errorContentEditable.not(':empty').removeClass('haserror');
 }
-
-//if (message.indexOf('long') > -1) {
-//	var maxLength = message.replace( /\D/g, '');
-//	var correctLength = errorContentEditable.filter(function(el) {
-//		return el.text().length <= maxLength
-//
-//	var wrongLength = errorContentEditable.filter(function(el) {
-//		return el.text().length > maxLength
-//	});
-
-//	correctLength.not(':empty').removeClass('haserror');
-//	wrongLength.addClass('haserror');
-
-	//if (errorContentEditable.text().length <= maxLength) {
-	//	errorContentEditable.not(':empty').removeClass('haserror');
-	//} else {
-	//	errorContentEditable.addClass('haserror');
-	//}
-//}
-
-//validationErrors.append('<%= key %>' + ' ' + '<%= message %>')
 
 <% end %>
 
@@ -125,6 +102,9 @@ if ($('.homeinvoice').length) {
 	homeInvoice.find('.homeclose span').text('Record Payment');
 	homeInvoice.find('.homeclose').removeClass('homeclose');
 	homeInvoice.find('.homeinvoiceinfowrapper').children().removeClass('active');
+
+	$('.homenumberdue').html("<%= pluralize(number_of_due_invoices, 'invoice') %> due and not paid in full.");
+	$('#hometotaldue').html(" Total Due: <span <%= 'class=overdue' if total_amount_due > 0 %>><%= number_to_currency(total_amount_due) %>");
 	
 }
 
@@ -164,15 +144,6 @@ $('#invoicewrapper').css({
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
 
-// // Remove red background when input is changed
-// pageBody.on('change keyup', ':input, [contenteditable=true]', function() {
-// 	var $this = $(this);
-// 	$this.removeClass('haserror');
-
-// 	if ($this.hasClass('clientnameinput')) {
-// 		$('#e-clientname').removeClass('haserror');
-// 	}
-// });
 
 } else {
 
