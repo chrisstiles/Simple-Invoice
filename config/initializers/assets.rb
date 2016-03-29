@@ -5,6 +5,7 @@ Rails.application.config.assets.version = '1.1.2'
 #Rails.application.config.assets.precompile += ['fonts.css']
 #Rails.application.config.assets.precompile += ['fonts/fonts.css']
 Rails.application.config.assets.precompile += %w( pdfs/pdf-fonts.css )
+Rails.application.config.assets.precompile += %w( fonts.scss )
 
 
 # Add additional assets to the asset load path
