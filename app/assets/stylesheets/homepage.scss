@@ -64,6 +64,7 @@
 
 .homerecordtable .row > div:last-of-type {
 	color:#41a9ee;
+	position:static !important;
 }
 
 .homerecordtable .amountpaidrow:hover {
@@ -281,8 +282,7 @@ a.thirdbutton {
 	background-repeat: no-repeat;
 	background-size:17px 15px;
 	float:right;
-	position:relative;
-	top:10px;
+	margin-top:10px;
 	margin-right:10px;
 	display:none;
 }
@@ -295,8 +295,8 @@ a.thirdbutton {
 	border-color: transparent transparent #c47375 transparent;
 	display:block;
 	content:"";
-	position:absolute;
-	bottom:-12px;
+	position:relative;
+	bottom:-20px;
 	left:50%;
 	transform:translateX(-50%);
 	border-style: inset;
@@ -314,12 +314,13 @@ a.thirdbutton {
 
 #validationerrors.amountpaidvalidation.indexpage {
     left: 50%;
-    transform: translate(-50%, 72px);
+    position:absolute;
+    top:72px;
+    transform: translateX(-50%);
     word-wrap: normal;
     min-width: 0;
     white-space:normal !important;
     width:210px;
-    visibility:none;
     opacity:0;
 }
 

@@ -84,6 +84,8 @@ errorHolder.append('<p>' + message + '</p>');
 
 <% else %> // No Errors
 
+<% if @invoice.errors.none? %>
+
 // Code for home page submissions
 if ($('.homeinvoice').length) {
 
@@ -107,6 +109,8 @@ if ($('.homeinvoice').length) {
 	$('#hometotaldue').html(" Total Due: <span <%= 'class=overdue' if total_amount_due > 0 %>><%= number_to_currency(total_amount_due) %>");
 	
 }
+
+<% end %>
 
 <% end %>
 
