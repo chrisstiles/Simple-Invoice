@@ -70,7 +70,10 @@ class Invoice < ActiveRecord::Base
 	end
 
 	validates :tax, presence: true, 
-	            numericality: { message: "^Tax % must be a number with no more than 10 digits", }
+	            numericality: { message: "^Tax % must be a number with no more than 10 digits" }
+
+    validates :amount_paid, presence: true, 
+	            numericality: { greater_than: 0, message: "^Amount paid must be a number greater than or equal to $0." }
 
 	validate :tax_only_max_digits
 
