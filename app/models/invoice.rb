@@ -66,14 +66,17 @@ class Invoice < ActiveRecord::Base
 	def amount_paid_less_than_or_equal_to_total
 	  if self.amount_paid && (Float(self.amount_paid) > Float(self.total))
 	  	errors.add(:amount_paid, "cannot be greater than the invoice total")
+	  elsif self.amount_paid.blank? || self.amount_paid.nil?
+	  	errors.add(:amount_paid, "cannot be blank")
+
 	  end
 	end
 
 	validates :tax, presence: true, 
 	            numericality: { message: "^Tax % must be a number with no more than 10 digits" }
 
-    validates :amount_paid, presence: true, 
-	            numericality: { greater_than: 0, message: "^Amount paid must be a number greater than or equal to $0." }
+    # validates :amount_paid, 
+	   #          numericality: { greater_than: 0, message: "^Amount paid must be a number greater than or equal to $0.", allow_nil: true, allow_blank: false }
 
 	validate :tax_only_max_digits
 

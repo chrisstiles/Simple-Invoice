@@ -3,7 +3,7 @@ class InvoicesController < ApplicationController
   #before_action :set_number_of_jobs_not_to_be_deleted, only: [:create, :update]
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
-  before_action :set_invoice_balance, only: [:update]
+  after_action :set_invoice_balance, only: [:update]
   before_action :authenticate_user!
   before_action :amount_paid_nil_to_zero, only: [:update]
 
