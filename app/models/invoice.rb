@@ -6,6 +6,8 @@ class Invoice < ActiveRecord::Base
 	has_many :jobs
 	accepts_nested_attributes_for :jobs, :client
 
+	before_create :generate_token
+
 	# Number of invoices to show per page with pagination
 	self.per_page = 9
 
@@ -75,10 +77,7 @@ class Invoice < ActiveRecord::Base
 	validates :tax, presence: true, 
 	            numericality: { message: "^Tax % must be a number with no more than 10 digits" }
 
-    # validates :amount_paid, 
-	   #          numericality: { greater_than: 0, message: "^Amount paid must be a number greater than or equal to $0.", allow_nil: true, allow_blank: false }
-
-	validate :tax_only_max_digits
+    validate :tax_only_max_digits
 
 	def tax_only_max_digits
 		number_of_digits = self.tax.to_s.gsub('.', '').length
@@ -170,5 +169,9 @@ class Invoice < ActiveRecord::Base
 			raw("<span class='paidinfull'>Paid in full</span>")
 		end
 	end
+
+	 def generate_token
+      self.token = SecureRandom.urlsafe_base64(16)
+    end
 
 end

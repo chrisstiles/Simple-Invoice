@@ -1,11 +1,12 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
   #before_action :set_number_of_jobs_not_to_be_deleted, only: [:create, :update]
+  before_action :authenticate_user!
+  before_action :amount_paid_nil_to_zero, only: [:update]
+
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
   after_action :set_invoice_balance, only: [:update]
-  before_action :authenticate_user!
-  before_action :amount_paid_nil_to_zero, only: [:update]
 
   def index
    @invoices = current_user.invoices.where(archived: false).page(params[:page])
@@ -20,7 +21,9 @@ class InvoicesController < ApplicationController
   def show
     @editable = "false"
     respond_to do |format|
-      format.html
+      if params[:invoice_number]
+        format.html
+      end
       format.pdf do
         render pdf: "Invoice #{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb', show_as_html: params.key?('debug')
       end
@@ -155,7 +158,11 @@ class InvoicesController < ApplicationController
   private
    
     def set_invoice
-      @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
+      if params[:invoice_number]
+        @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
+      elsif params[:token]
+        @invoice = Invoice.find_by(token: params[:token])
+      end
 
       if @invoice && @invoice.archived
         @invoice = nil
@@ -266,5 +273,6 @@ class InvoicesController < ApplicationController
         @invoice.amount_paid = 0
       end
     end
+
 
 end
