@@ -12,31 +12,36 @@ ready = function() {
 	// Code for all page
 
 	// Add loading content to buttons on press
-	pageBody.on('click', '.willload', function() {
+
+	pageBody.on('submit', 'form', function() { 
 		var $this = $(this);
+		if ($this.find('.willload').length) {
+			var button = $this.find('.willload');
 
-		if (!$this.hasClass('hasloadingtext')) {
+			if (!button.hasClass('hasloadingtext')) {
 
-			$this.addClass('hasloadingtext');
+				button.addClass('hasloadingtext');
 
-			var oldContent = ''
+				var oldContent = ''
 
-			if ($this.is('input')) {
-				$this.prop('disabled', true);
-				$this.parents('form').submit();
-				oldContent = $this.val();
-			} else {
-				oldContent = $this.text();
+				if (button.is('input')) {
+					button.prop('disabled', true);
+					button.parents('form').submit();
+					oldContent = button.val();
+				} else {
+					oldContent = button.text();
+				}
+
+				pageBody.append('<div class="hidden buttoncontent">' + oldContent + '</div>');
+				
+				button.addClass('loading');
+				button.val('Loading...');
+
+				button.text('Loading...');
+
 			}
-
-			pageBody.append('<div class="hidden buttoncontent">' + oldContent + '</div>');
-			
-			$this.addClass('loading');
-			$this.val('Loading...');
-
-			$this.text('Loading...');
-
 		}
+		
 	});
 
 	// Function to prevent pasting formatted text in content editable
