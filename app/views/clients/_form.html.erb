@@ -53,12 +53,12 @@
 
 		<div class="half">
 			<% unless @client.id.nil? %>
-		 		<div class="button deleteclient" data-clientid="<%= @client.id %>">Delete Client</div>
+		 		<div class="button deleteclient deleteicon" data-clientid="<%= @client.id %>">Delete Client</div>
 			<% end %>
 		</div>
 
 		<div class="half nomargin">
-			<%= f.submit class: "button blue willload" %>
+			<%= f.submit 'Save Client', class: "button blue willload saveicon" %>
 		</div>
 
 	<% end %>

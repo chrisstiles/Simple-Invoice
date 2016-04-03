@@ -429,6 +429,12 @@ function uploadSuccessful() {
     pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
 }
 
+
+// Select all input
+$('.selectallinput').on('click', function() {
+	$(this).select();
+});
+
 };
 
 $(document).ready(ready);

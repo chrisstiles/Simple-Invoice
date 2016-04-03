@@ -17,7 +17,7 @@
 <div id="toolbar">
   <div id="toolbarcontent">
     <%= link_to "Back to Invoices", invoices_path, class: "back" %>
-    <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), tabindex: '-1', class: "button blue" %>
+    <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), tabindex: '-1', class: "button blue editinvoiceicon" %>
   </div>
 </div>
 
@@ -25,9 +25,9 @@
     <div class="scrollwrapper">
       <div id="controls">
       <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
-      <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton" %>
-      <a href="#" class="emailmodal showbutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
-      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton" %>
+      <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton showeditinvoicebutton" %>
+      <a href="#" class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
+      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton viewpdfbutton" %>
       <h2>
         Record Payment
         <span class="showduedate"><%= @invoice.print_days_until_due %></span>
@@ -58,7 +58,13 @@
        
       <% end %>
 
-      <div class="button deleteinvoice" data-invoicenumber="<%= @invoice.invoice_number %>">Delete Invoice</div>
+      <div id="publicurl">
+        <div>Public URL</div>
+        <input type="text" class="selectallinput" value="<%= display_public_invoice_url(@invoice) %>" readonly />
+      </div>
+
+
+      <div class="button deleteinvoice deleteicon" data-invoicenumber="<%= @invoice.invoice_number %>">Delete Invoice</div>
 
     </div>
 </aside>

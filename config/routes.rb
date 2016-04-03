@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :send_email_invoice
   get 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :show_email_invoice
 
-  get '/pdfs/:token' => 'invoices#show', param: :token, :defaults => { :format => :pdf }
+  get '/pdfs/:token' => 'invoices#show', param: :token, :defaults => { :format => :pdf }, as: :public_invoice
 
   resources :users, only: [:show, :update]
 

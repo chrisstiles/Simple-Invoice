@@ -66,6 +66,56 @@ header a.button {
 	margin-left:30px;
 }
 
+.newinvoiceicon:before, .editinvoiceicon:before, .saveicon:before, .deleteicon:before, .uploadicon:before  {
+	background-repeat:no-repeat;
+	display:inline-block;
+	content:"";
+	position:relative;
+	line-height:0;
+	margin-right:8px;
+	margin-bottom:-1px;
+	top:1px;
+}
+
+.newinvoiceicon:before {
+	background-image:$new-white-icon;
+	width:13px;
+	height:15px;
+}
+
+.editinvoiceicon:before {
+	background-image:$edit-white-icon;
+	width:15px;
+	height:15px;
+}
+
+.saveicon:before {
+	background-image:$save-white-icon;
+	width:14px;
+	height:14px;
+}
+
+
+input.saveicon {
+	background-image:$save-white-icon;
+	background-size:13px 13px;
+	padding-left:47px;
+	background-position: left 25px center;
+}
+
+.deleteicon:before {
+	background-image:$delete-white-icon;
+	width:13px;
+	height:15px;
+}
+
+.uploadicon:before {
+	background-image:$upload-white-icon;
+	width:18px;
+	height:15px;
+	top:2px;
+}
+
 nav a {
 	border-right:1px solid #f0f0f0;
 }
@@ -161,6 +211,7 @@ nav a:active, #sessioninfo a:active {
 
 .button {
 	padding:8px 25px;
+	background-repeat:no-repeat;
 	background-color:#41a9ee;
 	outline:none;
 	border-radius:2px;
@@ -178,12 +229,19 @@ nav a:active, #sessioninfo a:active {
     user-select: none;
     text-align: center;
     position:relative;
+    -webkit-appearance: none;
+    -moz-appearance:none;
 }
 
 .button.loading {
 	background-color:#5e6771 !important;
 	content:"Loading";
 	cursor:default !important;
+}
+
+.loading {
+	background-image:none !important;
+	padding-left:25px !important;
 }
 
 .button.small {
@@ -255,6 +313,7 @@ nav a:active, #sessioninfo a:active {
 	bottom:0;
     box-shadow: 3px 0 6px -2px rgba(0,0,0,0.08);
 	z-index:200;
+	color:#fff;
 }
 
 .scrollwrapper {
@@ -290,6 +349,12 @@ a.logo img {
 }
 
 /* Invoice Editing Controls */
+
+#controls:after {
+	display:block;
+	content:"";
+	clear:both;
+}
 
 #controls h2 {
 	color:#fff;
@@ -381,9 +446,40 @@ a.logo img {
 	font-weight:600;
 	font-size:14px;
 	text-decoration: none;
-	padding:13px 22px 14px 22px;
+	padding:13px 22px 14px 45px;
+	background-repeat:no-repeat;
 	border-top:1px solid rgba(255,255,255,.08);
 	line-height:1;
+}
+
+.showeditinvoicebutton {
+	background-image:$edit-white-icon;
+	background-size:15px 15px;
+	background-position: left 16px center;
+}
+
+.showeditinvoicebutton:hover {
+	background-image:$edit-blue-icon;
+}
+
+.showemailinvoicebutton {
+	background-image:$mail-white-icon;
+	background-position: left 15px center;
+	background-size:16px 10px;
+}
+
+.showemailinvoicebutton:hover {
+	background-image:$mail-blue-icon;
+}
+
+.viewpdfbutton {
+	background-image:$file-white-icon;
+	background-position: left 18px center;
+	background-size:11px 15px;
+}
+
+.viewpdfbutton:hover {
+	background-image:$file-blue-icon
 }
 
 .firstshowbutton {
@@ -912,4 +1008,35 @@ a.logo img {
 .recordpaymentbutton {
 	float:right;
 	margin:12px;
+}
+
+#publicurl:before {
+	clear:both;
+	content:"";
+	display:block;
+}
+
+#publicurl {
+	border-top:1px solid #4d5761;
+	padding:13px 22px 14px 22px;
+}
+
+#publicurl div {
+	font-weight:600;
+	font-size:14px;
+	margin-bottom:8px;
+}
+
+#publicurl input {
+	width:100%;
+	box-sizing:border-box;
+	padding:8px;
+	font-family:Libertad;
+	font-weight:400;
+	font-size:13px;
+	border-radius:2px;
+	color:#26323f;
+	border:none;
+	outline:none;
+	cursor:text;
 }
