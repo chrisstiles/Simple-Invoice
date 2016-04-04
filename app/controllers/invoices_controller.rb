@@ -1,7 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
-  #before_action :set_number_of_jobs_not_to_be_deleted, only: [:create, :update]
-  before_action :authenticate_user!
+
   before_action :amount_paid_nil_to_zero, only: [:update]
 
   after_action :merge_client_if_name_exists, only: [:create, :update]
