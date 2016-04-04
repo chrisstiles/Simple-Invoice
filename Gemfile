@@ -36,6 +36,9 @@ gem 'rails_admin'
 # Authorization
 gem 'cancancan', '~> 1.10'
 
+# Fastclick for mobile browsers
+gem 'fastclick-rails'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

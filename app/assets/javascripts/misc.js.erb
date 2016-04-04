@@ -3,6 +3,11 @@ Turbolinks.enableProgressBar();
 var ready;
 ready = function() {
 
+// Fastclick
+$(function() {
+  return new FastClick(document.body);
+});
+
 // Cookie user's timezone
 function set_time_zone_offset() {
     var current_time = new Date();

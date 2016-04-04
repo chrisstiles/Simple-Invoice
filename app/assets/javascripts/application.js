@@ -17,4 +17,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require dropzone
+//= require fastclick
 //= require_tree .
