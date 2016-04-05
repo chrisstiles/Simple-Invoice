@@ -210,7 +210,8 @@ nav a:active, #sessioninfo a:active {
 /***********/
 
 .button {
-	padding:8px 25px;
+	padding:0 25px;
+	line-height:34px;
 	background-repeat:no-repeat;
 	background-color:#41a9ee;
 	outline:none;
@@ -250,9 +251,9 @@ nav a:active, #sessioninfo a:active {
 
 .button.small {
 	font-size: 13px;
-	padding: 8px 12px;
+	padding: 0 12px;
 	font-weight: 600;
-	line-height: 1;
+	line-height: 29px;
 }
 
 .button.greenbutton {
