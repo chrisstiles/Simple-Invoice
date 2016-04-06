@@ -10,24 +10,26 @@
 <body>
 <header>
 	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
-	<% if user_signed_in? %>
-	<nav>
-		<%= link_to "Invoices", invoices_path %>
-		<%= link_to "Clients", clients_path %>
-	</nav>
+	<div id="menu">
+		<% if user_signed_in? %>
+		<nav>
+			<%= link_to "Invoices", invoices_path %>
+			<%= link_to "Clients", clients_path %>
+		</nav>
 
-	<%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
+		<%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
 
-	<div id="sessioninfo">
-		
-			<%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
-			<%= link_to "Profile", settings_path %>
-	</div>
-	<% else %>
-			<div id="sessioninfo">
-			<%= link_to "Sign In", new_user_session_path %>
-			</div>
-	<% end %>		
+		<div id="sessioninfo">
+			
+				<%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+				<%= link_to "Profile", settings_path %>
+		</div>
+		<% else %>
+				<div id="sessioninfo">
+				<%= link_to "Sign In", new_user_session_path %>
+				</div>
+		<% end %>	
+	</div>	
 </header>
 
 <% if flash[:success] %>
