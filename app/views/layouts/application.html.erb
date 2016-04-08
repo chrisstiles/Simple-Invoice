@@ -8,6 +8,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
+<% if flash[:success] %>
+	<div class="success">
+	  <div class="successtimer"></div>
+	  <div class="closesuccess"></div>
+	  <span><%= flash[:success] %></span>
+	</div>
+<% end %>
+
+<div id="pagecontent">
+
+<%= yield %>
+
+</div>
+
 <header>
 	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
 	<div id="menu">
@@ -31,16 +47,6 @@
 		<% end %>	
 	</div>	
 </header>
-
-<% if flash[:success] %>
-	<div class="success">
-	  <div class="successtimer"></div>
-	  <div class="closesuccess"></div>
-	  <span><%= flash[:success] %></span>
-	</div>
-<% end %>
-
-<%= yield %>
 
 </body>
 </html>

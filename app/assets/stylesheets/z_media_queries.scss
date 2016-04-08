@@ -19,8 +19,26 @@
 }
 
 @media screen and (max-width:906px) {
+	header .logo {
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+	}
+
+	#pagecontent {
+		height: calc(100vh - 50px);
+		overflow:scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	header {
+		position:relative;
+		height:50px;
+	}
+
 	#menu {
-		position: fixed;
+		position: static;
 	    bottom: 0;
 	    left: 0;
 	    right: 0;
@@ -28,6 +46,8 @@
 	    z-index: 9999;
 	    border-top:1px solid #D4D4D4;
 	    height:50px;
+	    transform:translate3d(0,0,0);
+	    -webkit-backface-visibility: hidden;
 	}
 
 	nav a, #sessioninfo a {

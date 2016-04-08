@@ -434,6 +434,15 @@ function uploadSuccessful() {
     pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span>Logo was successfully uploaded!</span></div>');
 }
 
+// Show loading spinner when PDF clicked from invoice show page
+
+var loadingSpinnerHtml = '<div class="loadingspinner showloadingspinner"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
+
+$('.viewpdfbutton').on("click", function() {
+	$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300);
+	//$('#invoicewrapper').append(loadingSpinnerHtml);
+});
+
 
 // Select all input
 $('.selectallinput').on('click', function() {
@@ -444,3 +453,10 @@ $('.selectallinput').on('click', function() {
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
+
+// Run this when using the back button and turbolinks loads from cache
+$(document).on('page:restore', function() {
+	$('.showloadingspinner').remove();
+});
+
