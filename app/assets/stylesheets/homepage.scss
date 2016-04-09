@@ -336,6 +336,14 @@ a.thirdbutton {
 	font-size:11px;
 }
 
+#searchresults {
+	padding-top:0;
+}
+
+#searchresults.haspagination {
+	padding-top:70px;
+}
+
 #searchresultswrapper {
 	position:relative;
 	z-index: 301;

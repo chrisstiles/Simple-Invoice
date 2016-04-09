@@ -192,9 +192,9 @@ function setHomePagination() {
 		
 		if ($('.pagination').length) {
 			pagination.show();
-			searchResults.css('padding-top', '70px');
+			searchResults.addClass('haspagination');
 		} else {
-			searchResults.css('padding-top', '0');
+			searchResults.removeClass('haspagination');
 			pagination.hide();
 		}
 

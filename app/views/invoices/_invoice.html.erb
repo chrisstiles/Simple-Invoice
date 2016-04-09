@@ -1,8 +1,12 @@
 
 <a href="<%= invoice_path(invoice.invoice_number) %>" class="mobilehomeinvoice"> 
-<h3><%= invoice.client_name %></h3>
-<p>Total: <strong><%= number_to_currency(invoice.total) %></strong></p>
-<div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+  <div class="mobilebalance">
+    Balance:<br>
+    <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
+  </div>
+  <h3><%= invoice.client_name %></h3>
+  <p>Total: <strong><%= number_to_currency(invoice.total) %></strong></p>
+  <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
 </a>
 
 
