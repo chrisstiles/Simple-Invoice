@@ -1,3 +1,13 @@
+
+<a href="<%= invoice_path(invoice.invoice_number) %>" class="mobilehomeinvoice"> 
+<h3><%= invoice.client_name %></h3>
+<p>Total: <strong><%= number_to_currency(invoice.total) %></strong></p>
+<div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+</a>
+
+
+
+
 <div class="homeinvoice" data-invoice-number="<%= invoice.invoice_number %>">
 
 <div class="homeinvoiceloader"><div class="throbber-loader">Loading...</div></div>

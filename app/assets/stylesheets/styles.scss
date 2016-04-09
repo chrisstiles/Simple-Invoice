@@ -6,12 +6,17 @@ body, html {
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
-	margin:0;
 	background-color:#ecf0f1;
 	font-family: 'Libertad', sans-serif;
+}
+
+#contentwrapper {
+	position:absolute;
+	top:63px;
 }
 
 /* Loading bar */
@@ -20,7 +25,6 @@ html.turbolinks-progress-bar::before {
   height: 2px !important;
   z-index: 9999;
 }
-
 
 #nprogress .peg {
 	box-shadow: 0 0 10px #41A9EE, 0 0 5px #26323F !important;
@@ -1079,3 +1083,61 @@ a.logo img {
 	outline:none;
 	cursor:text;
 }
+
+
+#mobilesidebar span, #mobilesidebar span:before, #mobilesidebar span:after {
+	height:4px;
+	width:24px;
+	background-color:#fff;
+	border-radius:1px;
+	transition: all .2s;
+	position:absolute;
+}
+
+#mobilesidebar {
+	position:absolute;
+	top:15px;
+	left:15px;
+	height:20px;
+	width:24px;
+	display:none;
+}
+
+#mobilesidebar span {
+	top:8px;
+}
+
+#mobilesidebar span:before, #mobilesidebar span:after {
+	content:"";
+	display:block;
+}
+
+#mobilesidebar span:before {
+	top:-8px;
+}
+
+#mobilesidebar span:after {
+	bottom:-8px;
+}
+
+#mobilesidebar:active {
+	opacity:.5;
+}
+
+#mobilesidebar.open span {
+	background-color:transparent;
+	-webkit-backface-visibility:hidden;
+}
+
+#mobilesidebar.open span:before {
+	transform:translateY(8px) rotate(45deg);
+}
+
+#mobilesidebar.open span:after {
+	transform:translateY(-8px) rotate(-45deg);
+}
+
+.mobilehomeinvoice {
+	display:none;
+}
+

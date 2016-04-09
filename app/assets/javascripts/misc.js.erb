@@ -457,7 +457,6 @@ $('.selectallinput').on('click', function() {
 	$(this).select();
 });
 
-
 var selScrollable = '#contentwrapper';
 // Uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
@@ -480,16 +479,22 @@ $('body').on('touchmove', selScrollable, function(e) {
 
 document.addEventListener("touchstart", function(){}, true);
 
-var contentWrapper = $('#contentwrapper');
-var fixedElements = $('#homeside');
+var mobileSidebarWrapper = $('#mobilesidebarwrapper'),
+	contentWrapper = $('#contentwrapper'),
+	mobileSidebarButton = $('#mobilesidebar');
 
-(function() {
-  var target = contentwrapper;
-  fixedElements.scroll(function() {
-    target.prop("scrollTop", this.scrollTop)
-          .prop("scrollLeft", this.scrollLeft);
-  });
-})();
+$('#mobilesidebar').on('click', toggleMobileSidebar);
+$('.closemobilesidebar').on('click', toggleMobileSidebar);
+
+function toggleMobileSidebar() {
+	
+	mobileSidebarButton.toggleClass('open');
+	mobileSidebarWrapper.toggleClass('open');
+	contentWrapper.toggleClass('sidebaropen');
+	homePageWrapper.toggleClass('sidebaropen');
+
+}
+
 
 
 
@@ -504,5 +509,12 @@ $(document).on('page:load', ready);
 $(document).on('page:restore', function() {
 	$('.showloadingspinner').remove();
 	invoiceLoading = false;
+
+	if ($(window).width() <= 1020) {
+		$('#mobilesidebarwrapper > div').css('position', 'static');
+	} else {
+		$('#mobilesidebarwrapper > div').css('position', 'fixed');
+	}
+
 });
 
