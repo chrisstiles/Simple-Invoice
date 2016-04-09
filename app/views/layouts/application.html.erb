@@ -3,6 +3,8 @@
 <head>
   <title>Invoicer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -25,16 +27,15 @@
 	<div id="menu">
 		<% if user_signed_in? %>
 		<nav>
-			<%= link_to "Invoices", invoices_path %>
-			<%= link_to "Clients", clients_path %>
+			<%= link_to "Invoices", invoices_path, class: "navinvoices" %>
+			<%= link_to "Clients", clients_path, class: "navclients" %>
 		</nav>
 
 		<%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
 
 		<div id="sessioninfo">
-			
-				<%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
-				<%= link_to "Profile", settings_path %>
+				<%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "navsignout" %>
+				<%= link_to "Profile", settings_path, class: "navprofile" %>
 		</div>
 		<% else %>
 				<div id="sessioninfo">

@@ -1,3 +1,5 @@
+@import "variables";
+
 @media screen and (max-width:1210px) {
 	#invoicewrapper {
 		width: calc(100% - 408px);
@@ -11,14 +13,55 @@
 	}
 }
 
-@media screen and (max-width:986px) {
+@media screen and (max-width:1100px) {
 	nav a, #sessioninfo a {
 		padding-left:25px;
 		padding-right:25px;
+		background-position:25px center;
+	}
+
+	.navinvoices {
+		padding-left:52px;
+	}
+
+	.navclients {
+		padding-left:54px;
+	}
+
+	#sessioninfo .navprofile {
+		padding-left:54px;
+	}
+
+	#sessioninfo .navsignout {
+		padding-left:55px;
 	}
 }
 
-@media screen and (max-width:906px) {
+@media screen and (max-width:1020px) {
+	body, html {
+		overflow:hidden;
+	}
+
+	#htmlwrapper {
+		position:absolute;
+		top:0;
+		left:0;
+		bottom:0;
+		right:0;
+		overflow:hidden;
+	}
+
+	#contentwrapper {
+		position:absolute;
+		top:63px;
+		right:0;
+		bottom:0;
+		left:0;
+		overflow-y:scroll;
+		overflow-x:hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+
 	#htmlwrapper:before {
 		content:"";
 		display:block;
@@ -63,9 +106,10 @@
 	    -webkit-backface-visibility: hidden;
 	}
 
-	nav a, #sessioninfo a {
+	nav a, #sessioninfo a, header .newinvoiceicon {
 		height:50px;
 		text-align: center;
+		background-position:top 8px center;
 	}
 
 	#sessioninfo {
@@ -75,7 +119,8 @@
 	nav a, #menu a {
 		width:20%;
 		font-size:12px;
-		padding:0;
+		padding:32px 0 0 0 !important;
+		line-height:12px;
 	}
 
 	#sessioninfo a {
@@ -86,7 +131,24 @@
 		margin:0;
 		padding:0;
 		height:50px;
-		background-color:transparent;
-		color:#41a9ee;
+		border-radius:0;
+		position:static;
+		transform:none;
+		background-image:$new-white-icon;
+		background-size:15px 17px;
+		top:auto;
+		background-position: top 10px center;
+	}
+
+	header .newinvoiceicon:before {
+		display:none;
+	}
+
+	.navclients {
+		border-right:none !important;
+	}
+
+	.navprofile {
+		border-left:!important;
 	}
 }

@@ -478,10 +478,22 @@ $('body').on('touchmove', selScrollable, function(e) {
 
 });
 
-
 document.addEventListener("touchstart", function(){}, true);
 
+var contentWrapper = $('#contentwrapper');
+var fixedElements = $('#homeside');
 
+(function() {
+  var target = contentwrapper;
+  fixedElements.scroll(function() {
+    target.prop("scrollTop", this.scrollTop)
+          .prop("scrollLeft", this.scrollLeft);
+  });
+})();
+
+
+
+// End misc.js
 };
 
 $(document).ready(ready);
