@@ -18,11 +18,7 @@
 	</div>
 <% end %>
 
-<div id="pagecontent">
-
-<%= yield %>
-
-</div>
+<div id="htmlwrapper">
 
 <header>
 	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
@@ -47,6 +43,15 @@
 		<% end %>	
 	</div>	
 </header>
+
+<div id="contentwrapper">
+
+	<%= yield %>
+
+</div>
+
+
+</div>
 
 </body>
 </html>

@@ -19,22 +19,35 @@
 }
 
 @media screen and (max-width:906px) {
-	header .logo {
+	#htmlwrapper:before {
+		content:"";
+		display:block;
 		position:absolute;
 		top:0;
-		right:0;
 		left:0;
+		right:0;
+		height:50px;
+		background-image:asset-url('logo.png');
+		background-size:100px 25px;
+		background-repeat:no-repeat;
+		background-position:center center;
+		background-color:#41a9ee;
 	}
 
-	#pagecontent {
-		height: calc(100vh - 50px);
-		overflow:scroll;
-		-webkit-overflow-scrolling: touch;
+	header .logo {
+		display:none;
+	}
+
+	#contentwrapper {
+		top:50px;
+		bottom:50px;
 	}
 
 	header {
-		position:relative;
+		bottom:0;
+		top:auto;
 		height:50px;
+		position:absolute;
 	}
 
 	#menu {
@@ -61,6 +74,8 @@
 
 	nav a, #menu a {
 		width:20%;
+		font-size:12px;
+		padding:0;
 	}
 
 	#sessioninfo a {

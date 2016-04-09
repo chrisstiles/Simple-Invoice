@@ -19,7 +19,7 @@ function setClientFilter() {
 	var width = clientContainer.outerWidth();
 	var clientContainerPosition = clientContainer.offset();
 
-	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight() + 63);
+	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight());
 
 	clientSearch.css({
 		'left': clientContainerPosition.left,
