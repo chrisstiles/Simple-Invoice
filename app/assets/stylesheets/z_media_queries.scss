@@ -11,6 +11,13 @@
 	#invoicewrapper.show {
 		width: calc(100% - 358px);
 	}
+
+	#toolbarcontent {
+		width: calc(100% - 358px);
+		left: 0;
+	    margin-left: 320px;
+	    max-width: none;
+	}
 }
 
 @media screen and (max-width:1100px) {
@@ -271,6 +278,48 @@
 		padding-top:30px;
 	}
 
+	#toolbar {
+		top:50px;
+		height:54px;
+		background-color:#fff;
+		border-bottom:1px solid #dedede;
+	}
+
+	#toolbarcontent {
+		height:54px;
+		width:auto;
+		margin: 0 25px;
+	}
+
+	#invoicewrapper, #invoicewrapper.show {
+		width:auto;
+		top:81px;
+		margin:0 25px 25px 25px;
+	}
+
+	#sidebar, .scrollwrapper {
+		position:relative;
+		width:auto;
+		overflow:hidden;
+		background-color:#26323f;
+		top:0;
+	}
+
+	#mobilesidebarwrapper.invoicesidebar {
+		padding:0;
+	}
+
+	#mobilesidebarwrapper .button.deleteinvoice {
+		position:relative;
+		left:0;
+		right:0;
+		margin:25px 15px 10px 15px;
+	}
+
+	#publicurlinput {
+
+	}
+
 }
 
 @media screen and (max-width:700px) {
@@ -322,6 +371,7 @@
 		font-size:31px;
 		font-weight:400 !important;
 	}
+
 
 }
 

@@ -901,7 +901,9 @@ ready = function() {
 					$this.next('br').remove();
 				}
 
-				$this.remove();
+				if (!$this.parent().is('#mobilesidebar')) {
+					$this.remove();
+				}
 			}
 
 		});

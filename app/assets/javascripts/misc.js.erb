@@ -453,9 +453,31 @@ $('.viewpdfbutton').on("click", function(e) {
 
 
 // Select all input
-$('.selectallinput').on('click', function() {
-	$(this).select();
+$('.selectallinput').on('click touchstart', function() {
+	var id = $(this).attr("id");
+	var input = document.getElementById(id);
+	$(this).focus();
+    input.setSelectionRange(0,9999);
+
 });
+
+function SelectText(element) {
+    var doc = document,
+        text = doc.getElementById(element),
+        range,
+        selection;
+    if (doc.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if (window.getSelection) {
+        selection = window.getSelection();        
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+}
 
 var selScrollable = '#contentwrapper, #mobilesidebarwrapper';
 // Uses document because document will be topmost level in bubbling

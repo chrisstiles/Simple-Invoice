@@ -47,6 +47,11 @@ html.turbolinks-progress-bar::before {
 	padding-left:29px;
 }
 
+#mobilesidebarwrapper {
+	position:relative;
+	z-index: 220;
+}
+
 /***********/
 /* Header */
 /***********/
@@ -497,6 +502,7 @@ a.logo img {
 	background-repeat:no-repeat;
 	border-top:1px solid rgba(255,255,255,.08);
 	line-height:1;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 .showeditinvoicebutton {

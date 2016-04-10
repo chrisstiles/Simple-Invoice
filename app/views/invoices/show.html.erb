@@ -21,53 +21,55 @@
   </div>
 </div>
 
-<aside id="sidebar">
-    <div class="scrollwrapper">
-      <div id="controls">
-      <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
-      <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton showeditinvoicebutton" %>
-      <a href="#" class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
-      <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton viewpdfbutton" %>
-      <h2>
-        Record Payment
-        <span class="showduedate"><%= @invoice.print_days_until_due %></span>
-      </h2>
-      <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
+<div id="mobilesidebarwrapper" class="invoicesidebar">
+  <aside id="sidebar">
+      <div class="scrollwrapper">
+        <div id="controls">
+        <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
+        <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton showeditinvoicebutton" %>
+        <a href="#" class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
+        <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton viewpdfbutton" %>
+        <h2>
+          Record Payment
+          <span class="showduedate"><%= @invoice.print_days_until_due %></span>
+        </h2>
+        <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
 
-      <div id="showrecordpayment">
-        <div class="row invoicetotalrow">
-          <div class="cell">Invoice Total</div>
-          <div class="cell invoicetotalcell"><%= number_to_currency(@invoice.total) %></div>
-        </div>
-        <div class="row amountpaidrow">
-          <div class="cell amountpaidlabel">- Amount Paid</div>
-          <div class="cell">
-             <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
-             <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]">
-              <%= number_with_precision(@invoice.amount_paid, precision: 2) %>
-              </span>
+        <div id="showrecordpayment">
+          <div class="row invoicetotalrow">
+            <div class="cell">Invoice Total</div>
+            <div class="cell invoicetotalcell"><%= number_to_currency(@invoice.total) %></div>
+          </div>
+          <div class="row amountpaidrow">
+            <div class="cell amountpaidlabel">- Amount Paid</div>
+            <div class="cell">
+               <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
+               <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]">
+                <%= number_with_precision(@invoice.amount_paid, precision: 2) %>
+                </span>
+            </div>
+          </div>
+          <div class="row balancerow">
+            <div class="cell">Invoice Balance</div>
+            <div class="cell balancecell"><%= number_to_currency(@invoice.balance) %></div>
           </div>
         </div>
-        <div class="row balancerow">
-          <div class="cell">Invoice Balance</div>
-          <div class="cell balancecell"><%= number_to_currency(@invoice.balance) %></div>
+         <%= f.submit 'Record Payment', class: "button small greenbutton recordpaymentbutton willload" %>
+          </div>
+         
+        <% end %>
+
+        <div id="publicurl">
+          <div>Public URL</div>
+          <input type="text" id="publicurlinput" class="selectallinput" value="<%= display_public_invoice_url(@invoice) %>"  readonly />
         </div>
+
+
+        <div class="button deleteinvoice deleteicon" data-invoicenumber="<%= @invoice.invoice_number %>">Delete Invoice</div>
+
       </div>
-       <%= f.submit 'Record Payment', class: "button small greenbutton recordpaymentbutton willload" %>
-        </div>
-       
-      <% end %>
-
-      <div id="publicurl">
-        <div>Public URL</div>
-        <input type="text" class="selectallinput" value="<%= display_public_invoice_url(@invoice) %>" readonly />
-      </div>
-
-
-      <div class="button deleteinvoice deleteicon" data-invoicenumber="<%= @invoice.invoice_number %>">Delete Invoice</div>
-
-    </div>
-</aside>
+  </aside>
+</div>
 
 <!-- Start Invioce -->
 
