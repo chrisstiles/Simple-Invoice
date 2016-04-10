@@ -560,7 +560,7 @@ input[type="checkbox"]:checked + label span:before {
 	background-color:#ecf0f1;
 	padding: 40px 15px 0px 100px;
     box-sizing: border-box;
-    z-index: 200;
+    z-index: 400;
 }
 
 #homepagination:after {
@@ -595,6 +595,7 @@ input[type="checkbox"]:checked + label span:before {
 	font-weight:bold;
 	font-style:normal;
 	position:relative;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .pagination a {

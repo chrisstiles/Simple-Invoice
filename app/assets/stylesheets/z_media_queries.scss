@@ -46,7 +46,7 @@
 	}
 
 	#htmlwrapper {
-		position:absolute;
+		position:fixed;
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
 		-webkit-overflow-scrolling: touch;
@@ -61,7 +61,7 @@
 	}
 
 	#contentwrapper {
-		position:absolute;
+		position:fixed;
 		top:63px;
 		right:0;
 		bottom:0;

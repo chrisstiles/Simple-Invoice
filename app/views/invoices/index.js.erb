@@ -1,5 +1,6 @@
 <% js = escape_javascript(render 'list') %>
 $("#searchresults").html("<%= js %>");
+$('#homepagination').remove();
 
 $('#loadingspinner').hide();
 
@@ -37,6 +38,8 @@ function setHomePagination() {
 		searchResults.removeClass('haspagination');
 		pagination.hide();
 	}
+
+	$('#homepagination').detach().prependTo('body');
 }
 
 if (homePageWrapper.length) {
