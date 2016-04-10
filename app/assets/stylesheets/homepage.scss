@@ -417,6 +417,10 @@ a.noborder {
 	border-bottom:1px solid #c9c9c9;
 }
 
+.homefiltersection {
+	padding-bottom:14px;
+}
+
 #homeside > div:last-child {
 	border-bottom:none !important;	
 }
@@ -485,9 +489,16 @@ a.noborder {
 	z-index: 500;
 }
 
+.checkboxholder label:after {
+	clear:both;
+	content:"";
+	display:block;
+}
+
 input[type="checkbox"] {
     display:none;
     float:left;
+    -webkit-appearance: none;
 }
 
 input[type="checkbox"] + label {
@@ -495,15 +506,21 @@ input[type="checkbox"] + label {
 }
 
 input[type="checkbox"] + label div {
-	position:absolute;
-	left:30px;
+	float:left;
+	position:relative;
 	font-size: 14px;
 	top:0;
+	z-index: 400;
+	width:calc(100% - 34px);
+	margin-left:9px;
+	margin-top:-3px;
 }
 
 input[type="checkbox"] + label span {
     display:inline-block;
+    float:left;
     font-weight:400;
+    z-index: 400;
     width:19px;
     height:19px;
     margin:-1px 4px 0 0;

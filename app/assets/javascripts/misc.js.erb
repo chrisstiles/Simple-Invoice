@@ -500,6 +500,22 @@ $('#homepagination').detach().prependTo('body');
 $('#mobilesidebarwrapper').detach().prependTo('body');
 
 
+// iOS does not select custom checkboxes, so we have to check to manually ensure that the value changes on click
+
+$('.checkboxholder label').on('click', function(e) {
+	e.preventDefault();
+	var checkBox = $(this).prevAll(':checkbox');
+	var isChecked = checkBox.is(':checked');
+	
+	if (isChecked) {
+		checkBox.prop('checked', false);
+	} else {
+		checkBox.prop('checked', true);
+	}
+
+});
+
+
 // End misc.js
 };
 

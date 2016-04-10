@@ -2,7 +2,7 @@
    <% if current_user.invoices.where(archived: false).any? %>
    <div id="mobilesidebarwrapper">
       <div id="homeside">
-        <div class="homesidesection">
+        <div class="homesidesection homefiltersection">
            <h3>Filter Invoices</h3>
            <form accept-charset="UTF-8" action="/invoices" method="get" class="homefilter">
               <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
@@ -19,7 +19,7 @@
                  </select>
               </div>
               <div class="checkboxholder">
-                 <input type="checkbox" id="c1" name="currently_due" onclick=" " class="search invoice_show_currently_due searchchange" />
+                 <input type="checkbox" id="c1" name="currently_due" class="search invoice_show_currently_due searchchange" />
                  <label for="c1">
                     <span></span>
                     <div>Only show invoices currently due and not paid in full.</div>
