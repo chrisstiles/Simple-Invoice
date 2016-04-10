@@ -161,7 +161,7 @@
 	width:100%;
 }
 
-.clientsformwrapper input[type="text"] {
+.clientsformwrapper input[type="text"], .clientsformwrapper input[type="password"] {
 	margin-bottom: 10px;
     display: block;
     outline: none;
@@ -176,16 +176,16 @@
     font-size: 15px;
 }
 
-.clientsformwrapper input[type="text"]:focus {
+.clientsformwrapper input[type="text"]:focus, .clientsformwrapper input[type="password"]:focus {
 	border: 1px solid #41a9ee;
 }
 
-.clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror {
+.clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror, .clientsformwrapper input[type="password"].haserror {
 	border:1px solid #c47375;
 	background-color:#fff !important;
 }
 
-.clientsformwrapper input[type="text"].haserror:focus, .sendemailform input[type="text"].haserror:focus, #modalcontent .selectize-input.input-active.haserror {
+.clientsformwrapper input[type="text"].haserror:focus, .sendemailform input[type="text"].haserror:focus, #modalcontent .selectize-input.input-active.haserror, .clientsformwrapper input[type="password"].haserror:focus {
 	border:1px solid #df4535 !important;
 }
 
@@ -196,10 +196,10 @@
 
 .clientsformwrapper .half {
 	width:calc(50% - 11px);
-	margin-right:22px;
-	float:left;
-	display:block;
+	margin-right:18px;
+	display:inline-block;
 	height:64px;
+	vertical-align:top;
 }
 
 .full {

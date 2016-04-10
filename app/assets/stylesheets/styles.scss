@@ -1100,15 +1100,16 @@ a.logo img {
 
 #mobilesidebar {
 	position:absolute;
-	top:15px;
-	left:15px;
-	height:20px;
-	width:24px;
+	top:0;
+	left:0;
+	height:50px;
+	width:54px;
 	display:none;
 }
 
 #mobilesidebar span {
-	top:8px;
+	top:23px;
+	left:15px;
 }
 
 #mobilesidebar span:before, #mobilesidebar span:after {

@@ -482,6 +482,7 @@ a.noborder {
 .checkboxholder {
 	position:relative;
 	margin-top:15px;
+	z-index: 500;
 }
 
 input[type="checkbox"] {

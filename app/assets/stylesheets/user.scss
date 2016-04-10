@@ -542,7 +542,7 @@
 }
 
 #profiletax {
-  min-height:150px;
+  min-height:56px;
 }
 
 #userpreferences #hastaxwrapper {
@@ -580,7 +580,14 @@
   margin-bottom:0;
 }
 
+#settingfields {
+  position:relative;
+  top:-10px;
+}
 
-
+#userpreferences {
+  position:relative;
+  top:4px;
+}
 
 

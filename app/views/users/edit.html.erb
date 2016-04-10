@@ -18,76 +18,100 @@
 		<div class="formholder">
 
 			<%= form_for(@user, remote: true) do |f| %>
-				<%= f.text_field :name, placeholder: "Name" %>
-				
-				<div class="half">
-					<%= f.label :email %>
-					<%= f.text_field :email, placeholder: "Email" %>
-				</div>
+				<div id="profilefields">
 
-				<div class="half nomargin">
-					<%= f.label :phone %>
-					<%= f.text_field :phone, placeholder: "Phone Number" %>
-				</div>
-
-				<div class="half">
-					<%= f.label :address %>
-					<%= f.text_field :address, placeholder: "Address" %>
-				</div>
-
-				<div class="half nomargin">
-					<%= f.label :city %>
-					<%= f.text_field :city, placeholder: "City" %>
-				</div>
-
-				<div class="half">
-					<%= f.label :state %>
-					<%= f.select :state, options_for_select(us_states, selected: @user.state), prompt: "Select a state", class: "half" %>
-				</div>
-
-				<div class="half nomargin">
-					<%= f.label :zip %>
-					<%= f.text_field :zip, placeholder: "Zip Code" %>
-				</div>
-
-				<div class="clientformtitle">Preferences</div>
-
-				<div id="userpreferences">
-					<%= f.fields_for :setting, @setting do |c| %>
-						<div class="half">
-							<%= c.label :base_invoice_number %>
-							<%= c.text_field :base_invoice_number, class: "onlynumber" %>
-						</div>
-						
-						<div id="profiletax" class="full">
-							<div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
-							<div id="hastaxwrapper">
-					            <%= c.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>
-					            <%= c.label :has_tax, '', class: "cmn-toggle-1" %>
-					          </div>
-					          <div id="taxinformation">
-					            <div class="taxamount">
-					            	<%= c.label :tax, 'Tax Amount' %>
-					             	<%= c.text_field :tax, class: "tax-rate-box onlynumber", maxlength: 11  %>
-					            </div>
-					            <div class="taxincluded">
-					              <div class="checkboxholder">
-					                <%= c.check_box :tax_included, class: "includedtoggle" %>
-					                <label for="user_setting_attributes_tax_included"><span></span>
-					                  <div>
-					                    <div>Tax Inclusive:</div><br>
-					                    <div class="inclusiontext">Do not include tax in invoice total</div>
-					                  </div>
-					                </label>
-					              </div>
-					            </div>
-					          </div>
-						</div>
-					<% end %>
-					<div class="full">
-						<%= f.submit "Save Profile", class: "button blue willload saveicon" %>
+					<%= f.text_field :name, placeholder: "Name" %>
+					
+					<div class="half">
+						<%= f.label :email %>
+						<%= f.text_field :email, placeholder: "Email" %>
 					</div>
+
+					<div class="half nomargin">
+						<%= f.label :phone %>
+						<%= f.text_field :phone, placeholder: "Phone Number" %>
+					</div>
+
+					<div class="half">
+						<%= f.label :address %>
+						<%= f.text_field :address, placeholder: "Address" %>
+					</div>
+
+					<div class="half nomargin">
+						<%= f.label :city %>
+						<%= f.text_field :city, placeholder: "City" %>
+					</div>
+
+					<div class="half">
+						<%= f.label :state %>
+						<%= f.select :state, options_for_select(us_states, selected: @user.state), prompt: "Select a state", class: "half" %>
+					</div>
+
+					<div class="half nomargin">
+						<%= f.label :zip %>
+						<%= f.text_field :zip, placeholder: "Zip Code" %>
+					</div>
+
 				</div>
+
+				<div id="settingfields">
+				
+					<div class="clientformtitle">Change Password</div>
+
+					<div class="half">
+						<%= f.label :password %>
+		    			<%= f.password_field :password, autocomplete: "off" %>
+	    			</div>
+
+	    			<div class="half nomargin">
+	    				<%= f.label :password_confirmation %>
+	   					<%= f.password_field :password_confirmation, autocomplete: "off" %>
+	   				</div>
+
+	   				<div id="userpreferences">
+
+						<div class="clientformtitle">Preferences</div>
+					
+						<%= f.fields_for :setting, @setting do |c| %>
+							<div class="half">
+								<%= c.label :base_invoice_number %>
+								<%= c.text_field :base_invoice_number, class: "onlynumber" %>
+							</div>
+
+							<div class="half nomargin">
+								<div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
+								<div id="hastaxwrapper">
+						            <%= c.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>
+						            <%= c.label :has_tax, '', class: "cmn-toggle-1" %>
+						          </div>
+							</div>
+							
+							<div id="profiletax" class="full">
+						          <div id="taxinformation">
+						            <div class="taxamount">
+						            	<%= c.label :tax, 'Tax Amount' %>
+						             	<%= c.text_field :tax, class: "tax-rate-box onlynumber", maxlength: 11  %>
+						            </div>
+						            <div class="taxincluded">
+						              <div class="checkboxholder">
+						                <%= c.check_box :tax_included, class: "includedtoggle" %>
+						                <label for="user_setting_attributes_tax_included"><span></span>
+						                  <div>
+						                    <div>Tax Inclusive:</div><br>
+						                    <div class="inclusiontext">Do not include tax in invoice total</div>
+						                  </div>
+						                </label>
+						              </div>
+						            </div>
+						          </div>
+							</div>
+						<% end %>
+						<div class="full">
+							<%= f.submit "Save Profile", class: "button blue willload saveicon" %>
+						</div>
+					</div>
+
+				</div>	
 
 			<% end %>
 

@@ -14,8 +14,10 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		remove_password_param_if_blank
 		respond_to do |format|
 			if @user.update(user_params)
+				sign_in :user, @user, bypass: true
 				flash[:success] = 'Profile successfully updated!'
           		flash.keep(:success)
 				format.html { redirect_to edit_user_path }
@@ -36,7 +38,14 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, setting_attributes: [:id, :base_invoice_number, :has_tax, :tax, :tax_included])
+			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, :password, :password_confirmation, setting_attributes: [:id, :base_invoice_number, :has_tax, :tax, :tax_included])
+		end
+
+		def remove_password_param_if_blank
+			if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+				params[:user].delete(:password)
+				params[:user].delete(:password_confirmation)
+			end
 		end
 
 		#def normalize_blank_values
