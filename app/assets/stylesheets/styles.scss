@@ -12,6 +12,7 @@ body, html {
 body {
 	background-color:#ecf0f1;
 	font-family: 'Libertad', sans-serif;
+	-webkit-text-size-adjust: 100%;
 }
 
 #contentwrapper {
@@ -337,6 +338,15 @@ nav a:active, #sessioninfo a:active {
 	width:auto;
 }
 
+body.ios .button.deleteinvoice {
+	position:relative;
+	margin-top:25px;
+	left:15px;
+	right:auto;
+	width:252px;
+	box-sizing:border-box;
+}
+
 .button.deleteclient {
 	position:relative;
 	float:left;
@@ -496,7 +506,7 @@ a.logo img {
 	display:block;
 	color:#fff;
 	font-weight:600;
-	font-size:14px;
+	font-size:14px !important;
 	text-decoration: none;
 	padding:13px 22px 14px 45px;
 	background-repeat:no-repeat;

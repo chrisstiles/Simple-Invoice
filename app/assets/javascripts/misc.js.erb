@@ -34,8 +34,24 @@ pageBody.on('submit', 'form', function(e) {
 
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
-pageBody.on('click', '.thirdbutton.file', function() {
-	$(this).siblings('.homeinvoiceloader').fadeIn(200);
+
+
+
+var homeInvoiceLoading = false;
+
+pageBody.on('click', '.thirdbutton.file', function(e) {
+	var $this = $(this);
+	if (!invoiceLoading) {
+		invoiceLoading = true;
+		e.preventDefault();
+		var url = $(this).attr('href');
+		$this.siblings('.homeinvoiceloader').fadeIn(200, function() {
+			window.location.href = url;
+		});
+	} else {
+		e.preventDefault();
+	}
+	
 });
 
 // Remove success modal when close is clicked
@@ -442,42 +458,28 @@ var loadingSpinnerHtml = '<div class="loadingspinner showloadingspinner"> <div c
 var invoiceLoading = false;
 $('.viewpdfbutton').on("click", function(e) {
 	if (!invoiceLoading) {
-		$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300);
 		invoiceLoading = true;
+		e.preventDefault();
+		var url = $(this).attr('href');
+		$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300, function() {
+			window.location.href = url;
+		});
 	} else {
 		e.preventDefault();
 	}
 	
-	//$('#invoicewrapper').append(loadingSpinnerHtml);
 });
 
 
 // Select all input
-$('.selectallinput').on('click touchstart', function() {
+$('.selectallinput').on('click touchstart', function(e) {
+	e.preventDefault();
 	var id = $(this).attr("id");
 	var input = document.getElementById(id);
 	$(this).focus();
     input.setSelectionRange(0,9999);
-
 });
 
-function SelectText(element) {
-    var doc = document,
-        text = doc.getElementById(element),
-        range,
-        selection;
-    if (doc.body.createTextRange) {
-        range = document.body.createTextRange();
-        range.moveToElementText(text);
-        range.select();
-    } else if (window.getSelection) {
-        selection = window.getSelection();        
-        range = document.createRange();
-        range.selectNodeContents(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    }
-}
 
 var selScrollable = '#contentwrapper, #mobilesidebarwrapper';
 // Uses document because document will be topmost level in bubbling
@@ -518,6 +520,7 @@ function toggleMobileSidebar() {
 }
 
 
+
 $('#homepagination').detach().prependTo('body');
 $('#mobilesidebarwrapper').detach().prependTo('body');
 
@@ -555,6 +558,8 @@ $(document).on('page:restore', function() {
 	} else {
 		$('#mobilesidebarwrapper > div').css('position', 'fixed');
 	}
+
+
 
 });
 

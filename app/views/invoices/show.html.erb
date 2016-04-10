@@ -62,6 +62,7 @@
         <div id="publicurl">
           <div>Public URL</div>
           <input type="text" id="publicurlinput" class="selectallinput" value="<%= display_public_invoice_url(@invoice) %>"  readonly />
+          <%= link_to display_public_invoice_url(@invoice), display_public_invoice_url(@invoice), class: "mobilepublicurl" %>
         </div>
 
 

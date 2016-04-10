@@ -845,3 +845,7 @@ input.cmn-toggle-round:checked + label:after {
 	transform:translate(-50%,-50%) scale(1.3);
 	background-color:transparent;
 }
+
+.mobilepublicurl {
+	display:none;
+}

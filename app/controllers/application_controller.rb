@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
+  before_action :get_users_browser, only: [:show, :edit, :new, :index]
 
   skip_before_action :authenticate_user!, if: lambda {
   	if params[:token] && (request.original_url.include? "/pdfs/") && ("show".include? action_name)
@@ -46,6 +47,9 @@ class ApplicationController < ActionController::Base
 	  	end
 	  end
 
+	  def get_users_browser
+	  	@browser = browser || ''
+	  end
 
   
 end

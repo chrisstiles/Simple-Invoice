@@ -174,7 +174,7 @@
 	}
 
 	#mobilesidebarwrapper {
-		position: fixed;
+		position: absolute;
 	    background: #26323f;
 	    top: 50px;
 	    right: 0;
@@ -314,10 +314,23 @@
 		left:0;
 		right:0;
 		margin:25px 15px 10px 15px;
+		width:auto;
+	}
+
+	#invoiceswrapper {
+		text-align: center;
 	}
 
 	#publicurlinput {
+		display:none;
+	}
 
+	.mobilepublicurl {
+		color: #41A9EE;
+		text-decoration: none;
+		word-break: break-all;
+		display:block;
+		margin-top:-5px;
 	}
 
 }

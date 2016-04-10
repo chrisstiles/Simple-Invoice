@@ -39,6 +39,9 @@ gem 'cancancan', '~> 1.10'
 # Fastclick for mobile browsers
 gem 'fastclick-rails'
 
+# Detect user's browser
+gem 'browser'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
