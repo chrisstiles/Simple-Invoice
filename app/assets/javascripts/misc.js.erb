@@ -551,6 +551,7 @@ $(document).on('page:load', ready);
 // Run this when using the back button and turbolinks loads from cache
 $(document).on('page:restore', function() {
 	$('.showloadingspinner').remove();
+	$('.homeinvoiceloader').hide();
 	invoiceLoading = false;
 
 	if ($(window).width() <= 1020) {

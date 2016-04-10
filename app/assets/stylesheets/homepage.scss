@@ -604,7 +604,9 @@ input[type="checkbox"]:checked + label span:before {
 
 .pagination > * {
 	padding:0 15px;
-	line-height:33px;
+	//line-height:33px;
+	height:33px;
+	vertical-align:middle;
 	display:table-cell;
 	border:1px solid #c9c9c9;
 	background-clip:padding-box;
@@ -643,7 +645,8 @@ input[type="checkbox"]:checked + label span:before {
 	background-size:10px 16px;
 	overflow:hidden;
 	position:relative;
-	top:13px;
+	//top:13px;
+	top:6px;
 }
 
 .previous_page:before {

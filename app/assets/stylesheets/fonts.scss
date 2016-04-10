@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-extrabold.eot');
+    src: asset-data-url('libertad-extrabold.eot');
     src: font-url('libertad-extrabold.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-extrabold.svg#Libertad') format("svg"),
-         font-url('libertad-extrabold.woff2') format("woff2"),
-         font-url('libertad-extrabold.woff') format("woff"),
-         font-url('libertad-extrabold.ttf') format("truetype");
+         asset-data-url('libertad-extrabold.woff2') format("woff2"),
+         asset-data-url('libertad-extrabold.woff') format("woff"),
+         asset-data-url('libertad-extrabold.ttf') format("truetype");
     font-weight: 800;
     font-style: normal;
 
@@ -14,12 +14,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-bold.eot');
+    src: asset-data-url('libertad-bold.eot');
     src: font-url('libertad-bold.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-bold.svg#Libertad') format("svg"),
-         font-url('libertad-bold.woff2') format("woff2"),
-         font-url('libertad-bold.woff') format("woff"),
-         font-url('libertad-bold.ttf') format("truetype");
+         asset-data-url('libertad-bold.woff2') format("woff2"),
+         asset-data-url('libertad-bold.woff') format("woff"),
+         asset-data-url('libertad-bold.ttf') format("truetype");
     font-weight: 700;
     font-style: normal;
 
@@ -28,12 +28,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-bolditalic.eot');
+    src: asset-data-url('libertad-bolditalic.eot');
     src: font-url('libertad-bolditalic.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-bolditalic.svg#Libertad') format("svg"),
-         font-url('libertad-bolditalic.woff2') format("woff2"),
-         font-url('libertad-bolditalic.woff') format("woff"),
-         font-url('libertad-bolditalic.ttf') format("truetype");
+         asset-data-url('libertad-bolditalic.woff2') format("woff2"),
+         asset-data-url('libertad-bolditalic.woff') format("woff"),
+         asset-data-url('libertad-bolditalic.ttf') format("truetype");
     font-weight: 700;
     font-style: italic;
 
@@ -42,12 +42,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-italic.eot');
+    src: asset-data-url('libertad-italic.eot');
     src: font-url('libertad-italic.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-italic.svg#Libertad') format("svg"),
-         font-url('libertad-italic.woff2') format("woff2"),
-         font-url('libertad-italic.woff') format("woff"),
-         font-url('libertad-italic.ttf') format("truetype");
+         asset-data-url('libertad-italic.woff2') format("woff2"),
+         asset-data-url('libertad-italic.woff') format("woff"),
+         asset-data-url('libertad-italic.ttf') format("truetype");
     font-weight: 400;
     font-style: italic;
 
@@ -56,12 +56,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad.eot');
+    src: asset-data-url('libertad.eot');
     src: font-url('libertad.eot?#iefix') format("embedded-opentype"),
          font-url('libertad.svg#Libertad') format("svg"),
-         font-url('libertad.woff2') format("woff2"),
-         font-url('libertad.woff') format("woff"),
-         font-url('libertad.ttf') format("truetype");
+         asset-data-url('libertad.woff2') format("woff2"),
+         asset-data-url('libertad.woff') format("woff"),
+         asset-data-url('libertad.ttf') format("truetype");
     font-weight: 400;
     font-style: normal;
 
@@ -70,12 +70,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-lightitalic.eot');
+    src: asset-data-url('libertad-lightitalic.eot');
     src: font-url('libertad-lightitalic.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-lightitalic.svg#Libertad') format("svg"),
-         font-url('libertad-lightitalic.woff2') format("woff2"),
-         font-url('libertad-lightitalic.woff') format("woff"),
-         font-url('libertad-lightitalic.ttf') format("truetype");
+         asset-data-url('libertad-lightitalic.woff2') format("woff2"),
+         asset-data-url('libertad-lightitalic.woff') format("woff"),
+         asset-data-url('libertad-lightitalic.ttf') format("truetype");
     font-weight: 300;
     font-style: italic;
 
@@ -84,12 +84,12 @@
 
 @font-face {
     font-family: 'Libertad';
-    src: font-url('libertad-light.eot');
+    src: asset-data-url('libertad-light.eot');
     src: font-url('libertad-light.eot?#iefix') format("embedded-opentype"),
          font-url('libertad-light.svg#Libertad') format("svg"),
-         font-url('libertad-light.woff2') format("woff2"),
-         font-url('libertad-light.woff') format("woff"),
-         font-url('libertad-light.ttf') format("truetype");
+         asset-data-url('libertad-light.woff2') format("woff2"),
+         asset-data-url('libertad-light.woff') format("woff"),
+         asset-data-url('libertad-light.ttf') format("truetype");
     font-weight: 300;
     font-style: normal;
 
