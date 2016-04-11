@@ -40,4 +40,12 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def current_logo
+		unless self.logos.empty?
+			self.logos.where(current_logo: true).first
+		else
+			''
+		end
+	end
+
 end

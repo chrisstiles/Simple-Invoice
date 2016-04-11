@@ -324,6 +324,7 @@ html.noscroll {
 input[type="text"].modalinput {
 	height:42px;
 	max-width:245px;
+  -webkit-appearance: none;
 }
 
  .modalinput {
@@ -357,6 +358,7 @@ input[type="text"].modalinput {
 	font-size:13px;
 	line-height: 1.5em;
 	padding:9px 13px;
+  -webkit-appearance: none;
 }
 
 .sendemailform label.messagelabel {

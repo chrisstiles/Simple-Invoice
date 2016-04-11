@@ -1,11 +1,11 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
 
-  before_action :amount_paid_nil_to_zero, only: [:update]
+  #before_action :amount_paid_nil_to_zero, only: [:update]
 
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
-  after_action :set_invoice_balance, only: [:update]
+  after_action :set_logo_dimensions, only: [:create, :update]
 
   def index
    @invoices = current_user.invoices.where(archived: false).page(params[:page])
@@ -170,7 +170,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :logo, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :logo, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     # def email_invoice_params
@@ -245,7 +245,7 @@ class InvoicesController < ApplicationController
       client_id = @invoice.client_id
       client_name = @invoice.client_name
       client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
-      #client = current_user.clients.find_by(name: client_name)
+
       unless client.nil?
         @invoice.client_name = client.name
       end
@@ -258,18 +258,16 @@ class InvoicesController < ApplicationController
       @invoice.amount_paid = 0
     end
 
-    def set_invoice_balance
-      if @invoice.amount_paid.present? && @invoice.amount_paid > 0
-        @invoice.balance = @invoice.total - @invoice.amount_paid
-      else
-        @invoice.amount_paid = 0
-        @invoice.balance = @invoice.total
-      end
-    end
+    def set_logo_dimensions
+      if @invoice.logo.to_s == current_user.display_logo.to_s && params[:invoice][:logo_width].present? && params[:invoice][:logo_height].present? && current_user.logos.present? && @invoice.valid?
+        print "THE SAMEEEE"
 
-    def amount_paid_nil_to_zero
-      if @invoice.amount_paid.nil?
-        @invoice.amount_paid = 0
+        logo = current_user.current_logo
+
+        logo.logo_width = params[:invoice][:logo_width]
+        logo.logo_height = params[:invoice][:logo_height]
+        logo.save
+
       end
     end
 

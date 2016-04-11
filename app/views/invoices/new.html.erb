@@ -83,8 +83,13 @@
               <div id="invoicelogo">
                   <%= f.hidden_field :logo, value: current_user.display_logo.url %>
 
+                  <%= f.hidden_field :logo_width, value: current_user.current_logo.logo_width, class: "logowidthfield" %>
+                  <%= f.hidden_field :logo_height, value: current_user.current_logo.logo_height, class: "logoheightfield" %>
+
                   <div id="haslogo">
-                  <%= image_tag current_user.display_logo.url %>
+                    <div id="logoresize">
+                      <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: current_user.current_logo.logo_width, height: current_user.current_logo.logo_height } %>
+                    </div>
                   <div id="removelogobutton" class="removelogo">
                     <span>Remove Logo</span>
                   </div>

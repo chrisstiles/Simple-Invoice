@@ -318,6 +318,65 @@ ready = function() {
 		});
 
 
+	// Set initial logo dimensions
+
+	var invoiceLogoImage = $('.invoicelogoimage');
+	if (invoiceLogoImage.length) {
+
+		var targetWidth = parseInt(invoiceLogoImage.attr('data-width'));
+		var targetHeight = parseInt(invoiceLogoImage.attr('data-height'));
+	
+		if (!isNaN(targetWidth) && !isNaN(targetHeight)) {
+
+			if (creating || editing) {
+				// Creating and Editing Pages
+				var logoWrapper = $('#logoresize');
+				var logoWrapperWidth = logoWrapper.width();
+				if (targetWidth <= logoWrapperWidth) {
+					invoiceLogoImage.css({
+						width: targetWidth,
+						height: targetHeight
+					});
+					logoWrapper.css({
+						width: targetWidth,
+						height: targetHeight
+					});
+				} else {
+					invoiceLogoImage.css({
+						width: logoWrapperWidth,
+						height: 'auto'
+					});
+					logoWrapper.css({
+						width: logoWrapperWidth,
+						height: 'auto'
+					});
+				}
+			} else {
+				// Show Page
+				var logoWrapper = $('#invoicelogo');
+				var logoWrapperWidth = logoWrapper.width();
+				if (targetWidth <= logoWrapperWidth) {
+					invoiceLogoImage.css({
+						width: targetWidth,
+						height: targetHeight
+					});
+					logoWrapper.css({
+						width: targetWidth,
+						height: targetHeight
+					});
+				} else {
+					invoiceLogoImage.css({
+						width: logoWrapperWidth,
+						height: 'auto'
+					});
+					logoWrapper.css({
+						width: logoWrapperWidth,
+						height: 'auto'
+					});
+				}
+			}
+		}
+	}
 
 	if (editing || creating) {
 
@@ -808,7 +867,7 @@ ready = function() {
 		});
 
 
-		// Hide the logo section when delete button pressed
+		// Only run code related to logo if the user has one uploaded
 
 		if ($('#invoicelogo').length) {
 
@@ -830,7 +889,7 @@ ready = function() {
 			});
 
 			$('.addlogobutton').on('click', function() {
-
+				resetLogoSize();
 				hasLogo.show();
 				noLogo.hide();
 
@@ -839,12 +898,136 @@ ready = function() {
 
 				logoField.val(logoURL);
 
-			})
+			});
 
 
+			// Allow logo to be resized;
+
+			var logoDiv = $('#logoresize')
+			var logo = $('#logoresize img');
+
+			var logoOriginalWidth;
+			var logoOriginalHeight;
+
+			var logoSectionWidth = $('#invoicelogo').outerWidth();
+
+			function getLogoSectionWidth() {
+				logoSectionWidth = $('#invoicelogo').outerWidth();
+			}
+
+			var logoWidthField = $('.logowidthfield');
+			var logoHeightField = $('.logoheightfield');
+
+			function setHiddenFieldDimensions() {
+				logoWidthField.val(Math.round(logoDiv.width()));
+				logoHeightField.val(Math.round(logoDiv.height()));
+				
+			}
+
+			logoDiv.resizable({
+				maxWidth: logoSectionWidth,
+				aspectRatio: true,
+				resize: function(event, ui) {
+					setHiddenFieldDimensions()
+				},
+				start: function() {
+					logoDiv.addClass('isresizing');
+				},
+				stop: function() {
+					logoDiv.removeClass('isresizing');
+				}
+			});
+
+			logo.on('load', function() {
+				logoOriginalWidth = logo.width();
+				logoOriginalHeight = logo.height();
+
+				logoDiv.css({
+					width: logoOriginalWidth,
+					height: logoOriginalHeight
+				});
+
+				logo.css({
+					width: '100%',
+					height: '100%'
+				});
+
+			});
+
+			function getHeight(oldWidth,oldHeight,newWidth) {
+				return (oldHeight * newWidth) / oldWidth;
+			}
+
+			var hasShrunkResize = false;
+			var beforeShrunkWidth;
+
+			var previousBrowserWidth = $(window).width();
+
+			$(window).on('resize', function() {
+				getLogoSectionWidth();
+				logoDiv.resizable("option", "maxWidth", logoSectionWidth);
+
+				if (logoDiv.outerWidth() > logoSectionWidth) {
+					if (!hasShrunkResize) {
+						beforeShrunkWidth = logoDiv.width();
+						hasShrunkResize = true;
+					}
+
+					setAspectHeight();
+
+					
+					
+				}
+
+				if (hasShrunkResize && ($(window).width() > previousBrowserWidth)) {
+					//hasShrunkResize = false;
+					
+					if (logoDiv.outerWidth() < logoSectionWidth && logoDiv.width() < beforeShrunkWidth) {
+
+						setAspectHeight();
+
+					}
+
+				}
+
+
+			});
+
+			function setAspectHeight() {
+				var oldWidth = logoDiv.width();
+				logoDiv.css('width', logoSectionWidth);
+				var newWidth = logoDiv.width();
+				var oldHeight = logoDiv.height();
+
+				var newHeight = getHeight(oldWidth, oldHeight, newWidth);
+				logoDiv.css('height', newHeight);
+				previousBrowserWidth = $(window).width();
+			}
+			
+			function resetLogoSize() {
+				hasShrunkResize = false;
+				if (logoOriginalWidth > logoSectionWidth) {
+					var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
+					logoDiv.css({
+						width: logoSectionWidth,
+						height: newHeight
+					});
+				} else {
+					logoDiv.css({
+						width: logoOriginalWidth,
+						height: logoOriginalHeight
+					});
+				}
+				
+			}
+
+
+		// End logo code	
 		}
 
-		$('.removelogo')
+
+		
+
 
 
 	}

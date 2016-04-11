@@ -98,12 +98,18 @@
             <% unless current_user.logos.empty? %>
               <div id="invoicelogo">
                   <%= f.hidden_field :logo, value: @invoice.logo %>
+
+                  <%= f.hidden_field :logo_width, value: @invoice.logo_width, class: "logowidthfield" %>
+                  <%= f.hidden_field :logo_height, value: @invoice.logo_height, class: "logoheightfield" %>
+
                   <% if @invoice.logo.blank? %>
 
                     <div id="noinvoicelogo">
 
                         <div id="haslogo">
-                      <%= image_tag current_user.display_logo.url %>
+                          <div id="logoresize">
+                            <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: @invoice.logo_width, height: @invoice.logo_height } %>
+                          </div>
                       <div id="removelogobutton" class="removelogo">
                         <span>Remove Logo</span>
                       </div>
@@ -117,7 +123,9 @@
 
                   <% else %>
                       <div id="haslogo">
-                      <%= image_tag @invoice.logo %>
+                      <div id="logoresize">
+                        <%= image_tag @invoice.logo, class: "invoicelogoimage", data: { width: @invoice.logo_width, height: @invoice.logo_height } %>
+                      </div>
                       <div id="removelogobutton" class="removelogo">
                         <span>Remove Logo</span>
                       </div>

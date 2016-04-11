@@ -20,7 +20,7 @@
 	margin:0 auto 45px auto;
 	position:relative;
 	max-width:780px;
-	top:160px;
+	top:88px;
 	background:#f3cacb;
 	border-radius:2px;
 	margin-bottom:35px;
@@ -369,7 +369,7 @@ section:after {
 }
 
 #invoicelogo {
-	width:calc(100% - 380px);
+	width:calc(100% - 230px);
 	float:left;
 	margin-top:2px;
 	position:relative;
@@ -848,4 +848,82 @@ input.cmn-toggle-round:checked + label:after {
 
 .mobilepublicurl {
 	display:none;
+}
+
+.ui-widget-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.ui-resizable {
+	position: relative;
+}
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.ui-resizable-disabled .ui-resizable-handle,
+.ui-resizable-autohide .ui-resizable-handle {
+	display: none;
+}
+
+.ui-resizable-s {
+	cursor: ns-resize;
+	height: 7px;
+	width: 100%;
+	bottom: -5px;
+	left: 0;
+}
+.ui-resizable-e {
+	cursor: ew-resize;
+	width: 7px;
+	right: -5px;
+	top: 0;
+	height: 100%;
+}
+
+.ui-resizable-se {
+	cursor: nwse-resize;
+	width: 12px;
+	height: 12px;
+	right: 1px;
+	bottom: 1px;
+}
+
+#logoresize {
+	position:relative;
+}
+
+#logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {
+	position:absolute;
+	z-index: 500;
+	background:#41a9ee;
+	opacity:0;
+	content:"";
+	display:block;
+	transition:all .2s;
+	pointer-events:none;
+}
+
+#logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {
+	opacity:.65;
+}
+
+#logoresize:hover:before, #logoresize.isresizing:before {
+	width:4px;
+	top:0;
+	right:0;
+	bottom:0;
+}
+
+#logoresize:hover:after, #logoresize.isresizing:after {
+	height:4px;
+	bottom:0;
+	left:0;
+	right:4px;
 }

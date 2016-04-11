@@ -185,6 +185,7 @@
 .homeinvoice a {
 	color:#41a9ee;
 	text-align:center;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 .homeinvoice a:hover {
@@ -477,6 +478,7 @@ a.noborder {
     color:#26323f;
     width:100%;
     font-size:15px;
+    -webkit-appearance: none;
 }
 
 .homefilter input[type="text"]:focus {

@@ -41,32 +41,53 @@ for (var i = 46; i < 105; i++) {
   keycodes.push(i);
 }
 
-
 //setup before functions
-var typingTimer;                //timer identifier
-var doneTypingInterval = 80;  //time in ms, 5 second for example
-var $input = $('#myInput');
+// var typingTimer;               //timer identifier
+// var doneTypingInterval = 80;  //time in ms, 5 second for example
+// var $input = $('#myInput');
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
 
 var searchBoxes = $('.search');
 
 pageBody.on('keyup', '.search', function(e) {
+
   pageBody.addClass('loadingsearchresults');
 
   var keyCode = e.which;
 
   if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(searchInvoice, doneTypingInterval);
+   delay(function(){
+      searchInvoice();
+    }, 80 );
+  } 
+});
+
+
+pageBody.on('change', '.searchchange, .search', searchInvoice);
+
+// iOS does not select custom checkboxes, so we have to check to manually ensure that the value changes on click
+
+$('.checkboxholder label').on('click', function(e) {
+  e.preventDefault();
+  var checkBox = $(this).prevAll(':checkbox');
+  var isChecked = checkBox.is(':checked');
+  
+  if (isChecked) {
+    checkBox.prop('checked', false);
+  } else {
+    checkBox.prop('checked', true);
   }
 
-});
+  searchInvoice();
 
-//on keydown, clear the countdown 
-pageBody.on('keydown', function() {
-  clearTimeout(typingTimer);
 });
-
-pageBody.on('change', '.searchchange', searchInvoice);
 
 var $loading;
 

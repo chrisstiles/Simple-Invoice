@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402172437) do
+ActiveRecord::Schema.define(version: 20160411004844) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20160402172437) do
     t.decimal  "tax",                                           default: 0.0
     t.boolean  "tax_included",                                  default: false
     t.string   "token"
+    t.integer  "logo_width"
+    t.integer  "logo_height"
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"
@@ -77,6 +79,8 @@ ActiveRecord::Schema.define(version: 20160402172437) do
     t.datetime "updated_at",                  null: false
     t.string   "image"
     t.boolean  "current_logo", default: true
+    t.integer  "logo_width"
+    t.integer  "logo_height"
   end
 
   add_index "logos", ["user_id"], name: "index_logos_on_user_id"

@@ -7,6 +7,8 @@ class Logo < ActiveRecord::Base
 	# Validations
 	validate :logo_size
 
+	validates :logo_width, :logo_height, numericality: true, allow_blank: true
+
 	private
 
 		def logo_size

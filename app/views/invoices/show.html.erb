@@ -87,7 +87,7 @@
       <section id="companyinformation">
 
             <div id="invoicelogo">
-              <%= image_tag @invoice.logo unless @invoice.logo.blank? %>
+              <%= image_tag @invoice.logo, class: "invoicelogoimage", data: { width: @invoice.logo_width, height: @invoice.logo_height } unless @invoice.logo.blank? %>
             </div>
        		
             <div id="dateterms">

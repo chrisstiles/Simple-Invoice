@@ -42,6 +42,7 @@ gem 'fastclick-rails'
 # Detect user's browser
 gem 'browser'
 
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

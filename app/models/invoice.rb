@@ -1,9 +1,12 @@
 class Invoice < ActiveRecord::Base
+	before_save :set_balance
+
 	# Relationships
 	belongs_to :user
 	belongs_to :client
 	
 	has_many :jobs
+
 	accepts_nested_attributes_for :jobs, :client
 
 	before_create :generate_token
@@ -102,6 +105,8 @@ class Invoice < ActiveRecord::Base
 		errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.") if num_jobs > 45
 	end
 
+	validates :logo_width, :logo_height, numericality: true, allow_blank: true
+
 
 	# Is overdue? method
 	def overdue?
@@ -109,6 +114,15 @@ class Invoice < ActiveRecord::Base
 			false
 		else
 			true
+		end
+	end
+
+	def set_balance
+		if self.amount_paid >= 0
+			self.balance = self.total - self.amount_paid
+		else
+			self.amount_paid = 0
+			self.balance = self.total
 		end
 	end
 
