@@ -806,7 +806,7 @@ input.cmn-toggle-round:checked + label:after {
 	line-height:1;
 }
 
-.taxincluded input[type="checkbox"] + label > div div {
+.taxincluded input[type="checkbox"] + label > div div, #invoicewrapper .taxincluded input[type="checkbox"] + label > div div  {
 	position:static;
 	font-size:13px;
 	color:#26323f;
@@ -815,7 +815,7 @@ input.cmn-toggle-round:checked + label:after {
 	margin-bottom:1px;
 }
 
-.taxincluded input[type="checkbox"] + label > div div.inclusiontext {
+.taxincluded input[type="checkbox"] + label > div div.inclusiontext, #invoicewrapper .taxincluded input[type="checkbox"] + label > div div.inclusiontext {
 	color:#888888;
 	font-weight:400;
 	margin-bottom:0;
@@ -897,11 +897,13 @@ input.cmn-toggle-round:checked + label:after {
 
 #logoresize {
 	position:relative;
+	min-width:50px;
+	min-height:50px;
 }
 
 #logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {
 	position:absolute;
-	z-index: 500;
+	z-index: 20;
 	background:#41a9ee;
 	opacity:0;
 	content:"";

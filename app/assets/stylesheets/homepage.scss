@@ -513,9 +513,17 @@ input[type="checkbox"] + label div {
 	font-size: 14px;
 	top:0;
 	z-index: 400;
+}
+
+#homeside input[type="checkbox"] + label div {
 	width:calc(100% - 34px);
 	margin-left:9px;
 	margin-top:-3px;
+}
+
+#invoicewrapper input[type="checkbox"] + label div {
+	position:absolute;
+	left:30px;
 }
 
 input[type="checkbox"] + label span {
@@ -534,6 +542,11 @@ input[type="checkbox"] + label span {
     border: 1px solid #d2cccc;
     box-sizing:border-box;
 }
+
+#invoicewrapper input[type="checkbox"] + label span {
+	float:none;
+}
+
 input[type="checkbox"]:checked + label span {
     background:#41a9ee;
     border: 1px solid #41a9ee;
