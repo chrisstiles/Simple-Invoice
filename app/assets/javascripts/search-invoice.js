@@ -79,13 +79,18 @@ $('.checkboxholder label').on('click', function(e) {
   var checkBox = $(this).prevAll(':checkbox');
   var isChecked = checkBox.is(':checked');
   
-  if (isChecked) {
-    checkBox.prop('checked', false);
-  } else {
-    checkBox.prop('checked', true);
-  }
+  checkBox.trigger('click');
 
-  searchInvoice();
+  var isCheckedAfterClick = checkBox.is(':checked');
+
+  // If the value after the triggered click matches the value after, manually switch
+  if (isChecked === isCheckedAfterClick) {
+    if (isChecked) {
+      checkBox.prop('checked', false);
+    } else {
+      checkBox.prop('checked', true);
+    }
+  }  
 
 });
 
