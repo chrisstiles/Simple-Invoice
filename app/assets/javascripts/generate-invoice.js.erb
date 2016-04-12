@@ -889,6 +889,7 @@ ready = function() {
 			});
 
 			$('.addlogobutton').on('click', function() {
+
 				resetLogoSize();
 				hasLogo.show();
 				noLogo.hide();
@@ -1008,6 +1009,14 @@ ready = function() {
 			
 			function resetLogoSize() {
 				hasShrunkResize = false;
+				
+
+				if (logoOriginalWidth === 0 || logoOriginalHeight === 0) {
+					logoOriginalWidth = logo.attr('data-width');
+					logoOriginalHeight = logo.attr('data-height');
+				}
+
+
 				if (logoOriginalWidth > logoSectionWidth) {
 					var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
 					logoDiv.css({

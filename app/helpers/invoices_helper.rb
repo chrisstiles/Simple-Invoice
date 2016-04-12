@@ -23,12 +23,15 @@ module InvoicesHelper
 	def total_amount_due
       total_due = 0
 
-      current_user.invoices.where(archived: false).each do |invoice|
+      invoices = current_user.invoices.where(archived: false)
+
+      invoices.each do |invoice|
         unless invoice.due_date.future?
           total_due += (invoice.total - invoice.amount_paid)
         end
       end
 
+      print "TOTAL DUE: #{total_due} :: Count: #{invoices.count}"
       total_due
       
     end

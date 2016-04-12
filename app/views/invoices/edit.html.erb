@@ -108,7 +108,7 @@
 
                         <div id="haslogo">
                           <div id="logoresize">
-                            <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: @invoice.logo_width, height: @invoice.logo_height } %>
+                            <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: current_user.current_logo.logo_width, height: current_user.current_logo.logo_height } %>
                           </div>
                       <div id="removelogobutton" class="removelogo">
                         <span>Remove Logo</span>

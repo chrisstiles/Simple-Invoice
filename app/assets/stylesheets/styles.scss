@@ -46,7 +46,7 @@ html.turbolinks-progress-bar::before {
 	z-index: 220;
 }
 
-body.ios #htmlwrapper {
+body.ios #htmlwrapper, body.android #htmlwrapper {
 	position:fixed;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
@@ -61,7 +61,7 @@ body.ios #htmlwrapper {
 	overflow:hidden;
 }
 
-body.ios #contentwrapper {
+#contentwrapper, body.ios #contentwrapper, body.android #contentwrapper  {
 	position:absolute;
 	top:63px;
 	right:0;
@@ -70,6 +70,10 @@ body.ios #contentwrapper {
 	overflow-y:scroll;
 	overflow-x:hidden;
 	-webkit-overflow-scrolling: touch;
+}
+
+#contentwrapper {
+	position:fixed;
 }
 
 /***********/

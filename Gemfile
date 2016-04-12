@@ -83,6 +83,9 @@ group :development, :test do
   gem 'byebug'
   gem 'bullet'
 
+  # Test for security vulnerabilities
+  gem 'brakeman', :require => false
+
   # Use sqlite3 as the database for Active Record in development
   gem 'sqlite3'
 end

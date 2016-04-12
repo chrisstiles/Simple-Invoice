@@ -523,6 +523,7 @@ $('#mobilesidebarwrapper').detach().prependTo('body');
 $('header').detach().prependTo('body');
 
 
+
 // End misc.js
 };
 
@@ -532,6 +533,7 @@ $(document).on('page:load', ready);
 
 // Run this when using the back button and turbolinks loads from cache
 $(document).on('page:restore', function() {
+
 	$('.showloadingspinner').remove();
 	$('.homeinvoiceloader').hide();
 	invoiceLoading = false;

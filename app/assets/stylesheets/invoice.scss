@@ -800,10 +800,14 @@ input.cmn-toggle-round:checked + label:after {
 	margin:2px 0 0 0;
 }
 
-.taxincluded input[type="checkbox"] + label > div {
+#invoicewrapper .taxincluded input[type="checkbox"] + label > div {
 	left:auto;
 	right:34px;
 	line-height:1;
+}
+
+#invoicewrapper .taxincluded input[type="checkbox"] + label div {
+	float:none;
 }
 
 .taxincluded input[type="checkbox"] + label > div div, #invoicewrapper .taxincluded input[type="checkbox"] + label > div div  {
@@ -834,7 +838,7 @@ input.cmn-toggle-round:checked + label:after {
 	left:0;
 	right:0;
 	bottom:0;
-	z-index: 500;
+	z-index: 100;
 	background-color:rgba(255,255,255,.85);
 }
 
