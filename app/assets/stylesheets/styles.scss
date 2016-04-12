@@ -59,9 +59,10 @@ body.ios #htmlwrapper, body.android #htmlwrapper {
 	width:100%;
 	height:100%;
 	overflow:hidden;
+	padding-top:0;
 }
 
-#contentwrapper, body.ios #contentwrapper, body.android #contentwrapper  {
+body.ios #contentwrapper, body.android #contentwrapper  {
 	position:absolute;
 	top:63px;
 	right:0;
@@ -73,7 +74,7 @@ body.ios #htmlwrapper, body.android #htmlwrapper {
 }
 
 #contentwrapper {
-	position:fixed;
+	padding-top:63px;
 }
 
 /***********/

@@ -518,9 +518,13 @@ function toggleMobileSidebar() {
 
 }
 
-$('#homepagination').detach().prependTo('body');
-$('#mobilesidebarwrapper').detach().prependTo('body');
-$('header').detach().prependTo('body');
+//if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
+
+	$('#homepagination').detach().prependTo('body');
+	$('#mobilesidebarwrapper').detach().prependTo('body');
+	$('header').detach().prependTo('body');
+
+//} 
 
 
 
