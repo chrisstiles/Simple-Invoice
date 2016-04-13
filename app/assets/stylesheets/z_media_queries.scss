@@ -52,7 +52,7 @@
 		max-width: 100%;
 	}
 
-	#htmlwrapper {
+	#htmlwrapper, body.ios #htmlwrapper, body.android #htmlwrapper {
 		position:fixed;
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
@@ -67,7 +67,7 @@
 		overflow:hidden;
 	}
 
-	#contentwrapper {
+	#contentwrapper, body.ios #contentwrapper, body.android #contentwrapper {
 		position:fixed;
 		right:0;
 		top:50px;
@@ -385,7 +385,36 @@
 		font-weight:400 !important;
 	}
 
+	#toolbar {
+		background-color:#F5F5F5;
+	}
 
+	#invoicewrapper, #invoicewrapper.show {
+		margin:0;
+		top:50px;
+	}
+
+	#invoice {
+		border:none;
+	}
+
+}
+
+@media screen and (max-width:540px) {
+	#invoicelogo {
+		width:100%;
+		float:none;
+		margin-bottom:15px;
+	}
+
+	#dateterms {
+		width:100%;
+		float:none;
+	}
+
+	#dateterms td.invoicesetting {
+		width:auto;
+	}
 }
 
 @media screen and (max-width:340px) {

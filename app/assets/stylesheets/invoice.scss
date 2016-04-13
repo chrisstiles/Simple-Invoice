@@ -902,7 +902,6 @@ input.cmn-toggle-round:checked + label:after {
 #logoresize {
 	position:relative;
 	min-width:50px;
-	min-height:50px;
 }
 
 #logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {

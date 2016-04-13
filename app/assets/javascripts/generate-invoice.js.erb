@@ -353,27 +353,34 @@ ready = function() {
 				}
 			} else {
 				// Show Page
-				var logoWrapper = $('#invoicelogo');
-				var logoWrapperWidth = logoWrapper.width();
-				if (targetWidth <= logoWrapperWidth) {
-					invoiceLogoImage.css({
-						width: targetWidth,
-						height: targetHeight
-					});
-					logoWrapper.css({
-						width: targetWidth,
-						height: targetHeight
-					});
-				} else {
-					invoiceLogoImage.css({
-						width: logoWrapperWidth,
-						height: 'auto'
-					});
-					logoWrapper.css({
-						width: logoWrapperWidth,
-						height: 'auto'
-					});
-				}
+				var logoWrapper = $('#showlogowrapper');
+				//var logoWrapperWidth = logoWrapper.width();
+				logoWrapper.css({
+					width: '100%',
+					'max-width': targetWidth,
+					height: 'auto'
+				});
+				// if (targetWidth <= logoWrapperWidth) {
+				// 	invoiceLogoImage.css({
+				// 		width: '100%',
+				// 		height: 'auto'
+				// 	});
+				// 	logoWrapper.css({
+				// 		'max-width': targetWidth,
+				// 		'width': '100%',
+				// 		'height':'auto'
+				// 	});
+				// } else {
+				// 	invoiceLogoImage.css({
+				// 		width: '100%',
+				// 		height: 'auto'
+				// 	});
+				// 	logoWrapper.css({
+				// 		width: logoWrapperWidth,
+				// 		'max-width': '100%',
+				// 		height: 'auto'
+				// 	});
+				// }
 			}
 		}
 	}
