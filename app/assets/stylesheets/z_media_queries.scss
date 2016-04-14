@@ -326,6 +326,14 @@
 		margin-top:-5px;
 	}
 
+	.success {
+		bottom: 50px;
+		right: 0;
+		left: 0;
+		border-radius:0;
+		transform: translateY(0);
+	}
+
 }
 
 @media screen and (max-width:885px) {
@@ -387,15 +395,54 @@
 
 	#toolbar {
 		background-color:#F5F5F5;
+		position:relative;
+		top:0;
 	}
 
 	#invoicewrapper, #invoicewrapper.show {
 		margin:0;
-		top:50px;
+		top:0;
 	}
 
 	#invoice {
 		border:none;
+	}
+
+	#modalwindow {
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		max-width:none;
+		max-height:none;
+		transform:translateY(100%);
+		border-radius:0;
+		animation-delay:0;
+		animation-name: slideUp;
+		animation-timing-function:cubic-bezier(.07,.89,.23,.99);
+		opacity:1;
+		margin-bottom:10px;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	#modalcontent {
+		padding:20px;
+	}
+
+	.emailclientname {
+		float:none;
+		text-align: left;
+		margin-bottom:10px;
+	}
+
+	@keyframes slideUp {
+		from {
+			transform: translateY(100%);
+		}
+
+		to {
+			transform: translateY(0);
+		}
 	}
 
 }
@@ -414,6 +461,26 @@
 
 	#dateterms td.invoicesetting {
 		width:auto;
+	}
+
+	#invoicelogo * {
+		margin:0 auto;
+	}
+
+	#invoicewrapper {
+		font-size:15px;
+	}
+
+	#dateterms td {
+		padding-bottom:0;
+	}
+
+	#e-name {
+		font-size:25px;
+	}
+
+	#invoiceitems {
+		font-size:15px;
 	}
 }
 
