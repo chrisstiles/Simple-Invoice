@@ -28,6 +28,10 @@ html.turbolinks-progress-bar::before {
 	box-shadow: 0 0 10px #41A9EE, 0 0 5px #26323F !important;
 }
 
+input {
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
 #pagewrapper {
 	max-width:1200px;
 	margin:37px auto 0 auto;
@@ -255,6 +259,7 @@ nav a:active, #sessioninfo a:active {
 	display:inline-block;
 	font-size:18px;
 	font-weight:300;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 .back:hover {

@@ -527,6 +527,32 @@ function toggleMobileSidebar() {
 //} 
 
 
+contentWrapper.on('touchmove', function() {
+	pageBody.addClass('touchmoving');
+});
+
+contentWrapper.on('touchend', function() {
+	pageBody.removeClass('touchmoving');
+});
+
+var isWaitingForActive = false;
+
+pageBody.on('touchstart', '.mobilehomeinvoice', function() {
+	isWaitingForActive = true;
+	var homeInvoice = $(this);
+	
+	setTimeout(function() {
+		if (isWaitingForActive) {
+			homeInvoice.addClass('touchdown');
+		}
+	}, 75);
+	
+});
+
+pageBody.on('touchmove touchend', function() {
+	isWaitingForActive = false;
+	$('.mobilehomeinvoice').removeClass('touchdown');
+});
 
 // End misc.js
 };

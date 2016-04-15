@@ -1,5 +1,13 @@
 module InvoicesHelper
 
+  def has_any_invoices?
+    if current_user.invoices.where(archived: false).any?
+      true
+    else
+      false
+    end
+  end
+
 	def print_days_until_due(invoice)
 		if invoice.total - invoice.amount_paid > 0
 			if invoice.due_date > Date.today

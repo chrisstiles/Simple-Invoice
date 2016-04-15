@@ -650,6 +650,14 @@ input[type="checkbox"]:checked + label span:before {
 	background-color:#f7f7f7;
 }
 
+.previous_page {
+	padding-left:30px;
+}
+
+.next_page {
+	padding-right:30px;
+}
+
 .previous_page:before, .next_page:before {
 	content:"";
 	display:block;
@@ -659,21 +667,19 @@ input[type="checkbox"]:checked + label span:before {
 	background-repeat: no-repeat;
 	background-size:10px 16px;
 	overflow:hidden;
-	position:relative;
-	//top:13px;
-	top:6px;
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .previous_page:before {
-	float:left;
 	background-position:0px -8px;
-	margin-right:8px;
+	left:15px;
 }
 
 .next_page:before {
-	float:right;
 	background-position:-5px -8px;
-	margin-left:8px;
+	right:15px;
 }
 
 .previous_page.disabled:before {
@@ -696,12 +702,13 @@ input[type="checkbox"]:checked + label span:before {
     color: #6F6F6F;
 }
 
-.noinvoices p {
+#searchnoinvoices  p {
 	margin-bottom:0;
 }
 
-.noinvoices .button {
+#searchnoinvoices .button {
 	font-size:18px;
+	display:inline-block
 }
 
 .closemobilesidebar {

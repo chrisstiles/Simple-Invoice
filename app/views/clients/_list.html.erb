@@ -6,4 +6,16 @@
 
 </div>
 
+<% if @clients.any? %>
+
 <%= render @clients %>
+
+<% else %>
+
+<div id="noclients">
+
+	<p>No Clients Found</p>
+
+</div>
+
+<% end %>

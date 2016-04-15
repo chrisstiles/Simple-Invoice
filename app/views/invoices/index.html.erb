@@ -1,5 +1,7 @@
+<% if has_any_invoices? %>
+
 <div id="pagewrapper" class="widthfixedsidebar">
-   <% if current_user.invoices.where(archived: false).any? %>
+   
    <div id="mobilesidebarwrapper">
       <div id="homeside">
         <div class="homesidesection homefiltersection">
@@ -54,5 +56,24 @@
          <%= render 'list' %>
       </div>
    </div>
+
+   <% else %>
+
+   <div id="pagewrapper">
+
+      <div id="searchnoinvoices">
+         <p>No Invoices Found</p>
+         <%= link_to "Create Your First Invoice", new_invoice_path, class: "button blue" %>
+      </div>
+      <div class="loadingspinner">
+         <div class="loadingcircle">
+            <div class="throbber-loader">Loading...</div>
+         </div>
+      </div>
+      <div id="searchresults">
+         <%= render 'list' %>
+      </div>
+
+
    <% end %>
 </div>
