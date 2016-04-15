@@ -27,7 +27,7 @@
         <div id="controls">
         <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
         <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton showeditinvoicebutton" %>
-        <a href="#" class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</a>
+        <div class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</div>
         <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton viewpdfbutton" %>
         <h2>
           Record Payment

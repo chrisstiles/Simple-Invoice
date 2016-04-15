@@ -545,11 +545,11 @@ pageBody.on('touchstart', '.mobilehomeinvoice', function() {
 		if (isWaitingForActive) {
 			homeInvoice.addClass('touchdown');
 		}
-	}, 150);
+	}, 100);
 	
 });
 
-pageBody.on('touchmove', function() {
+pageBody.on('touchmove touchend', function() {
 	isWaitingForActive = false;
 	$('.mobilehomeinvoice').removeClass('touchdown');
 });

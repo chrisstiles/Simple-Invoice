@@ -543,6 +543,7 @@ a.logo img {
 	border-top:1px solid rgba(255,255,255,.08);
 	line-height:1;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	cursor:pointer;
 }
 
 .showeditinvoicebutton {
@@ -555,10 +556,14 @@ a.logo img {
 	background-image:$edit-blue-icon;
 }
 
-.showemailinvoicebutton {
+#controls .showemailinvoicebutton {
 	background-image:$mail-white-icon;
 	background-position: left 15px center;
 	background-size:16px 10px;
+}
+
+#controls > div:nth-of-type(1).showemailinvoicebutton {
+	border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .showemailinvoicebutton:hover {
