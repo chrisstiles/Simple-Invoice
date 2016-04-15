@@ -64,7 +64,7 @@ ready = function() {
     });
 
     // Displays the modal window and adds title. Must add content per individual open links with addModalContent()
-    pageBody.on('click touchend', '.modal', function(e) {
+    pageBody.on('click', '.modal', function(e) {
         e.preventDefault();
         if (!$(this).hasClass('nomodal')) {
             var title = $(this).data('title') || '';
