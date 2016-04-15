@@ -549,7 +549,7 @@ pageBody.on('touchstart', '.mobilehomeinvoice', function() {
 	
 });
 
-pageBody.on('touchmove touchend', function() {
+pageBody.on('touchmove', function() {
 	isWaitingForActive = false;
 	$('.mobilehomeinvoice').removeClass('touchdown');
 });
