@@ -460,14 +460,23 @@ $('.viewpdfbutton').on("click", function(e) {
 		invoiceLoading = true;
 		e.preventDefault();
 		var url = $(this).attr('href');
-		$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300, function() {
-			window.location.href = url;
-		});
+
+		if (mobileSidebarWrapper.hasClass('open')) {
+			$(loadingSpinnerHtml).appendTo($('html')).fadeIn(300, function() {
+				window.location.href = url;
+			});
+		} else {
+			$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300, function() {
+				window.location.href = url;
+			});
+		}
 	} else {
 		e.preventDefault();
 	}
 	
 });
+
+$('.showloadingspinner').remove();
 
 
 // Select all input
@@ -480,14 +489,14 @@ $('.selectallinput').on('click touchstart', function(e) {
 });
 
 
-var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow';
+var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button';
 // Uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
   e.preventDefault();
 });
 // Uses body because jQuery on events are called off of the element they are
 // added to, so bubbling would not work if we used document instead.
-$('body').on('touchstart', selScrollable, function(e) {
+$('body').on('touchmove', selScrollable, function(e) {
   if (e.currentTarget.scrollTop === 0) {
     e.currentTarget.scrollTop = 1;
   } else if (e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.offsetHeight) {

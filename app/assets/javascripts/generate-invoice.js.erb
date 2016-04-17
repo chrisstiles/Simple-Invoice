@@ -80,24 +80,28 @@ ready = function() {
 
 		// Prevent pasting with formatting
 
-		var editables = document.querySelectorAll('[contenteditable=true]');
+		function preventPasting() {
+			var editables = document.querySelectorAll('[contenteditable=true]');
 
-		[].forEach.call(editables, function(e) {
+			[].forEach.call(editables, function(e) {
 
-			e.addEventListener("paste", function(e) {
+				e.addEventListener("paste", function(e) {
 
-			// cancel paste
-			e.preventDefault();
+				// cancel paste
+				e.preventDefault();
 
-			// get text representation of clipboard
-			var text = e.clipboardData.getData("text/plain");
+				// get text representation of clipboard
+				var text = e.clipboardData.getData("text/plain");
 
-			// insert text manually
-			document.execCommand("insertHTML", false, text);
-			
+				// insert text manually
+				document.execCommand("insertHTML", false, text);
+				
+				});
+
 			});
+		}
 
-		});
+		preventPasting();
 
 
 		// Change input field when content editable changes
@@ -684,6 +688,32 @@ ready = function() {
 			rowControls.removeClass('activerow');
 		});
 
+		
+		// Internet Explorer 11 and below do not handle position: absolute in a table cell well
+
+		var isIE = $(pageBody).hasClass('internet explorer');
+
+		function setJobControlsHeight() {
+			if (isIE) {
+				var jobControls = $('.jobcontrols').filter(':visible');
+
+				jobControls.each(function() {
+					var $this = $(this);
+					var initialHeight = $this.parent('.amountcell').outerHeight();
+					$this.outerHeight(initialHeight);
+				});
+
+				if (jobControls.length > 1) {
+					var lastControl = jobControls.last();
+					lastControl.css({
+						'height': lastControl.outerHeight() + 1
+					});
+				}
+			}	
+		}
+
+		setJobControlsHeight();
+
 
 		// Update the name attributes on each of the inputs in the jobs table to ensure everything saves correctly
 
@@ -727,6 +757,8 @@ ready = function() {
 			updateNameValues();
 			checkLastRow();
 			setBorders();
+			preventPasting();
+			setJobControlsHeight();
 		});
 
 		// When editing and the delete button is clicked. Change the hidden field to true to set the item up for deletion
@@ -739,6 +771,7 @@ ready = function() {
 
 		jobsTable.on('keyup', 'span', function() {
 			$(this).parents('tr').attr('changed', 'true');
+			setJobControlsHeight();
 		});
 
 
@@ -800,6 +833,7 @@ ready = function() {
 			updateNameValues();
 			checkLastRow();
 			setBorders();
+			setJobControlsHeight();
 		});
 
 

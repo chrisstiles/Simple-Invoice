@@ -619,18 +619,18 @@ input[type="checkbox"]:checked + label span:before {
 
 .pagination > * {
 	padding:0 15px;
-	//line-height:33px;
-	height:33px;
-	vertical-align:middle;
-	display:table-cell;
+	line-height:33px;
+	display:inline-block;
 	border:1px solid #c9c9c9;
 	background-clip:padding-box;
+	margin-right:-1px;
 	color:#26323f;
 	font-size:14px;
 	font-weight:bold;
 	font-style:normal;
 	position:relative;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	float:left;
 }
 
 .pagination a {
@@ -659,8 +659,8 @@ input[type="checkbox"]:checked + label span:before {
 }
 
 .previous_page:before, .next_page:before {
-	content:"";
 	display:block;
+	content:"";
 	width:5px;
 	height:8px;
 	background-image: url(/assets/paginationarrows.png);

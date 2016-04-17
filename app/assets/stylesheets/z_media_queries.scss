@@ -290,8 +290,8 @@
 
 	#invoicewrapper, #invoicewrapper.show {
 		width:auto;
-		top:81px;
-		margin:0 25px 25px 25px;
+		//top:81px;
+		margin:81px 25px 25px 25px;
 	}
 
 	#sidebar, .scrollwrapper {
@@ -344,6 +344,17 @@
 
 	.back:active {
 		opacity:.25;
+	}
+
+	.showloadingspinner {
+		position:fixed;
+		z-index: 99999;
+		background-color:rgba(236, 240, 241, 0.9);
+	}
+
+	.loadingcircle {
+		left:50%;
+		transform:translate(-50%,-50%);
 	}
 
 }

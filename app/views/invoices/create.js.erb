@@ -99,18 +99,31 @@ var validationsHeight = validationErrors.outerHeight(),
 	negativeValidationsHeight = -1 * validationsHeight;
 
 validationErrors.css({
-	'margin-bottom' : negativeValidationsHeight,
+	//'margin-bottom' : negativeValidationsHeight,
 	'display' : 'block'
 });
 
 validationsHeight += 15;
 
-$('#invoicewrapper').css({
+var invoiceWrapper = $('#invoicewrapper');
+
+var currentMarginTop = parseInt(invoiceWrapper.css('margin-top'));
+var currentPaddingBottom = parseInt(invoiceWrapper.css('padding-bottom'));
+var currentHeight = invoiceWrapper.height();
+
+invoiceWrapper.css({
+	//'min-height' : 	currentHeight +  validationsHeight,
+	'top': negativeValidationsHeight,
+	'margin-bottom' : 15,
   '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
   '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
   '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
   '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
+
+// $('#invoice').css({
+// 	'margin-bottom': 45 + validationsHeight - 15,
+// });
 
 

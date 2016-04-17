@@ -573,11 +573,8 @@
 
 #userpreferences input[type="checkbox"] + label div {
   position:static;
+  line-height:1;
   float:left;
-}
-
-#userpreferences .inclusiontext {
-  margin-top:-3px;
 }
 
 #user_setting_attributes_tax {

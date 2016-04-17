@@ -14,7 +14,7 @@ setTimeout(function() {
 	}
 
 	button.removeClass('loading hasloadingtext');
-	$('.buttoncontent').remove();
+	$('.buttoncontent').empty().remove();
 	
 }, 200);
 
@@ -107,7 +107,7 @@ function setClientFilter() {
 	var width = clientContainer.outerWidth();
 	var clientContainerPosition = clientContainer.offset();
 
-	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight() + 63);
+	//pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight() + 63);
 
 	clientSearch.css({
 		'left': clientContainerPosition.left,

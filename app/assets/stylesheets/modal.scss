@@ -202,6 +202,10 @@ html.noscroll {
 	width: calc(100% + 50px);
 }
 
+.modal, .emailmodal {
+  -webkit-touch-callout: none;
+}
+
 .modalclient {
 	padding: 17px 25px;
 	font-size: 15px;
@@ -444,6 +448,7 @@ input[type="text"].modalinput {
   font-size: 14px;
   line-height: 20px;
   -webkit-font-smoothing: inherit;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .selectize-input,
 .selectize-control.single .selectize-input.input-active {

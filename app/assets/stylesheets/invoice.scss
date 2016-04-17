@@ -2,17 +2,20 @@
 
 #invoicewrapper {
 	max-width:780px;
-	margin:0 auto 45px auto;
+	margin:97px auto 0 auto;
+	padding-bottom:45px;
 	position:relative;
-	top:97px;
+	//top:97px;
 	left:141px;
 	font-size:17px;
-	-webkit-box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.14);
-	-moz-box-shadow:    0px 8px 25px 0px rgba(0, 0, 0, 0.14);
-	box-shadow:         0px 8px 25px 0px rgba(0, 0, 0, 0.14);
 	transition: all .3s;
 }
 
+#invoicewrapper:after {
+	display:block;
+	clear:both;
+	content:"";
+}
 
 #validationerrors, #modalvalidationerrors {
 	display:none;
@@ -132,16 +135,20 @@
 	}
 }
 
-#invoicewrapper:after {
-	clear:both;
-	display:block;
-	content:"";
-}
 
 #invoice {
 	background:#fff;
 	display:block;
 	border: 1px solid #dedede;
+	-webkit-box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+	-moz-box-shadow:    0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+	box-shadow:         0px 8px 25px 0px rgba(0, 0, 0, 0.14);
+}
+
+#invoice:after {
+	clear:both; 
+	content:"";
+	display:block;
 }
 
 .hiddencontainer {
@@ -543,6 +550,13 @@ section:after {
     user-select: none;
     border-right: 1px solid #c9c9c9;
     bottom:-1px;
+}
+
+body.internet.explorer .jobcontrols {
+	width:93px;
+	box-sizing:border-box;
+	min-height:61px;
+	right:-61px;
 }
 
 #invoiceitems tr.firstrow .jobcontrols {
