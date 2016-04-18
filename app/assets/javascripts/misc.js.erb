@@ -529,11 +529,27 @@ function toggleMobileSidebar() {
 
 //if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
 
-	$('#homepagination').detach().prependTo('body');
-	$('#mobilesidebarwrapper').detach().prependTo('body');
-	$('header').detach().prependTo('body');
+$('#homepagination').detach().prependTo('body');
+
+if ($('#pagewrapper').hasClass('homepage')) {
+
+	mobileSidebarWrapper.addClass('detached');
+	mobileSidebarWrapper.detach().prependTo('body');
+}
+
+//$('.invoiceform').detach().prependTo('body');
+$('header').detach().prependTo('body');
 
 //} 
+
+// var formWrapper = $('#formwrapper');
+
+// if (formWrapper.length) {
+// 	//console.log(formWrapper.html());
+// 	console.log(document.getElementsByClassName('invoiceform')[0].nodeName)
+// }
+
+
 
 
 contentWrapper.on('touchmove', function() {

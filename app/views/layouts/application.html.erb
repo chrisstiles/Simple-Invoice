@@ -10,8 +10,9 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
 
+
+<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
 
 <% if flash[:success] %>
 	<div class="success">

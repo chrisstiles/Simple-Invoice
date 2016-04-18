@@ -362,7 +362,7 @@ ready = function() {
 				logoWrapper.css({
 					width: '100%',
 					'max-width': targetWidth,
-					height: 'auto'
+					height: targetHeight
 				});
 				// if (targetWidth <= logoWrapperWidth) {
 				// 	invoiceLogoImage.css({
@@ -556,14 +556,53 @@ ready = function() {
 		eDate.html(dateField.val());
 		eDueDate.html(dueDateField.val());
 
+		var mobileSidebarWrapper = $('#mobilesidebarwrapper'),
+			contentWrapper = $('#contentwrapper'),
+			mobileSidebarButton = $('#mobilesidebar'),
+			homePageWrapper = $('#pagewrapper');
+
+		function toggleMobileSidebar() {
+			
+			mobileSidebarButton.toggleClass('open');
+			mobileSidebarWrapper.toggleClass('open');
+			contentWrapper.toggleClass('sidebaropen');
+			homePageWrapper.toggleClass('sidebaropen');
+
+		}
+
+		function showMobileSidebar() {
+			mobileSidebarButton.addClass('open');
+			mobileSidebarWrapper.addClass('open');
+			contentWrapper.addClass('sidebaropen');
+			homePageWrapper.addClass('sidebaropen');
+		}
+
 		eDate.on('click focus keydown', function(e) {
 			e.preventDefault();
-			dateField.datepicker('show');
+			showMobileSidebar();
+			setTimeout(function(){
+				dateField.datepicker('show');
+			}, 500);
 		});
 
 		eDueDate.on('click focus keydown', function(e) {
 			e.preventDefault();
-			dueDateField.datepicker('show');
+			showMobileSidebar();
+			setTimeout(function(){
+				dueDateField.datepicker('show');
+			}, 500);
+		});
+
+		dateField.on('focus', function() {
+			if (!mobileSidebarWrapper.hasClass('open')) {
+				dateField.datepicker('hide');
+			}
+		});
+
+		dueDateField.on('focus', function() {
+			if (!mobileSidebarWrapper.hasClass('open')) {
+				dueDateField.datepicker('hide');
+			}
 		});
 
 		

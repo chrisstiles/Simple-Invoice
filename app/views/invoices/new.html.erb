@@ -1,4 +1,5 @@
-<%= form_for(@invoice, remote: true) do |f| %>
+<div id="formwrapper">
+<%= form_for(@invoice, remote: true, html: { class: "invoiceform" }) do |f| %>
 
 <div id="validationerrors">
   <div class="validationtitle">
@@ -246,4 +247,5 @@
 
 
 <% end %>
+</div>
 

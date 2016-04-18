@@ -169,20 +169,27 @@
 		display:block;
 	}
 
+
 	#mobilesidebarwrapper {
 		position: absolute;
 	    background: #26323f;
-	    top: 50px;
+	    top: 0;
 	    right: 0;
 	    left: 0;
 	    z-index: 9999;
-	    bottom:50px;
+	    bottom:0;
 	    overflow:scroll;
 	    -webkit-overflow-scrolling: touch;
 	    transform:translateX(-100%);
 	    transition: all .5s;
 	    box-sizing:border-box;
 	    padding:15px 25px 25px 25px;
+	}
+
+	#mobilesidebarwrapper.detached {
+		position: fixed;
+	   	top: 50px;
+	   	bottom:50px;
 	}
 
 	#contentwrapper.sidebaropen {
@@ -292,6 +299,7 @@
 		width:auto;
 		//top:81px;
 		margin:81px 25px 25px 25px;
+		padding-bottom:0;
 	}
 
 	#sidebar, .scrollwrapper {
@@ -364,6 +372,66 @@
 		animation-name:validationSlideUp;
 		max-width:none;
 		border-radius:0;
+	}
+
+	.jobcontrols {
+		right:-90px;
+		border-right:none;
+		width:90px;
+		box-sizing:border-box;
+	}
+
+	#invoiceitems table {
+		width: calc(100% - 90px);
+	}
+
+	#invoiceitems th:last-child, #invoiceitems td.amountcell {
+		padding-right:0;
+	}
+
+	#invoiceitems tr:after {
+		right:0;
+	}
+
+	#ui-datepicker-div {
+		z-index: 9999 !important;
+		width:100%;
+		animation-name:fadeInUp;
+		animation-duration:.3s;
+		animation-timing-function:ease;
+		//animation-delay:.4s;
+		transform:translateY(0);
+		opacity:0;
+		animation-fill-mode:forwards;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			transform:translateY(20px);
+			opacity:0;
+		}
+
+		to  {
+			transform:translateY(0);
+			opacity:1;
+		}
+	}
+
+	.ui-datepicker table {
+		width:calc(100% - 50px);
+		padding-bottom:12px;
+	}
+
+	.ui-datepicker td span, .ui-datepicker td a {
+		padding:8px;
+	}
+
+	.tableheading th:nth-child(1) {
+		width:67% !important;
+	}
+
+	.tableheading th:nth-child(4) {
+		width:62% !important;
 	}
 
 }
@@ -481,6 +549,49 @@
 		}
 	}
 
+	#removelogobutton {
+		left:-14px;
+	}
+
+	#removelogobutton:hover span {
+		display:none;
+	}
+
+	#invoiceitems th {
+		font-size:14px;
+	}
+
+}
+
+@media screen and (max-width:650px) {
+	.tableheading th:nth-child(1) {
+		width:60% !important;
+	}
+
+	.tableheading th:nth-child(2) {
+		width:13% !important;
+	}
+
+	.tableheading th:nth-child(3) {
+		width:12% !important;
+	}
+
+	.tableheading th:nth-child(4) {
+		width:15% !important;
+		min-width:63px;
+	}
+
+	section {
+		padding:18px 20px 16px 20px;
+	}
+
+	#invoiceitems th:first-child, #invoiceitems td.jobdescriptioncell {
+		padding-left:20px;
+	}
+
+	#invoiceitems tr:after {
+		left:20px;
+	}
 }
 
 @media screen and (max-width:540px) {
@@ -508,7 +619,7 @@
 	}
 
 	#dateterms td {
-		padding-bottom:0;
+		padding-bottom:5px;
 	}
 
 	#e-name {
@@ -518,6 +629,26 @@
 	#invoiceitems {
 		font-size:15px;
 	}
+
+	.jobcontrols {
+		padding:15px 10px;
+		width:70px;
+		right:-70px;
+	}
+
+	#invoiceitems table {
+		width: calc(100% - 70px)
+	}
+
+	.jobcontrols div {
+		width:25px;
+		height:25px;
+		background-size:19px 19px;
+	}
+}
+
+@media screen and (max-width:500px) {
+
 }
 
 @media screen and (max-width:340px) {
