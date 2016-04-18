@@ -107,12 +107,7 @@ validationsHeight += 15;
 
 var invoiceWrapper = $('#invoicewrapper');
 
-var currentMarginTop = parseInt(invoiceWrapper.css('margin-top'));
-var currentPaddingBottom = parseInt(invoiceWrapper.css('padding-bottom'));
-var currentHeight = invoiceWrapper.height();
-
 invoiceWrapper.css({
-	//'min-height' : 	currentHeight +  validationsHeight,
 	'top': negativeValidationsHeight,
 	'margin-bottom' : 15,
   '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
@@ -122,8 +117,5 @@ invoiceWrapper.css({
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
 
-// $('#invoice').css({
-// 	'margin-bottom': 45 + validationsHeight - 15,
-// });
 
 

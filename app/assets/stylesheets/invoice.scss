@@ -38,6 +38,11 @@
 	min-width:248px;
 }
 
+.edit_invoice #validationerrors.amountpaidvalidation {
+	position:fixed;
+	left:-9999px;
+}
+
 #logoerrorholder p {
 	color:#791c1c;
 }

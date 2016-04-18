@@ -184,19 +184,27 @@ invoiceWrapper.css({
 			<% end %>
 
 		} else {
-			validationErrors.offset({
-				top: amountPaidLocation.top,
-				left: amountPaidLocation.left + amountPaidWidth + 20
-			});
+			if (!$('#mobilesidebarwrapper').hasClass('open')) {
+				validationErrors.offset({
+					top: amountPaidLocation.top,
+					left: amountPaidLocation.left + amountPaidWidth + 20
+				});
+			}
 		}
 		
 
 		if ($('#invoicewrapper').hasClass('show')) {
 
-		validationErrors.show();	
+		var validationsHeight;
 
-		var validationsHeight = validationErrors.outerHeight() / 4
-
+		if ($('#mobilesidebarwrapper').hasClass('open')) {
+			validationErrors.detach().prependTo('.edit_invoice').show();
+			validationsHeight = 0;
+		} else {
+			validationErrors.show();
+			validationsHeight = validationErrors.outerHeight() / 4
+		}
+		
 		validationErrors.css({
 		  '-webkit-transform' : 'translateY(-' + validationsHeight + 'px)',
 		  '-moz-transform'    : 'translateY(-' + validationsHeight + 'px)',

@@ -357,6 +357,15 @@
 		transform:translate(-50%,-50%);
 	}
 
+	.edit_invoice #validationerrors.amountpaidvalidation {
+		left:0 !important;
+		bottom:0 !important;
+		position:static;
+		animation-name:validationSlideUp;
+		max-width:none;
+		border-radius:0;
+	}
+
 }
 
 @media screen and (max-width:885px) {

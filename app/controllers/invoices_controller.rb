@@ -242,15 +242,17 @@ class InvoicesController < ApplicationController
     end
 
    def merge_client_if_name_exists
-      client_id = @invoice.client_id
-      client_name = @invoice.client_name
-      client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
+      if @invoice.valid?
+        client_id = @invoice.client_id
+        client_name = @invoice.client_name
+        client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
 
-      unless client.nil?
-        @invoice.client_name = client.name
+        unless client.nil?
+          @invoice.client_name = client.name
+        end
+        @invoice.client = client
+        @invoice.save
       end
-      @invoice.client = client
-      @invoice.save
    end
 
     def set_initial_balance
