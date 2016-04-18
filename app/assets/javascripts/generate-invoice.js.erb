@@ -274,7 +274,7 @@ ready = function() {
 
 			if (taxValue < 0 || isNaN(taxValue) || taxValue === '') {
 				taxAmount.html('0.0');
-				taxTextField.val('0.0')
+				taxTextField.val('0.0');
 			}
 		}
 
@@ -579,30 +579,50 @@ ready = function() {
 
 		eDate.on('click focus keydown', function(e) {
 			e.preventDefault();
-			showMobileSidebar();
-			setTimeout(function(){
+			if (window.innerWidth <= 1020) {
+				if (!mobileSidebarWrapper.hasClass('open')) {
+					showMobileSidebar();
+					setTimeout(function(){
+						dateField.datepicker('show');
+					}, 500);
+
+				}
+			} else {
 				dateField.datepicker('show');
-			}, 500);
+			}
 		});
 
 		eDueDate.on('click focus keydown', function(e) {
 			e.preventDefault();
-			showMobileSidebar();
-			setTimeout(function(){
+			if (window.innerWidth <= 1020) {
+				if (!mobileSidebarWrapper.hasClass('open')) {
+					showMobileSidebar();
+					setTimeout(function(){
+						dueDateField.datepicker('show');
+					}, 500);
+
+				}
+			} else {
 				dueDateField.datepicker('show');
-			}, 500);
+			}
 		});
 
 		dateField.on('focus', function() {
-			if (!mobileSidebarWrapper.hasClass('open')) {
+			if (!mobileSidebarWrapper.hasClass('open') && window.innerWidth <= 1020) {
 				dateField.datepicker('hide');
 			}
 		});
 
 		dueDateField.on('focus', function() {
-			if (!mobileSidebarWrapper.hasClass('open')) {
+			if (!mobileSidebarWrapper.hasClass('open') && window.innerWidth <= 1020) {
 				dueDateField.datepicker('hide');
 			}
+		});
+
+		$(document).click(function(e) { 
+		    var ele = $(e.toElement); 
+		    if (!ele.hasClass("hasDatepicker") && !ele.hasClass("ui-datepicker") && !ele.hasClass("ui-icon") && !$(ele).parent().parents(".ui-datepicker").length)
+		       $(".hasDatepicker").datepicker("hide"); 
 		});
 
 		

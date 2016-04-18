@@ -171,13 +171,15 @@
 
 
 	#mobilesidebarwrapper {
-		position: absolute;
+		//position: absolute;
+		position:fixed;
 	    background: #26323f;
-	    top: 0;
+	    top: 50px;
 	    right: 0;
 	    left: 0;
 	    z-index: 9999;
-	    bottom:0;
+	    //bottom:0;
+	    bottom:50px;
 	    overflow:scroll;
 	    -webkit-overflow-scrolling: touch;
 	    transform:translateX(-100%);
@@ -186,11 +188,11 @@
 	    padding:15px 25px 25px 25px;
 	}
 
-	#mobilesidebarwrapper.detached {
-		position: fixed;
-	   	top: 50px;
-	   	bottom:50px;
-	}
+	// #mobilesidebarwrapper.detached {
+	// 	position: fixed;
+	//    	top: 50px;
+	//    	bottom:50px;
+	// }
 
 	#contentwrapper.sidebaropen {
 		overflow:hidden !important;
@@ -403,6 +405,7 @@
 		transform:translateY(0);
 		opacity:0;
 		animation-fill-mode:forwards;
+		margin-top:-6px;
 	}
 
 	@keyframes fadeInUp {
@@ -423,7 +426,7 @@
 	}
 
 	.ui-datepicker td span, .ui-datepicker td a {
-		padding:8px;
+		padding:4px;
 	}
 
 	.tableheading th:nth-child(1) {
@@ -432,6 +435,15 @@
 
 	.tableheading th:nth-child(4) {
 		width:62% !important;
+	}
+
+	.control {
+		height:45px;
+	}
+
+	#controls h2 {
+		padding:13px 22px;
+		font-size:16px;
 	}
 
 }
