@@ -627,12 +627,18 @@ ready = function() {
 			dueDateField.datepicker('show');
 		});
 
-		dateField.blur(function() {
-		  dateField.datepicker("hide");
-		});
-
-		dueDateField.blur(function() {
-		  dueDateField.datepicker("hide");
+		$(document).on("click", function(e) {
+		    var elem = $(e.target);
+		    if(!elem.hasClass("hasDatepicker") && 
+		        !elem.hasClass("ui-datepicker") && 
+		        !elem.hasClass("ui-icon") && 
+		        !elem.hasClass("ui-datepicker-next") && 
+		        !elem.hasClass("ui-datepicker-prev") && 
+		        !elem.hasClass("datecontrol") && 
+		        !elem.hasClass("duedatecontrol") && 
+		        !$(elem).parents(".ui-datepicker").length){
+		            $('.hasDatepicker').datepicker('hide');
+		    }
 		});
 
 		
