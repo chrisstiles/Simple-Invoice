@@ -636,6 +636,8 @@ ready = function() {
 		        !elem.hasClass("ui-datepicker-prev") && 
 		        !elem.hasClass("datecontrol") && 
 		        !elem.hasClass("duedatecontrol") && 
+		        !elem.is("#e-date") && 
+		        !elem.is("#e-duedate") && 
 		        !$(elem).parents(".ui-datepicker").length){
 		            $('.hasDatepicker').datepicker('hide');
 		    }
