@@ -21,7 +21,7 @@
       <div class="scrollwrapper">
       <div id="controls">
         <h2>Date and Terms</h2>
-          <div class="control">
+          <div class="control datecontrol">
               <div class="alignment">
                   <span>Date</span>
                   <%= f.text_field :date, class: "datefield", readonly: true %>
@@ -44,7 +44,7 @@
                   </select>
               </div>
           </div>
-          <div class="control">
+          <div class="control duedatecontrol">
               <div class="alignment">
                   <span>Due</span>
                   <%= f.text_field :due_date, class: "duedatefield", readonly: true %>
