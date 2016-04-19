@@ -81,7 +81,7 @@ var clientNameText = $('.client_name_search').val();
 
  $.ajax({
 	type: 'GET',
-	url: '/clients/?client_name=' + clientNameText + '&page=' + currentPage,
+	url: '/clients/?client_name=' + clientNameText + '&page=<%= @pagination_page %>',
 	dataType: 'script',
 	async: true
 	}).done(function( msg ) {

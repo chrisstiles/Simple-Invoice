@@ -57,6 +57,7 @@ class ClientsController < ApplicationController
 			if @client.update(client_params)
 				flash[:success] = 'Client Updated!'
           		flash.keep(:success)
+          		@pagination_page = return_client_page_pagination(@client)
 				format.js
 			else
 				format.js
