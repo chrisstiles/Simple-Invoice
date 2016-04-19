@@ -68,6 +68,7 @@ pageWrapper.on('click', '.client', function() {
 	var $this = $(this);
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected')) {
+
 		pageBody.addClass('loadingclientform');
 
 		$('.selected').removeClass('selected');

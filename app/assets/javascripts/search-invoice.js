@@ -70,7 +70,11 @@ pageBody.on('keyup', '.search', function(e) {
 });
 
 
-pageBody.on('change', '.searchchange, .search', searchInvoice);
+pageBody.on('change', '.searchchange, .search', function() {
+  if (!$(this).hasClass('client_name_search')) {
+    searchInvoice();
+  }
+});
 
 // iOS does not select custom checkboxes, so we have to check to manually ensure that the value changes on click
 
