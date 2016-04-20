@@ -1,7 +1,7 @@
 @import "variables";
 
 @media screen and (max-width:1210px) {
-	#invoicewrapper {
+	#invoicewrapper, #formwrapper #validationerrors {
 		width: calc(100% - 408px);
 	    left: 0;
 	    margin-left: 320px;
@@ -304,6 +304,12 @@
 		padding-bottom:0;
 	}
 
+	#formwrapper #validationerrors  {
+		width:auto;
+		margin: 0 25px 0 25px;
+		top:75px;
+	}
+
 	#sidebar, .scrollwrapper {
 		position:relative;
 		width:auto;
@@ -538,6 +544,12 @@
 		border:none;
 	}
 
+	#formwrapper #validationerrors  {
+		width:auto;
+		margin: 0 7px 0 7px;
+		top:7px;
+	}
+
 	#modalwindow {
 		top:0;
 		right:0;
@@ -685,8 +697,15 @@
 	}
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:400px) {
+	.back {
+		font-size:15px;
+		padding-left:20px;
+	}
 
+	.back:before {
+		transform:scale(.7);
+	}
 }
 
 @media screen and (max-width:340px) {

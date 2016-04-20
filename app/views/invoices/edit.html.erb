@@ -9,19 +9,19 @@
 
 <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
 
+<div id="toolbar">
+  <div id="toolbarcontent">
+    <%= link_to "Back to Invoice", invoice_path, class: "back" %>
+    <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
+  </div>
+</div>
+
 <div id="validationerrors">
   <div class="validationtitle">
     <div class="closeerrors"></div>
     Please correct the following errors before saving
   </div>
   <div id="errorholder"></div>
-</div>
-
-<div id="toolbar">
-  <div id="toolbarcontent">
-    <%= link_to "Back to Invoice", invoice_path, class: "back" %>
-    <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
-  </div>
 </div>
 
 <aside id="sidebar">
