@@ -509,8 +509,9 @@ $('body').on('touchmove', selScrollable, function(e) {
 
 });
 
-$(document).on('touchend', '[contenteditable=true]', function() {
-	$(this).trigger('click');
+$('body').on('click', '[contenteditable=true]', function() {
+	//$(this).trigger('click');
+	$(this).focus();
 });
 
 document.addEventListener("touchstart", function(){}, true);
@@ -532,7 +533,6 @@ function toggleMobileSidebar() {
 }
 
 //if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
-	
 
 $('#homepagination').detach().prependTo('body');
 
