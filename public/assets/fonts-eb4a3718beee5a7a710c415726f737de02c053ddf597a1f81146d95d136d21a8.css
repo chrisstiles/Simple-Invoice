@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-extrabold-9de831de66fd718f4b6e581c091d12c5402257bd96565e9dda1bd7d9af14a301.eot);
+  src: url(/assets/libertad-extrabold-9de831de66fd718f4b6e581c091d12c5402257bd96565e9dda1bd7d9af14a301.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-extrabold-1258ed2850dc828723b44a3bf603921341eff70e5860c90929e13cfcdf1dd115.svg#Libertad) format("svg"), url(/assets/libertad-extrabold-976db0eefe3bc0ef602ba614d067af40e0641edf3132f2079e1c317284ed6f46.woff2) format("woff2"), url(/assets/libertad-extrabold-0086d00c83a4bf3899da0f5eea053fdbedf6d97b1916b39d8625e8f4dd3db347.woff) format("woff"), url(/assets/libertad-extrabold-decc55a1587a27754b111508d7f7862677d4834b9973331dd6991bce8b0b3390.ttf) format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-bold-6aab45eba8d32aa7fe884261fac9a594788d83d9c9c5602210387a6e9952848b.eot);
+  src: url(/assets/libertad-bold-6aab45eba8d32aa7fe884261fac9a594788d83d9c9c5602210387a6e9952848b.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-bold-b5d6ebdcd65ca3a4c68a68af4ad60951ddc5393f7d09fddbbbe59f06554de4ab.svg#Libertad) format("svg"), url(/assets/libertad-bold-113f23781460ce8bd2cc53ac2579d719aecf3b15d8ed6c6bcf1795c68863905d.woff2) format("woff2"), url(/assets/libertad-bold-53de8e96cf1b8c997c091c3ff50b85b6f9b8fb017d591eca3ad0295698af3850.woff) format("woff"), url(/assets/libertad-bold-02ab05efdcce62ac597d3f5747d59b1446057154225367c667ff6f54d06c3118.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-bolditalic-11bf75a2397ff46f21d6a1ad6751bfbf10cda176b29d68acf70aa37e2fbb4aac.eot);
+  src: url(/assets/libertad-bolditalic-11bf75a2397ff46f21d6a1ad6751bfbf10cda176b29d68acf70aa37e2fbb4aac.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-bolditalic-63b56ea19428c4bbe0ee4cafba9d81c78f06c582c05059fa3c8dd667deb44ac7.svg#Libertad) format("svg"), url(/assets/libertad-bolditalic-0b2a646c0c51bf855c07d796d24d8d529d231a8f860ad4d9b5b533b2dfadc082.woff2) format("woff2"), url(/assets/libertad-bolditalic-ee3d32fc8f47da11291a0efc58939501481e77b60c3c65d8f0fb4aa51234972c.woff) format("woff"), url(/assets/libertad-bolditalic-d6af75577f267b5b9946b6516bd010a2f15806aeb174c38c88497017359c48be.ttf) format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-italic-409cf88985c0be9e54bc24783d3226cb8cfea79236589295129e4706afb35747.eot);
+  src: url(/assets/libertad-italic-409cf88985c0be9e54bc24783d3226cb8cfea79236589295129e4706afb35747.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-italic-e17880c1601f62b832d6f015b4afb8834229e4026dd423ef3726edb0bb732c54.svg#Libertad) format("svg"), url(/assets/libertad-italic-2fe0c9de05400223d836a0962645b4b7771d9eb49cdef4479cb716fabe6d1f63.woff2) format("woff2"), url(/assets/libertad-italic-859dee33f7045deb86a85da414482042a8cd5ae493dffe442bc26bd653b55b6b.woff) format("woff"), url(/assets/libertad-italic-44b2126976c6bed1c80714d60d306ffbe46cd1706df1f97eb32521831aff99db.ttf) format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-b897d452d0d77bf9ef388d519d290d13a279365f60429137f46c87917c3a9a2b.eot);
+  src: url(/assets/libertad-b897d452d0d77bf9ef388d519d290d13a279365f60429137f46c87917c3a9a2b.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-bafa83e4752ee115fd6f07bd74c950dccd4cfcb13580029cb0f49c003ab43fdb.svg#Libertad) format("svg"), url(/assets/libertad-d4d99d1dc36b9f16fc53a999850e94de63e97a4a84895fa9e880a5526a7cfe9a.woff2) format("woff2"), url(/assets/libertad-ea2a3255b524ece5465cb1c44adc99849ee95f5ce2a231cb73f2190816194495.woff) format("woff"), url(/assets/libertad-89028afe9850215cecbb3c35016077cadd96ab6ee24070f6fc2ebe0142a3159f.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-lightitalic-cde13bdcaa9acfa253d030159e69634f860bfa20ef4dca6a74dcc59ea5a7b2ab.eot);
+  src: url(/assets/libertad-lightitalic-cde13bdcaa9acfa253d030159e69634f860bfa20ef4dca6a74dcc59ea5a7b2ab.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-lightitalic-11691d4134975ec7b401dc3c3e82901ac1df07252b024fefbf4e1eb493c0de8d.svg#Libertad) format("svg"), url(/assets/libertad-lightitalic-99205fdb546c193491f15fe4cb212f885f61895cae2a8f6e30d8ddf579eaf503.woff2) format("woff2"), url(/assets/libertad-lightitalic-45e881538dfe72c9a0f52ba3e5d111194563055adc3dae9ca3310415cf5e7d2f.woff) format("woff"), url(/assets/libertad-lightitalic-ef6ac487bdd909c4085f19743686bc9368f6d37d2c79ac11546fc7c5e3f780fc.ttf) format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Libertad';
+  src: url(/assets/libertad-light-2fb8e439c82e73926747c0b63ed86f4c1aa66d801e7060a103f031f191347981.eot);
+  src: url(/assets/libertad-light-2fb8e439c82e73926747c0b63ed86f4c1aa66d801e7060a103f031f191347981.eot?#iefix) format("embedded-opentype"), url(/assets/libertad-light-a12d4bffecb4afa7200831d0a740837dc8de08b7811c917ab63bb369963bd18f.svg#Libertad) format("svg"), url(/assets/libertad-light-ec4a2bea9826be96d89505bc8a7be646dfe9633f4b6e51c3b9b266047cfb9d05.woff2) format("woff2"), url(/assets/libertad-light-170a3e2ea52cc68461710e4562f4db4e21c7152e11def3eb3ffe18aac1cff016.woff) format("woff"), url(/assets/libertad-light-1227de39ce3c91d86ba8e72c1d08e3782825eca11b9d491abe4e8ef894c8a5a7.ttf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
