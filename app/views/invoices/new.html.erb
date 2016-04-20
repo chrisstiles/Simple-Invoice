@@ -142,13 +142,9 @@
 
            <div id="userinfo">
                   <%= f.text_field :name, value: print_if_not_nil(current_user.name)%>
-                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]">
-                    <%= print_if_not_nil(current_user.name) %>
-                  </span><br>
+                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= print_if_not_nil(current_user.name) %></span><br>
                   <%= f.text_field :address_line1, value: print_if_not_nil(current_user.address) %>
-                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]">
-                    <%= print_if_not_nil(current_user.address) %>
-                  </span><br>
+                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= print_if_not_nil(current_user.address) %></span><br>
                   <%= f.text_field :address_line2, value: print_full_address(current_user.city, current_user.state, current_user.zip) %>
                   <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]">
                     <%= print_full_address(current_user.city, current_user.state, current_user.zip) %>
