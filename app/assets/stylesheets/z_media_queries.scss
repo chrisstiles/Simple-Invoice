@@ -446,6 +446,20 @@
 		font-size:16px;
 	}
 
+	.clients-modal span {
+		left:-10px;
+		top:50%;
+		transform:translate(-100%, -50%);
+		margin-top:0;
+	}
+
+	.clients-modal span:before {
+		left:auto;
+		right:-7px;
+		top:50%;
+		transform:translateY(-50%) rotate(90deg);
+	}
+
 }
 
 @media screen and (max-width:885px) {
@@ -614,12 +628,16 @@
 	#invoicelogo {
 		width:100%;
 		float:none;
-		margin-bottom:15px;
+		margin-bottom:20px;
 	}
 
 	#dateterms {
 		width:100%;
 		float:none;
+	}
+
+	#dateterms table {
+		float:right;
 	}
 
 	#dateterms td.invoicesetting {
@@ -660,6 +678,10 @@
 		width:25px;
 		height:25px;
 		background-size:19px 19px;
+	}
+
+	#removelogobutton {
+		right:auto;
 	}
 }
 

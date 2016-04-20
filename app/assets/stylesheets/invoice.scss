@@ -9,6 +9,7 @@
 	left:141px;
 	font-size:17px;
 	transition: all .3s;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 #invoicewrapper:after {
@@ -669,6 +670,7 @@ body.internet.explorer .jobcontrols {
 #notes {
 	border-bottom:none;
 	padding:0;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 #notes p {
@@ -950,4 +952,8 @@ input.cmn-toggle-round:checked + label:after {
 	bottom:0;
 	left:0;
 	right:4px;
+}
+
+#invoicewrapper a {
+
 }

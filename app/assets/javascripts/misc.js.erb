@@ -489,7 +489,7 @@ $('.selectallinput').on('click touchstart', function(e) {
 });
 
 
-var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button';
+var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper';
 // Uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
   e.preventDefault();
@@ -507,6 +507,10 @@ $('body').on('touchmove', selScrollable, function(e) {
 $('body').on('touchmove', selScrollable, function(e) {
   e.stopPropagation();
 
+});
+
+$(document)on('touchend', '[contenteditable=true]', function() {
+	$(this).trigger('click');
 });
 
 document.addEventListener("touchstart", function(){}, true);
