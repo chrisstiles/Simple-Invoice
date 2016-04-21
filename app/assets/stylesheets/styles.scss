@@ -247,10 +247,15 @@ nav a:active, #sessioninfo a:active {
 }
 
 #toolbar .button {
-	position:relative;
+	position:absolute;
+	right:0;
 	top:50%;
 	transform:translateY(-50%);
-	float:right;
+}
+
+body.ios input.button {
+	line-height:0;
+	height:34px;
 }
 
 .back {
