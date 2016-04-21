@@ -511,8 +511,15 @@ $('body').on('touchmove', selScrollable, function(e) {
 
 $('body').on('touchend', '[contenteditable=true]', function() {
 	//$(this).trigger('click');
-	$(this).focus();
-	setEndOfContenteditable(this);
+	var $this = $(this);
+	
+	if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
+		if (!$this.is(':focus')) {
+			$this.focus();
+			setEndOfContenteditable(this);
+		}
+	}
+	
 });
 
 function setEndOfContenteditable(contentEditableElement) {

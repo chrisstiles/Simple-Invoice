@@ -60,4 +60,14 @@ module InvoicesHelper
     	end
     end
 
+    def no_current_logos?
+      if current_user.logos.empty?
+        true
+      elsif current_user.logos.where(current_logo: true).first.nil?
+        true
+      else
+        false
+      end
+    end
+
 end

@@ -525,6 +525,18 @@ section:after {
 
 .quantitycell, .ratecell, .amountcell {
 	white-space:nowrap;
+	max-width:95px;
+	overflow:hiden;
+}
+
+#invoicewrapper .e-quantity, #invoicewrapper .e-rate{
+	max-width:35px;
+	overflow:hidden;
+}
+
+.amountbox {
+	max-width:200px;
+	overflow:hidden;
 }
 
 .ratecell [contenteditable="true"] {
@@ -665,6 +677,9 @@ body.internet.explorer .jobcontrols {
 	text-align:right;
 	font-size:30px;	
 	white-space: nowrap;
+	max-width: calc(100% - 100px);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #notes {

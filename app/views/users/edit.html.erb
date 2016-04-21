@@ -140,7 +140,7 @@
 		<div class="logoformholder<%= " nologos" if @user.logos.empty? %>">
 			<%= form_for(@logo, html: { multipart: true, class: "dropzone logouploader" }) do |f| %>
 				<div id="imageloading"><div class="throbber-loader">Loading...</div></div>
-				<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless @user.logos.empty? %>
+				<%= image_tag @user_logo.url(:screen), draggable: "false", class: "userlogo" unless no_current_logos? %>
 			<% end %>
 			<br>
 			<div id="dropzoneclickable" class="button blue uploadicon">Or click here to upload</div>

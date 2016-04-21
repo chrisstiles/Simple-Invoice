@@ -84,7 +84,7 @@
        
       <section id="companyinformation">
 
-            <% unless current_user.logos.empty? %>
+            <% unless no_current_logos? %>
               <div id="invoicelogo">
                   <%= f.hidden_field :logo, value: current_user.display_logo.url %>
 

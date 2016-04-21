@@ -34,7 +34,12 @@ class User < ActiveRecord::Base
 
 	def display_logo
 		unless self.logos.empty?
-			self.logos.where(current_logo: true).first.image
+			logo = self.logos.where(current_logo: true).first
+			unless logo.nil?
+				logo.image
+			else
+				''
+			end
 		else
 			''
 		end
@@ -42,7 +47,12 @@ class User < ActiveRecord::Base
 
 	def current_logo
 		unless self.logos.empty?
-			self.logos.where(current_logo: true).first
+			logo = self.logos.where(current_logo: true).first
+			unless logo.nil?
+				logo
+			else
+				''
+			end
 		else
 			''
 		end

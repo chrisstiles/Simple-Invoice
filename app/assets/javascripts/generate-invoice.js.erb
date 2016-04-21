@@ -316,8 +316,8 @@ ready = function() {
 
 		// Max length for tax box
 
-		function checkMaxLength() {
-			var newLength = $.trim(taxAmount.text().replace('.', '')).length
+		function checkMaxLength(el) {
+			var newLength = $.trim(el.text().replace('.', '')).length
 
 			if (newLength > 10) {
 				return true
@@ -326,9 +326,9 @@ ready = function() {
 			}
 		}
 
-		taxAmount.on('keypress', function(e) {
+		pageBody.on('keypress', '.e-taxamount, .e-quantity, .e-rate', function(e) {
 			var keyCode = e.keyCode || e.which;
-			if (checkMaxLength()) {
+			if (checkMaxLength($(this))) {
 				if (keyCode == 190 || keyCode == 110 || keyCode == 46) {
 					return true
 				} else {
@@ -353,20 +353,20 @@ ready = function() {
 				var logoWrapper = $('#logoresize');
 				var logoWrapperWidth = logoWrapper.width();
 				if (targetWidth <= logoWrapperWidth) {
-					invoiceLogoImage.css({
-						width: targetWidth,
-						height: targetHeight
-					});
 					logoWrapper.css({
 						width: targetWidth,
 						height: targetHeight
 					});
-				} else {
 					invoiceLogoImage.css({
+						width: targetWidth,
+						height: 'auto'
+					});
+				} else {
+					logoWrapper.css({
 						width: logoWrapperWidth,
 						height: 'auto'
 					});
-					logoWrapper.css({
+					invoiceLogoImage.css({
 						width: logoWrapperWidth,
 						height: 'auto'
 					});
@@ -380,6 +380,11 @@ ready = function() {
 					'max-width': targetWidth,
 					height: targetHeight
 				});
+				invoiceLogoImage.css({
+					width: '100%',
+					height: 'auto'
+				});
+
 				// if (targetWidth <= logoWrapperWidth) {
 				// 	invoiceLogoImage.css({
 				// 		width: '100%',
@@ -1009,6 +1014,7 @@ ready = function() {
 				noLogo = $('#nologo');
 
 			var currentLogo = $('.addlogobutton').attr('data-logo-url');
+			var oldLogo = $('.invoicelogoimage').attr('src');
 
 			// Save logo URL
 			var logoField = $('#invoice_logo');
@@ -1019,6 +1025,7 @@ ready = function() {
 				hasLogo.hide();
 				noLogo.show();
 				logoField.val('');
+				$('#logoresize').removeAttr('style');
 
 			});
 
@@ -1032,6 +1039,8 @@ ready = function() {
 				logoURL = currentLogo;
 
 				logoField.val(logoURL);
+
+				setHiddenFieldDimensions();
 
 			});
 
@@ -1150,17 +1159,23 @@ ready = function() {
 					logoOriginalHeight = logo.attr('data-height');
 				}
 
-
-				if (logoOriginalWidth > logoSectionWidth) {
-					var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
-					logoDiv.css({
-						width: logoSectionWidth,
-						height: newHeight
-					});
+				if (currentLogo == oldLogo) {
+					if (logoOriginalWidth > logoSectionWidth) {
+						var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
+						logoDiv.css({
+							width: logoSectionWidth,
+							height: newHeight
+						});
+					} else {
+						logoDiv.css({
+							width: logoOriginalWidth,
+							height: logoOriginalHeight
+						});
+					}
 				} else {
 					logoDiv.css({
-						width: logoOriginalWidth,
-						height: logoOriginalHeight
+						width: '100%',
+						height: 'auto'
 					});
 				}
 				
