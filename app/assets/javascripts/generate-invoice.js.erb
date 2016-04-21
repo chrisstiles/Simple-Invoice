@@ -378,7 +378,7 @@ ready = function() {
 				logoWrapper.css({
 					width: '100%',
 					'max-width': targetWidth,
-					height: targetHeight
+					height: 'auto'
 				});
 				invoiceLogoImage.css({
 					width: '100%',
@@ -797,16 +797,28 @@ ready = function() {
 
 				jobControls.each(function() {
 					var $this = $(this);
-					var initialHeight = $this.parent('.amountcell').outerHeight();
+					var parentCell = $this.parent('.amountcell');
+					var initialHeight = parentCell.outerHeight();
+					var parentBottomOffset = parentCell.offset().top + initialHeight;
+					
 					$this.outerHeight(initialHeight);
+
+					var thisBottomOffset = $this.offset().top + $this.outerHeight();
+
+					if (thisBottomOffset != parentBottomOffset) {
+						$this.outerHeight(initialHeight + 1);
+					}
+
 				});
 
-				if (jobControls.length > 1) {
+				if (jobControls.length >= 1) {
 					var lastControl = jobControls.last();
 					lastControl.css({
 						'height': lastControl.outerHeight() + 1
 					});
 				}
+
+				
 			}	
 		}
 

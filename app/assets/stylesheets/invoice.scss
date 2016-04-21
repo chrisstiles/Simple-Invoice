@@ -525,12 +525,12 @@ section:after {
 
 .quantitycell, .ratecell, .amountcell {
 	white-space:nowrap;
-	max-width:95px;
+	max-width:96px;
 	overflow:hiden;
 }
 
 #invoicewrapper .e-quantity, #invoicewrapper .e-rate{
-	max-width:35px;
+	max-width:56px;
 	overflow:hidden;
 }
 
@@ -938,6 +938,7 @@ input.cmn-toggle-round:checked + label:after {
 #logoresize {
 	position:relative;
 	min-width:50px;
+	margin-bottom:5px;
 }
 
 #logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {
