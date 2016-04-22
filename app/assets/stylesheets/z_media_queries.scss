@@ -45,6 +45,19 @@
 	}
 }
 
+@media screen and (min-width:1020px) {
+	body.ios #mobilescrollwrapper, body.android #mobilescrollwrapper {
+		position:absolute !important;
+		top: 0 !important;
+		bottom:0!important;
+		left:0;
+		right:0;
+		overflow-x:visible;
+		overflow-y:scroll;
+		webkit-overflow-scrolling:touch;
+	}
+}
+
 @media screen and (max-width:1020px) {
 
 	body, html {
@@ -465,6 +478,20 @@
 		right:-7px;
 		top:50%;
 		transform:translateY(-50%) rotate(90deg);
+	}
+
+	#removelogobutton span {
+		left: 40px;
+		width: 80px;
+		top: 50%;
+		transform: translateY(-50%);
+		margin-top: 0;
+	}
+
+	.removelogo span:before {
+		left:-7px;
+		top:50%;
+		transform:translateY(-50%) rotate(-90deg);
 	}
 
 }

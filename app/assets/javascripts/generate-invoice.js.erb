@@ -568,6 +568,8 @@ ready = function() {
 			var invoiceDueDate = dueDateField.attr('date');
 			dueDateField.datepicker('setDate', invoiceDueDate);
 			setTerms();
+			setMaxDate();
+			setMinDate();
 
 		} else {
 			setDueDate();
