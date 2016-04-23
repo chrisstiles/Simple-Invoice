@@ -78,5 +78,13 @@ module ApplicationHelper
 		end
 	end
 
+	def page_title
+		title = content_for :title
+		if title.present?
+			"#{title} | Simple Invoice"
+		else
+			"Simple Invoice"
+		end 
+	end
 
 end

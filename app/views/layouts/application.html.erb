@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Invoicer</title>
+  <title><%= page_title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,6 +14,7 @@
 
 
 <body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
+<%= yield :outside_content %>
 
 <% if flash[:success] %>
 	<div class="success">
@@ -39,7 +40,7 @@
 
 		<div id="sessioninfo">
 				<%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "navsignout" %>
-				<%= link_to "Profile", settings_path, class: "navprofile" %>
+				<%= link_to "Settings", settings_path, class: "navprofile" %>
 		</div>
 		<% else %>
 				<div id="sessioninfo">

@@ -99,6 +99,9 @@ $('.client[data-id=' + id + ']').addClass('selected');
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');
 var clientFilter = $('#clientfiltering');
+
+//clientFilter.detach().appendTo('#clientsearch');
+
 var clientContainer = $('#clientscontainer');
 var clientSearch = $('#clientsearch');
 var clientsSidebar = $('#clientssidebar');
@@ -114,11 +117,6 @@ function setClientFilter() {
 		'width': width
 	});
 
-	clientFilter.css({
-		'left': clientContainerPosition.left,
-		'width': width,
-		'top': clientSearch.outerHeight() + 63
-	});
 
 	clientsSidebar.css({
 		'left': clientContainerPosition.left + width,

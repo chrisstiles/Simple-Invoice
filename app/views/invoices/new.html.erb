@@ -1,4 +1,5 @@
 <%= content_for(:nophone, true) %>
+<%= provide :title, "New Invoice" %>
 
 <div id="formwrapper">
 <%= form_for(@invoice, remote: true) do |f| %>
@@ -8,14 +9,6 @@
     <%= link_to "Back to Invoices", invoices_path, class: "back" %>
     <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
   </div>
-</div>
-
-<div id="validationerrors">
-  <div class="validationtitle">
-    <div class="closeerrors"></div>
-    Please correct the following errors before saving
-  </div>
-  <div id="errorholder"></div>
 </div>
 
 <div id="mobilesidebarwrapper" class="invoicesidebar">
@@ -73,6 +66,14 @@
 <!-- Start Invioce -->
 
 <div id="mobilescrollwrapper">
+
+<div id="validationerrors">
+  <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors before saving
+  </div>
+  <div id="errorholder"></div>
+</div>
 
 <div id="invoicewrapper" class="new">
 

@@ -63,9 +63,9 @@ pageBody.on('click', '.homerecordpayment', function() {
 	pageBody.addClass('homerecordclicked');
 });
 
-// Submit form on record payment enter pressed
+// Specifically allow enter key to submit form from certian input fields
 
-pageBody.on('keyup', '.e-amountpaid', function(e) {
+pageBody.on('keyup', '.e-amountpaid, #user_setting_attributes_base_invoice_number, #user_setting_attributes_tax', function(e) {
 	if(e.which == 13) {
 	   $(this).parents('form').submit();
 	}
@@ -466,7 +466,7 @@ $('.viewpdfbutton').on("click", function(e) {
 				window.location.href = url;
 			});
 		} else {
-			$(loadingSpinnerHtml).appendTo("#invoicewrapper").fadeIn(300, function() {
+			$(loadingSpinnerHtml).appendTo("#invoice").fadeIn(300, function() {
 				window.location.href = url;
 			});
 		}

@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-	before_action :set_client, only: [:show, :edit, :update, :destroy]
+	before_action :set_client, only: [:edit, :update, :destroy]
 	after_action :add_new_client_to_existing_invoices, only: [:create, :update]
 	after_action :update_client_name_on_invoices, only: [:update]
 	before_action :authenticate_user!
@@ -25,6 +25,10 @@ class ClientsController < ApplicationController
 
 	def new
 		@client = Client.new
+	end
+
+	def show
+		redirect_to clients_path
 	end
 
 	def create
@@ -68,6 +72,7 @@ class ClientsController < ApplicationController
 	def destroy
 		@client.destroy
 		@client = Client.new
+		@pagination_page = return_client_page_pagination(@client)
 
 		flash[:success] = 'Client deleted!'
     	flash.keep(:success)
@@ -81,6 +86,9 @@ class ClientsController < ApplicationController
 
 		def set_client
 			@client = current_user.clients.find(params[:id])
+
+			rescue ActiveRecord::RecordNotFound
+				@client = Client.new
 		end
 
 		def client_params

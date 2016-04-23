@@ -107,14 +107,20 @@ validationsHeight += 15;
 
 var invoiceWrapper = $('#invoicewrapper');
 
+// if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
+// 	var invoiceWrapper = $('#mobilescrollwrapper');
+// } else {
+// 	var invoiceWrapper = $('#invoicewrapper');
+// }
+
 invoiceWrapper.css({
 	'top': negativeValidationsHeight,
 	'margin-bottom' : 15,
-  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
-  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
-  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
-  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
-  'transform'         : 'translateY(' + validationsHeight + 'px)'
+	'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+	'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+	'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+	'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+	'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
 
 

@@ -15,22 +15,26 @@ var clientContainer = $('#clientscontainer');
 var clientSearch = $('#clientsearch');
 var clientsSidebar = $('#clientssidebar');
 
+// clientSearch.detach().prependTo('body');
+// clientFilter.detach().appendTo('#clientsearch');
+
+
 function setClientFilter() {
 	var width = clientContainer.outerWidth();
 	var clientContainerPosition = clientContainer.offset();
 
-	pageWrapper.css('top', clientFilter.outerHeight() + clientSearch.outerHeight());
+	pageWrapper.css('top', clientSearch.outerHeight());
 
 	clientSearch.css({
 		'left': clientContainerPosition.left,
 		'width': width
 	});
 
-	clientFilter.css({
-		'left': clientContainerPosition.left,
-		'width': width,
-		'top': clientSearch.outerHeight() + 63
-	});
+	// clientFilter.css({
+	// 	'left': clientContainerPosition.left,
+	// 	'width': width,
+	// 	'top': clientSearch.outerHeight() + 63
+	// });
 
 	clientsSidebar.css({
 		'left': clientContainerPosition.left + width,

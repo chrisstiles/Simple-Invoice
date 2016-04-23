@@ -6,27 +6,30 @@
 }
 
 #clientscontainer #searchresultswrapper {
-	border-right:1px solid #c9c9c9;
 	padding-bottom:35px;
 	margin-right:-1px;
 }
 
-#clientfiltering, #clientsearch {
+#clientsearch {
 	position: fixed;
     top: 63px;
     background-color: #ecf0f1;
-    padding: 40px 0 0px 20px;
+    padding: 40px 0 0 20px;
     margin-left:-20px;
     box-sizing: content-box;
-    z-index: 200;
+    z-index: 400;
 }
 
-#clientsearch {
-	padding-bottom:20px;
-}
 
 #clientfiltering {
 	padding-top:0;
+	z-index: 400;
+	margin-top:20px;
+	min-height:1px;
+	top:0;
+	box-sizing:content-box;
+	position:relative;
+	padding: 0;
 }
 
 #clientfiltering:after {
@@ -34,7 +37,7 @@
 	height:1px;
 	background-color:#c9c9c9;
 	bottom:0;
-	left:20px;
+	left:0;
 	right:0;
 	content:"";
 	position:absolute;
@@ -67,6 +70,7 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
+	z-index: 300;
 	//bottom:35px;
 	border-left:1px solid #c9c9c9;
 }

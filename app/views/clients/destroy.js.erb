@@ -7,7 +7,7 @@ clientsFormWrapper.html("<%= js %>");
 
  $.ajax({
 	type: 'GET',
-	url: '/clients/?client_name=' + clientNameText + '&page=' + currentPage,
+	url: '/clients/page=' + currentPage,
 	dataType: 'script',
 	async: true
 	}).done(function( msg ) {
@@ -17,6 +17,6 @@ clientsFormWrapper.html("<%= js %>");
 	console.log(msg)
 });
 
-
+$('.success').remove();
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 <% flash.discard %>

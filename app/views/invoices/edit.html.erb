@@ -1,7 +1,10 @@
 <%= content_for(:nophone, true) %>
 <% if @invoice.nil? %>
+  <%= provide :title, "No Invoice Found" %>
   <%= render 'not_found' %>
 <% else %>
+
+<%= provide :title, "Edit Invoice ##{@invoice.invoice_number}" %>
 
 <% if @validation_failed %>
   <% content_for :body_class, "validationfailed invoicevalidation" %>
@@ -15,14 +18,6 @@
     <%= link_to "Back to Invoice", invoice_path, class: "back" %>
     <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
   </div>
-</div>
-
-<div id="validationerrors">
-  <div class="validationtitle">
-    <div class="closeerrors"></div>
-    Please correct the following errors before saving
-  </div>
-  <div id="errorholder"></div>
 </div>
 
 <div id="mobilesidebarwrapper" class="invoicesidebar">
@@ -89,6 +84,14 @@
 <!-- Start Invioce -->
 
 <div id="mobilescrollwrapper">
+
+<div id="validationerrors">
+  <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors before saving
+  </div>
+  <div id="errorholder"></div>
+</div>
 
 <div id="invoicewrapper" class="edit">
     <div id="invoice">
