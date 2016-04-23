@@ -6,6 +6,10 @@ html {
 	overflow-y:scroll;
 }
 
+* {
+	-webkit-overflow-scrolling:auto !important;
+}
+
 body, html {
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
