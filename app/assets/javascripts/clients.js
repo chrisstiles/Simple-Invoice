@@ -37,7 +37,7 @@ function setClientFilter() {
 	// });
 
 	clientsSidebar.css({
-		'left': clientContainerPosition.left + width,
+		'left': clientContainerPosition.left + width - 1,
 		'width': width
 	});
 
@@ -45,20 +45,20 @@ function setClientFilter() {
 
 setClientFilter();
 
-// Add overflow scroll if the box is too large for the screen
-function checkWrapperHeight() {
-	var sidebar = $('#clientssidebar');
-	var formHeight = $('.clientsformwrapper').outerHeight();
-	var wrapperHeight = sidebar.outerHeight() - $('#newclientbox').outerHeight();
+// // Add overflow scroll if the box is too large for the screen
+// function checkWrapperHeight() {
+// 	var sidebar = $('#clientssidebar');
+// 	var formHeight = $('.clientsformwrapper').outerHeight();
+// 	var wrapperHeight = sidebar.outerHeight() - $('#newclientbox').outerHeight();
 
-	if (formHeight > wrapperHeight) {
-		sidebar.css('overflow-y', 'scroll');
-	} else {
-		sidebar.css('overflow-y', 'auto');
-	}
-}
+// 	if (formHeight > wrapperHeight) {
+// 		sidebar.css('overflow-y', 'scroll');
+// 	} else {
+// 		sidebar.css('overflow-y', 'auto');
+// 	}
+// }
 
-checkWrapperHeight();
+// checkWrapperHeight();
 
 // Changed fixed positions on window resize
 $( window ).resize(function() {

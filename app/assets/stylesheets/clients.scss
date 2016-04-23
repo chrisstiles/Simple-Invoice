@@ -3,6 +3,8 @@
 #clientscontainer {
 	width:50%;
 	padding-top:32px;
+	position:relative;
+	border-right:1px solid #c9c9c9;
 }
 
 #clientscontainer #searchresultswrapper {
@@ -70,7 +72,7 @@
 #clientssidebar {
 	position:fixed;
 	top:100px;
-	z-index: 300;
+	z-index: 600;
 	//bottom:35px;
 	border-left:1px solid #c9c9c9;
 }
@@ -115,6 +117,10 @@
 	position:absolute;
 	top:50%;
 	transform:translateY(-50%);
+	width:50%;
+	word-wrap:break-word;
+	line-height:1;
+	width:calc(50% - 25px);
 }
 
 .clientname {
@@ -125,6 +131,7 @@
 .clientemail {
 	right:20px;
 	font-size:14px;
+	text-align:right;
 }
 
 .clientformtitle {
@@ -138,7 +145,7 @@
 
 .clientsformwrapper {
 	position:relative;
-	padding:25px 30px;
+	padding:25px 0px 25px 30px;
 }
 
 .formholder, .logoformholder {
@@ -178,6 +185,7 @@
     color: #26323f;
     width: 100%;
     font-size: 15px;
+    -webkit-appearance:none;
 }
 
 .clientsformwrapper input[type="text"]:focus, .clientsformwrapper input[type="password"]:focus {

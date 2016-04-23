@@ -21,7 +21,7 @@ class Client < ActiveRecord::Base
 	default_scope { order('LOWER(name) ASC') }
 	scope :client_name, -> (client_name) { where("LOWER(name) like ?", "#{client_name.downcase}%")}
 
-	# Number of clients to show per page with pagination.
-	self.per_page = 10
-	PER_PAGE = 10
+	# Number of clients to show per page with pagination. return to 10 
+	self.per_page = 6
+	PER_PAGE = 6
 end

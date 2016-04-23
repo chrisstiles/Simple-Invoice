@@ -301,11 +301,14 @@
 	}
 
 	.pagination > * {
-		border-top:0;
 		transform:translateZ(0);
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
 		-webkit-overflow-scrolling: touch;
+	}
+
+	#homepagination .pagination > * {
+		border-top:0;
 	}
 
 	#searchresults.haspagination {
@@ -494,6 +497,28 @@
 		transform:translateY(-50%) rotate(90deg);
 	}
 
+	#clientsearch {
+		top:50px;
+	}
+
+}
+
+@media screen and (max-width:950px) {
+	.clientname {
+		font-size:14px;
+	}
+
+	#pagewrapper.clientspage {
+		padding: 0 30px 30px 30px;
+	}
+
+	#clientsearch {
+		padding-top:20px;
+	}
+
+	#clientssidebar {
+		margin-top:20px;
+	}
 }
 
 @media screen and (max-width:885px) {
