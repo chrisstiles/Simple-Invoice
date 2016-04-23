@@ -16,6 +16,12 @@ body, html {
     margin:0;
 }
 
+body.overflowhidden, html.overflowhidden {
+	overflow:hidden !important;
+	width:100% !important;
+	height:100% !important;
+}
+
 body {
 	background-color:#ecf0f1;
 	font-family: 'Libertad', sans-serif;

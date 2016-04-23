@@ -34,9 +34,6 @@ pageBody.on('submit', 'form', function(e) {
 
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
-
-
-
 var homeInvoiceLoading = false;
 
 pageBody.on('click', '.thirdbutton.file', function(e) {
@@ -188,6 +185,23 @@ function setSidebarPosition() {
 if (homePageWrapper.length) {
 	setSidebarPosition();
 }
+
+// Check for overflow
+
+function checkOverflow() {
+	var contentHeight = homePageWrapper.offset().top + homePageWrapper.outerHeight();
+	var windowHeight = $(window).outerHeight();
+
+	var scrollElements = $('body, html');
+
+	if (contentHeight < windowHeight) {
+		scrollElements.addClass('overflowhidden');
+	} else {
+		scrollElements.removeClass('overflowhidden');
+	}
+}
+
+checkOverflow();
 
 // Set position of pagination if it exists
 var searchResults = $('#searchresults');

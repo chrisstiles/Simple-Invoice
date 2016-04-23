@@ -166,6 +166,24 @@ pageBody.on('click', '.pagination a', function() {
  //    }    
  //  }, 300);
 
+
+ // Check for overflow
+
+function checkOverflow() {
+  var contentHeight = homePageWrapper.offset().top + homePageWrapper.outerHeight();
+  var windowHeight = $(window).outerHeight();
+
+  var scrollElements = $('body, html');
+
+  if (contentHeight < windowHeight) {
+    scrollElements.addClass('overflowhidden');
+  } else {
+    scrollElements.removeClass('overflowhidden');
+  }
+}
+
+checkOverflow();
+
   
 });
 
@@ -185,6 +203,7 @@ $(document)
    clearTimeout(timeOutHandler);
    setTimeout(function() {
     $('.loadingspinner').hide();
+    checkOverflow();
   }, 200);
 
    $('form').removeAttr('disabled');
