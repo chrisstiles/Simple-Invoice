@@ -16,14 +16,13 @@ var clientSearch = $('#clientsearch');
 var clientsSidebar = $('#clientssidebar');
 
 // clientSearch.detach().prependTo('body');
+
 // clientFilter.detach().appendTo('#clientsearch');
 
 
 function setClientFilter() {
 	var width = clientContainer.outerWidth();
 	var clientContainerPosition = clientContainer.offset();
-
-	pageWrapper.css('top', clientSearch.outerHeight());
 
 	clientSearch.css({
 		'left': clientContainerPosition.left,
@@ -40,6 +39,25 @@ function setClientFilter() {
 		'left': clientContainerPosition.left + width - 1,
 		'width': width
 	});
+
+	// var headingSize = clientSearch.find('h3').outerHeight(true);
+	// console.log('heading: ' + headingSize);
+
+	// var formSize = clientSearch.find('form input').outerHeight();
+	// console.log('form: ' + formSize);
+
+	// var pageOffset = headingSize + formSize + 20;
+
+
+	// if ($('#clientpagination .pagination').length) {
+	// 	pageOffset += 34;
+	// }
+
+	// console.log(pageOffset);
+
+	pageWrapper.css('top', clientSearch.outerHeight());
+
+	console.log(clientSearch.outerHeight());
 
 }
 
@@ -63,7 +81,6 @@ setClientFilter();
 // Changed fixed positions on window resize
 $( window ).resize(function() {
 	setClientFilter();
-	checkWrapperHeight();
 });
 
 // Add selected class and perform ajax request for edit form
