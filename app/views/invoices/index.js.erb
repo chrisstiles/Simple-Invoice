@@ -1,5 +1,4 @@
 <% js = escape_javascript(render 'list') %>
-$('#homepagination').remove();
 $("#searchresults").html("<%= js %>");
 
 $('#loadingspinner').hide();
@@ -15,6 +14,15 @@ if ($('.pagination').length) {
 	paginationWrapper.hide();
 }
 
+var invoiceCount = parseInt('<%= @invoices.count %>');
+var noInvoices = $('#searchnoinvoices');
+
+if (invoiceCount === 0) {
+	noInvoices.show();
+} else {
+	noInvoices.hide();
+}
+
 var homePageWrapper = $('#pagewrapper');
 var homeSide = $('#homeside');
 var searchResults = $('#searchresults');
@@ -23,13 +31,13 @@ var searchResults = $('#searchresults');
 var pagination = $('#homepagination');
 
 function setHomePagination() {
-	var leftPosition = $('.homeinvoice').first().offset().left - 100;
-	var rightPosition = $(window).width() - homeSide.offset().left;
+	// var leftPosition = $('.homeinvoice').first().offset().left - 100;
+	// var rightPosition = $(window).width() - homeSide.offset().left;
 
-	pagination.css({
-		'left' : leftPosition,
-		'right' : rightPosition
-	});
+	// pagination.css({
+	// 	'left' : leftPosition,
+	// 	'right' : rightPosition
+	// });
 
 	if ($('.pagination').length) {
 		pagination.show();
@@ -39,8 +47,11 @@ function setHomePagination() {
 		pagination.hide();
 	}
 
-	$('#homepagination').detach().prependTo('body');
+	//$('#homepagination').detach().prependTo('body');
 }
+
+<% pagination = escape_javascript(js_will_paginate @invoices) %>
+$("#homepagination").html("<%= pagination %>");
 
 if (homePageWrapper.length) {
 	setHomePagination();

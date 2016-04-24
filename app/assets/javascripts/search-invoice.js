@@ -15,10 +15,10 @@ function searchInvoice(){
     type: 'GET',
     dataType: 'script',
   }).done(function( msg ) {
-    seachNoInvoices.hide();
+    //searchNoInvoices.hide();
   //  hideLoader();
   }).fail(function(msg){
-    showNoInvoices();
+    //showNoInvoices();
   });
 };
 
@@ -146,12 +146,12 @@ checkPagination();
 
 // Function to hide the spinner and show no invoices found if the ajax call fails
 
-var seachNoInvoices = $('#searchnoinvoices');
+var searchNoInvoices = $('#searchnoinvoices');
 
 function showNoInvoices() {
   pageBody.addClass('hasfinishedloading');
   hideLoader()
-  seachNoInvoices.show();
+  searchNoInvoices.show();
 }
 
 // Scroll the user to the top of the page when they click a pagination link

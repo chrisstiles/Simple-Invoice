@@ -1,9 +1,13 @@
 <%= provide :title, "Invoices" %>
 <% if has_any_invoices? %>
 
-<div id="pagewrapper" class="homepage widthfixedsidebar">
-   
-   <div id="mobilesidebarwrapper">
+<%= provide :outside_content  do %>
+
+  <div id="homepagination">
+    <%= js_will_paginate @invoices %>
+  </div>
+
+  <div id="mobilesidebarwrapper">
       <div id="homeside">
         <div class="homesidesection homefiltersection">
            <h3>Filter Invoices</h3>
@@ -43,6 +47,10 @@
       </div>
 
    </div>
+<% end %>
+
+<div id="pagewrapper" class="homepage widthfixedsidebar">
+   
    <div id="searchresultswrapper">
       <div id="searchnoinvoices" class="noinvoices">
          <p>No Invoices Found</p>

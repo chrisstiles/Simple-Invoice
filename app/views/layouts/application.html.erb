@@ -14,18 +14,6 @@
 
 
 <body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
-<%= yield :outside_content %>
-
-<% if flash[:success] %>
-	<div class="success">
-	  <div class="successtimer"></div>
-	  <div class="closesuccess"></div>
-	  <span><%= flash[:success] %></span>
-	</div>
-<% end %>
-
-<div id="htmlwrapper">
-<div id="mobilesidebar"><span></span></div>
 
 <header>
 	<%= link_to image_tag("logo.png", alt: "Invoicer"), invoices_path, class: "logo" %>
@@ -49,6 +37,19 @@
 		<% end %>	
 	</div>	
 </header>
+
+<%= yield :outside_content %>
+
+<% if flash[:success] %>
+	<div class="success">
+	  <div class="successtimer"></div>
+	  <div class="closesuccess"></div>
+	  <span><%= flash[:success] %></span>
+	</div>
+<% end %>
+
+<div id="htmlwrapper">
+<div id="mobilesidebar"><span></span></div>
 
 <div id="contentwrapper">
 

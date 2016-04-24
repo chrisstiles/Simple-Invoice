@@ -70,7 +70,7 @@ pageBody.on('keyup', '.e-amountpaid, #user_setting_attributes_base_invoice_numbe
 
 // Don't submit form when user presses enter from text field in sidebar
 
-pageBody.on('keydown', '#sidebar input, ', function(e) {
+pageBody.on('keydown', '#sidebar input', function(e) {
 	if(e.which == 13) {
 	   e.preventDefault();
 	   return false
@@ -559,16 +559,16 @@ function toggleMobileSidebar() {
 
 //if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
 
-$('#homepagination').detach().prependTo('body');
+//$('#homepagination').detach().prependTo('body');
 
-if ($('#pagewrapper').hasClass('homepage')) {
+// if ($('#pagewrapper').hasClass('homepage')) {
 
-	mobileSidebarWrapper.addClass('detached');
-	mobileSidebarWrapper.detach().prependTo('body');
-}
+// 	mobileSidebarWrapper.addClass('detached');
+// 	//mobileSidebarWrapper.detach().prependTo('body');
+// }
 
 //$('.invoiceform').detach().prependTo('body');
-$('header').detach().prependTo('body');
+//$('header').detach().prependTo('body');
 
 //} 
 

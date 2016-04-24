@@ -21,11 +21,11 @@ module ApplicationHelper
 			if Rails.env.production?
 				image_tag image.logo.gsub('https', 'http'), width: @invoice.logo_width, height: @invoice.logo_height
 			else
-				unless params.has_key?(:debug)
+				#unless params.has_key?(:debug)
 					wicked_pdf_image_tag image.logo.gsub('https', 'http'), width: @invoice.logo_width, height: @invoice.logo_height
-				else
-					image_tag image.logo, width: @invoice.logo_width, height: @invoice.logo_height
-				end
+				#else
+				#	image_tag image.logo, width: @invoice.logo_width, height: @invoice.logo_height
+				#end
 			end
 		end
 	end
