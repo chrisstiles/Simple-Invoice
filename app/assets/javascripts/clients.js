@@ -62,7 +62,7 @@ pageWrapper.on('click', '.client', function() {
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected')) {
 
-		pageBody.addClass('loadingclientform');
+		pageBody.addClass('loadingclientform clientsformopen');
 
 		$('.selected').removeClass('selected');
 		$this.addClass('selected');

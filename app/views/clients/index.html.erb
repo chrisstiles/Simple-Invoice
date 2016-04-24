@@ -5,18 +5,24 @@
 <div id="clientsearch">
 	<h3>Filter Clients</h3>
 	<form accept-charset="UTF-8" action="/clients" method="get" class="homefilter" data-remote="true">
+		<a href="#" class="button blue newclientbutton mobilenewclient">New Client</a>
 		<input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
 	</form>
 	<div id="clientfiltering">
 
 	<div id="clientpagination">
-		<%= js_will_paginate @clients, :params => {:id=>nil, :method=>'get', :controller=>'clients', :action=>'index'} %> 
+		<%= js_will_paginate @clients, inner_window: 3, :params => {:id=>nil, :method=>'get', :controller=>'clients', :action=>'index'} %> 
 	</div>
 
 	</div>
 </div>
 
 <div id="clientssidebar">
+
+	<div id="toolbar">
+		asdfasdf
+
+	</div>
 
 	<div class="clientsformwrapper">
 		<%= render 'form' %>

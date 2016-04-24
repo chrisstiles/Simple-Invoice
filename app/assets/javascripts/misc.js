@@ -303,6 +303,8 @@ $( window ).resize(function() {
 			setHomePagination();
 		}
 	}
+
+	checkPaginationLength();
 });
 
 
@@ -556,6 +558,29 @@ function toggleMobileSidebar() {
 	homePageWrapper.toggleClass('sidebaropen');
 
 }
+
+function checkPaginationLength() {
+	var pagination = $('.pagination');
+	var paginationOffset = pagination.offset().left
+	var windowWidth = $(window).width();
+
+	var paginationWidth = 0;
+
+	$('.pagination > *').each(function() {
+		 paginationWidth += parseInt($(this).outerWidth(), 10);
+	});
+
+	var paginationLinks = $('.pagination > *').filter(':not(.previous_page, .next_page)');
+
+	if ((paginationWidth + paginationOffset) > (windowWidth - paginationOffset)) {
+		paginationLinks.hide();
+	} else {
+		paginationLinks.show();
+	}
+
+}
+
+checkPaginationLength();
 
 //if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
 
