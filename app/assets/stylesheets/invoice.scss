@@ -709,7 +709,7 @@ body.internet.explorer .jobcontrols {
 
 .notestitle {
 	position: absolute;
-    z-index: 100;
+    z-index: 200;
     top: 25px;
     left: 33px;
 }
@@ -879,7 +879,7 @@ input.cmn-toggle-round:checked + label:after {
 	left:0;
 	right:0;
 	bottom:0;
-	z-index: 100;
+	z-index: 300;
 	background-color:rgba(255,255,255,.85);
 }
 
