@@ -488,7 +488,7 @@ $('.selectallinput').on('click touchstart', function(e) {
 });
 
 
-var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *';
+var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar';
 // Uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
   e.preventDefault();

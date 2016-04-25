@@ -620,6 +620,7 @@
 		position:relative;
 		top:0;
 		padding:0 25px;
+		box-sizing:border-box;
 	}
 }
 
@@ -663,7 +664,15 @@
 		margin-bottom:35px;
 	}
 
-	body.touchmoving .mobilehomeinvoice, body.touchmoving .mobilehomeinvoice.touchdown, body.touchmoving .client, body.touchmoving .client.touchdown {
+	#searchresults .client:active {
+		background-color:#fff;
+	}
+
+	#noclients {
+		border-bottom:none !important;
+	}
+
+	body.touchmoving .mobilehomeinvoice, body.touchmoving .mobilehomeinvoice.touchdown, body.touchmoving #searchresults .client, body.touchmoving #searchresults .client.touchdown {
 		background-color:#fff !important
 	}
 
@@ -870,13 +879,13 @@
 		transform:scale(.7);
 	}
 
-	#clientssidebar .clientsformwrapper {
-		padding-bottom:125px;
+	#clientssidebar .clientsformwrapper form {
+		margin-bottom:-40px;
 	}
 
 	#clientssidebar .clientsformwrapper  .deleteclienthalf, #clientssidebar .clientsformwrapper .saveclienthalf {
 		white-space:nowrap;
-		position: absolute;
+		position: relative;
 		width: 100%;
 		text-align: center;
 		left: 50%;
@@ -886,7 +895,7 @@
 	}
 
 	#clientssidebar .clientsformwrapper .deleteclienthalf {
-		margin-top:50px;
+		top:50px;
 		margin-bottom:20px;
 	}
 
@@ -896,9 +905,9 @@
 		transform: translateX(-50%);
 	}
 
-	#clientssidebar .clientsformwrapper .saveclienthalf .button.blue {
-
-	}
+	#clientssidebar .clientsformwrapper .saveclienthalf  {
+		top:-80px;
+	}	
 
 	#clientssidebar .clientsformwrapper .button.deleteclient {
 		width:110px;
