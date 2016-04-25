@@ -561,7 +561,13 @@ function toggleMobileSidebar() {
 
 function checkPaginationLength() {
 	var pagination = $('.pagination');
-	var paginationOffset = pagination.offset().left
+
+	if (pagination.length) {
+		var paginationOffset = pagination.offset().left
+	} else {
+		var paginationOffset = 0;
+	}
+	
 	var windowWidth = $(window).width();
 
 	var paginationWidth = 0;
