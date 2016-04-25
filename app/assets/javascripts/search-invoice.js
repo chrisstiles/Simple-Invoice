@@ -16,7 +16,7 @@ function searchInvoice(){
     dataType: 'script',
   }).done(function( msg ) {
     //searchNoInvoices.hide();
-  //  hideLoader();
+    $('.loadingspinner').hide();
   }).fail(function(msg){
     //showNoInvoices();
   });
@@ -171,7 +171,9 @@ pageBody.on('click', '.pagination a', function() {
 
 function checkPaginationLength() {
   var pagination = $('.pagination');
-  var paginationOffset = pagination.offset().left
+  if (pagination.length) {
+    var paginationOffset = pagination.offset().left
+  }
   var windowWidth = $(window).width();
 
   var paginationWidth = 0;
