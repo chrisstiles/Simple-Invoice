@@ -513,7 +513,7 @@ $('body').on('touchend', '[contenteditable=true]', function() {
 	var $this = $(this);
 	
 	if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
-		if (!$this.is(':focus')) {
+		if (!$this.is(':focus') && !pageBody.hasClass('touchmoving')) {
 			$this.focus();
 			setEndOfContenteditable(this);
 		}
@@ -618,7 +618,9 @@ contentWrapper.on('touchmove', function() {
 });
 
 contentWrapper.on('touchend', function() {
-	pageBody.removeClass('touchmoving');
+	setTimeout(function() {
+		pageBody.removeClass('touchmoving');
+	}, 50);
 });
 
 var isWaitingForActive = false;
