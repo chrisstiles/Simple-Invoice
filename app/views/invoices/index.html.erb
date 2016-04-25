@@ -1,4 +1,5 @@
 <%= provide :title, "Invoices" %>
+<%= content_for(:mobilesidebar, true) %>
 <% if has_any_invoices? %>
 
 <%= provide :outside_content  do %>

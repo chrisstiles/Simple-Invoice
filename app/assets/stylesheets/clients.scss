@@ -103,16 +103,25 @@
 	color:#26323f;
 	margin-right:30px;
 	cursor: pointer;
+	 -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .client:hover {
 	background-color:#f7f7f7;
 }
 
-.client.selected {
-	color:#fff;
-	background-color:#41a9ee;
-	cursor: default;
+@media screen and (min-width:886px) {
+	.client.selected {
+		color:#fff;
+		background-color:#41a9ee;
+		cursor: default;
+	}
 }
 
 .clientname, .clientemail {
@@ -120,7 +129,9 @@
 	top:50%;
 	transform:translateY(-50%);
 	width:50%;
-	word-wrap:break-word;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 	line-height:1;
 	width:calc(50% - 25px);
 }
@@ -276,4 +287,8 @@
 
 .mobilenewclient {
 	display:none !important;
+}
+
+#clientssidebar #toolbar {
+	display:none;
 }

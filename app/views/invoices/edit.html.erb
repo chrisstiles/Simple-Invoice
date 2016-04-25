@@ -1,4 +1,5 @@
 <%= content_for(:nophone, true) %>
+<%= content_for(:mobilesidebar, true) %>
 <% if @invoice.nil? %>
   <%= provide :title, "No Invoice Found" %>
   <%= render 'not_found' %>

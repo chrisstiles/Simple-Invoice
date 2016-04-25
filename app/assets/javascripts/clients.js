@@ -51,18 +51,30 @@ setClientFilter();
 // checkWrapperHeight();
 
 // Changed fixed positions on window resize
+
 $( window ).resize(function() {
 	setClientFilter();
 });
+
+function showMobileClientsForm() {
+	pageBody.addClass('clientsformopen');
+}
+
+function hideMobileClientsForm() {
+	pageBody.removeClass('clientsformopen');
+	$('.selected').removeClass('selected');
+}
 
 // Add selected class and perform ajax request for edit form
 pageWrapper.on('click', '.client', function() {
 
 	var $this = $(this);
 	var id = $this.attr('data-id');
-	if (!$this.hasClass('selected')) {
+	if (!$this.hasClass('selected') || $(window).width() <= 885) {
 
-		pageBody.addClass('loadingclientform clientsformopen');
+		showMobileClientsForm();
+		pageBody.addClass('loadingclientform');
+		
 
 		$('.selected').removeClass('selected');
 		$this.addClass('selected');
@@ -70,6 +82,17 @@ pageWrapper.on('click', '.client', function() {
 		getClient(id);
 
 	}
+});
+
+$('.mobilenewclient').on('click', function(e) {
+	$('.selected').removeClass('selected');
+	showMobileClientsForm();
+	currentSelected = "";
+});
+
+pageBody.on('click', '.clientsback', function(e) {
+	e.preventDefault();
+	hideMobileClientsForm();
 });
 
 function getClient(id) {

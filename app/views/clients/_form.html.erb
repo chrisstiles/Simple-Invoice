@@ -51,13 +51,13 @@
 			<%= f.text_field :zip, placeholder: "Zip Code" %>
 		</div>
 
-		<div class="half">
+		<div class="half deleteclienthalf">
 			<% unless @client.id.nil? %>
 		 		<div class="button deleteclient deleteicon" data-clientid="<%= @client.id %>">Delete Client</div>
 			<% end %>
 		</div>
 
-		<div class="half nomargin">
+		<div class="half nomargin saveclienthalf">
 			<%= f.submit 'Save Client', class: "button blue willload saveicon" %>
 		</div>
 

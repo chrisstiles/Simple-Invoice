@@ -131,7 +131,11 @@ var clientsSidebar = $('#clientssidebar');
 // Add selected class to client after pagination
 
 function setClientSelected() {
-	$('.client[data-id=<%= @client_id %>]').addClass('selected');
+	if ($(window).width() > 885) {
+		$('.client[data-id=<%= @client_id %>]').addClass('selected');
+	} else {
+		$('.selected').removeClass('selected');
+	}
 }
 
 
@@ -154,6 +158,13 @@ function setClientFilter() {
 }
 
 setClientFilter();
+
+if (pageBody.hasClass('clientsformopen')) {
+	$('.selected').removeClass('selected');
+} 
+
+pageBody.removeClass('clientsformopen');
+
 
 
 <% end %>

@@ -93,8 +93,12 @@ var clientNameText = $('.client_name_search').val();
 
 // Add selected class to client after pagination
 var id = $('.edit_client').attr('data-id');
-$('.client[data-id=' + id + ']').addClass('selected');
 
+if ($(window).width() > 885) {
+	$('.client[data-id=' + id + ']').addClass('selected');
+} else {
+	$('.selected').removeClass('selected');
+}
 
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');
@@ -126,5 +130,11 @@ function setClientFilter() {
 }
 
 setClientFilter();
+
+if (pageBody.hasClass('clientsformopen') && $(window).width() <= 885) {
+	$('.selected').removeClass('selected');
+} 
+
+pageBody.removeClass('clientsformopen');
 
 <% end %>
