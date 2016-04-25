@@ -913,8 +913,12 @@
 		width:110px;
 	}
 
-	#clientscontainer #searchresultswrapper, #pagewrapper.clientspage {
+	#clientscontainer #searchresultswrapper {
 		padding-bottom:0;
+	}
+
+	#pagewrapper.clientspage {
+		padding-bottom:1px;
 	}
 
 
