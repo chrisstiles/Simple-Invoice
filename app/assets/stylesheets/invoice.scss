@@ -533,7 +533,10 @@ section:after {
 .quantitycell, .ratecell, .amountcell {
 	white-space:nowrap;
 	max-width:96px;
-	overflow:hiden;
+}
+
+.quantitycell, .ratecell {
+	overflow:hidden;
 }
 
 #invoicewrapper .e-quantity, #invoicewrapper .e-rate{
@@ -542,14 +545,6 @@ section:after {
 	display:block;
 	float:right;
 }
-
-// #invoicewrapper.edit td.ratecell:after, #invoicewrapper.new td.ratecell:after {
-// 	display:inline;
-// 	content:"$";
-// 	font-weight:300;
-// 	color:#838383;
-// 	float:right;
-// }
 
 .amountbox {
 	max-width:200px;

@@ -828,8 +828,12 @@
 		width:18% !important;
 	}
 
+	.amountcell {
+		text-align: right;
+	}
+
 	.amountbox {
-		overflow:visible;
+		// overflow:visible;
 		min-width:50px;
 	}
 
@@ -910,11 +914,11 @@
 
 @media screen and (max-width:470px) {
 	.tableheading th:nth-child(1) {
-		width:40% !important;
+		width:39% !important;
 	}
 
 	.tableheading th:nth-child(2) {
-		width:23% !important;
+		width:24% !important;
 	}
 
 	.tableheading th:nth-child(3) {
