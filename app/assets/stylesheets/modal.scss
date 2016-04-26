@@ -275,15 +275,16 @@ html.noscroll {
 	border:1px solid #41a9ee;
 }
 
-.noclients {
+#modalcontent .noclients {
 	position:absolute;
 	top:45%;
-	left:50%;
-	transform:translate(-50%,-50%);
+	left:0;
+  right:0;
+	transform:translateY(-50%);
 	text-align:center;
 }
 
-.noclients span {
+#modalcontent .noclients span {
 	display: block;
     font-size: 35px;
     font-weight: 100;
@@ -291,7 +292,7 @@ html.noscroll {
     margin-bottom: 10px;
 }
 
-.noclients a {
+#modalcontent .noclients a {
 	display:inline-block;
 }
 
