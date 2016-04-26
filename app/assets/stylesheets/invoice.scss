@@ -518,6 +518,8 @@ section:after {
 
 #invoicewrapper .e-jobdescription {
 	margin-right:8px;
+	display:block;
+	float:left;
 }
 
 #invoiceitems td {
@@ -537,11 +539,22 @@ section:after {
 #invoicewrapper .e-quantity, #invoicewrapper .e-rate{
 	max-width:56px;
 	overflow:hidden;
+	display:block;
+	float:right;
 }
+
+// #invoicewrapper.edit td.ratecell:after, #invoicewrapper.new td.ratecell:after {
+// 	display:inline;
+// 	content:"$";
+// 	font-weight:300;
+// 	color:#838383;
+// 	float:right;
+// }
 
 .amountbox {
 	max-width:200px;
 	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .ratecell [contenteditable="true"] {
@@ -661,14 +674,6 @@ body.internet.explorer .jobcontrols {
 
 #invoiceitems tr.tableheading:hover {
 	background-color:transparent;
-}
-
-#invoicewrapper.edit td.ratecell:before, #invoicewrapper.new td.ratecell:before {
-	display:inline;
-	content:"$";
-	font-weight:300;
-	color:#838383;
-	margin-right:2px;
 }
 
 #invoicetotal {

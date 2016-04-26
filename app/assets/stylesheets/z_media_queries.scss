@@ -420,11 +420,11 @@
 		box-sizing:border-box;
 	}
 
-	#invoiceitems table {
+	#invoicewrapper.new #invoiceitems table, #invoicewrapper.edit #invoiceitems table {
 		width: calc(100% - 90px);
 	}
 
-	#invoiceitems th:last-child, #invoiceitems td.amountcell {
+	#invoicewrapper.new #invoiceitems th:last-child, #invoicewrapper.edit #invoiceitems th:last-child, #invoiceitems.new #invoiceitems td.amountcell, #invoiceitems.edit #invoiceitems td.amountcell {
 		padding-right:0;
 	}
 
@@ -466,12 +466,35 @@
 		padding:4px;
 	}
 
+	.tableheading th, #invoiceitems td {
+		padding-right:15px;
+		box-sizing:border-box;
+	}
+
+	#invoicewrapper span.e-quantity {
+		max-width:60px;
+	}
+
+	#invoiceitems [contenteditable="true"] {
+		margin-right:0;
+	}
+
 	.tableheading th:nth-child(1) {
-		width:67% !important;
+		width:60% !important;
+	}
+
+	.tableheading th:nth-child(2) {
+		width:13% !important;
+	}
+
+	.tableheading th:nth-child(3) {
+		width:12% !important;
 	}
 
 	.tableheading th:nth-child(4) {
-		width:62% !important;
+		width:15% !important;
+		min-width:63px;
+		padding-right:0;
 	}
 
 	.control {
@@ -777,23 +800,6 @@
 }
 
 @media screen and (max-width:650px) {
-	.tableheading th:nth-child(1) {
-		width:60% !important;
-	}
-
-	.tableheading th:nth-child(2) {
-		width:13% !important;
-	}
-
-	.tableheading th:nth-child(3) {
-		width:12% !important;
-	}
-
-	.tableheading th:nth-child(4) {
-		width:15% !important;
-		min-width:63px;
-	}
-
 	section {
 		padding:18px 20px 16px 20px;
 	}
@@ -804,6 +810,30 @@
 
 	#invoiceitems tr:after {
 		left:20px;
+	}
+
+	.tableheading th:nth-child(1) {
+		width:50% !important;
+	}
+
+	.tableheading th:nth-child(2) {
+		width:16% !important;
+	}
+
+	.tableheading th:nth-child(3) {
+		width:16% !important;
+	}
+
+	.tableheading th:nth-child(4) {
+		width:18% !important;
+	}
+
+	.amountbox {
+		overflow:visible;
+	}
+
+	#invoiceitems, #invoiceitems span {
+		font-size:12px !important;
 	}
 }
 
@@ -850,10 +880,10 @@
 	.jobcontrols {
 		padding:15px 10px;
 		width:70px;
-		right:-70px;
+		right:-80px;
 	}
 
-	#invoiceitems table {
+	#invoicewrapper.new #invoiceitems table, #invoicewrapper.edit #invoiceitems table {
 		width: calc(100% - 70px)
 	}
 
@@ -865,6 +895,43 @@
 
 	#removelogobutton {
 		right:auto;
+	}
+
+	#invoiceitems span {
+		font-size:14px;
+		color:#484848;
+	}
+
+	[contenteditable="true"]:before, #clientinformation {
+		color:#484848;
+	}
+}
+
+@media screen and (max-width:470px) {
+	.tableheading th:nth-child(1) {
+		width:40% !important;
+	}
+
+	.tableheading th:nth-child(2) {
+		width:23% !important;
+	}
+
+	.tableheading th:nth-child(3) {
+		width:17% !important;
+	}
+
+	.tableheading th:nth-child(4) {
+		width:20% !important;
+	}
+
+	.e-jobdescription:before {
+		content:"Description";
+	}
+}
+
+@media screen and (max-width: 420px) {
+	#invoiceitems th:first-child, #invoiceitems td.jobdescriptioncell {
+		padding-right:10px;
 	}
 }
 
