@@ -830,6 +830,7 @@
 
 	.amountbox {
 		overflow:visible;
+		min-width:50px;
 	}
 
 	#invoiceitems, #invoiceitems span {
@@ -879,8 +880,8 @@
 
 	.jobcontrols {
 		padding:15px 10px;
-		width:70px;
-		right:-80px;
+		width:78px;
+		right:-78px;
 	}
 
 	#invoicewrapper.new #invoiceitems table, #invoicewrapper.edit #invoiceitems table {
