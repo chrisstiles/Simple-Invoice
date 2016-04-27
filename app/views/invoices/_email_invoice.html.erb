@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="formholder">
+<div class="formholder emailformwrapper">
 <%= form_for @invoice, :url => url_for(:controller => 'invoices', :action => 'email_invoice'), method: "post", remote: true do |f|  %>
 <div class="sendemailform">
 	<div class="emailclientname"><%= @invoice.client_name %></div>

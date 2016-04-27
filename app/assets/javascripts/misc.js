@@ -475,6 +475,7 @@ $('.viewpdfbutton').on("click", function(e) {
 	
 });
 
+
 $('.showloadingspinner').remove();
 
 
@@ -482,7 +483,7 @@ $('.showloadingspinner').remove();
 $('.selectallinput').on('click touchstart', function(e) {
 	e.preventDefault();
 	var id = $(this).attr("id");
-	var input = document.getElementById(id);
+	var input = document.getElefentById(id);
 	$(this).focus();
     input.setSelectionRange(0,9999);
 });
