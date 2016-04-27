@@ -71,17 +71,14 @@ pageWrapper.on('click', '.client', function() {
 	var $this = $(this);
 	var id = $this.attr('data-id');
 	if (!$this.hasClass('selected') || $(window).width() <= 885) {
-
 		
-		pageBody.addClass('loadingclientform');
-		
+		if (!$this.hasClass('selected')) {
+			pageBody.addClass('loadingclientform');
+			getClient(id);
+		}
 
 		$('.selected').removeClass('selected');
 		$this.addClass('selected');
-		
-		if ($this.hasClass('selected')) {
-			getClient(id);
-		}
 
 		showMobileClientsForm();
 
