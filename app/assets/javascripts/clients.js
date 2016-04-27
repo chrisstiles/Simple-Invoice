@@ -62,7 +62,7 @@ function showMobileClientsForm() {
 
 function hideMobileClientsForm() {
 	pageBody.removeClass('clientsformopen');
-	$('.selected').removeClass('selected');
+	//$('.selected').removeClass('selected');
 }
 
 // Add selected class and perform ajax request for edit form
