@@ -79,7 +79,9 @@ pageWrapper.on('click', '.client', function() {
 		$('.selected').removeClass('selected');
 		$this.addClass('selected');
 		
-		getClient(id);
+		if ($this.hasClass('selected')) {
+			getClient(id);
+		}
 
 		showMobileClientsForm();
 
