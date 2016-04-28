@@ -643,6 +643,24 @@ pageBody.on('touchmove touchend', function() {
 	$('.mobilehomeinvoice, .client').removeClass('touchdown');
 });
 
+
+var profileToggle = $('#profiletoggle');
+var logoToggle = $('#logotoggle');
+
+profileToggle.on('click', function(e) {
+	profileToggle.addClass('active');
+	logoToggle.removeClass('active');
+	homePageWrapper.removeClass('logovisible');
+});
+
+logoToggle.on('click', function(e) {
+	logoToggle.addClass('active');
+	profileToggle.removeClass('active');
+	homePageWrapper.addClass('logovisible');
+});
+
+
+
 // End misc.js
 };
 
