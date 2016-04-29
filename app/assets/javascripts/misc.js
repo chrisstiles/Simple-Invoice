@@ -612,8 +612,6 @@ checkPaginationLength();
 // }
 
 
-
-
 contentWrapper.on('scroll', function() {
 	pageBody.addClass('touchmoving');
 });
