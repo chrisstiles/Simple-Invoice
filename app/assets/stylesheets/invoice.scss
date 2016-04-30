@@ -433,20 +433,41 @@ section:after {
 	padding-right:15px;
 }
 
+#userinfo span {
+	display:block;
+	float:left;
+}
+
+#e-name {
+	z-index: 2;
+	overflow:hidden;
+	margin-top: -10px;
+	margin-bottom:-5px;
+	padding-top:6px;
+	padding-bottom:6px;
+}
+
 #clientinfo {
 	width:50%;
 	text-align: right;
 	float:right;
 	box-sizing: border-box;
 	padding-left:15px;
-	margin-top:-6px;
+	margin-top:-8px;
 }
 
+#clientinfo span {
+	display:block;
+	float:right;
+}
 
-#e-invoicenumber {
+#e-invoicenumber, #invoicenumber span {
 	color:#7a7777;
 	font-weight:700;
 	min-width:15px;
+	display:block;
+	float:right;
+	margin-left:4px;
 }
 
 #e-name {
@@ -491,6 +512,7 @@ section:after {
 #clientinformation {
 	color:#818080;
 	font-weight:400;
+	padding-top: 30px;
 }
 
 #invoiceitems {

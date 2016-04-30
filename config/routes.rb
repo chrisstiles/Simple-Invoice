@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :users
-   devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations" }
+
+  devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations" }
   
  # get '/invoices/new' => 'invoices#new', as: :new_invoice
  # post '/invoices' => 'invoices#create'
  # get '/invoices/:invoice_number' => 'invoices#show', as: :invoice
  # get '/invoices/:invoice_number/edit' => 'invoices#edit', as: :edit_invoice
   #patch '/invoices/:invoice_number' => 'invoices#update'
-  root 'invoices#index'  
+
+  # authenticated :user do
+  #   root 'invoices#index', as: :authenticated_root
+  # end  
+
+  root 'static_pages#home'
 
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
   resources :invoices, param: :invoice_number

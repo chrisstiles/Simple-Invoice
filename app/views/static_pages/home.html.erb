@@ -1,0 +1,255 @@
+<h1>StaticPages#home</h1>
+<p>THIS IS THE HOME PAGE IF NO USER IS SIGNED IN</p><Br><br>
+<%= content_for(:nophone, true) %>
+<%= content_for(:mobilesidebar, true) %>
+<%= provide :title, "New Invoice" %>
+
+<div id="formwrapper">
+<%= form_for(@invoice, remote: true) do |f| %>
+<%= hidden_field_tag :creating_from_root %>
+
+<div id="toolbar">
+  <div id="toolbarcontent">
+    <%= link_to "Back to Invoices", invoices_path, class: "back" %>
+    <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
+  </div>
+</div>
+
+<div id="mobilesidebarwrapper" class="invoicesidebar">
+  <aside id="sidebar">
+      <div class="scrollwrapper">
+      <div id="controls">
+        <h2>Date and Terms</h2>
+          <div class="control datecontrol">
+              <div class="alignment">
+                  <span>Date</span>
+                  <%= f.text_field :date, class: "datefield", readonly: true %>
+              </div>
+          </div>
+          <div class="control">
+              <div class="alignment">
+                  <span>Terms</span>
+                  <select class="terms">
+                    <option data-term="0">Same Day</option>
+                      <option data-term="7">7 Days</option>
+                      <option data-term="14">14 Days</option>
+                      <option data-term="21">21 Days</option>
+                      <option data-term="30" selected="selected">30 Days</option>
+                      <option data-term="45">45 Days</option>
+                      <option data-term="60">60 Days</option>
+                      <option data-term="90">90 Days</option>
+                      <option data-term="180">180 Days</option>
+                      <option data-term="365">365 Days</option>
+                  </select>
+              </div>
+          </div>
+          <div class="control duedatecontrol">
+              <div class="alignment">
+                  <span>Due</span>
+                  <%= f.text_field :due_date, class: "duedatefield", readonly: true %>
+              </div>
+          </div>
+          <h2>
+            Client
+          </h2>
+          <div class="control bonly">
+          <div class="alignment">
+              <span>Client Name</span>
+              <%= f.text_field :client_name, class: "clientnameinput", autocomplete: "off" %>
+              </div>
+          </div>
+
+      </div>
+      </div>
+  </aside>
+</div>
+
+<!-- Start Invioce -->
+
+<div id="mobilescrollwrapper">
+
+<div id="validationerrors">
+  <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors before saving
+  </div>
+  <div id="errorholder"></div>
+</div>
+
+<div id="invoicewrapper" class="new">
+
+    <div id="invoice">
+    
+      <section id="invoicenumber">
+                  <div>
+                  <%= f.text_field :invoice_number, value: "1" %>
+                  Invoice No. <span id="e-invoicenumber" class="onlynumber" contenteditable="<%= @editable %>"><%= @number %>1</span>
+            </div>
+       </section> 
+       
+      <section id="companyinformation">
+
+            <% unless no_current_logos? %>
+              <div id="invoicelogo">
+                  <%= f.hidden_field :logo, value: current_user.display_logo.url %>
+
+                  <%= f.hidden_field :logo_width, value: current_user.current_logo.logo_width, class: "logowidthfield" %>
+                  <%= f.hidden_field :logo_height, value: current_user.current_logo.logo_height, class: "logoheightfield" %>
+
+                  <div id="haslogo">
+                    <div id="logoresize">
+                      <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: current_user.current_logo.logo_width, height: current_user.current_logo.logo_height } %>
+                    </div>
+                  <div id="removelogobutton" class="removelogo">
+                    <span>Remove Logo</span>
+                  </div>
+                </div>
+                <div id="nologo">
+                  <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo.url %>">Add Logo</div>
+                </div>
+              </div>
+            <% end %>
+
+            <div id="dateterms">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td align="right">Date:</td>
+                      <td class="invoicesetting"><span id="e-date" contenteditable="<%= @editable %>"></span></td>
+                    </tr>
+                    <tr>
+                      <td align="right">Terms:</td>
+                      <td class="invoicesetting">
+                        <select class="terms">
+                            <option data-term="0">Same Day</option>
+                            <option data-term="7">7 Days</option>
+                            <option data-term="14">14 Days</option>
+                            <option data-term="21">21 Days</option>
+                            <option data-term="30" selected="selected">30 Days</option>
+                            <option data-term="45">45 Days</option>
+                            <option data-term="60">60 Days</option>
+                            <option data-term="90">90 Days</option>
+                            <option data-term="180">180 Days</option>
+                            <option data-term="365">365 Days</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">Due Date:</td>
+                      <td class="invoicesetting"><span id="e-duedate" contenteditable="<%= @editable %>"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+      </section>
+      
+       <section id="clientinformation">
+
+           <div id="userinfo">
+                  <%= f.text_field :name %>
+                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"></span><br>
+                  <%= f.text_field :address_line1 %>
+                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"></span><br>
+                  <%= f.text_field :address_line2 %>
+                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]"></span><br>
+                  <%= f.text_field :phone %>
+                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"></span>
+
+            </div>
+
+            <div id="clientinfo">
+                  <%= hidden_field_tag :client_id, @client_id %>
+                  <div class="sectiontitle">Bill To:</div>
+                  <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"></span><br>
+                  <%= f.text_field :client_address_line1 %>
+                  <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"></span><br>
+                  <%= f.text_field :client_address_line2 %>
+                  <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"></span><br>
+            </div>
+       </section>
+       
+       <section id="invoiceitems">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                      <tr class="tableheading">
+                        <th width="61%" align="left">Description</th>
+                        <th width="11%" align="right">Quantity</th>
+                        <th width="10%" align="right">Rate</th>
+                        <th width="18%" align="right">Amount</th>
+                      </tr>
+                      <%= f.fields_for :jobs do |c| %>
+                            <tr changed="false" class="jobrow">
+                              <td align="left" class="jobdescriptioncell">
+                                    <%= c.text_area :job_description, class: "job-description-box" %>
+                                    <span class="e-jobdescription job_description" contenteditable="<%= @editable %>" placeholder="Type a job description"></span>
+                              </td>
+                              <td align="right" class="quantitycell">
+                                    <%= c.text_field :job_quantity, class: "job-quantity-box"%>
+                                    <span class="e-quantity job_quantity" contenteditable="<%= @editable %>" placeholder="Quantity"></span>
+                              </td>
+                              <td align="right" class="ratecell">
+                                    <%= c.text_field :job_rate, class: "job-rate-box" %>
+                                    <span class="e-rate job_rate" contenteditable="<%= @editable %>" placeholder="Rate"></span>
+                              </td>
+                              <td align="right" class="amountcell">
+                                    <div class="amountbox"></div>
+                                    <div class="jobcontrols">
+                                    <div class="delete"></div>
+                                    <div class="insert"></div>
+                                </div>
+                              </td>
+                            </tr>
+                  <% end %>
+              </tbody>
+            </table>
+       </section>
+
+       <section id="invoicetax">
+          <div id="hastaxwrapper">
+            <div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
+            <%= f.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>
+            <%= f.label :has_tax, '', class: "cmn-toggle-1" %>
+          </div>
+          <div id="taxinformation">
+            <div class="taxamount">
+              <%= f.text_field :tax, class: "tax-rate-box onlynumber" %>
+              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"></span> <span class="percentage">%</span>
+            </div>
+            <div class="taxincluded">
+              <div class="checkboxholder">
+                <%= f.check_box :tax_included, class: "includedtoggle" %>
+                <label for="invoice_tax_included"><span></span>
+                  <div>
+                    <div>Tax Inclusive:</div>
+                    <div class="inclusiontext">Not Included</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+       </section>
+       
+       <section id="invoicetotal">
+            <div id="invoiceamount"></div>
+            <%= f.hidden_field :total, value: '0.00' %>
+            Total:
+       </section>
+       
+       <section id="notes">
+            <div class="sectiontitle notestitle">Notes:</div>
+            <%= f.text_area :notes %>
+            <div id="e-notes" contenteditable="<%= @editable %>" placeholder="Type any notes regarding the invoice here." name="invoice[notes]"></div>
+       </section>
+       
+    </div>
+</div>
+
+</div>
+<% end %>
+</div>
+
+
+
+
+
+

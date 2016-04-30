@@ -16,7 +16,7 @@
 <body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
 
 <header>
-	<%= link_to "", invoices_path, class: "logo" %>
+	<%= link_to "", root_url, class: "logo" %>
 	<div id="menu">
 		<% if user_signed_in? %>
 		<nav>

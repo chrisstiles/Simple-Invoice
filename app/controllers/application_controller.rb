@@ -4,10 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
-  before_action :get_users_browser, only: [:show, :edit, :new, :index]
+  before_action :get_users_browser, only: [:show, :edit, :new, :index, :home]
 
   skip_before_action :authenticate_user!, if: lambda {
-  	if params[:token] && (request.original_url.include? "/pdfs/") && ("show".include? action_name)
+
+  	is_token = params[:token] && (request.original_url.include? "/pdfs/") && ("show".include? action_name)
+  	is_creating_from_root = params[:creating_from_root]
+
+  	if is_token || is_creating_from_root
   		true
   	else
   		false
@@ -50,6 +54,5 @@ class ApplicationController < ActionController::Base
 	  def get_users_browser
 	  	@browser = browser || ''
 	  end
-
   
 end

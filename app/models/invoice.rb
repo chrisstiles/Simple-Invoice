@@ -59,7 +59,7 @@ class Invoice < ActiveRecord::Base
 	end
 
 	# Invoice Number Uniqueness
-	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }
+	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }, if: 'self.user.present?'
 
 	# Length
 	validates :name, :date, :due_date, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line1, length: { maximum: 255 }

@@ -70,15 +70,17 @@ class InvoicesController < ApplicationController
 
 
   def create
-    @invoice = current_user.invoices.build(invoice_params)
-    @invoice.invoice_number = set_invoice_number
-    set_initial_balance
+    if user_signed_in?
+      @invoice = current_user.invoices.build(invoice_params)
+      @invoice.invoice_number = set_invoice_number
+      @editable = "true"
+      set_client_if_not_nil
+      set_number_of_jobs_not_to_be_deleted
+    else
+      @invoice = Invoice.create(invoice_params)
+    end
 
-    @editable = "true"
-    
-    set_client_if_not_nil
-    set_number_of_jobs_not_to_be_deleted
-    #@jobs = @invoice.jobs
+    set_initial_balance
 
     respond_to do |format|
 
@@ -170,7 +172,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:terms, :logo, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :logo, :invoice_number, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     # def email_invoice_params
@@ -242,16 +244,18 @@ class InvoicesController < ApplicationController
     end
 
    def merge_client_if_name_exists
-      if @invoice.valid?
-        client_id = @invoice.client_id
-        client_name = @invoice.client_name
-        client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
+      if user_signed_in?
+        if @invoice.valid?
+          client_id = @invoice.client_id
+          client_name = @invoice.client_name
+          client = current_user.clients.where('lower(name) = ?', client_name.downcase).first
 
-        unless client.nil?
-          @invoice.client_name = client.name
+          unless client.nil?
+            @invoice.client_name = client.name
+          end
+          @invoice.client = client
+          @invoice.save
         end
-        @invoice.client = client
-        @invoice.save
       end
    end
 
@@ -261,17 +265,20 @@ class InvoicesController < ApplicationController
     end
 
     def set_logo_dimensions
-      if @invoice.logo.to_s == current_user.display_logo.to_s && params[:invoice][:logo_width].present? && params[:invoice][:logo_height].present? && current_user.logos.present? && @invoice.valid?
-        print "THE SAMEEEE"
+      if user_signed_in?
+        if @invoice.logo.to_s == current_user.display_logo.to_s && params[:invoice][:logo_width].present? && params[:invoice][:logo_height].present? && current_user.logos.present? && @invoice.valid?
+          print "THE SAMEEEE"
 
-        logo = current_user.current_logo
+          logo = current_user.current_logo
 
-        logo.logo_width = params[:invoice][:logo_width]
-        logo.logo_height = params[:invoice][:logo_height]
-        logo.save
+          logo.logo_width = params[:invoice][:logo_width]
+          logo.logo_height = params[:invoice][:logo_height]
+          logo.save
 
+        end
       end
     end
+
 
 
 end
