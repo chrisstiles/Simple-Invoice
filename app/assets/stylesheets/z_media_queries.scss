@@ -68,7 +68,7 @@
 }
 
 @media screen and (min-width:1020px) {
-	body.ios #mobilescrollwrapper, body.android #mobilescrollwrapper {
+	body.ios #mobilescrollwrapper, body.android #mobilescrollwrapper, body.windows_phone {
 		position:absolute !important;
 		top: 0 !important;
 		bottom:0!important;
@@ -88,7 +88,7 @@
 		max-width: 100%;
 	}
 
-	#htmlwrapper, body.ios #htmlwrapper, body.android #htmlwrapper {
+	#htmlwrapper, body.ios #htmlwrapper, body.android #htmlwrapper, body.windows_phone {
 		position:fixed;
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
@@ -103,7 +103,7 @@
 		overflow:hidden;
 	}
 
-	#contentwrapper, body.ios #contentwrapper, body.android #contentwrapper {
+	#contentwrapper, body.ios #contentwrapper, body.android #contentwrapper, body.windows_phone #contentwrapper {
 		position:fixed;
 		right:0;
 		top:50px;
@@ -124,10 +124,10 @@
 		left:0;
 		right:0;
 		height:50px;
-		background-image:asset-url('logo.png');
-		background-size:100px 25px;
+		background-image:$logo;
+		background-size:160px 27px;
 		background-repeat:no-repeat;
-		background-position:center center;
+		background-position:calc(50% - 2px) calc(50% + 2px);
 		background-color:#41a9ee;
 	}
 
@@ -953,6 +953,16 @@
 	#invoiceitems, #invoiceitems span {
 		font-size:12px !important;
 	}
+
+	.clientsformwrapper .half.baseinvoicehalf {
+	  width:calc(35% - 11px);
+	  min-width:120px;
+	}
+
+	.clientsformwrapper .half.hastaxhalf {
+	  width:calc(65% - 11px);
+	  margin-bottom:6px;
+	}
 }
 
 @media screen and (max-width:540px) {
@@ -980,7 +990,7 @@
 	}
 
 	#invoicewrapper {
-		font-size:15px;
+		font-size:14px;
 	}
 
 	#dateterms td {
@@ -1047,9 +1057,13 @@
 	}
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 430px) {
 	#invoiceitems th:first-child, #invoiceitems td.jobdescriptioncell {
 		padding-right:10px;
+	}
+
+	.clientsformwrapper .half.hastaxhalf {
+	  width:calc(100% - 11px);
 	}
 }
 
@@ -1109,8 +1123,20 @@
 
 }
 
-@media screen and (max-width:340px) {
+@media screen and (max-width:355px) {
 	nav a, #menu a {
 		font-size:11px;
+	}
+
+	#toolbar .button {
+		transform:translateY(-50%) scale(.8);
+		transform-origin:right center;
+	}
+}
+
+@media screen and (max-width: 310px) {
+	#userpreferences .taxincluded input[type="checkbox"] + label span {
+		display:block;
+		margin-bottom:6px;
 	}
 }

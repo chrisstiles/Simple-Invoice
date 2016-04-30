@@ -583,11 +583,16 @@ section:after {
     bottom:-1px;
 }
 
-body.internet.explorer .jobcontrols {
+body.windows.internet.explorer .jobcontrols {
 	width:93px;
 	box-sizing:border-box;
 	min-height:61px;
 	right:-61px;
+	border:none !important;
+}
+
+.body.windows_phone .jobcontrols {
+	border:none !important;
 }
 
 #invoiceitems tr.firstrow .jobcontrols {

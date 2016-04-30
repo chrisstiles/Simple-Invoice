@@ -791,7 +791,7 @@ ready = function() {
 		
 		// Internet Explorer 11 and below do not handle position: absolute in a table cell well
 
-		var isIE = $(pageBody).hasClass('internet explorer');
+		var isIE = pageBody.hasClass('windows internet explorer');
 
 		function setJobControlsHeight() {
 			if (isIE) {

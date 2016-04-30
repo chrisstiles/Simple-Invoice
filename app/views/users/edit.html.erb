@@ -78,12 +78,12 @@
 						<div class="clientformtitle">Preferences</div>
 					
 						<%= f.fields_for :setting, @setting do |c| %>
-							<div class="half">
+							<div class="half baseinvoicehalf">
 								<%= c.label :base_invoice_number %>
 								<%= c.text_field :base_invoice_number, class: "onlynumber" %>
 							</div>
 
-							<div class="half nomargin">
+							<div class="half nomargin  hastaxhalf">
 								<div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
 								<div id="hastaxwrapper">
 						            <%= c.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>

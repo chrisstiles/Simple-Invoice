@@ -618,4 +618,11 @@ body.ios .dropzone, body.android .dropzone {
   top:4px;
 }
 
+.clientsformwrapper .half.baseinvoicehalf {
+  width:calc(30% - 11px);
+}
+
+.clientsformwrapper .half.hastaxhalf {
+  width:calc(70% - 11px);
+}
 
