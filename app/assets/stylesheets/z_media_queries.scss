@@ -125,7 +125,7 @@
 		right:0;
 		height:50px;
 		background-image:$logo;
-		background-size:160px 27px;
+		background-size:148px 25px;
 		background-repeat:no-repeat;
 		background-position:calc(50% - 2px) calc(50% + 2px);
 		background-color:#41a9ee;
@@ -1032,6 +1032,14 @@
 
 	[contenteditable="true"]:before, #clientinformation {
 		color:#484848;
+	}
+
+	.back {
+		left:-13px;
+	}
+
+	#toolbar .button {
+		right:-13px;
 	}
 }
 

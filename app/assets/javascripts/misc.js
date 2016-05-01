@@ -512,9 +512,11 @@ $('body').on('touchmove', selScrollable, function(e) {
 $('body').on('touchend', '[contenteditable=true]', function() {
 	//$(this).trigger('click');
 	var $this = $(this);
+
+	var isDateField = $this.is('#e-date') || $this.is('#e-duedate');
 	
 	if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
-		if (!$this.is(':focus') && !pageBody.hasClass('touchmoving')) {
+		if (!$this.is(':focus') && !pageBody.hasClass('touchmoving') && !isDateField) {
 			$this.focus();
 			setEndOfContenteditable(this);
 		}

@@ -604,6 +604,7 @@ ready = function() {
 			e.preventDefault();
 			if (window.innerWidth <= 1020) {
 				if (!mobileSidebarWrapper.hasClass('open')) {
+					$(this).blur();
 					showMobileSidebar();
 					setTimeout(function(){
 						dateField.datepicker('show');
@@ -611,7 +612,8 @@ ready = function() {
 
 				}
 			} else {
-				dateField.datepicker('show');
+				$(this).blur();
+				dueDateField.focus();
 			}
 		});
 
@@ -619,6 +621,7 @@ ready = function() {
 			e.preventDefault();
 			if (window.innerWidth <= 1020) {
 				if (!mobileSidebarWrapper.hasClass('open')) {
+					$(this).blur();
 					showMobileSidebar();
 					setTimeout(function(){
 						dueDateField.datepicker('show');
@@ -626,7 +629,8 @@ ready = function() {
 
 				}
 			} else {
-				dueDateField.datepicker('show');
+				$(this).blur();
+				dueDateField.focus();
 			}
 		});
 
