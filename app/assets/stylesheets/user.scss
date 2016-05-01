@@ -304,7 +304,7 @@
 }
 .dropzone.dz-drag-hover {
   background-color:#f8f8f8;
-  border-color: #41a9ee;
+  border-color: $light-blue;
 }
 /*.dropzone.dz-drag-hover .dz-message {
   opacity: 0.5;
@@ -557,7 +557,7 @@ body.ios .dropzone, body.android .dropzone {
 }
 
 .logosection p {
-  color:#26323f;
+  color:$dark-blue;
   font-size:15px;
   margin-top:0;
 }
@@ -582,7 +582,7 @@ body.ios .dropzone, body.android .dropzone {
 
 #userpreferences .hastaxtitle, #userpreferences .hastaxtitle span {
   font-size:13px;
-  color:#26323f;
+  color:$dark-blue;
 }
 
 #userpreferences .taxamount {

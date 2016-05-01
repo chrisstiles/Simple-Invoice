@@ -44,7 +44,7 @@ html.turbolinks-progress-bar::before {
 }
 
 #nprogress .peg {
-	box-shadow: 0 0 10px #41A9EE, 0 0 5px #26323F !important;
+	box-shadow: 0 0 10px $light-blue, 0 0 5px $dark-blue !important;
 }
 
 input {
@@ -201,7 +201,7 @@ nav a, #sessioninfo a {
 	text-decoration:none;
 	padding: 23px 35px 0 35px;
 	box-sizing:border-box;
-	color:#26323f;
+	color:$dark-blue;
 	background-repeat:no-repeat;
 	background-position:35px center;
 }
@@ -271,7 +271,10 @@ nav a:active, #sessioninfo a:active {
 body.ios input.button {
 	line-height:0;
 	height:34px;
-	margin:0
+}
+
+input.button {
+	margin:0;
 }
 
 .back {
@@ -289,7 +292,7 @@ body.ios input.button {
 }
 
 .back:hover {
-	color:#41a9ee;
+	color:$light-blue;
 }
 
 .back:before {
@@ -317,7 +320,7 @@ body.ios input.button {
 	padding:0 25px;
 	line-height:34px;
 	background-repeat:no-repeat;
-	background-color:#41a9ee;
+	background-color:$light-blue;
 	outline:none;
 	border-radius:2px;
 	border:none;
@@ -374,7 +377,7 @@ body.ios input.button {
 }
 
 .button.blue {
-	background-color:#41a9ee;
+	background-color:$light-blue;
 }
 
 .button.blue:hover {
@@ -425,7 +428,7 @@ body.ios .button.deleteinvoice {
 
 #sidebar {
 	width:282px;
-	background-color:#26323f;
+	background-color:$dark-blue;
 	position:fixed;
 	top:0;
 	left:0;
@@ -447,7 +450,7 @@ body.ios .button.deleteinvoice {
 a.logo {
 	display:inline-block;
 	text-align:center;
-	background-color:#41a9ee;
+	background-color:$light-blue;
 	height: 63px;
 	box-sizing:border-box;
 	padding-top:16px;
@@ -617,7 +620,7 @@ a.logo img {
 
 .showbutton:hover {
 	background-color:rgba(255,255,255,.03);
-	color:#41a9ee;
+	color:$light-blue;
 }
 
 .alignment {
@@ -1164,7 +1167,7 @@ a.logo img {
 	font-weight:400;
 	font-size:13px;
 	border-radius:2px;
-	color:#26323f;
+	color:$dark-blue;
 	border:none;
 	outline:none;
 	cursor:text;

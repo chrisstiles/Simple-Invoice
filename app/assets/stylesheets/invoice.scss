@@ -793,7 +793,7 @@ input.cmn-toggle-round + label:after {
   transition: margin 0.2s;
 }
 input.cmn-toggle-round:checked + label, input.cmn-toggle-round:checked + label:before {
-  background-color: #41a9ee;
+  background-color: $light-blue;
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 34px;
@@ -817,7 +817,7 @@ input.cmn-toggle-round:checked + label:after {
 .hastaxtitle {
 	line-height:1;
 	font-size:15px;
-	color:#26323f;
+	color:$dark-blue;
 	font-weight:600;
 	margin-bottom:10px;
 }
@@ -881,7 +881,7 @@ input.cmn-toggle-round:checked + label:after {
 .taxincluded input[type="checkbox"] + label > div div, #invoicewrapper .taxincluded input[type="checkbox"] + label > div div  {
 	position:static;
 	font-size:13px;
-	color:#26323f;
+	color:$dark-blue;
 	font-weight:600;
 	text-align: left;
 	margin-bottom:1px;
@@ -976,7 +976,7 @@ input.cmn-toggle-round:checked + label:after {
 #logoresize:hover:before, #logoresize:hover:after, #logoresize.isresizing:before, #logoresize.isresizing:after {
 	position:absolute;
 	z-index: 20;
-	background:#41a9ee;
+	background:$light-blue;
 	opacity:0;
 	content:"";
 	display:block;
@@ -1003,5 +1003,5 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 #invoicewrapper a {
-	color:#41a9ee;
+	color:$light-blue;
 }

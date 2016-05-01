@@ -128,7 +128,7 @@
 		background-size:148px 25px;
 		background-repeat:no-repeat;
 		background-position:calc(50% - 2px) calc(50% + 2px);
-		background-color:#41a9ee;
+		background-color:$light-blue;
 	}
 
 	header .logo {
@@ -209,7 +209,7 @@
 	#mobilesidebarwrapper {
 		//position: absolute;
 		position:fixed;
-	    background: #26323f;
+	    background: $dark-blue;
 	    top: 50px;
 	    right: 0;
 	    left: 0;
@@ -353,7 +353,7 @@
 		position:relative;
 		width:auto;
 		overflow:hidden;
-		background-color:#26323f;
+		background-color:$dark-blue;
 		top:0;
 	}
 
@@ -374,7 +374,7 @@
 	}
 
 	.mobilepublicurl {
-		color: #41A9EE;
+		color: $light-blue;
 		text-decoration: none;
 		word-break: break-all;
 		display:block;
@@ -615,10 +615,10 @@
   		box-sizing:border-box;
   		width:50%;
   		text-align: center;
-  		border:1px solid #41a9ee;
+  		border:1px solid $light-blue;
   		line-height:28px;
   		position:relative;
-  		color:#41a9ee;
+  		color:$light-blue;
   		font-weight:400;
   		font-size:17px;
   		transition:all .1s;
@@ -637,7 +637,7 @@
   	}
 
   	#profiletoggle.active, #logotoggle.active {
-  		background-color:#41a9ee !important;
+  		background-color:$light-blue !important;
   		color:#fff !important;
   	}
 
@@ -775,7 +775,7 @@
 		background-color:#fff;
 		padding:15px;
 		font-size:14px;
-		color:#26323f;
+		color:$dark-blue;
 		border-top:1px solid #e0e2e3;
 		text-decoration: none;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -831,7 +831,7 @@
 	}
 
 	.mobilebalance span {
-		color:#41a9ee;
+		color:$light-blue;
 		font-size:31px;
 		font-weight:400 !important;
 	}

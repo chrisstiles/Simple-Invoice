@@ -63,7 +63,7 @@
 }
 
 .homerecordtable .row > div:last-of-type {
-	color:#41a9ee;
+	color:$light-blue;
 	position:static !important;
 }
 
@@ -109,7 +109,7 @@
 	margin:0;
 	padding:12px 0 11px 0;
 	line-height:1;
-	background-color:#26323f;
+	background-color:$dark-blue;
 	color:#fff;
 	font-weight:100;
 	text-align:center;
@@ -151,7 +151,7 @@
 }
 
 .balancesection {
-    color: #41a9ee;
+    color: $light-blue;
     font-weight: 600;
     font-size: 33px;
     padding-top: 3px;
@@ -183,7 +183,7 @@
 }
 
 .homeinvoice a {
-	color:#41a9ee;
+	color:$light-blue;
 	text-align:center;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
@@ -409,7 +409,7 @@ a.noborder {
 	right:100px;
 	border-left:1px solid #c9c9c9;
 	transform:translateX(-100%);
-	color:#26323f;
+	color:$dark-blue;
 	z-index: 300;
 }
 
@@ -475,14 +475,14 @@ a.noborder {
     border: 1px solid #d2cccc;
     font-weight:300;
     font-family: 'Libertad', sans-serif;
-    color:#26323f;
+    color:$dark-blue;
     width:100%;
     font-size:15px;
     -webkit-appearance: none;
 }
 
 .homefilter input[type="text"]:focus {
-	border:1px solid #41a9ee;
+	border:1px solid $light-blue;
 }
 
 .checkboxholder {
@@ -548,8 +548,8 @@ input[type="checkbox"] + label span {
 }
 
 input[type="checkbox"]:checked + label span {
-    background:#41a9ee;
-    border: 1px solid #41a9ee;
+    background:$light-blue;
+    border: 1px solid $light-blue;
     transition: all .1s;
 }
 
@@ -579,7 +579,7 @@ input[type="checkbox"]:checked + label span:before {
 }
 
 #invoicesoverview .homesideborders span {
-	color:#41a9ee;
+	color:$light-blue;
 	font-weight:600;
 }
 
@@ -624,7 +624,7 @@ input[type="checkbox"]:checked + label span:before {
 	border:1px solid #c9c9c9;
 	background-clip:padding-box;
 	margin-right:-1px;
-	color:#26323f;
+	color:$dark-blue;
 	font-size:14px;
 	font-weight:bold;
 	font-style:normal;
@@ -635,7 +635,7 @@ input[type="checkbox"]:checked + label span:before {
 
 .pagination a {
 	text-decoration:none;
-	color:#41a9ee;
+	color:$light-blue;
 }
 
 .pagination a:hover {

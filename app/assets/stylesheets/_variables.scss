@@ -2,7 +2,6 @@
 $logo: asset-data-url("logo-white.svg");
 
 /* SVG Icons */
-
 $white-close-icon: asset-data-url("close-modal.svg");
 $grey-close-icon: asset-data-url("close-payment.svg");
 $back-icon: asset-data-url("angle-left.svg");
@@ -28,3 +27,8 @@ $invoices-icon: asset-data-url("icon-invoices.svg");
 $clients-icon: asset-data-url("clients-icon.svg");
 $profile-icon: asset-data-url("profile-icon.svg");
 $signout-icon: asset-data-url("signout-icon.svg");
+
+
+/* Colors */
+$light-blue: #41a9ee;
+$dark-blue: #26323f;

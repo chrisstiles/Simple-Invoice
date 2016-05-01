@@ -1,8 +1,16 @@
-<h1>StaticPages#home</h1>
-<p>THIS IS THE HOME PAGE IF NO USER IS SIGNED IN</p><Br><br>
 <%= content_for(:nophone, true) %>
 <%= content_for(:mobilesidebar, true) %>
 <%= provide :title, "New Invoice" %>
+<%= provide :special_class, " homepage" %>
+
+<%#= provide :outside_content  do %>
+
+<div id="herotext">
+	<h1>The simplest way for freelancers to invoice their clients.</h1>
+	<h2>Create and email invoices. Manage clients. Track payments. Completely Free.</h2>
+</div>
+
+<%# end %>
 
 <div id="formwrapper">
 <%= form_for(@invoice, remote: true) do |f| %>

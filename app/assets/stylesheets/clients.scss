@@ -119,7 +119,7 @@
 @media screen and (min-width:886px) {
 	.client.selected {
 		color:#fff;
-		background-color:#41a9ee;
+		background-color:$light-blue;
 		cursor: default;
 	}
 }
@@ -151,7 +151,7 @@
 	font-size:20px;
 	font-weight:400;
 	margin-bottom:10px;
-	color:#26323f;
+	color:$dark-blue;
 }
 
 /* Forms */
@@ -178,7 +178,7 @@
     font-weight: 600;
     padding-bottom: 3px;
     display: block;
-    color:#26323f;
+    color:$dark-blue;
 }
 
 .clientsformwrapper select {
@@ -202,7 +202,7 @@
 }
 
 .clientsformwrapper input[type="text"]:focus, .clientsformwrapper input[type="password"]:focus {
-	border: 1px solid #41a9ee;
+	border: 1px solid $light-blue;
 }
 
 .clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror, .clientsformwrapper input[type="password"].haserror {

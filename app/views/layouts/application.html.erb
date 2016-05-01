@@ -13,7 +13,7 @@
 </head>
 
 
-<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %>'>
+<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %><%= yield :special_class %>'>
 
 <header>
 	<%= link_to "", root_url, class: "logo" %>
@@ -32,7 +32,8 @@
 		</div>
 		<% else %>
 				<div id="sessioninfo">
-				<%= link_to "Sign In", new_user_session_path %>
+					<%= link_to "Register", new_user_registration_path %>
+					<%= link_to "Sign In", new_user_session_path %>
 				</div>
 		<% end %>	
 	</div>	
