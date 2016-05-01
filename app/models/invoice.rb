@@ -101,8 +101,11 @@ class Invoice < ActiveRecord::Base
 	validate :validate_number_of_jobs
 
 	def validate_number_of_jobs
-		num_jobs = self.num_jobs || 1
-		errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.") if num_jobs > 45
+		num_jobs = self.num_jobs || 0
+
+		if num_jobs <= 0 || num_jobs > 45
+			errors.add(:jobs, "^Your invoice can only have a maximum of 45 jobs.")
+		end
 	end
 
 	validates :logo_width, :logo_height, numericality: true, allow_blank: true
