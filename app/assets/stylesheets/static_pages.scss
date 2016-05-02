@@ -6,6 +6,10 @@ body.homepage #formwrapper {
 	padding-top:61px;
 }
 
+body.ios.homepage #formwrapper, body.android.homepage #formwrapper {
+	padding-top:0;
+}
+
 body.nofixed.homepage #toolbar, body.nofixed.homepage #formwrapper {
 	position:relative;
 	top:0;
@@ -31,7 +35,7 @@ body.ios.homepage #htmlwrapper, body.android.homepage #htmlwrapper, body.ios.hom
 // 	position:fixed !important;
 // }
 
-body.ios.hasfixed #sidebar, body.hasfixed #toolbar, body.ios.hasfixed #mobilesidebarwrapper, body.ios.hasfixed .scrollwrapper, body.android.hasfixed #sidebar, body.android.hasfixed #mobilesidebarwrapper, body.android.hasfixed .scrollwrapper {
+body.ios.hasfixed #sidebar, body.ios.hasfixed #mobilesidebarwrapper, body.ios.hasfixed .scrollwrapper, body.android.hasfixed #sidebar, body.android.hasfixed #mobilesidebarwrapper, body.android.hasfixed .scrollwrapper {
 	position:fixed !important;
 }
 
@@ -39,12 +43,18 @@ body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
 	padding-top:63px;
 }
 
+
 body.homepage #invoicewrapper {
 	margin-top:64px;
 }
 
 body.hasabsolutes #toolbar {
 	position:absolute !important;
+}
+
+body.ios.homepage #toolbar, body.ios.hasabsolutes #toolbar, body.android.hasabsolutes #toolbar {
+	top:0;
+	position:relative;
 }
 
 body.hasabsolutes #formwrapper {
@@ -76,3 +86,11 @@ body.hasabsolutes #formwrapper {
 #herotext h2 span {
 	margin: 0 8px;
 }
+
+#bottomsection {
+	background-color:$light-blue;
+	text-align:center;
+	padding:100px;
+	color:#fff;
+}
+
