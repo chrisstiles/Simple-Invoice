@@ -602,9 +602,10 @@ ready = function() {
 
 		eDate.on('click focus keydown', function(e) {
 			e.preventDefault();
+			var $this = $(this);
 			if (window.innerWidth <= 1020) {
 				if (!mobileSidebarWrapper.hasClass('open')) {
-					$(this).blur();
+					$this.blur();
 					showMobileSidebar();
 					setTimeout(function(){
 						dateField.datepicker('show');
@@ -612,16 +613,17 @@ ready = function() {
 
 				}
 			} else {
-				$(this).blur();
-				dueDateField.focus();
+				$this.blur();
+				dateField.focus();
 			}
 		});
 
 		eDueDate.on('click focus keydown', function(e) {
 			e.preventDefault();
+			var $this = $(this);
 			if (window.innerWidth <= 1020) {
 				if (!mobileSidebarWrapper.hasClass('open')) {
-					$(this).blur();
+					$this.blur();
 					showMobileSidebar();
 					setTimeout(function(){
 						dueDateField.datepicker('show');
@@ -629,7 +631,7 @@ ready = function() {
 
 				}
 			} else {
-				$(this).blur();
+				$this.blur();
 				dueDateField.focus();
 			}
 		});
