@@ -68,16 +68,16 @@
 }
 
 @media screen and (min-width:1020px) {
-	body.ios #mobilescrollwrapper, body.android #mobilescrollwrapper, body.windows_phone {
-		position:absolute !important;
-		top: 0 !important;
-		bottom:0!important;
-		left:0;
-		right:0;
-		overflow-x:visible;
-		overflow-y:scroll;
-		webkit-overflow-scrolling:touch;
-	}
+	// body.ios #mobilescrollwrapper, body.android #mobilescrollwrapper, body.windows_phone {
+	// 	position:absolute !important;
+	// 	top: 0 !important;
+	// 	bottom:0!important;
+	// 	left:0;
+	// 	right:0;
+	// 	overflow-x:visible;
+	// 	overflow-y:scroll;
+	// 	webkit-overflow-scrolling:touch;
+	// }
 }
 
 @media screen and (max-width:1020px) {

@@ -272,7 +272,7 @@ html.noscroll {
 }
 
 #modalsearch:focus {
-	border:1px solid #41a9ee;
+	border:1px solid $light-blue;
 }
 
 #modalcontent .noclients {
@@ -347,7 +347,7 @@ input[type="text"].modalinput {
  }
 
 .modalinput:focus {
-	border:1px solid #41a9ee
+	border:1px solid $light-blue
 }
 
 .sendemailform label {
@@ -699,7 +699,7 @@ input[type="text"].modalinput {
 .selectize-input.input-active:hover,
 .selectize-control.multi .selectize-input.focus {
   background: #ffffff !important;
-  border:1px solid #41a9ee;
+  border:1px solid $light-blue;
   outline:none;
 }
 .selectize-control.single .selectize-input {
@@ -757,8 +757,8 @@ input[type="text"].modalinput {
 .selectize-control.multi .selectize-input > div {
   color: #fff;
   text-shadow: none;
-  background-color:#41a9ee;
-  border:1px solid #41a9ee;
+  background-color:$light-blue;
+  border:1px solid $light-blue;
   *background-color: #e6e6e6;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;

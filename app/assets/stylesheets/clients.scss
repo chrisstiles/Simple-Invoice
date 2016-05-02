@@ -67,7 +67,7 @@
 	line-height:19px;
     font-weight: 700;
     margin-bottom: 5px;
-    color:#26323f;
+    color:$dark-blue;
     margin-top:0;
 }
 
@@ -100,7 +100,7 @@
 	-webkit-box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.05);
 	-moz-box-shadow:    0px 2px 14px 0px rgba(0, 0, 0, 0.05);
 	box-shadow:         0px 2px 14px 0px rgba(0, 0, 0, 0.05);
-	color:#26323f;
+	color:$dark-blue;
 	margin-right:30px;
 	cursor: pointer;
 	 -webkit-touch-callout: none;
@@ -195,7 +195,7 @@
     border: 1px solid #d2cccc;
     font-weight: 300;
     font-family: 'Libertad', sans-serif;
-    color: #26323f;
+    color: $dark-blue;
     width: 100%;
     font-size: 15px;
     -webkit-appearance:none;

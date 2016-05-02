@@ -3,6 +3,8 @@ Turbolinks.enableProgressBar();
 var ready;
 ready = function() {
 
+var $document = $(document);
+
 // Fastclick
 $(function() {
   return new FastClick(document.body);
@@ -491,7 +493,7 @@ $('.selectallinput').on('click touchstart', function(e) {
 
 var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar, #pagewrapper, #usersettingshalf, #userlogohalf';
 // Uses document because document will be topmost level in bubbling
-$(document).on('touchmove',function(e){
+$document.on('touchmove',function(e){
   e.preventDefault();
 });
 // Uses body because jQuery on events are called off of the element they are
