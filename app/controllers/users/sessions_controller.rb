@@ -9,7 +9,17 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     params[:user].merge!(remember_me: 1)
-    super
+    resource = User.find_for_database_authentication(email: params[:user][:email])
+    return invalid_login_attempt unless resource
+
+    if resource.valid_password?(params[:user][:password])
+      sign_in :user, resource
+      return render js: "window.location = '#{invoices_url}'"
+    end
+
+    invalid_login_attempt
+
+    #super
   end
 
   # DELETE /resource/sign_out
@@ -17,7 +27,12 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+    def invalid_login_attempt
+      set_flash_message(:alert, :invalid)
+      render json: flash[:alert], status: 401
+    end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
