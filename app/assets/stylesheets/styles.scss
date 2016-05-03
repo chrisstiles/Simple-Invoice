@@ -364,6 +364,11 @@ body.ios input.button {
 	line-height: 29px;
 }
 
+body.ios input.button.small {
+	line-height:0;
+	height:28px;
+}
+
 .button.greenbutton {
 	background-color:#7ba42c;
 }
