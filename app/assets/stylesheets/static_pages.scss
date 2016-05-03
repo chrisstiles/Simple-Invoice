@@ -7,7 +7,8 @@ body.homepage #formwrapper {
 }
 
 body.ios.homepage #formwrapper, body.android.homepage #formwrapper {
-	padding-top:0;
+	padding-top:0 !important;
+	position:relative !important;
 }
 
 body.nofixed.homepage #toolbar, body.nofixed.homepage #formwrapper {
@@ -27,35 +28,51 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 	bottom:0;
 }
 
-body.ios.homepage #htmlwrapper, body.android.homepage #htmlwrapper, body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
-	position:static !important;
+// body.ios.homepage #htmlwrapper, body.android.homepage #htmlwrapper, body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
+// 	position:relative !important;
+// }
+
+body.ios.homepage #sidebar, body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #sidebar, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
+	position:absolute !important;
+	top:0 !important;
+	bottom:0;
 }
 
-// body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.hasfixed #contentwrapper, body.android.hasfixed #contentwrapper {
+body.ios.homepage #toolbar, body.ios.homepage #toolbar {
+	position:absolute !important;
+	top:0 !important;
+}
+
+body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.hasfixed #contentwrapper, body.android.hasfixed #contentwrapper {
+	position:relative !important;
+}
+
+// body.ios.hasfixed #sidebar, body.ios.hasfixed #mobilesidebarwrapper, body.ios.hasfixed .scrollwrapper, body.android.hasfixed #sidebar, body.android.hasfixed #mobilesidebarwrapper, body.android.hasfixed .scrollwrapper {
 // 	position:fixed !important;
 // }
 
-body.ios.hasfixed #sidebar, body.ios.hasfixed #mobilesidebarwrapper, body.ios.hasfixed .scrollwrapper, body.android.hasfixed #sidebar, body.android.hasfixed #mobilesidebarwrapper, body.android.hasfixed .scrollwrapper {
-	position:fixed !important;
-}
-
-body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
-	padding-top:63px;
-}
+// body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
+// 	padding-top:63px;
+// }
 
 
 body.homepage #invoicewrapper {
 	margin-top:64px;
 }
 
+body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
+	margin-top:0;
+	padding-top:97px;
+}
+
 body.hasabsolutes #toolbar {
 	position:absolute !important;
 }
 
-body.ios.homepage #toolbar, body.ios.hasabsolutes #toolbar, body.android.hasabsolutes #toolbar {
-	top:0;
-	position:relative;
-}
+// body.ios.homepage #toolbar, body.ios.hasabsolutes #toolbar, body.android.hasabsolutes #toolbar {
+// 	top:0;
+// 	position:relative;
+// }
 
 body.hasabsolutes #formwrapper {
 	padding-top:61px !important;
