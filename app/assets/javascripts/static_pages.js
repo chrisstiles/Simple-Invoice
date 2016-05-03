@@ -12,16 +12,11 @@ var $window = $(window);
 var scrollElements = $('#mobilesidebarwrapper, #toolbar');
 var header = $('header');
 
-function getScrollMin() {
-	scrollMin = heroText.outerHeight();
-}
-
-getScrollMin();
-
 var absoluteOffset;
 
-function getScrollMax() {
+function getScrollMinAndMax() {
 	var formWrapperOffset = formWrapper.offset().top;
+	scrollMin = formWrapperOffset - header.height();
 	scrollMax = formWrapperOffset + formWrapper.outerHeight(true) - $window.height();
 }
 
@@ -29,7 +24,7 @@ function getAbsoluteOffset() {
 	absoluteOffset = scrollMax - formWrapper.offset().top + parseInt(formWrapper.css('padding-top'));
 }
 
-getScrollMax();
+getScrollMinAndMax();
 getAbsoluteOffset();
 
 function checkScroll() {
@@ -57,8 +52,7 @@ $document.on('scroll', function() {
 });
 
 $window.on('resize', function() {
-	getScrollMin();
-	getScrollMax();
+	getScrollMinAndMax();
 	getAbsoluteOffset();
 	checkScroll();
 });

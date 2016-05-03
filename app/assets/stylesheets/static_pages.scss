@@ -88,10 +88,47 @@ body.hasabsolutes #formwrapper {
 	margin: 0 8px;
 }
 
-#bottomsection {
+#dots {
+	position:relative;
+	margin:35px auto -10px auto;
+}
+
+#dots, #dots:before, #dots:after {
+	width:6px;
+	height:6px;
+	background-color:$light-blue;
+	border-radius:50%;
+}
+
+#dots:before {
+	left:-15px;
+}
+
+#dots:after {
+	right:-15px;
+}
+
+#dots:before, #dots:after {
+	content:"";
+	position:absolute;
+}
+
+#bottomsection, #tryitout {
 	background-color:$light-blue;
 	text-align:center;
-	padding:100px;
 	color:#fff;
 }
+
+#tryitout {
+	font-size:17px;
+	line-height:38px;
+	font-weight:400;
+}
+
+#bottomsection {
+	padding:100px;
+}
+
+
+
 
