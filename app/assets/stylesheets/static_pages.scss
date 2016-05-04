@@ -32,10 +32,15 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 // 	position:relative !important;
 // }
 
-body.ios.homepage #sidebar, body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #sidebar, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
+body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
 	position:absolute !important;
 	top:0 !important;
 	bottom:0;
+	right:auto;
+}
+
+body.ios.homepage #sidebar, body.android.homepage #sidebar, body.ios.homepage .scrollwrapper, body.android.homepage .scrollwrapper {
+	right:0;
 }
 
 body.ios.homepage #toolbar, body.ios.homepage #toolbar {

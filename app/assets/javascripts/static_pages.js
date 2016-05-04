@@ -48,6 +48,7 @@ function checkScroll() {
 		pageBody.removeClass('hasabsolutes');
 		pageBody.addClass('hasfixed');
 	} else if (scrollAmount >= scrollMax) {
+		getAbsoluteOffset();
 		scrollElements.css('top', absoluteOffset);
 		pageBody.addClass('hasabsolutes nofixed');
 		pageBody.removeClass('hasfixed');
