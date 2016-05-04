@@ -1,0 +1,17 @@
+<h3>Log in to Simple Invoice</h3>
+<%= form_for(:user, url: session_path(:user), remote: true, html: { class: "loginform" }) do |f| %>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, id: "login_user_email", autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Log in", class: "button blue" %>
+  </div>
+<% end %>

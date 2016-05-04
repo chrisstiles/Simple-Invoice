@@ -19,7 +19,6 @@ body.nofixed.homepage #toolbar, body.nofixed.homepage #formwrapper {
 
 body.nofixed #toolbar {
 	 box-shadow: inset 0 6px 10px -10px rgba(0, 0, 0, 0.4);
-	 //margin-bottom:-36px;
 }
 
 body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollwrapper {
@@ -27,10 +26,6 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 	top:0;
 	bottom:0;
 }
-
-// body.ios.homepage #htmlwrapper, body.android.homepage #htmlwrapper, body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
-// 	position:relative !important;
-// }
 
 body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
 	position:absolute !important;
@@ -51,15 +46,6 @@ body.ios.homepage #toolbar, body.ios.homepage #toolbar {
 body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.hasfixed #contentwrapper, body.android.hasfixed #contentwrapper {
 	position:relative !important;
 }
-
-// body.ios.hasfixed #sidebar, body.ios.hasfixed #mobilesidebarwrapper, body.ios.hasfixed .scrollwrapper, body.android.hasfixed #sidebar, body.android.hasfixed #mobilesidebarwrapper, body.android.hasfixed .scrollwrapper {
-// 	position:fixed !important;
-// }
-
-// body.ios.homepage #contentwrapper, body.android.homepage #contentwrapper {
-// 	padding-top:63px;
-// }
-
 
 body.homepage #invoicewrapper {
 	margin-top:64px;
@@ -152,5 +138,86 @@ body.hasabsolutes #formwrapper {
 }
 
 
+/* Login and Registration */
+#sessionoverlay {
+	position:fixed;
+	top:63px;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#fff;
+	z-index: 750;
+	display:none;
+}
 
+.sessionbox {
+	border:1px solid #E2E2E2;
+	padding:45px 80px 70px 80px;
+	width:100%;
+	max-width:490px;
+	box-sizing:border-box;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	animation-name: fadeInUp;
+	animation-delay: .2s;
+	animation-duration: .8s;
+	animation-fill-mode:forwards;
+	opacity:0;
+}
+
+@keyframes fadeInUp {
+	from {
+		transform:translate(-50%, -10%);
+		opacity:0;
+	}
+
+	to {
+		transform:translate(-50%, -50%);
+		opacity: 1;
+	}
+}
+
+
+.sessionbox h3 {
+	color:$light-blue;
+	font-weight:400;
+	font-size:22px;
+	margin:0 0 35px 0;
+	text-align:center;
+}
+
+.sessionbox input[type="text"], .sessionbox input[type="email"], .sessionbox input[type="password"] {
+	display:block;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    border: 1px solid #E6E6E6;
+    font-weight: 400;
+    font-family: 'Libertad', sans-serif;
+    color: #5F5F5F !important;
+    font-size: 15px;
+    margin-bottom:15px;
+}
+
+.sessionbox input[type="text"]:focus, .sessionbox input[type="email"]:focus, .sessionbox input[type="password"]:focus {
+	border:1px solid $light-blue;
+}
+
+.sessionbox input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    color: #5F5F5F !important;
+    -webkit-text-fill-color:#5F5F5F;
+}
+
+.sessionbox label {
+	display:block;
+	font-size:15px;
+	color:#707070;
+	margin-bottom:4px;
+}
 

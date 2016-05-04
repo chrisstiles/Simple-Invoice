@@ -13,6 +13,15 @@ $('.loginform').bind('ajax:success', function(evt, data, status, xhr) {
   alert('failed login bruh');
 });
 
+var sessionOverlay = $('#sessionoverlay');
+var signInEmail = $('#login_user_email');
+
+$('.signinbutton').on('click', function(e) {
+	e.preventDefault();
+	sessionOverlay.show();
+	signInEmail.focus();
+});
+
 
 if (pageBody.hasClass('homepage')) {
 

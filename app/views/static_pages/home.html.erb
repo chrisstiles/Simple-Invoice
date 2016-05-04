@@ -10,24 +10,12 @@
 	<div id="dots"></div>
 </div>
 
-<%= form_for(:user, url: session_path(:user), remote: true, html: { class: "loginform" }) do |f| %>
+<div id="sessionoverlay">
+	<div class="sessionbox">
+		<%= render 'login_form' %>
+	</div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%#= render "devise/shared/links" %>
 
 <div id="tryitout">Try it out!</div>
 
