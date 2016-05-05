@@ -186,6 +186,7 @@ body.hasabsolutes #formwrapper {
 	font-size:22px;
 	margin:0 0 35px 0;
 	text-align:center;
+	transition:all .3s;
 }
 
 .sessionbox input[type="text"], .sessionbox input[type="email"], .sessionbox input[type="password"] {
@@ -219,5 +220,83 @@ body.hasabsolutes #formwrapper {
 	font-size:15px;
 	color:#707070;
 	margin-bottom:4px;
+}
+
+.loginloadingspinner {
+	position:absolute;
+	bottom:-40px;
+	left:0;
+	right:0;
+	background-color:rgba(255,255,255,.8);
+	display:none;
+}
+
+.loginloadingspinner .loadingcircle {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+
+.sessionerror h3 {
+	transform:translateY(-10px);
+}
+
+.sessionerrortext {
+	text-align:center;
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    font-size: 14px;
+    color: #df4535;
+    font-weight: 600;
+    opacity:0;
+    visibility: hidden;
+    transition: all .3s;
+    transform:translateY(30px);
+}
+
+.sessionerror .sessionerrortext {
+	visibility:visible;
+	opacity:1;
+	transform:translateY(0);
+}
+
+.sessionbox .button.blue {
+	float: right;
+    padding: 0 45px !important;
+    margin-top:10px;
+    position: relative;
+    z-index: 200;
+}
+
+.sessionbox a {
+	color:$light-blue;
+	text-decoration:none;
+}
+
+.sessionbox a:hover {
+	text-decoration:underline;
+}
+
+.sessionbox a.forgotpassword {
+	float: left;
+    margin-top: 7px;
+    font-size: 15px;
+}
+
+.sessionbottomtext:before {
+	clear:both;
+	content:"";
+	display:block;
+}
+
+.sessionbottomtext {
+	position: relative;
+    top: 24px;
+	color:#707070;
+	text-align:center;
+	font-size:15px;
 }
 

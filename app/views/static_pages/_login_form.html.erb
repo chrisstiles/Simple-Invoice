@@ -1,17 +1,16 @@
 <h3>Log in to Simple Invoice</h3>
+<div class="sessionerrortext">Invalid username or password.</div>
 <%= form_for(:user, url: session_path(:user), remote: true, html: { class: "loginform" }) do |f| %>
 
-  <div class="field">
     <%= f.label :email %>
     <%= f.email_field :email, id: "login_user_email" %>
-  </div>
 
-  <div class="field">
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: "button blue" %>
-  </div>
+    <%= link_to "Forgot Password", new_password_path(:user), class: "forgotpassword" %>
+    <%= f.submit "Log in", class: "button blue willload loginbutton" %>
+
+    <div class="sessionbottomtext">Don't have an account? <%= link_to "Register", new_registration_path(:user) %></div>
+
 <% end %>
