@@ -228,6 +228,10 @@ class InvoicesController < ApplicationController
 
       end
 
+      if num_jobs == 0 && params[:invoice][:amount_paid].present?
+        num_jobs = 1
+      end
+
       @invoice.num_jobs = num_jobs
 
     end

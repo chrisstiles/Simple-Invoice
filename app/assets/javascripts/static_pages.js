@@ -2,16 +2,23 @@ var ready;
 ready = function() {
 var pageBody = $('body');
 var pageHTML = $('html');
+var $document = $(document);
 var loadingSpinnerHtml = '<div class="loginloadingspinner sessionloading"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
 
 // Ajax login form
-$('.loginform').bind('ajax:success', function(evt, data, status, xhr) {
+$('.loginform').bind('ajax:start', function() {
+	beginLoading();
+}).bind('ajax:success', function(evt, data, status, xhr) {
   //function called on status: 200 (for ex.)
-  console.log('success');
+  //console.log('success');
 }).bind("ajax:error", function(evt, xhr, status, error) {
-  $('.sessionbox').addClass('sessionerror');
-  revertButtonText();
-  $('.loginloadingspinner').remove();
+  endLoading();
+});
+
+$document.bind('change', function(e) {
+	if( $(e.target).is(':invalid') ) {
+		endLoading();
+	}
 });
 
 function revertButtonText() {
@@ -38,14 +45,29 @@ var signInEmail = $('#login_user_email');
 $('.signinbutton').on('click', function(e) {
 	e.preventDefault();
 	sessionOverlay.show();
-	signInEmail.focus();
 	pageHTML.addClass('noscroll');
+	setTimeout(function() {
+		signInEmail.focus();
+	}, 300);
 });
 
 $('.loginbutton').on('click', function() {
 	var sessionBox = $(this).parents('.sessionbox');
 	$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
 });
+
+function beginLoading() {
+	var sessionBox = $(this).parents('.sessionbox').filter(':visible');
+	$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+}
+
+function endLoading() {
+	$('.sessionbox').filter(':visible').addClass('sessionerror');
+  	revertButtonText();
+  	setTimeout(function() {
+  		pageBody.find('.loginloadingspinner').remove();
+  	}, 200);
+}
 
 
 if (pageBody.hasClass('homepage')) {

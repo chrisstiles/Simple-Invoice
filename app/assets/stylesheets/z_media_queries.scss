@@ -412,7 +412,7 @@
 		transform:translate(-50%,-50%);
 	}
 
-	.edit_invoice #validationerrors.amountpaidvalidation {
+	#sidebar .edit_invoice #validationerrors.amountpaidvalidation {
 		left:0 !important;
 		bottom:0 !important;
 		position:static;
