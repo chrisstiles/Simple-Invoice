@@ -300,3 +300,21 @@ body.hasabsolutes #formwrapper {
 	font-size:15px;
 }
 
+.sessionclose {
+	width:56px;
+	height:56px;
+	position:absolute;
+	top:35px;
+	right:35px;
+	background-image:$session-close-icon;
+	background-size:42px 42px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	cursor:pointer;
+	border-radius:50%;
+}
+
+.sessionclose:hover {
+	background-color:#f7f7f7;
+}
+

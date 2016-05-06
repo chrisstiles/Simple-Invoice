@@ -44,12 +44,10 @@ var signInEmail = $('#login_user_email');
 
 $('.signinbutton').on('click', function(e) {
 	e.preventDefault();
-	sessionOverlay.show();
-	pageHTML.addClass('noscroll');
-	setTimeout(function() {
-		signInEmail.focus();
-	}, 300);
+	showSession();
 });
+
+$('.sessionclose').on('click', hideSession);
 
 $('.loginbutton').on('click', function() {
 	var sessionBox = $(this).parents('.sessionbox');
@@ -67,6 +65,32 @@ function endLoading() {
   	setTimeout(function() {
   		pageBody.find('.loginloadingspinner').remove();
   	}, 200);
+}
+
+function showSession() {
+	sessionOverlay.show();
+
+	if ($document.height() > $(window).height()) {
+         var scrollTop = (pageHTML.scrollTop()) ? pageHTML.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
+         pageHTML.addClass('noscroll').css('top',-scrollTop);         
+    }
+
+    pageHTML.addClass('noscroll').css('top',-scrollTop); 
+
+	pageHTML.addClass('noscroll');
+	setTimeout(function() {
+		signInEmail.focus();
+	}, 300);
+}
+
+function hideSession() {
+	sessionOverlay.hide();
+	
+	var scrollTop = parseInt(pageHTML.css('top'));
+        pageHTML.removeClass('noscroll');
+        $('html,body').scrollTop(-scrollTop);
+
+	signInEmail.blur();
 }
 
 
