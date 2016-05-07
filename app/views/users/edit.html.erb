@@ -149,8 +149,15 @@
 			<% end %>
 			<br>
 			<div id="dropzoneclickable" class="button blue uploadicon needsclick"><span>Or click here to upload</span></div>
+			
+
 		</div>
+
+		<%= link_to 'Delete Logo', @user.current_logo, id: "deletelogobutton", class: "deleteicon deletelogo button", data: {confirm: 'Are you sure?'}, method: :delete  %>
+		<br clear="both">
+
 	</div>
+
 
 </div>
 

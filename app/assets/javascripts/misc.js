@@ -144,7 +144,6 @@ pageBody.on('click', '.closeerrors', function() {
 		$('#invoicewrapper').removeAttr('style');
 
 		if (parentEl.hasClass('logovalidation')) {
-			console.log('yes');
 			$('.logoformholder').removeAttr('style');
 		} else {
 			$('.formholder').removeAttr('style');
@@ -295,8 +294,6 @@ $('#user_logo').bind('change', function() {
 });
 
 
-
-
 // Changed fixed positions on window resize
 $( window ).resize(function() {
 	if (homePageWrapper.length) {
@@ -392,6 +389,7 @@ var logoUploader = $(".logouploader").dropzone({
         });
         this.on("success", function(file, response) {
         	uploadSuccessful();
+        	updateDeleteLink(response.id);
         });
         this.on("error", function(file, jsonResponse) {
         	addErrors(jsonResponse);
@@ -399,6 +397,32 @@ var logoUploader = $(".logouploader").dropzone({
     }
 });	
 
+function hasLogo() {
+	var currentLogo = $('.userlogo').length;
+	if (currentLogo) {
+		return true
+	} else {
+		return false
+	}
+}
+
+var deleteLogoButton = $('#deletelogobutton');
+
+function updateDeleteLink(id) {
+	if (id) {
+		deleteLogoButton.show();
+		deleteLogoButton.attr('href', 'logos/' + id);
+	} else {
+		if (hasLogo()) {
+			deleteLogoButton.show();
+
+		} else {
+			deleteLogoButton.hide();
+		}
+	}
+}
+
+updateDeleteLink();
 
 // Function for adding and hiding errors. As we receive JSON back for Dropzone this needs to be custom.
 var validationErrors = $('#modalvalidationerrors'),
