@@ -333,11 +333,19 @@ var thumbnailLoading = $('#imageloading');
 // Store original HTML inside Dropzone div
 var dropzoneContent;
 
+var isMobile = false;
+
+if (pageBody.hasClass('ios') || pageBody.hasClass('android') || pageBody.hasClass('windows_phone')) {
+	isMobile = true;
+}
+
+var dropzoneMessageContent = isMobile ? "Tap the link below to upload logo" : "Drop your logo here to upload";
+
 // Grab upload form, set initial settings
 var logoUploader = $(".logouploader").dropzone({
 		// restrict image size to a maximum 1MB
 		maxFilesize: 1000,
-		dictDefaultMessage: "Drop your logo here to upload",
+		dictDefaultMessage: dropzoneMessageContent,
 		// changed the passed param to one accepted by
 		// our rails app
 		paramName: "logo[image]",
@@ -376,7 +384,7 @@ var logoUploader = $(".logouploader").dropzone({
 		});
 		this.on("processing", function() {
 			$('.dz-message').remove();
-			$('.dropzone').append('<div class="dz-default dz-message"><span>Drop your logo here to upload</span></div>');
+			$('.dropzone').append('<div class="dz-default dz-message"><span>'+ dropzoneMessageContent + '</span></div>');
 			$('.dz-message').hide();
 
 			var offsetDistance = -19 - $('.dz-message').outerHeight();
@@ -565,7 +573,7 @@ pageBody.on('touchend', '[contenteditable=true]', function() {
 
 	var isDateField = $this.is('#e-date') || $this.is('#e-duedate');
 	
-	if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
+	if (isMobile) {
 		if (!$this.is(':focus') && !pageBody.hasClass('touchmoving') && !isDateField) {
 			$this.focus();
 			setEndOfContenteditable(this);

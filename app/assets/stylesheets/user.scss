@@ -544,13 +544,13 @@ body.ios #dropzoneclickable:after, body.android #dropzoneclickable:after {
     content:"Upload Logo" !important;
 }
 
-body.ios .dz-message, body.android .dz-message {
-    display:none !important;
+body.ios .dz-message, body.android .dz-message, body.windows_phone .dz-message {
+    //display:none !important;
 }
 
-body.ios .dropzone, body.android .dropzone {
-    padding-bottom:15px;
-}
+// body.ios .dropzone, body.android .dropzone, body.windows_phone .dropzone {
+//     padding-bottom:15px;
+// }
 
 .logosection .clientformtitle {
   margin-bottom:2px;
