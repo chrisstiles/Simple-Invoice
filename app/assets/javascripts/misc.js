@@ -516,27 +516,37 @@ $('.selectallinput').on('click touchstart', function(e) {
 });
 
 
-var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar, #pagewrapper, #usersettingshalf, #userlogohalf';
+var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar, #pagewrapper, #usersettingshalf, #userlogohalf, .sessionbox';
 // Uses document because document will be topmost level in bubbling
 $document.on('touchmove',function(e){
   e.preventDefault();
 });
 // Uses body because jQuery on events are called off of the element they are
 // added to, so bubbling would not work if we used document instead.
-$('body').on('touchmove', selScrollable, function(e) {
+pageBody.on('touchmove', selScrollable, function(e) {
   if (e.currentTarget.scrollTop === 0) {
     e.currentTarget.scrollTop = 1;
   } else if (e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.offsetHeight) {
     e.currentTarget.scrollTop -= 1;
   }
 });
-// Stops preventDefault from being called on document if it sees a scrollable div
-$('body').on('touchmove', selScrollable, function(e) {
-  e.stopPropagation();
 
+// Stops preventDefault from being called on document if it sees a scrollable div
+pageBody.on('touchmove', selScrollable, function(e) {
+		if (!$(e.target).hasClass('sessionboxwrapper')) {
+			e.stopPropagation();
+		}
 });
 
-$('body').on('touchend', '[contenteditable=true]', function() {
+pageBody.on('click', function(e) {
+	if (pageBody.hasClass('sessionopen')) {
+		console.log(e.delegateTarget);
+		console.log(e.target);
+		console.log(e.target.nodeName);
+	}
+})
+
+pageBody.on('touchend', '[contenteditable=true]', function() {
 	//$(this).trigger('click');
 	var $this = $(this);
 

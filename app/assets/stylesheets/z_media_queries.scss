@@ -1,8 +1,9 @@
 @import "variables";
 
-@media screen and (max-height: 660px) {
+@media screen and (max-height: 780px) {
 	.sessionbox {
-		top:80px;
+		top:90px;
+		bottom:30px;
 		transform:translate(-50%, 0);
 	}
 
@@ -54,11 +55,15 @@
 	}
 }
 
-@media screen and (max-width:1100px) {
+@media screen and (max-width:1114px) {
 	nav a, #sessioninfo a {
 		padding-left:25px;
 		padding-right:25px;
 		background-position:25px center;
+	}
+
+	header a.button {
+		margin-left:25px;
 	}
 
 	.navinvoices {
