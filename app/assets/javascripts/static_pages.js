@@ -44,15 +44,36 @@ var signInEmail = $('#login_user_email');
 
 $('.signinbutton').on('click', function(e) {
 	e.preventDefault();
+	if (sessionOverlay.not(':visible')) {
+		setTimeout(function() {
+			signInEmail.focus();
+		}, 300);
+	} 
 	showSession();
+});
+
+var registerEmail = $('.registeremail');
+
+$('.showregister').on('click', function(e) {
+	e.preventDefault();
+	if (sessionOverlay.not(':visible')) {
+		setTimeout(function() {
+			registerEmail.focus();
+		}, 300);
+	} 
+	showSession('register');
 });
 
 $('.sessionclose').on('click', hideSession);
 
-$('.loginbutton').on('click', function() {
-	var sessionBox = $(this).parents('.sessionbox');
-	$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+$('.loginbutton, .registerbutton').on('click', function() {
+	addSessionLoading($(this));
 });
+
+function addSessionLoading(el) {
+	var sessionBox = el.parents('.sessionbox');
+	$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+}
 
 function beginLoading() {
 	var sessionBox = $(this).parents('.sessionbox').filter(':visible');
@@ -62,12 +83,24 @@ function beginLoading() {
 function endLoading() {
 	$('.sessionbox').filter(':visible').addClass('sessionerror');
   	revertButtonText();
-  	setTimeout(function() {
+  	removeLoading();
+}
+
+function removeLoading() {
+	setTimeout(function() {
   		pageBody.find('.loginloadingspinner').remove();
   	}, 200);
 }
 
-function showSession() {
+function showSession(option) {
+
+	if (option === "register") {
+		sessionOverlay.addClass('registeropen');
+	} else {
+		sessionOverlay.removeClass('registeropen');
+	}
+
+	removeLoading();
 	sessionOverlay.show();
 
 	if ($document.height() > $(window).height()) {
@@ -78,19 +111,21 @@ function showSession() {
     pageHTML.addClass('noscroll').css('top',-scrollTop); 
 
 	pageHTML.addClass('noscroll');
-	setTimeout(function() {
-		signInEmail.focus();
-	}, 300);
+
+	pageBody.addClass('sessionopen');
 }
 
 function hideSession() {
 	sessionOverlay.hide();
+	sessionOverlay.removeClass('registeropen');
 	
 	var scrollTop = parseInt(pageHTML.css('top'));
         pageHTML.removeClass('noscroll');
         $('html,body').scrollTop(-scrollTop);
 
+    pageBody.removeClass('sessionopen');
 	signInEmail.blur();
+	registerEmail.blur();
 }
 
 

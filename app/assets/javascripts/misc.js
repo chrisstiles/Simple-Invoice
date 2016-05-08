@@ -147,6 +147,7 @@ pageBody.on('click', '.closeerrors', function() {
 			$('.logoformholder').removeAttr('style');
 		} else {
 			$('.formholder').removeAttr('style');
+			$('.sessionbox').removeAttr('style');
 		}
 		
 	}

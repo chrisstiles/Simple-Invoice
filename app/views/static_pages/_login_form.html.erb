@@ -11,6 +11,6 @@
     <%= link_to "Forgot Password", new_password_path(:user), class: "forgotpassword" %>
     <%= f.submit "Log in", class: "button blue willload loginbutton" %>
 
-    <div class="sessionbottomtext">Don't have an account? <%= link_to "Register", new_registration_path(:user) %></div>
+    <div class="sessionbottomtext">Don't have an account? <%= link_to "Register", new_registration_path(:user), class: "showregister" %></div>
 
 <% end %>

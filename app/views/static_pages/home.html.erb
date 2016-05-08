@@ -12,8 +12,15 @@
 
 <div id="sessionoverlay">
 	<div class="sessionclose"></div>
-	<div class="sessionbox">
-		<%= render 'login_form' %>
+	<div class="sessionboxwrapper loginwrapper">
+		<div class="sessionbox loginbox">
+			<%= render 'login_form' %>
+		</div>
+	</div>
+	<div class="sessionboxwrapper registerwrapper">
+		<div class="sessionbox registerbox">
+			<%= render 'register_form' %>
+		</div>
 	</div>
 </div>
 

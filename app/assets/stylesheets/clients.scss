@@ -205,12 +205,12 @@
 	border: 1px solid $light-blue;
 }
 
-.clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror, .clientsformwrapper input[type="password"].haserror {
-	border:1px solid #c47375;
+.clientsformwrapper input[type="text"].haserror, .sendemailform input[type="text"].haserror, #modalcontent .selectize-input.haserror, .clientsformwrapper input[type="password"].haserror, .sessionbox input.haserror {
+	border:1px solid #c47375 !important;
 	background-color:#fff !important;
 }
 
-.clientsformwrapper input[type="text"].haserror:focus, .sendemailform input[type="text"].haserror:focus, #modalcontent .selectize-input.input-active.haserror, .clientsformwrapper input[type="password"].haserror:focus {
+.clientsformwrapper input[type="text"].haserror:focus, .sendemailform input[type="text"].haserror:focus, #modalcontent .selectize-input.input-active.haserror, .clientsformwrapper input[type="password"].haserror:focus, .sessionbox input.haserror:focus {
 	border:1px solid #df4535 !important;
 }
 

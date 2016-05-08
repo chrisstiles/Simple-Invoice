@@ -148,6 +148,7 @@ body.hasabsolutes #formwrapper {
 	background-color:#fff;
 	z-index: 750;
 	display:none;
+	overflow:hidden;
 }
 
 .sessionbox {
@@ -165,7 +166,42 @@ body.hasabsolutes #formwrapper {
 	animation-duration: .8s;
 	animation-fill-mode:forwards;
 	opacity:0;
+	transition: all .3s;
+	margin-bottom:45px;
 }
+
+.sessionbox.registerbox {
+	padding-bottom:50px;
+}
+
+.sessionboxwrapper {
+	position:fixed;
+	top:25px;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:scroll;
+	width:100%;
+	height:100%;
+	background-color:#fff;
+}
+
+body.sessionopen .sessionboxwrapper {
+	transition:transform .3s;
+}
+
+.sessionboxwrapper.registerwrapper {
+	transform:translateX(100%);
+}
+
+#sessionoverlay.registeropen  .sessionboxwrapper.loginwrapper {
+	transform:translateX(-100%);
+}
+
+#sessionoverlay.registeropen  .sessionboxwrapper.registerwrapper {
+	transform:translateX(0);
+}
+
 
 @keyframes fadeInUp {
 	from {
@@ -303,8 +339,8 @@ body.hasabsolutes #formwrapper {
 .sessionclose {
 	width:56px;
 	height:56px;
-	position:absolute;
-	top:35px;
+	position:fixed;
+	top:90px;
 	right:35px;
 	background-image:$session-close-icon;
 	background-size:42px 42px;
@@ -312,9 +348,16 @@ body.hasabsolutes #formwrapper {
 	background-position:center center;
 	cursor:pointer;
 	border-radius:50%;
+	z-index: 9999;
 }
 
 .sessionclose:hover {
 	background-color:#f7f7f7;
+}
+
+.sessionbox .clienterrors {
+	top:-10px !important;
+	width:calc(100% + 30px);
+	left:-15px !important;
 }
 

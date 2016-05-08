@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  respond_to :js
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
   after_action :create_user_settings, only: [:create]
@@ -10,6 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    flash[:success] = 'Welcome to Simple Invoice!'
+    flash.keep(:success)
     super
   end
 

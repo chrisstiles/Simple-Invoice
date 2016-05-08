@@ -939,7 +939,7 @@ ready = function() {
 			} else if (hasBeenEdited === 'false') {
 				deleteRow($this);
 			} else {
-				var confirmation = confirm('You have made changes to this row. Are you sure you would like to delete it?');
+				var confirmation = confirm('Are you sure you would like to delete this job?');
 				if (confirmation) {
 					deleteRow($this);
 				} else {

@@ -1,0 +1,29 @@
+<h3>Create a Simple Invoice Account</h3>
+
+ <div id="validationerrors" class="clienterrors">
+    <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors before saving
+    </div>
+     <div id="errorholder"></div>
+  </div>
+
+<div class="formholder">
+    <%= form_for(:user, url: registration_path(:user), remote: true, html: { class: "registerform" }) do |f| %>
+      <%#= devise_error_messages!(:user) %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "registeremail" %>
+
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off" %>
+
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+        <%= f.submit "Sign up", class: "button blue willload registerbutton" %>
+    <% end %>
+</div>

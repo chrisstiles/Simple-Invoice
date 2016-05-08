@@ -1,5 +1,24 @@
 @import "variables";
 
+@media screen and (max-height: 660px) {
+	.sessionbox {
+		top:80px;
+		transform:translate(-50%, 0);
+	}
+
+	@keyframes fadeInUp {
+		from {
+			transform:translate(-50%, 0);
+			opacity:0;
+		}
+
+		to {
+			transform:translate(-50%, 0);
+			opacity: 1;
+		}
+	}
+}
+
 @media screen and (max-width:1210px) {
 	#invoicewrapper, #formwrapper #validationerrors {
 		width: calc(100% - 408px);
