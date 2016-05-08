@@ -11,6 +11,9 @@ $('.loginform').bind('ajax:start', function() {
 }).bind('ajax:success', function(evt, data, status, xhr) {
   //function called on status: 200 (for ex.)
   //console.log('success');
+  setTimeout(function() {
+  		pageBody.find('.loginloadingspinner').remove();
+  	}, 200);
 }).bind("ajax:error", function(evt, xhr, status, error) {
   endLoading();
 });
@@ -81,7 +84,7 @@ function beginLoading() {
 }
 
 function endLoading() {
-	$('.sessionbox').filter(':visible').addClass('sessionerror');
+	$('.loginbox').filter(':visible').addClass('sessionerror');
   	revertButtonText();
   	removeLoading();
 }

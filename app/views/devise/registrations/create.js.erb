@@ -14,11 +14,11 @@ setTimeout(function() {
 	
 }, 200);
 
-<% if resource.errors.any? %>
-
 setTimeout(function() {
 	pageBody.find('.loginloadingspinner').remove();
 }, 200);
+
+<% if resource.errors.any? %>
 
 var pageBody = $('body'),
 	validationErrors = $('#validationerrors'),
