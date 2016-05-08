@@ -1065,6 +1065,51 @@
 	#toolbar .button {
 		right:-13px;
 	}
+
+	.clientsformwrapper .half {
+		width:100%;
+		height:auto;
+	}
+
+	.clientsformwrapper select {
+		margin-bottom:10px;
+	}
+
+	#settingfields {
+		top:0;
+		margin-top:4px;
+	}
+
+	#clientssidebar .clientsformwrapper  .deleteclienthalf, #clientssidebar .clientsformwrapper .saveclienthalf {
+		white-space:nowrap;
+		position: relative;
+		width: 100%;
+		text-align: center;
+		left: 50%;
+		left: 0;
+		right: 0;
+		margin: 0;
+	}
+
+	#clientssidebar .clientsformwrapper .deleteclienthalf {
+		top:110px;
+		margin-bottom:20px;
+	}
+
+	#clientssidebar .clientsformwrapper .button.deleteclient, #clientssidebar .clientsformwrapper .saveclienthalf .button.blue {
+		left: 50%;
+		position: absolute;
+		transform: translateX(-50%);
+	}
+
+	#clientssidebar .clientsformwrapper .saveclienthalf  {
+		top:-18px;
+	}	
+
+	#clientssidebar .clientsformwrapper .button.deleteclient {
+		width:110px;
+	}
+
 }
 
 @media screen and (max-width:470px) {
@@ -1112,36 +1157,6 @@
 
 	#clientssidebar .clientsformwrapper form {
 		margin-bottom:-40px;
-	}
-
-	#clientssidebar .clientsformwrapper  .deleteclienthalf, #clientssidebar .clientsformwrapper .saveclienthalf {
-		white-space:nowrap;
-		position: relative;
-		width: 100%;
-		text-align: center;
-		left: 50%;
-		left: 0;
-		right: 0;
-		margin: 0;
-	}
-
-	#clientssidebar .clientsformwrapper .deleteclienthalf {
-		top:50px;
-		margin-bottom:20px;
-	}
-
-	#clientssidebar .clientsformwrapper .button.deleteclient, #clientssidebar .clientsformwrapper .saveclienthalf .button.blue {
-		left: 50%;
-		position: absolute;
-		transform: translateX(-50%);
-	}
-
-	#clientssidebar .clientsformwrapper .saveclienthalf  {
-		top:-80px;
-	}	
-
-	#clientssidebar .clientsformwrapper .button.deleteclient {
-		width:110px;
 	}
 
 	#clientscontainer #searchresultswrapper {
