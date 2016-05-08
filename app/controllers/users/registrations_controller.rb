@@ -11,9 +11,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    flash[:success] = 'Welcome to Simple Invoice!'
-    flash.keep(:success)
     super
+    if resource.save
+      flash[:success] = 'Welcome to Simple Invoice!'
+    end
   end
 
   # GET /resource/edit
@@ -40,12 +41,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  private
 
-  def create_user_settings
-    setting = Setting.create
-    resource.setting = setting
-  end
+    def create_user_settings
+      setting = Setting.create
+      resource.setting = setting
+    end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

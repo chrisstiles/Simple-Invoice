@@ -53,12 +53,13 @@ validationErrors.css({
 validationsHeight += 15;
 
 $('.formholder').css({
-  '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
-  '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
-  '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
-  '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
-  'transform'         : 'translateY(' + validationsHeight + 'px)'
+  '-webkit-transform' : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-moz-transform'    : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-ms-transform'     : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-o-transform'      : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  'transform'         : 'translate3d(0, ' + validationsHeight + 'px, 0)'
 });
+
 
 $('.sessionbox').css({
 	'padding-bottom' : validationsHeight + 50,
@@ -67,6 +68,7 @@ $('.sessionbox').css({
 <% else %>
 
 window.location = '<%= invoices_path %>'
+
 
 <% end %>
 
