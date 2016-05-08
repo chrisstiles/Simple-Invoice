@@ -18,6 +18,14 @@
 			opacity: 1;
 		}
 	}
+
+	.throbber-loader:not(:required) {
+		transform:translate(-50%, -47%);
+	}
+
+	.loginloadingspinner {
+		bottom:77px;
+	}
 }
 
 @media screen and (max-width:1210px) {

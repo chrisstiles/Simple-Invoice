@@ -86,7 +86,7 @@ function addSessionLoading(el) {
 	});
 
 	if (isValid) {
-		$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+		$(loadingSpinnerHtml).insertAfter(sessionBox).fadeIn(500);
 	}
 
 }
@@ -118,7 +118,7 @@ function showSession(option) {
 		sessionOverlay.removeClass('registeropen');
 	}
 
-	removeLoading();
+	removeLoading(); 
 	sessionOverlay.show();
 
 	if (!pageBody.hasClass('sessionopen')) {
