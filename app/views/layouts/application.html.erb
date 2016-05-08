@@ -20,20 +20,20 @@
 	<div id="menu">
 		<% if user_signed_in? %>
 		<nav>
-			<%= link_to "Invoices", invoices_path, class: "navinvoices" %>
-			<%= link_to "Clients", clients_path, class: "navclients" %>
+			<%= link_to "Invoices", invoices_path, class: "navinvoices#{current_page('invoices')}" %>
+			<%= link_to "Clients", clients_path, class: "navclients#{current_page('clients')}" %>
 		</nav>
 
 		<%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
 
 		<div id="sessioninfo">
 				<%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "navsignout" %>
-				<%= link_to "Settings", settings_path, class: "navprofile" %>
+				<%= link_to "Settings", settings_path, class: "navprofile#{current_page('users')}" %>
 		</div>
 		<% else %>
 				<div id="sessioninfo">
-					<%= link_to "Register", new_user_registration_path, class: "showregister" %>
-					<%= link_to "Sign In", new_user_session_path, class: "signinbutton" %>
+					<%= link_to "Register", new_user_registration_path, class: "showregister#{current_page('registrations')}" %>
+					<%= link_to "Sign In", new_user_session_path, class: "signinbutton#{current_page('sessions')}" %>
 				</div>
 		<% end %>	
 	</div>	

@@ -87,4 +87,20 @@ module ApplicationHelper
 		end 
 	end
 
+	def controller?(*controller)
+		controller.include?(params[:controller])
+	end
+
+	def action?(*action)
+		action.include?(params[:action])
+	end
+
+	def current_page(page)
+		if controller?(page.to_s)
+			" current"
+		else
+			""
+		end
+	end
+
 end
