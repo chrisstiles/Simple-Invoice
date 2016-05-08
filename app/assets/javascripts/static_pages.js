@@ -121,11 +121,13 @@ function showSession(option) {
 	removeLoading();
 	sessionOverlay.show();
 
-	if ($document.height() > $(window).height()) {
-         var scrollTop = (pageHTML.scrollTop()) ? pageHTML.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
-         pageHTML.addClass('noscroll').css('top',-scrollTop);         
-    }
-
+	if (!pageBody.hasClass('sessionopen')) {
+		if ($document.height() > $(window).height()) {
+			var scrollTop = (pageHTML.scrollTop()) ? pageHTML.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
+			pageHTML.addClass('noscroll').css('top',-scrollTop);         
+		}
+	}
+	
     pageHTML.addClass('noscroll').css('top',-scrollTop); 
 
 	pageHTML.addClass('noscroll');

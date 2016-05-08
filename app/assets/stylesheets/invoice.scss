@@ -438,13 +438,32 @@ section:after {
 	float:left;
 }
 
+#invoicewrapper br {
+	clear:both;
+}
+
 #e-name {
 	z-index: 2;
-	overflow:hidden;
 	margin-top: -10px;
-	margin-bottom:-5px;
-	padding-top:6px;
-	padding-bottom:6px;
+	margin-bottom:0;
+	padding-top:0;
+	padding-bottom:0;
+	line-height:30px;
+	color:#686666;
+	font-weight:600;
+	font-size:28px;
+}
+
+#e-name:empty {
+	overflow:hidden;
+	height:30px;
+	width:81px;
+	box-sizing:border-box;
+	position:relative;
+}
+
+#e-name:empty:before {
+	line-height:30px;
 }
 
 #clientinfo {
@@ -470,11 +489,6 @@ section:after {
 	margin-left:4px;
 }
 
-#e-name {
-	color:#686666;
-	font-weight:600;
-	font-size:28px;
-}
 
 #dateterms {
 	width:230px;
