@@ -20,7 +20,7 @@ $('.loginform').bind('ajax:start', function() {
 
 $document.bind('change', function(e) {
 	if( $(e.target).is(':invalid') ) {
-		endLoading();
+		removeLoading();
 	}
 });
 
@@ -75,7 +75,21 @@ $('.loginbutton, .registerbutton').on('click', function() {
 
 function addSessionLoading(el) {
 	var sessionBox = el.parents('.sessionbox');
-	$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+	var sessionBoxInputs = sessionBox.find('input');
+	var isValid = true
+	var invalidCount = 0
+	
+	sessionBoxInputs.each(function() {
+		var $this = $(this);
+		if ($this.is(':invalid')) {
+			isValid = false;
+		}
+	});
+
+	if (isValid) {
+		$(loadingSpinnerHtml).appendTo(sessionBox).fadeIn(500);
+	}
+
 }
 
 function beginLoading() {
@@ -84,7 +98,9 @@ function beginLoading() {
 }
 
 function endLoading() {
-	$('.loginbox').filter(':visible').addClass('sessionerror');
+	if (!sessionOverlay.hasClass('registeropern')) {
+		$('.loginbox').filter(':visible').addClass('sessionerror');
+	}
   	revertButtonText();
   	removeLoading();
 }
