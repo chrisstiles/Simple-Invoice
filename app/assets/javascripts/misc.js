@@ -533,18 +533,31 @@ pageBody.on('touchmove', selScrollable, function(e) {
 
 // Stops preventDefault from being called on document if it sees a scrollable div
 pageBody.on('touchmove', selScrollable, function(e) {
-		if (!$(e.target).hasClass('sessionboxwrapper')) {
-			e.stopPropagation();
-		}
-});
 
-pageBody.on('click', function(e) {
+	var element = $(e.target);
+
 	if (pageBody.hasClass('sessionopen')) {
-		console.log(e.delegateTarget);
-		console.log(e.target);
-		console.log(e.target.nodeName);
+
+		if (!element.hasClass('sessionboxwrapper')) {
+
+			var sessionBox;
+
+			if (element.is('.sessionbox')) {
+				sessionBox = element;
+			} else {
+				sessionBox = element.parents('.sessionbox');
+			}
+
+			if (sessionBox[0].offsetHeight < sessionBox[0].scrollHeight) {
+				e.stopPropagation();
+			}
+		}
+
+	} else {
+		e.stopPropagation();
 	}
-})
+		
+});
 
 pageBody.on('touchend', '[contenteditable=true]', function() {
 	//$(this).trigger('click');
