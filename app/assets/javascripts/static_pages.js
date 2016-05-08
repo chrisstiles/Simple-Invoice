@@ -76,8 +76,7 @@ $('.loginbutton, .registerbutton').on('click', function() {
 function addSessionLoading(el) {
 	var sessionBox = el.parents('.sessionbox');
 	var sessionBoxInputs = sessionBox.find('input');
-	var isValid = true
-	var invalidCount = 0
+	var isValid = true;
 	
 	sessionBoxInputs.each(function() {
 		var $this = $(this);
