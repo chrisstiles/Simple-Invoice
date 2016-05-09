@@ -228,7 +228,12 @@ body.sessionopen .sessionboxwrapper {
 	transition:all .3s;
 }
 
-.sessionbox input[type="text"], .sessionbox input[type="email"], .sessionbox input[type="password"] {
+.sessionbox input[type="text"], 
+.sessionbox input[type="email"], 
+.sessionbox input[type="password"], 
+#pagewrapper.staticwrapper input[type="text"], 
+#pagewrapper.staticwrapper input[type="email"], 
+#pagewrapper.staticwrapper input[type="password"] {
 	display:block;
     width: 100%;
     box-sizing: border-box;
@@ -245,17 +250,22 @@ body.sessionopen .sessionboxwrapper {
     -webkit-appearance: none;
 }
 
-.sessionbox input[type="text"]:focus, .sessionbox input[type="email"]:focus, .sessionbox input[type="password"]:focus {
+.sessionbox input[type="text"]:focus, 
+.sessionbox input[type="email"]:focus, 
+.sessionbox input[type="password"]:focus, 
+#pagewrapper.staticwrapper input[type="text"]:focus, 
+#pagewrapper.staticwrapper input[type="email"]:focus, 
+#pagewrapper.staticwrapper input[type="password"]:focus {
 	border:1px solid $light-blue;
 }
 
-.sessionbox input:-webkit-autofill {
+.sessionbox input:-webkit-autofill, #pagewrapper.staticwrapper input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     color: #5F5F5F !important;
     -webkit-text-fill-color:#5F5F5F;
 }
 
-.sessionbox label {
+.sessionbox label, #pagewrapper.staticwrapper label {
 	display:block;
 	font-size:15px;
 	color:#707070;
@@ -363,5 +373,96 @@ body.sessionopen .sessionboxwrapper {
 	top:-10px !important;
 	width:calc(100% + 30px);
 	left:-15px !important;
+}
+
+
+/* Static Inner Pages */
+
+#pagewrapper.staticwrapper {
+	background-color:#fff;
+	border:1px solid #c7c6c6;
+	padding:45px 80px 70px 80px;
+	margin-top:55px;
+	max-width:900px;
+	margin-bottom:55px;
+	
+}
+
+.paddinganimate {
+	transition: padding .3s;
+}
+
+#pagewrapper.smallbox {
+	max-width:600px;
+}
+
+#pagewrapper.staticwrapper h1 {
+	margin-top:0;
+	color:$light-blue;
+	font-weight:400;
+	font-size:22px;
+	text-align:center;
+	margin:0 0 35px 0;
+}
+
+#pagewrapper.nosidepadding {
+	padding-left:0;
+	padding-right:0;
+}
+
+#pagewrapper.nosidepadding #validationerrors.clienterrors {
+	margin-left:80px;
+	margin-right:80px;
+}
+
+p.staticsubmit {
+	text-align:right;
+	display:block;
+	margin-top:30px;
+}
+
+.passwordformholder {
+	position:relative;
+	height:150px;
+	overflow:hidden;
+	transition: all .3s;
+}
+
+#passwordsuccess, #passwordform {
+	width:100%;
+	padding:0 80px;
+	box-sizing:border-box;
+	position:absolute;
+	top:0;
+	left:0;
+	transition:all .3s;
+}
+
+#passwordsuccess {
+	transform:translateX(100%);
+	padding:0 30px;	
+}
+
+#passwordsuccesscontent {
+	background-color:#e8f9ef;
+	border:1px solid #2ecc71;
+	color:#3B5A48;
+	font-size:19px;
+	font-weight:400;
+	padding: 27px 40px;
+	line-height: 1.3em;
+	border-radius:2px;
+}
+
+.passwordformholder.emailsent {
+	height:110px;
+}
+
+.passwordformholder.emailsent #passwordsuccess {
+	transform:translateX(0);
+}
+
+.passwordformholder.emailsent #passwordform {
+	transform:translateX(-100%);
 }
 

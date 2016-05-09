@@ -3,10 +3,10 @@
 <%= form_for(:user, url: session_path(:user), remote: true, html: { class: "loginform" }) do |f| %>
 
     <%= f.label :email %>
-    <%= f.email_field :email, id: "login_user_email" %>
+    <%= f.email_field :email, id: "login_user_email", placeholder: "Email address" %>
 
     <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
 
     <%= link_to "Forgot Password", new_password_path(:user), class: "forgotpassword" %>
     <%= f.submit "Log in", class: "button blue willload loginbutton" %>

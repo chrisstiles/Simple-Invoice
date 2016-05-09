@@ -1,0 +1,74 @@
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+		button.val(oldContent);
+		button.prop('disabled', false);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').empty().remove();
+	
+}, 200);
+
+setTimeout(function() {
+	pageBody.find('.loginloadingspinner').remove();
+}, 200);
+
+<% if resource.errors.any? %>
+
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
+
+errorHolder.empty();
+
+<% resource.errors.each do |key, message| %>
+
+var key = "<%= key %>"
+
+var errorInput = $(".registerbox input[name='user[" + key + "]']");
+errorInput.addClass('haserror');
+
+<% end %>
+
+<% resource.errors.full_messages.each do |message| %>
+	
+	var message = '<%= message %>'
+	errorHolder.append('<p>' + message + '</p>');
+
+<% end %>
+
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+validationsHeight += 15;
+
+$('.formholder').css({
+  '-webkit-transform' : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-moz-transform'    : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-ms-transform'     : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-o-transform'      : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  'transform'         : 'translate3d(0, ' + validationsHeight + 'px, 0)'
+});
+
+
+$('.smallbox').css({
+	'padding-bottom' : validationsHeight + 70,
+});
+
+<% else %>
+
+$('.closeerrors').trigger('click');
+$('.passwordformholder').addClass('emailsent');
+
+<% end %>
+

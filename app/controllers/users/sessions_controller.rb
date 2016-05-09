@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
 
     def invalid_login_attempt
       set_flash_message(:alert, :invalid)
-      render json: flash[:alert], status: 401
+      render json: flash[:alert]
     end
 
   # If you have extra params to permit, append them to the sanitizer.

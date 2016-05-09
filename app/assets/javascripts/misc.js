@@ -20,6 +20,8 @@ set_time_zone_offset();
 
 var pageBody = $('body');
 
+$('html').removeClass('noscroll');
+
 // Prevent double submitting form
 
 pageBody.on('submit', 'form', function(e) {
@@ -129,6 +131,9 @@ pageBody.on('keyup', '#invoice_client_name', function() {
 });
 
 // Close validation errors on close button
+
+var removeElements = $('.formholder, .sessionbox, .paddinganimate');
+
 pageBody.on('click', '.closeerrors', function() {
 	var $this = $(this);
 	var parentEl;
@@ -146,8 +151,7 @@ pageBody.on('click', '.closeerrors', function() {
 		if (parentEl.hasClass('logovalidation')) {
 			$('.logoformholder').removeAttr('style');
 		} else {
-			$('.formholder').removeAttr('style');
-			$('.sessionbox').removeAttr('style');
+			removeElements.removeAttr('style');
 		}
 		
 	}

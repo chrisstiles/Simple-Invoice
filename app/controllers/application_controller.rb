@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
-  before_action :get_users_browser, only: [:show, :edit, :new, :index, :home]
+  before_action :get_users_browser#, only: [:show, :edit, :new, :index, :home]
 
   skip_before_action :authenticate_user!, if: lambda {
 

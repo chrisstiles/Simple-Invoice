@@ -111,7 +111,9 @@ if (!$('html').hasClass('noscroll')) {
      var loadingBox = $('.loadingspinner').first();
   }
  
-  var leftPosition = resultsWrapper.offset().left + (resultsWrapper.outerWidth() / 2);
+  if (resultsWrapper.length) {
+    var leftPosition = resultsWrapper.offset().left + (resultsWrapper.outerWidth() / 2);
+  }
 
   $('.loadingcircle').css('left', leftPosition);
 
