@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :users
 
+  devise_scope :user do
+    get "signin", to: "users/sessions#new"
+    get "register", to: "users/registrations#new"
+    get "forgotpassword", to: "users/passwords#new"
+  end
+
   devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations", passwords: "users/passwords" }
   
  # get '/invoices/new' => 'invoices#new', as: :new_invoice

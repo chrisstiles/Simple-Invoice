@@ -32,8 +32,8 @@
 		</div>
 		<% else %>
 				<div id="sessioninfo">
-					<%= link_to "Register", new_user_registration_path, class: "showregister#{current_page('registrations')}" %>
-					<%= link_to "Sign In", new_user_session_path, class: "signinbutton#{current_page('sessions')}" %>
+					<%= link_to "Register", register_path, class: "showregister#{current_page('registrations')}" %>
+					<%= link_to "Sign In", signin_path, class: "signinbutton#{current_page('sessions')}" %>
 				</div>
 		<% end %>	
 	</div>	
