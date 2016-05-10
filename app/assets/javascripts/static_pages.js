@@ -5,6 +5,10 @@ var pageHTML = $('html');
 var $document = $(document);
 var loadingSpinnerHtml = '<div class="loginloadingspinner sessionloading"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
 
+
+
+if (pageBody.hasClass('homepage')) {
+
 // Ajax login form
 $('.loginform').bind('ajax:start', function() {
 	beginLoading();
@@ -148,8 +152,6 @@ function hideSession() {
 	registerEmail.blur();
 }
 
-
-if (pageBody.hasClass('homepage')) {
 
 var scrollMin;
 var scrollMax;
