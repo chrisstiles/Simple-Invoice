@@ -132,13 +132,15 @@ pageBody.on('keyup', '#invoice_client_name', function() {
 
 // Close validation errors on close button
 
-var removeElements = $('.formholder, .sessionbox, .paddinganimate');
+var removeElements = $('.registerformholder, .sessionbox, .paddinganimate');
 
 pageBody.on('click', '.closeerrors', function() {
 	var $this = $(this);
 	var parentEl;
 	if ($this.parents('#validationerrors').length) {
 		parentEl = $this.parents('#validationerrors');
+	} else if ($this.parents('#registervalidationerrors').length) {
+		parentEl = $this.parents('#registervalidationerrors');
 	} else {
 		parentEl = $this.parents('#modalvalidationerrors');
 		parentEl.parents('#modalcontent').scrollTop(0);
@@ -151,7 +153,10 @@ pageBody.on('click', '.closeerrors', function() {
 		if (parentEl.hasClass('logovalidation')) {
 			$('.logoformholder').removeAttr('style');
 		} else {
-			removeElements.removeAttr('style');
+			if (parentEl.is('#registervalidationerrors')) {
+				removeElements.removeAttr('style');
+			}
+			$this.parents('.formholder').removeAttr('style');
 		}
 		
 	}

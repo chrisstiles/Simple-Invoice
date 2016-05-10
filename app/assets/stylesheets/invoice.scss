@@ -18,7 +18,7 @@
 	content:"";
 }
 
-#validationerrors, #modalvalidationerrors {
+#validationerrors, #modalvalidationerrors, #registervalidationerrors {
 	display:none;
 	left:141px;
 	margin:0 auto 45px auto;
@@ -75,7 +75,7 @@
 	transform:translateY(-50%);
 }
 
-#validationerrors p, #modalvalidationerrors p {
+#validationerrors p, #modalvalidationerrors p, #registervalidationerrors p {
 	margin-top:0;
 	font-size:14px;
 	font-weight:600;
@@ -84,11 +84,11 @@
 	text-align:left;
 }
 
-#validationerrors p:nth-child(even), #modalvalidationerrors p:nth-child(even) {
+#validationerrors p:nth-child(even), #modalvalidationerrors p:nth-child(even), #registervalidationerrors p:nth-child(even) {
 	background-color:#e3b0b2;
 }
 
-#validationerrors p:last-child, #modalvalidationerrors p:last-child {
+#validationerrors p:last-child, #modalvalidationerrors p:last-child, #registervalidationerrors p:last-child {
 	margin-bottom:0;
 }
 

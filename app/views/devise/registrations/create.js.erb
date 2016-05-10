@@ -21,8 +21,8 @@ setTimeout(function() {
 <% if resource.errors.any? %>
 
 var pageBody = $('body'),
-	validationErrors = $('#validationerrors'),
-	errorHolder = $('#errorholder');
+	validationErrors = $('#registervalidationerrors.registererrors'),
+	errorHolder = $('#registervalidationerrors.registererrors .errorholder');
 
 errorHolder.empty();
 
@@ -52,7 +52,7 @@ validationErrors.css({
 
 validationsHeight += 15;
 
-$('.formholder').css({
+$('.registerformholder').css({
   '-webkit-transform' : 'translate3d(0, ' + validationsHeight + 'px, 0)',
   '-moz-transform'    : 'translate3d(0, ' + validationsHeight + 'px, 0)',
   '-ms-transform'     : 'translate3d(0, ' + validationsHeight + 'px, 0)',

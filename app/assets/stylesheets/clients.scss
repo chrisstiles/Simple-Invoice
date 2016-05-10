@@ -250,25 +250,25 @@
 	float:right;
 }
 
-#validationerrors.clienterrors, #modalvalidationerrors.emailinvoicevalidation, #modalvalidationerrors.logovalidation {
+#validationerrors.clienterrors, #modalvalidationerrors.emailinvoicevalidation, #modalvalidationerrors.logovalidation, #registervalidationerrors.registererrors {
 	left:0;
 	top:0;
 	margin-bottom:0;
 }
 
-#validationerrors.clienterrors .validationtitle {
+#validationerrors.clienterrors .validationtitle, #registervalidationerrors.registererrors .validationtitle {
 	padding:6px;
 }
 
-#validationerrors.clienterrors p {
+#validationerrors.clienterrors p, #registervalidationerrors.registererrors p {
 	padding:6px 15px;
 }
 
-#validationerrors.clienterrors p, #validationerrors.clienterrors .validationtitle {
+#validationerrors.clienterrors p, #validationerrors.clienterrors .validationtitle, #registervalidationerrors.registererrors p, , #registervalidationerrors.registererrors .validationtitle {
 	font-size:13px;
 }
 
-#validationerrors.clienterrors .closeerrors {
+#validationerrors.clienterrors .closeerrors, #registervalidationerrors.registererrors.closeerrors {
 	width:21px;
 	height:21px;
 	background-size:15px 15px;
