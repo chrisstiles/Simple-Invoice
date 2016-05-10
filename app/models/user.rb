@@ -45,6 +45,19 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def display_logo_url
+		unless self.logos.empty?
+			logo = self.logos.where(current_logo: true).first
+			unless logo.nil?
+				logo.image.url
+			else
+				''
+			end
+		else
+			''
+		end
+	end
+
 	def current_logo
 		unless self.logos.empty?
 			logo = self.logos.where(current_logo: true).first

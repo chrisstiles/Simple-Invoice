@@ -1033,8 +1033,14 @@ ready = function() {
 			var hasLogo = $('#haslogo'),
 				noLogo = $('#nologo');
 
-			var currentLogo = $('.addlogobutton').attr('data-logo-url');
+			var newUrl = $('.addlogobutton').attr('data-logo-url');
+
+			var currentLogo =  $('.addlogobutton').attr('data-logo-url');
 			var oldLogo = $('.invoicelogoimage').attr('src');
+
+			if (newUrl === '') {
+				currentLogo = oldLogo;
+			}
 
 			// Save logo URL
 			var logoField = $('#invoice_logo');
@@ -1179,19 +1185,34 @@ ready = function() {
 					logoOriginalHeight = logo.attr('data-height');
 				}
 
-				if (currentLogo == oldLogo) {
-					if (logoOriginalWidth > logoSectionWidth) {
-						var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
+				if (currentLogo === oldLogo) {
+
+					if (logoOriginalWidth === 'null' || logoOriginalHeight === 'null') {
 						logoDiv.css({
-							width: logoSectionWidth,
-							height: newHeight
+							width: '100%',
+							height: 'auto'
+						});
+
+						logo.css({
+							width: '100%',
+							height: 'auto'
 						});
 					} else {
-						logoDiv.css({
-							width: logoOriginalWidth,
-							height: logoOriginalHeight
-						});
+						if (logoOriginalWidth > logoSectionWidth) {
+							var newHeight = getHeight(logoOriginalWidth, logoOriginalHeight, logoSectionWidth);
+							logoDiv.css({
+								width: logoSectionWidth,
+								height: newHeight
+							});
+						} else {
+							logoDiv.css({
+								width: logoOriginalWidth,
+								height: logoOriginalHeight
+							});
+						}
 					}
+
+
 				} else {
 					logoDiv.css({
 						width: '100%',

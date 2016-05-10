@@ -105,7 +105,7 @@
        
       <section id="companyinformation">
 
-            <% unless no_current_logos? %>
+            <% unless no_current_logos? && @invoice.logo.blank? %>
               <div id="invoicelogo">
                   <%= f.hidden_field :logo, value: @invoice.logo %>
 
@@ -125,7 +125,7 @@
                       </div>
                     </div>
                     <div id="nologo">
-                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo.url %>">Add Logo</div>
+                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo_url %>">Add Logo</div>
                     </div>
 
 
@@ -141,7 +141,7 @@
                       </div>
                     </div>
                     <div id="nologo">
-                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo.url %>">Add Logo</div>
+                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo_url %>">Add Logo</div>
                     </div>
                   <% end %>
                   
