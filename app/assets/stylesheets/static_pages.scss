@@ -466,3 +466,11 @@ p.staticsubmit {
 	transform:translateX(-100%);
 }
 
+#pagewrapper.staticwrapper .loginloadingspinner {
+	bottom:-55px;
+}
+
+#pagewrapper.staticwrapper .throbber-loader:not(:required) {
+	transform:translate(-50%, -47%);
+}
+

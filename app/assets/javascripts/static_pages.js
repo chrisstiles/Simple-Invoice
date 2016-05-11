@@ -5,30 +5,6 @@ var pageHTML = $('html');
 var $document = $(document);
 var loadingSpinnerHtml = '<div class="loginloadingspinner sessionloading"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
 
-
-
-if (pageBody.hasClass('homepage')) {
-
-// Ajax login form
-$('.loginform').bind('ajax:start', function() {
-	beginLoading();
-}).bind('ajax:success', function(evt, data, status, xhr) {
-  //function called on status: 200 (for ex.)
-  //console.log('success');
-  setTimeout(function() {
-  		pageBody.find('.loginloadingspinner').remove();
-  	}, 200);
-}).bind("ajax:error", function(evt, xhr, status, error) {
-  endLoading();
-});
-
-$document.bind('change', function(e) {
-	if( $(e.target).is(':invalid') ) {
-		removeLoading();
-	}
-});
-
-
 function revertButtonText() {
 	setTimeout(function() {
 		var oldContent = $('.buttoncontent').text();
@@ -46,6 +22,61 @@ function revertButtonText() {
 		
 	}, 200);
 }
+
+var staticWrapper = $('.staticwrapper');
+
+function startStaticLoading() {
+	var staticInputs = staticWrapper.find('input');
+	var isValid = true;
+	
+	staticInputs.each(function() {
+		var $this = $(this);
+		if ($this.is(':invalid')) {
+			isValid = false;
+		}
+	});
+
+	if (isValid) {
+		$(loadingSpinnerHtml).appendTo('.staticwrapper').fadeIn(500);
+	}
+	
+}
+
+function endStaticLoading() {
+  	revertButtonText();
+  	removeLoading();
+}
+
+function removeLoading() {
+	setTimeout(function() {
+  		pageBody.find('.loginloadingspinner').remove();
+  	}, 200);
+}
+
+$document.bind('change', function(e) {
+	if( $(e.target).is(':invalid') ) {
+		removeLoading();
+	}
+});
+
+$('.staticloading').on('click', function() {
+	startStaticLoading();
+});
+
+if (pageBody.hasClass('homepage')) {
+
+// Ajax login form
+$('.loginform').bind('ajax:start', function() {
+	beginLoading();
+}).bind('ajax:success', function(evt, data, status, xhr) {
+  //function called on status: 200 (for ex.)
+  //console.log('success');
+  setTimeout(function() {
+  		pageBody.find('.loginloadingspinner').remove();
+  	}, 200);
+}).bind("ajax:error", function(evt, xhr, status, error) {
+  endLoading();
+});
 
 var sessionOverlay = $('#sessionoverlay');
 var signInEmail = $('#login_user_email');
@@ -108,12 +139,6 @@ function endLoading() {
 	}
   	revertButtonText();
   	removeLoading();
-}
-
-function removeLoading() {
-	setTimeout(function() {
-  		pageBody.find('.loginloadingspinner').remove();
-  	}, 200);
 }
 
 function checkSubpixel() {
