@@ -287,7 +287,7 @@ body.sessionopen .sessionboxwrapper {
 	transform:translate(-50%,-50%);
 }
 
-.sessionerror h3 {
+.sessionerror h3, .sessionerror h1 {
 	transform:translateY(-10px);
 }
 
@@ -312,7 +312,7 @@ body.sessionopen .sessionboxwrapper {
 	transform:translateY(0);
 }
 
-.sessionbox .button.blue {
+.sessionbox .button.blue, .staticwrapper .button.blue {
 	float: right;
     padding: 0 45px !important;
     margin-top:10px;
@@ -320,16 +320,16 @@ body.sessionopen .sessionboxwrapper {
     z-index: 200;
 }
 
-.sessionbox a {
+.sessionbox a, .staticwrapper a {
 	color:$light-blue;
 	text-decoration:none;
 }
 
-.sessionbox a:hover {
+.sessionbox a:hover, .staticwrapper a:hover {
 	text-decoration:underline;
 }
 
-.sessionbox a.forgotpassword {
+.sessionbox a.forgotpassword, .staticwrapper a.forgotpassword {
 	float: left;
     margin-top: 7px;
     font-size: 15px;
@@ -402,6 +402,7 @@ body.sessionopen .sessionboxwrapper {
 	font-size:22px;
 	text-align:center;
 	margin:0 0 35px 0;
+	transition:all .3s;
 }
 
 #pagewrapper.nosidepadding {

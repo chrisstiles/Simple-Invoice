@@ -43,6 +43,9 @@ function startStaticLoading() {
 }
 
 function endStaticLoading() {
+	if ($('.loginform').length) {
+		$('#pagewrapper').addClass('sessionerror');
+	}
   	revertButtonText();
   	removeLoading();
 }
@@ -63,11 +66,13 @@ $('.staticloading').on('click', function() {
 	startStaticLoading();
 });
 
-if (pageBody.hasClass('homepage')) {
-
 // Ajax login form
 $('.loginform').bind('ajax:start', function() {
-	beginLoading();
+	if (staticWrapper.length) {
+		startStaticLoading();
+	} else {
+		beginLoading();
+	}
 }).bind('ajax:success', function(evt, data, status, xhr) {
   //function called on status: 200 (for ex.)
   //console.log('success');
@@ -75,8 +80,14 @@ $('.loginform').bind('ajax:start', function() {
   		pageBody.find('.loginloadingspinner').remove();
   	}, 200);
 }).bind("ajax:error", function(evt, xhr, status, error) {
-  endLoading();
+	if (staticWrapper.length) {
+		endStaticLoading();
+	} else {
+		endLoading();
+	}
 });
+
+if (pageBody.hasClass('homepage')) {
 
 var sessionOverlay = $('#sessionoverlay');
 var signInEmail = $('#login_user_email');
@@ -134,9 +145,9 @@ function beginLoading() {
 }
 
 function endLoading() {
-	if (!sessionOverlay.hasClass('registeropern')) {
+	if (sessionOverlay.length && !sessionOverlay.hasClass('registeropern')) {
 		$('.loginbox').filter(':visible').addClass('sessionerror');
-	}
+	} 
   	revertButtonText();
   	removeLoading();
 }
