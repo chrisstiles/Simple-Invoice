@@ -28,6 +28,7 @@ $document.bind('change', function(e) {
 	}
 });
 
+
 function revertButtonText() {
 	setTimeout(function() {
 		var oldContent = $('.buttoncontent').text();
@@ -75,6 +76,7 @@ $('.sessionclose').on('click', hideSession);
 
 $('.loginbutton, .registerbutton').on('click', function() {
 	addSessionLoading($(this));
+	checkSubpixel();
 });
 
 function addSessionLoading(el) {
@@ -114,6 +116,18 @@ function removeLoading() {
   	}, 200);
 }
 
+function checkSubpixel() {
+	if (window.innerHeight > 780) {
+		$('.sessionbox').each(function() {
+			var $this = $(this);
+			if ($this.outerHeight() % 2 !== 0) {
+				var newPadding = parseInt($this.css('padding-top')) + 1;
+				$this.css('padding-top', newPadding);
+			}
+		});
+	}
+}
+
 function showSession(option) {
 
 	if (option === "register") {
@@ -124,6 +138,8 @@ function showSession(option) {
 
 	removeLoading(); 
 	sessionOverlay.show();
+
+	checkSubpixel();
 
 	if (!pageBody.hasClass('sessionopen')) {
 		if ($document.height() > $(window).height()) {
