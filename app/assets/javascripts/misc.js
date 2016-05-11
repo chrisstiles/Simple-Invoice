@@ -156,7 +156,8 @@ pageBody.on('click', '.closeerrors', function() {
 			if (parentEl.is('#registervalidationerrors')) {
 				removeElements.removeAttr('style');
 			}
-			$this.parents('.formholder').removeAttr('style');
+			parentEl.nextAll('.formholder').first().removeAttr('style');
+			parentEl.parents('.paddinganimate').removeAttr('style');
 		}
 		
 	}
