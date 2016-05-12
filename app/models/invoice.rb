@@ -61,9 +61,13 @@ class Invoice < ActiveRecord::Base
 	# Invoice Number Uniqueness
 	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }, if: 'self.user.present?'
 
+	validates :invoice_number, presence: true, 
+	            numericality: { greater_than_or_equal_to: 0, message: "^ Invoice number must be a number greater than or equal to zero", allow_blank: false }
+
+
 	# Length
 	validates :name, :date, :due_date, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line1, length: { maximum: 255 }
-	validates :total, length: { maximum: 25 }
+	validates :total, :invoice_number, length: { maximum: 25 }
 	validates :notes, length: { maximum: 5000 }
 
 	validate :amount_paid_less_than_or_equal_to_total
@@ -101,6 +105,7 @@ class Invoice < ActiveRecord::Base
 	validate :validate_number_of_jobs
 
 	def validate_number_of_jobs
+
 		num_jobs = self.num_jobs || self.jobs.count || 0
 
 		if num_jobs <= 0 || num_jobs > 45

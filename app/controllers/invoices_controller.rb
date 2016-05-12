@@ -75,11 +75,11 @@ class InvoicesController < ApplicationController
       @invoice.invoice_number = set_invoice_number
       @editable = "true"
       set_client_if_not_nil
-      set_number_of_jobs_not_to_be_deleted
     else
       @invoice = Invoice.create(invoice_params)
     end
 
+    set_number_of_jobs_not_to_be_deleted
     set_initial_balance
 
     respond_to do |format|

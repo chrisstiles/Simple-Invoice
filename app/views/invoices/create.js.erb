@@ -113,15 +113,34 @@ var invoiceWrapper = $('#invoicewrapper');
 // 	var invoiceWrapper = $('#invoicewrapper');
 // }
 
-invoiceWrapper.css({
-	'top': negativeValidationsHeight,
-	'margin-bottom' : 15,
-	'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
-	'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
-	'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
-	'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
-	'transform'         : 'translateY(' + validationsHeight + 'px)'
-});
+if (pageBody.hasClass('homepage')) {
+// Is on home page
 
+	//validationsHeight -= 15;
+
+	invoiceWrapper.css({
+		'top': negativeValidationsHeight,
+		'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+		'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+		'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+		'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+		'transform'         : 'translateY(' + validationsHeight + 'px)'
+	});
+
+} else {
+// Not on home page	
+
+	invoiceWrapper.css({
+		'top': negativeValidationsHeight,
+		'margin-bottom' : 15,
+		'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+		'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+		'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+		'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+		'transform'         : 'translateY(' + validationsHeight + 'px)'
+	});
+
+
+}
 
 

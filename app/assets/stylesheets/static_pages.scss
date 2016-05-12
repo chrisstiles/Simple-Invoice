@@ -48,7 +48,7 @@ body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.has
 }
 
 body.homepage #invoicewrapper {
-	margin-top:64px;
+	margin-top:45px;
 }
 
 body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
@@ -487,5 +487,9 @@ body.nofixed #ui-datepicker-div {
 
 body.hasfixed #ui-datepicker-div {
 	position:fixed !important;
+}
+
+body.homepage #mobilescrollwrapper #validationerrors {
+	top:31px;
 }
 

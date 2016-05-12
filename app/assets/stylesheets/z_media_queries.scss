@@ -873,7 +873,7 @@
 		top:0;
 	}
 
-	#invoicewrapper, #invoicewrapper.show {
+	#invoicewrapper, #invoicewrapper.show, body.homepage #invoicewrapper {
 		margin:0;
 		top:0;
 	}
@@ -883,9 +883,9 @@
 	}
 
 	#formwrapper #validationerrors  {
-		width:auto;
-		margin: 0 7px 0 7px;
-		top:7px;
+		width:auto !important;
+		margin: 0 7px 0 7px !important;
+		top:7px !important;
 	}
 
 	#modalwindow {
