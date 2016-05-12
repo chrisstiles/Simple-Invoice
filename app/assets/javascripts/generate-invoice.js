@@ -618,7 +618,9 @@ ready = function() {
 			}
 		});
 
-		eDueDate.on('click focus keydown', function(e) {
+
+
+		eDueDate.on('click keydown', function(e) {
 			e.preventDefault();
 			var $this = $(this);
 			if (window.innerWidth <= 1020) {
@@ -635,6 +637,10 @@ ready = function() {
 				dueDateField.focus();
 			}
 		});
+
+		eDueDate.on('focus', function() {
+			$(this).blur();
+		})
 
 		dateField.on('focus', function() {
 			if (!mobileSidebarWrapper.hasClass('open') && window.innerWidth <= 1020) {

@@ -3,7 +3,13 @@ ready = function() {
 var pageBody = $('body');
 var pageHTML = $('html');
 var $document = $(document);
+var $window = $(window);
 var loadingSpinnerHtml = '<div class="loginloadingspinner sessionloading"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
+var datePicker = $('#ui-datepicker-div');
+var dateField = $('.datefield');
+var dateFieldParent = dateField.parents('.control');
+var dueDateField = $('.duedatefield');
+var dueDateFieldParent = dueDateField.parents('.control');
 
 function revertButtonText() {
 	setTimeout(function() {
@@ -235,19 +241,65 @@ function checkScroll() {
 		pageBody.removeClass('nofixed');
 		scrollElements.removeAttr('style');
 		pageBody.removeClass('hasabsolutes');
+		checkDatePicker(true);
 		pageBody.addClass('hasfixed');
 	} else if (scrollAmount >= scrollMax) {
 		getAbsoluteOffset();
 		scrollElements.css('top', absoluteOffset);
+		checkDatePicker(false);
 		pageBody.addClass('hasabsolutes nofixed');
 		pageBody.removeClass('hasfixed');
 	} else {
+		checkDatePicker(false);
 		pageBody.addClass('nofixed');
 		pageBody.removeClass('hasfixed');
 	}
 }
 
 checkScroll();
+
+
+function checkDatePicker(goingToFixed) {
+	if (datePicker.is(':visible')) {
+
+		if (goingToFixed) {
+			var datePickerOffset;
+			if (dateField.is(':focus')) {
+				datePickerOffset = dateFieldParent.position().top + dateFieldParent.outerHeight() + 63;
+				datePicker.css({
+					'position' : 'fixed',
+					'top' : datePickerOffset
+				});
+			} else if (dueDateField.is(':focus')) {
+				datePickerOffset = dueDateFieldParent.position().top + dueDateFieldParent.outerHeight() + 63;
+				datePicker.css({
+					'position' : 'fixed',
+					'top' : datePickerOffset
+				});
+			} else {
+				datePicker.hide();
+			}
+		} else {
+			var datePickerOffset;
+			if (dateField.is(':focus')) {
+				datePickerOffset = dateFieldParent.offset().top + dateFieldParent.outerHeight() + 2;
+				datePicker.css({
+					'position' : 'fixed',
+					'top' : datePickerOffset
+				});
+			} else if (dueDateField.is(':focus')) {
+				datePickerOffset = dueDateFieldParent.offset().top + dueDateFieldParent.outerHeight() + 2;
+				datePicker.css({
+					'position' : 'fixed',
+					'top' : datePickerOffset
+				});
+			} else {
+				datePicker.hide();
+			}
+		}
+
+	}
+}
 
 $document.on('scroll', function() {
 	checkScroll();

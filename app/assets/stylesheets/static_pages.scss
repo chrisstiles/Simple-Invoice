@@ -481,3 +481,11 @@ p.staticsubmit {
 	display:block;
 }
 
+body.nofixed #ui-datepicker-div {
+	position:absolute !important;
+}
+
+body.hasfixed #ui-datepicker-div {
+	position:fixed !important;
+}
+
