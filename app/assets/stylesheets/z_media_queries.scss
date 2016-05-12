@@ -5,16 +5,15 @@
 		top:90px;
 		bottom:30px;
 		transform:translate(-50%, 0);
+		animation-name:fadeIn;
 	}
 
-	@keyframes fadeInUp {
+	@keyframes fadeIn {
 		from {
-			transform:translate(-50%, 0);
 			opacity:0;
 		}
 
 		to {
-			transform:translate(-50%, 0);
 			opacity: 1;
 		}
 	}
