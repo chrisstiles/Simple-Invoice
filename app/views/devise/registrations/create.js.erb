@@ -61,8 +61,11 @@ $('.registerformholder').css({
 });
 
 
+var registerBox = $('.registerbox');
+var registerBoxPadding = parseInt(registerBox.css('padding-bottom'));
+
 $('.registerbox').css({
-	'padding-bottom' : validationsHeight + 50,
+	'padding-bottom' : validationsHeight + registerBoxPadding,
 });
 
 <% else %>

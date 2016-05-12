@@ -1,29 +1,28 @@
-<h2>Sign up</h2>
+<div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <h1>Create a Simple Invoice Account</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div id="registervalidationerrors" class="registererrors">
+    <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors before saving
+    </div>
+     <div class="errorholder"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+<div class="formholder registerformholder">
+    <%= form_for(:user, url: registration_path(:user), remote: true, html: { class: "registerform" }) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "registeremail", placeholder: "Email address" %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
 
-<%= render "devise/shared/links" %>
+        <%= f.submit "Sign up", class: "button blue willload registerbutton" %>
+    <% end %>
+</div>
+
+</div>

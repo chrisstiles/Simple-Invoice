@@ -475,3 +475,9 @@ p.staticsubmit {
 	transform:translate(-50%, -47%);
 }
 
+.registerformholder:after {
+	clear:both;
+	content:"";
+	display:block;
+}
+
