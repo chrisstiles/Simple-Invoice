@@ -58,7 +58,7 @@ ready = function() {
 
     // Close modal when escape key is pressed
     $(document).on('keyup', function(e) {
-        if (e.keyCode == 27) {
+        if (e.keyCode == 27 && $('#modalwindow').length) {
             closeModal();
         }
     });
