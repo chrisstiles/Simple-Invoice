@@ -162,16 +162,16 @@ $('<input>').attr({
 }).appendTo('.registerform');
 
 
-validationErrors.hide();
-$('#invoicewrapper').removeAttr('style');
+// validationErrors.hide();
+// $('#invoicewrapper').removeAttr('style');
 
 var oldWrapperHeight = formWrapper.outerHeight();
 var newWrapperHeight = homeSuccessWrapper.outerHeight();
 
-//homeInvoiceWrapper.css('height', oldWrapperHeight);
+//homeInvoiceWrapper.css('height', homeInvoiceWrapper.outerHeight());
 homeInvoiceWrapper.addClass('invoicecreated').animate({
 	'height': newWrapperHeight
-	}, 200);
+	}, 600);
 
 setTimeout(function() {
 	formWrapper.remove();
