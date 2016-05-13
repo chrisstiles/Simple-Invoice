@@ -3,6 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
   after_action :create_user_settings, only: [:create]
+  after_action :add_homepage_invoice_to_user, only: [:create]
 
   # GET /resource/sign_up
   # def new
@@ -12,6 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    @user = resource
     if resource.save
       flash[:success] = 'Welcome to Simple Invoice!'
     end
@@ -67,4 +69,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+
+  private
+
+  def add_homepage_invoice_to_user
+    if params[:homepage_token].present?
+      invoice = Invoice.find_by(token: params[:homepage_token])
+
+      if invoice.user.nil?
+        invoice.user = @user
+        invoice.save
+      end      
+
+    end
+  end
+
 end

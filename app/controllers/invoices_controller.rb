@@ -85,14 +85,18 @@ class InvoicesController < ApplicationController
     respond_to do |format|
 
       if @invoice.save
-        #merge_client_if_name_exists
+
         format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully created!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
         flash[:success] = 'Invoice was successfully created!'
         flash.keep(:success)
 
-        format.js { render js: "window.location = '#{invoice_url(@invoice.invoice_number)}'" }
+        format.js do 
+          if user_signed_in?
+            render js: "window.location = '#{invoice_url(@invoice.invoice_number)}'"
+          end
+        end
 
         format.html { render invoice_path(@invoice.invoice_number) }
       else

@@ -11,6 +11,18 @@ var dateFieldParent = dateField.parents('.control');
 var dueDateField = $('.duedatefield');
 var dueDateFieldParent = dueDateField.parents('.control');
 
+var willChangePosition = true;
+
+function checkScreenHeight() {
+	if (window.innerHeight <= 850) {
+		willChangePosition = true;
+	} else {
+		willChangePosition = false;
+	}
+}
+
+checkScreenHeight();
+
 function revertButtonText() {
 	setTimeout(function() {
 		var oldContent = $('.buttoncontent').text();
@@ -230,6 +242,9 @@ function getScrollMinAndMax() {
 
 function getAbsoluteOffset() {
 	absoluteOffset = scrollMax - formWrapper.offset().top + parseInt(formWrapper.css('padding-top'));
+	if (!willChangePosition) {
+		absoluteOffset = 0;
+	}
 }
 
 getScrollMinAndMax();
@@ -237,23 +252,34 @@ getAbsoluteOffset();
 
 function checkScroll() {
 	var scrollAmount = $document.scrollTop();
-	if (scrollAmount >= scrollMin && scrollAmount < scrollMax) {
-		pageBody.removeClass('nofixed');
-		scrollElements.removeAttr('style');
-		pageBody.removeClass('hasabsolutes');
-		checkDatePicker(true);
-		pageBody.addClass('hasfixed');
-	} else if (scrollAmount >= scrollMax) {
+	if (willChangePosition) {
+		if (scrollAmount >= scrollMin && scrollAmount < scrollMax) {
+			pageBody.removeClass('nofixed');
+			scrollElements.removeAttr('style');
+			pageBody.removeClass('hasabsolutes');
+			checkDatePicker(true);
+			pageBody.addClass('hasfixed');
+		} else if (scrollAmount >= scrollMax) {
+			getAbsoluteOffset();
+			scrollElements.css('top', absoluteOffset);
+			checkDatePicker(false);
+			pageBody.addClass('hasabsolutes nofixed');
+			pageBody.removeClass('hasfixed');
+		} else {
+			checkDatePicker(false);
+			pageBody.addClass('nofixed');
+			pageBody.removeClass('hasfixed');
+		}
+	} else {
+
 		getAbsoluteOffset();
 		scrollElements.css('top', absoluteOffset);
 		checkDatePicker(false);
 		pageBody.addClass('hasabsolutes nofixed');
 		pageBody.removeClass('hasfixed');
-	} else {
-		checkDatePicker(false);
-		pageBody.addClass('nofixed');
-		pageBody.removeClass('hasfixed');
+
 	}
+	
 }
 
 checkScroll();
@@ -309,6 +335,7 @@ $window.on('resize', function() {
 	getScrollMinAndMax();
 	getAbsoluteOffset();
 	checkScroll();
+	checkScreenHeight();
 });
 
 

@@ -3,8 +3,6 @@ var pageBody = $('body'),
 	validationErrors = $('#validationerrors'),
 	errorHolder = $('#errorholder');
 
-<% if @invoice.errors.any? %>
-
 setTimeout(function() {
 	var oldContent = $('.buttoncontent').text();
 	var button = $('.hasloadingtext');
@@ -20,6 +18,8 @@ setTimeout(function() {
 	$('.buttoncontent').remove();
 	
 }, 200);
+
+<% if @invoice.errors.any? %>
 
 <% @invoice.errors.each do |key, message| %>
 
@@ -74,8 +74,6 @@ if (message.indexOf('Jobs j') > -1) {
 
 
 errorHolder.append('<p>' + message + '</p>');
-
-<% end %>
 
 <% end %>
 
@@ -143,4 +141,47 @@ if (pageBody.hasClass('homepage')) {
 
 }
 
+<% else %>
+// No errors
 
+if (pageBody.hasClass('homepage')) {
+
+var invoiceToken = '<%= @invoice.token %>'
+var homeInvoiceWrapper = $('#homeinvoicewrapper');
+var formWrapper = $('#formwrapper');
+var homeSuccessWrapper = $('#homesuccesswrapper');
+var viewInvoiceButton = $('.viewinvoicebutton');
+
+viewInvoiceButton.attr('href', '<%= display_public_invoice_url(@invoice) %>')
+
+$('<input>').attr({
+    type: 'hidden',
+    name: 'homepage_token',
+    id: 'homepage_token',
+    value: invoiceToken
+}).appendTo('.registerform');
+
+
+validationErrors.hide();
+$('#invoicewrapper').removeAttr('style');
+
+var oldWrapperHeight = formWrapper.outerHeight();
+var newWrapperHeight = homeSuccessWrapper.outerHeight();
+
+//homeInvoiceWrapper.css('height', oldWrapperHeight);
+homeInvoiceWrapper.addClass('invoicecreated').animate({
+	'height': newWrapperHeight
+	}, 200);
+
+setTimeout(function() {
+	formWrapper.remove();
+}, 500);
+
+$('.success').remove();
+pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+<% flash.discard %>
+
+}
+
+
+<% end %>

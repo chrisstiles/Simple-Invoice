@@ -4,6 +4,7 @@
 
 body.homepage #formwrapper {
 	padding-top:61px;
+	transition:transform .3s;
 }
 
 body.ios.homepage #formwrapper, body.android.homepage #formwrapper {
@@ -56,18 +57,22 @@ body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
 	padding-top:97px;
 }
 
-body.hasabsolutes #toolbar {
-	position:absolute !important;
+@media screen and (max-height: 850px) {
+	body.hasabsolutes #toolbar {
+		position:absolute !important;
+	}
+	body.hasabsolutes #formwrapper {
+		padding-top:61px !important;
+	}
 }
+
 
 // body.ios.homepage #toolbar, body.ios.hasabsolutes #toolbar, body.android.hasabsolutes #toolbar {
 // 	top:0;
 // 	position:relative;
 // }
 
-body.hasabsolutes #formwrapper {
-	padding-top:61px !important;
-}
+
 
 #herotext {
 	text-align:center;
@@ -493,3 +498,69 @@ body.homepage #mobilescrollwrapper #validationerrors {
 	top:31px;
 }
 
+#homeinvoicewrapper {
+	position:relative;
+	overflow:hidden;
+	transition: all .6s;
+}
+
+#homesuccesswrapper {
+	position:absolute;
+	top:0;
+	right:0;
+	left:0;
+	background-color:#ecf0f1;
+	z-index: 749;
+	transform:translateX(100%);
+	transition: all .3s;
+}
+
+#homeinvoicewrapper.invoicecreated #formwrapper {
+	transform:translateX(-100%);
+}
+
+#homeinvoicewrapper.invoicecreated #homesuccesswrapper {
+	transform:translateX(0);
+}
+
+#homesuccesscontent {
+	text-align:center;
+	padding: 90px 25px 105px 25px;
+	width:100%;
+	max-width:600px;
+	margin:0 auto;
+}
+
+#homesuccesscontent h2 {
+	margin:0;
+	font-weight:300;
+	font-size:38px;
+	color:$light-blue;
+	line-height:38px;
+}
+
+#homesuccesscontent p {
+	margin: 13px 0 30px 0;
+    line-height: 1.5em;
+    color: #545454;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+#homesuccesscontent p a {
+	color:$light-blue;
+	text-decoration:none;
+}
+
+#homesuccesscontent p a:hover {
+	color:$light-blue;
+	text-decoration:underline;
+}
+
+#homesuccesscontent .button {
+	background-image:$file-white-icon;
+	display:inline-block;
+	background-size:10px 14px;
+	background-position:center left 40px;
+	padding:0 40px 0 58px;
+}
