@@ -303,7 +303,7 @@ function checkDatePicker(goingToFixed) {
 					'top' : datePickerOffset
 				});
 			} else {
-				datePicker.hide();
+				//datePicker.hide();
 			}
 		} else {
 			var datePickerOffset;
@@ -320,7 +320,7 @@ function checkDatePicker(goingToFixed) {
 					'top' : datePickerOffset
 				});
 			} else {
-				datePicker.hide();
+				//datePicker.hide();
 			}
 		}
 

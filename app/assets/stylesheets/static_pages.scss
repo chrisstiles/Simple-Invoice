@@ -134,8 +134,39 @@ body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
 
 #tryitout {
 	font-size:17px;
-	line-height:38px;
 	font-weight:400;
+	transition: all .3s;
+	height:38px;
+	position:relative;
+	overflow:hidden;
+}
+
+#tryitout.invoicecreated {
+	background-color:#2ecc71;
+}
+
+
+.trytext, .successtext {
+	position:absolute;
+	line-height:38px;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	text-align:center;
+	transition: all .3s;
+}
+
+.successtext {
+	transform:translateY(100%);
+}
+
+#tryitout.invoicecreated .trytext {
+	transform:translateY(-100%);
+}
+
+#tryitout.invoicecreated .successtext {
+	transform:translateY(0);
 }
 
 #bottomsection {

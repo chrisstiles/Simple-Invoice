@@ -51,6 +51,11 @@ input {
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
+input[type=text]::-ms-clear {
+  width: 0;
+  height: 0;
+}
+
 a, a:hover, a:active, a:focus {
 	outline: 0 !important;
 }
