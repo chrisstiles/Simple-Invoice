@@ -8,7 +8,7 @@
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
 
-    <%= link_to "Forgot Password", forgotpassword_path, class: "forgotpassword" %>
+    <%= link_to "Forgot Password", forgot_password_path, class: "forgotpassword" %>
     <%= f.submit "Log in", class: "button blue willload loginbutton" %>
 
     <div class="sessionbottomtext">Don't have an account? <%= link_to "Register", new_registration_path(:user), class: "showregister" %></div>

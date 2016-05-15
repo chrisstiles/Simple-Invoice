@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   #devise_for :users
 
   devise_scope :user do
-    get "signin", to: "users/sessions#new"
+    get "sign-in", to: "users/sessions#new", as: :sign_in
     get "register", to: "users/registrations#new"
-    get "forgotpassword", to: "users/passwords#new"
+    get "forgot-password", to: "users/passwords#new", as: :forgot_password
   end
 
   devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations", passwords: "users/passwords" }
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   # authenticated :user do
   #   root 'invoices#index', as: :authenticated_root
   # end  
+
+  get 'pdfs/no-invoice-found' => 'static_pages#no_invoice_found', as: :no_invoice_found
 
   root 'static_pages#home'
 

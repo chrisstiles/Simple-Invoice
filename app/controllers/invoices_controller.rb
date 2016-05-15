@@ -167,6 +167,9 @@ class InvoicesController < ApplicationController
         @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
       elsif params[:token]
         @invoice = Invoice.find_by(token: params[:token])
+        if @invoice.nil?
+          redirect_to no_invoice_found_path
+        end
       end
 
       if @invoice && @invoice.archived
