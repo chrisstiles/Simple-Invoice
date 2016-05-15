@@ -321,6 +321,10 @@
 	position:relative;
 }
 
+[contenteditable="true"]:empty {
+	background-color:#E7F5FF;
+}
+
 .haserror {
 	background-color:#FFC1C1 !important;
 	z-index: 2;

@@ -162,8 +162,15 @@ $('<input>').attr({
 }).appendTo('.registerform');
 
 
-// validationErrors.hide();
-// $('#invoicewrapper').removeAttr('style');
+window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = 'Make sure you have saved the link to your invoice!' + 
+    						' The link will remain active for 30 days. You can save it permanently by creating an account now.';
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+});
+
+
 
 var oldWrapperHeight = formWrapper.outerHeight();
 var newWrapperHeight = homeSuccessWrapper.outerHeight();
