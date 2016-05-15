@@ -10,7 +10,7 @@
 	}
 }
 
-@media screen and (max-width:1020px) {
+@media screen and (max-height:780px) {
 	.sessionbox {
 		top:90px;
 		bottom:30px;
@@ -24,6 +24,15 @@
 
 	.loginloadingspinner {
 		bottom:77px;
+	}
+}
+
+@media screen and (min-height:780px) and (max-width: 1020px) and (min-width:651px) {
+	.sessionbox {
+		top:50% !important;
+		left:50% !important;
+		bottom: auto !important;
+		transform:translate(-50%, -50%) !important;
 	}
 }
 
