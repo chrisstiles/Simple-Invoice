@@ -196,6 +196,14 @@
 		width:40%;
 	}
 
+	#sessioninfo.notsignedin {
+		width:100%;
+	}
+
+	#sessioninfo.notsignedin .signinbutton {
+		border-left:none !important;
+	}
+
 	nav a, #menu a {
 		width:20%;
 		font-size:12px;

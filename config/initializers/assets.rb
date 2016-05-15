@@ -6,6 +6,7 @@ Rails.application.config.assets.version = '1.1.3'
 #Rails.application.config.assets.precompile += ['fonts/fonts.css']
 Rails.application.config.assets.precompile += %w( pdfs/pdf-fonts.css )
 Rails.application.config.assets.precompile += %w( fonts.scss )
+Rails.application.config.assets.precompile += %w( favicon.png )
 
 
 # Add additional assets to the asset load path
