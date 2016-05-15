@@ -1,21 +1,21 @@
 @import "variables";
 
-@media screen and (max-height: 780px) {
+@keyframes fadeIn {
+	from {
+		opacity:0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@media screen and (max-width:1020px) {
 	.sessionbox {
 		top:90px;
 		bottom:30px;
 		transform:translate(-50%, 0);
 		animation-name:fadeIn;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity:0;
-		}
-
-		to {
-			opacity: 1;
-		}
 	}
 
 	.throbber-loader:not(:required) {
@@ -26,6 +26,7 @@
 		bottom:77px;
 	}
 }
+
 
 @media screen and (max-width:1280px) {
 	#bottomsection {
@@ -189,6 +190,7 @@
 		background-repeat:no-repeat;
 		background-position:calc(50% - 2px) calc(50% + 2px);
 		background-color:$light-blue;
+		z-index: 9998;
 	}
 
 	header .logo {
@@ -271,13 +273,20 @@
 
 	#mobilesidebar {
 		display:block;
+		z-index: 9999;
 	}
 
+	.sessionbox {
+		animation-name:fadeIn;
+		top:65px;
+		bottom:70px;
+		transform:translate(-50%, 0);
+	}
 
 	#mobilesidebarwrapper {
 		position:fixed;
 	    background: $dark-blue;
-	    top: 50px;
+	    top: 40px;
 	    right: 0;
 	    left: 0;
 	    z-index: 9999;
@@ -911,6 +920,11 @@
 		font-size: 17px;
     	margin-right: 260px;
 	}
+
+	.sessionclose {
+		top:60px;
+		right:10px;
+	}
 }
 
 @media screen and (max-width:700px) {
@@ -1154,6 +1168,22 @@
 		display: block;
 		margin-top: 22px;
 	}
+
+	.sessionbox {
+		transform:translate(0,0) !important;
+		top:25px;
+		left:0;
+		right:0;
+		bottom:30px;
+		max-height:none;
+		max-width:none;
+		border:none;
+		padding-top:60px;
+	}
+
+	.sessionerrortext {
+		top:85px;
+	}
 }
 
 @media screen and (max-width:540px) {
@@ -1277,15 +1307,22 @@
 		width:110px;
 	}
 
+	.sessionclose {
+		width: 48px;
+		height: 48px;
+		background-size: 36px 36px;
+	}
+
 }
 
 @media screen and (max-width:500px) {
 	#herotext {
-		padding:33px 35px 46px 35px;
+		padding:33px 25px 46px 25px;
 	}
 
 	#herotext h1 {
 		margin-bottom:13px;
+		font-size: 23px;
 	}
 
 	#herotext h2 {
