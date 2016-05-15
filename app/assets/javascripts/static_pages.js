@@ -291,13 +291,13 @@ function checkDatePicker(goingToFixed) {
 		if (goingToFixed) {
 			var datePickerOffset;
 			if (dateField.is(':focus')) {
-				datePickerOffset = dateFieldParent.position().top + dateFieldParent.outerHeight() + 63;
+				datePickerOffset = dateFieldParent.position().top + dateFieldParent.outerHeight() + 65;
 				datePicker.css({
 					'position' : 'fixed',
 					'top' : datePickerOffset
 				});
 			} else if (dueDateField.is(':focus')) {
-				datePickerOffset = dueDateFieldParent.position().top + dueDateFieldParent.outerHeight() + 63;
+				datePickerOffset = dueDateFieldParent.position().top + dueDateFieldParent.outerHeight() + 65;
 				datePicker.css({
 					'position' : 'fixed',
 					'top' : datePickerOffset
