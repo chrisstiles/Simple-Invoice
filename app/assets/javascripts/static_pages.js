@@ -269,9 +269,10 @@ function checkScroll() {
 			checkDatePicker(false);
 			pageBody.addClass('nofixed');
 			pageBody.removeClass('hasfixed');
+			pageBody.removeClass('hasabsolutes');
+			scrollElements.removeAttr('style');
 		}
 	} else {
-
 		getAbsoluteOffset();
 		scrollElements.css('top', absoluteOffset);
 		checkDatePicker(false);
@@ -341,10 +342,10 @@ $document.on('scroll', function() {
 });
 
 $window.on('resize', function() {
+	checkScreenHeight();
 	getScrollMinAndMax();
 	getAbsoluteOffset();
 	checkScroll();
-	checkScreenHeight();
 });
 
 

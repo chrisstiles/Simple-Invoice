@@ -28,33 +28,35 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 	bottom:0;
 }
 
-body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
-	position:absolute !important;
-	top:0 !important;
-	bottom:0;
-	right:auto;
-}
+@media screen and (min-width:1020px) {
+	body.ios.homepage #mobilesidebarwrapper, body.ios.homepage .scrollwrapper, body.android.homepage #mobilesidebarwrapper, body.android.homepage .scrollwrapper {
+		position:absolute !important;
+		top:0 !important;
+		bottom:0;
+		right:auto;
+	}
 
-body.ios.homepage #sidebar, body.android.homepage #sidebar, body.ios.homepage .scrollwrapper, body.android.homepage .scrollwrapper {
-	right:0;
-}
+	body.ios.homepage #sidebar, body.android.homepage #sidebar, body.ios.homepage .scrollwrapper, body.android.homepage .scrollwrapper {
+		right:0;
+	}
 
-body.ios.homepage #toolbar, body.ios.homepage #toolbar {
-	position:absolute !important;
-	top:0 !important;
-}
+	body.ios.homepage #toolbar, body.ios.homepage #toolbar {
+		position:absolute !important;
+		top:0 !important;
+	}
 
-body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.hasfixed #contentwrapper, body.android.hasfixed #contentwrapper {
-	position:relative !important;
-}
+	body.ios.hasfixed #htmlwrapper, body.android.hasfixed #htmlwrapper, body.ios.hasfixed #contentwrapper, body.android.hasfixed #contentwrapper {
+		position:relative !important;
+	}
 
-body.homepage #invoicewrapper {
-	margin-top:45px;
-}
+	body.homepage #invoicewrapper {
+		margin-top:45px;
+	}
 
-body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
-	margin-top:0;
-	padding-top:97px;
+	body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
+		margin-top:0;
+		padding-top:97px;
+	}
 }
 
 @media screen and (max-height: 850px) {
@@ -78,6 +80,10 @@ body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
 	text-align:center;
 	padding: 50px 35px;
 	background-color:#fff;
+}
+
+.mobilebreak {
+	display:none;
 }
 
 #herotext h1 {
@@ -168,11 +174,6 @@ body.ios.homepage #invoicewrapper, body.android.homepage #invoicewrapper  {
 #tryitout.invoicecreated .successtext {
 	transform:translateY(0);
 }
-
-#bottomsection {
-	padding:100px;
-}
-
 
 /* Login and Registration */
 #sessionoverlay {
@@ -603,4 +604,52 @@ body.homepage #mobilescrollwrapper #validationerrors {
 	background-size:10px 14px;
 	background-position:center left 40px;
 	padding:0 40px 0 58px;
+}
+
+/* Bottom Section */
+
+#bottomsection {
+	padding:45px 90px 40px 95px;
+	text-align:left;
+}
+
+#bottomsectioncontent {
+	background-image:asset-url('devices.png');
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:center right;
+	box-sizing:border-box;
+	padding:50px 0;
+	margin: 0 auto;
+	max-width:1200px;
+}
+
+#bottomsectioncontent p {
+	margin-top:0;
+	font-size:25px;
+	margin-right:400px;
+	line-height:1.27em;
+
+}
+
+#bottomsectioncontent p:last-child {
+	margin-bottom:0;
+}
+
+#bottomsectioncontent p a {
+	color:#fff;
+	display:inline-block;
+	text-decoration:none;
+	padding:3px 8px;
+	margin:-3px 1px 0 -8px;
+	border-radius:2px;
+	background-color:#3790CC;
+}
+
+#bottomsectioncontent p a:hover {
+	background-color:#3085BF;
+}
+
+#bottomsectioncontent p a:active {
+	background-color:#2770A2;
 }
