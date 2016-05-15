@@ -284,19 +284,28 @@ function checkScroll() {
 
 checkScroll();
 
+var dateFieldActive = true;
+
+dateField.on("focus", function(e) {
+	dateFieldActive = true;
+});
+
+dueDateField.on("focus", function(e) {
+	dateFieldActive = false;
+});
 
 function checkDatePicker(goingToFixed) {
 	if (datePicker.is(':visible')) {
 
 		if (goingToFixed) {
 			var datePickerOffset;
-			if (dateField.is(':focus')) {
+			if (dateFieldActive) {
 				datePickerOffset = dateFieldParent.position().top + dateFieldParent.outerHeight() + 65;
 				datePicker.css({
 					'position' : 'fixed',
 					'top' : datePickerOffset
 				});
-			} else if (dueDateField.is(':focus')) {
+			} else if (!dateFieldActive) {
 				datePickerOffset = dueDateFieldParent.position().top + dueDateFieldParent.outerHeight() + 65;
 				datePicker.css({
 					'position' : 'fixed',
@@ -307,13 +316,13 @@ function checkDatePicker(goingToFixed) {
 			}
 		} else {
 			var datePickerOffset;
-			if (dateField.is(':focus')) {
+			if (dateFieldActive) {
 				datePickerOffset = dateFieldParent.offset().top + dateFieldParent.outerHeight() + 2;
 				datePicker.css({
 					'position' : 'fixed',
 					'top' : datePickerOffset
 				});
-			} else if (dueDateField.is(':focus')) {
+			} else if (!dateFieldActive) {
 				datePickerOffset = dueDateFieldParent.offset().top + dueDateFieldParent.outerHeight() + 2;
 				datePicker.css({
 					'position' : 'fixed',
