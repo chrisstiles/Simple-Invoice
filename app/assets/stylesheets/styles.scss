@@ -245,7 +245,7 @@ nav a:active, #sessioninfo a:active {
 	padding-left:62px;
 }
 
-.navclients {
+.navclients, #sessioninfo .showregister {
 	background-image:$clients-icon;
 	background-size:18px 18px;
 	padding-left:64px;
@@ -257,12 +257,11 @@ nav a:active, #sessioninfo a:active {
 	padding-left:64px;
 }
 
-#sessioninfo .navsignout {
+#sessioninfo .navsignout, #sessioninfo .signinbutton {
 	background-image:$signout-icon;
 	background-size:19px 15px;
 	padding-left:65px;
 }
-
 
 #sessioninfo {
 	float:right;
