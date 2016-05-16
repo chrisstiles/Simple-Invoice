@@ -134,6 +134,13 @@ $('.showregister').on('click', function(e) {
 
 $('.sessionclose').on('click', hideSession);
 
+$('.sessionhome').on('click', function(e) {
+	if (sessionOverlay.is(':visible')) {
+		e.preventDefault();
+		hideSession();
+	}
+});
+
 $('.loginbutton, .registerbutton').on('click', function() {
 	addSessionLoading($(this));
 	checkSubpixel();

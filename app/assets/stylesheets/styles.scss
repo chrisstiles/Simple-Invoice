@@ -220,6 +220,10 @@ nav a, #sessioninfo a {
 	position:relative;
 }
 
+.sessionhome {
+	display:none;
+}
+
 nav a.current:after, #sessioninfo a.current:after {
 	position:absolute;
 	display:block;

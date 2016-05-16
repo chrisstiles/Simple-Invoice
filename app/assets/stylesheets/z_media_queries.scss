@@ -240,8 +240,17 @@
 		width:100%;
 	}
 
-	#sessioninfo.notsignedin .signinbutton {
+	.sessionhome {
+		display:inline-block;
 		border-left:none !important;
+		background-image:$home-icon;
+		background-size:19px 19px;
+
+	}
+
+
+	#sessioninfo.notsignedin .signinbutton {
+		width:34% !important;
 	}
 
 	nav a, #menu a {
@@ -252,7 +261,7 @@
 	}
 
 	#sessioninfo a {
-		width:50%;
+		width:33%;
 	}
 
 	header a.button.blue {

@@ -36,6 +36,7 @@
 			<div id="sessioninfo" class="notsignedin">
 				<%= link_to "Register", register_path, class: "showregister#{current_page('registrations')}" %>
 				<%= link_to "Sign In", sign_in_path, class: "signinbutton#{current_page('sessions')}" %>
+				<%= link_to "Home", root_url, class: "sessionhome" %>
 			</div>
 		<% end %>	
 	</div>	
