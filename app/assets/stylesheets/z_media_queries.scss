@@ -261,6 +261,22 @@
 	}
 
 	#sessioninfo a {
+		width:50%;
+	}
+
+	.navinvoices {
+		background-position: top 10px center;
+	}
+
+	.navclients, #sessioninfo .showregister {
+		background-position: top 9px center;
+	}
+
+	#sessioninfo .navsignout, #sessioninfo .signinbutton  {
+		background-position: top 10px center;
+	}
+
+	#sessioninfo.notsignedin a {
 		width:33%;
 	}
 
@@ -1357,6 +1373,19 @@
 		width: 48px;
 		height: 48px;
 		background-size: 36px 36px;
+	}
+
+	#homesuccesscontent {
+		padding:60px 50px 80px 50px;
+	}
+
+	#homesuccesscontent h2 {
+		font-size:34px;
+		line-height:34px;
+	}
+
+	#homesuccesscontent p {
+		font-size:18px;
 	}
 
 }
