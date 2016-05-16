@@ -1349,6 +1349,24 @@
 	#dots {
 		margin-top:20px;
 	}
+
+	.sessionbox {
+		padding-left:30px;
+		padding-right:30px;
+	}
+
+	.sessionbox h3 {
+		font-size:21px;
+		margin:5px 15px 20px 0;
+	}
+
+	.sessionerror h3 {
+		transform:translateY(-7px);
+	}
+
+	.sessionerrortext {
+		top:84px;
+	}
 }
 
 @media screen and (max-width:470px) {
@@ -1420,6 +1438,14 @@
 		padding-bottom:1px;
 	}
 
+	#herotext {
+		padding-left:20px;
+		padding-right:20px;
+	}
+
+	#herotext h1 {
+		font-size:21px;
+	}
 
 }
 
