@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get "forgot-password", to: "users/passwords#new", as: :forgot_password
   end
 
+  get '/users/sign_in', to: redirect('/sign-in')
+
   devise_for :users, controllers: { sessions: "users/sessions", except: [:new], registrations: "users/registrations", passwords: "users/passwords" }
   
  # get '/invoices/new' => 'invoices#new', as: :new_invoice
