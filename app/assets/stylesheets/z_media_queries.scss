@@ -295,7 +295,7 @@
 	#mobilesidebarwrapper {
 		position:fixed;
 	    background: $dark-blue;
-	    top: 40px;
+	    top: 50px;
 	    right: 0;
 	    left: 0;
 	    z-index: 9999;
@@ -936,6 +936,13 @@
 	}
 }
 
+@media screen and (max-width:730px) {
+	#pagewrapper.smallbox {
+		max-width:none;
+		margin:35px;
+	}
+}
+
 @media screen and (max-width:700px) {
 	.homeinvoice {
 		display:none;
@@ -1190,8 +1197,29 @@
 		padding-top:60px;
 	}
 
-	.sessionerrortext {
+	.sessionbox .sessionerrortext {
 		top:85px;
+	}
+}
+
+@media screen and (max-width:600px) {
+	#pagewrapper.nosidepadding h1 {
+		padding:0 40px;
+	}
+
+	#pagewrapper.staticwrapper {
+		padding:45px 40px 70px 40px;
+	}
+
+	#passwordsuccess, #passwordform {
+		padding:0 40px;
+	}
+
+	#pagewrapper.nosidepadding #validationerrors.clienterrors {
+		margin-left:40px;
+		margin-right:0;
+		width:calc(100% - 80px);
+		min-width:0;
 	}
 }
 
@@ -1364,8 +1392,12 @@
 		transform:translateY(-7px);
 	}
 
-	.sessionerrortext {
-		top:84px;
+	p.staticsubmit {
+		text-align: center;
+	}
+
+	p.staticsubmit .button.blue {
+		float:none;
 	}
 }
 
@@ -1388,6 +1420,15 @@
 
 	.e-jobdescription:before {
 		content:"Description";
+	}
+
+	#passwordsuccesscontent {
+		font-size:17px;
+		padding:22px 30px;
+	}
+
+	.registerbreak {
+		display:block;
 	}
 }
 
@@ -1412,6 +1453,10 @@
 	#bottomsectioncontent p {
 		font-size: 17px;
     	margin-right: 0;
+	}
+
+	#pagewrapper.smallbox {
+		margin:15px;
 	}
 }
 
@@ -1445,6 +1490,21 @@
 
 	#herotext h1 {
 		font-size:21px;
+	}
+
+	.staticwrapper a.forgotpassword {
+		float:none;
+		display:block;
+		margin-top:-6px;
+	}
+
+	#pagewrapper.staticwrapper .loginbutton.blue {
+		float:none;
+		margin-left:auto;
+		margin-right:auto;
+		display:block;
+		width:180px;
+		margin-top:25px;
 	}
 
 }

@@ -1,3 +1,7 @@
+var pageBody = $('body'),
+	validationErrors = $('#validationerrors'),
+	errorHolder = $('#errorholder');
+
 setTimeout(function() {
 	var oldContent = $('.buttoncontent').text();
 	var button = $('.hasloadingtext');
@@ -19,10 +23,6 @@ setTimeout(function() {
 }, 200);
 
 <% if resource.errors.any? %>
-
-var pageBody = $('body'),
-	validationErrors = $('#validationerrors'),
-	errorHolder = $('#errorholder');
 
 errorHolder.empty();
 
@@ -68,7 +68,13 @@ $('.smallbox').css({
 <% else %>
 
 $('.closeerrors').trigger('click');
-$('.passwordformholder').addClass('emailsent');
+var passwordFormHolder = $('.passwordformholder');
+var newHeight = $('#passwordsuccess').outerHeight() + 15;
+passwordFormHolder.addClass('emailsent');
+passwordFormHolder.animate({
+	'height': newHeight
+}, 300);
+
 
 <% end %>
 

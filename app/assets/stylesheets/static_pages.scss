@@ -454,8 +454,8 @@ body.sessionopen .sessionboxwrapper {
 }
 
 #pagewrapper.nosidepadding {
-	padding-left:0;
-	padding-right:0;
+	padding-left:0 !important;
+	padding-right:0 !important;
 }
 
 #pagewrapper.nosidepadding #validationerrors.clienterrors {

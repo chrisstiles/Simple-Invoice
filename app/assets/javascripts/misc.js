@@ -621,6 +621,12 @@ var mobileSidebarWrapper = $('#mobilesidebarwrapper'),
 $('#mobilesidebar').on('click', toggleMobileSidebar);
 $('.closemobilesidebar').on('click', toggleMobileSidebar);
 
+$('#sessioninfo a').on('click', function() {
+	if (pageBody.hasClass('homepage') && mobileSidebarButton.hasClass('open')) {
+		toggleMobileSidebar();
+	}
+});
+
 function toggleMobileSidebar() {
 	
 	mobileSidebarButton.toggleClass('open');
@@ -664,7 +670,7 @@ contentWrapper.on('scroll', function() {
 	clearTimeout($.data(this, 'scrollTimer'));
 	$.data(this, 'scrollTimer', setTimeout(function() {
 		pageBody.removeClass('touchmoving');
-	}, 150));
+	}, 100));
 });
 
 

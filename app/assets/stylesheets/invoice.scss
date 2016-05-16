@@ -75,13 +75,15 @@
 	transform:translateY(-50%);
 }
 
-#validationerrors p, #modalvalidationerrors p, #registervalidationerrors p {
+#validationerrors p, #modalvalidationerrors p, #registervalidationerrors p, #pagewrapper.staticwrapper #validationerrors.clienterrors p, #pagewrapper.staticwrapper #registervalidationerrors p  {
 	margin-top:0;
 	font-size:14px;
 	font-weight:600;
 	margin-bottom:2px;
 	padding: 7px 18px;
 	text-align:left;
+	line-height:1;
+	color:#791c1c;
 }
 
 #validationerrors p:nth-child(even), #modalvalidationerrors p:nth-child(even), #registervalidationerrors p:nth-child(even) {
@@ -89,7 +91,7 @@
 }
 
 #validationerrors p:last-child, #modalvalidationerrors p:last-child, #registervalidationerrors p:last-child {
-	margin-bottom:0;
+	margin-bottom:0 !important;
 }
 
 .validationtitle {

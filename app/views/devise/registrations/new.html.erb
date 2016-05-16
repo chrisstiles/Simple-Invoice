@@ -2,7 +2,7 @@
 
 <div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox">
 
-  <h1>Create a Simple Invoice Account</h1>
+  <h1>Create a Simple <br class="mobilebreak registerbreak">Invoice Account</h1>
 
   <div id="registervalidationerrors" class="registererrors">
     <div class="validationtitle">
@@ -23,7 +23,7 @@
         <%= f.label :password_confirmation, "Confirm Password" %>
         <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
 
-        <%= f.submit "Sign up", class: "button blue willload registerbutton" %>
+       <p class="staticsubmit"> <%= f.submit "Sign up", class: "button blue willload registerbutton" %></p>
     <% end %>
 </div>
 
