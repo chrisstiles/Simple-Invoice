@@ -659,38 +659,14 @@ function checkPaginationLength() {
 
 checkPaginationLength();
 
-//if (pageBody.hasClass('ios') || pageBody.hasClass('android')) {
-
-//$('#homepagination').detach().prependTo('body');
-
-// if ($('#pagewrapper').hasClass('homepage')) {
-
-// 	mobileSidebarWrapper.addClass('detached');
-// 	//mobileSidebarWrapper.detach().prependTo('body');
-// }
-
-//$('.invoiceform').detach().prependTo('body');
-//$('header').detach().prependTo('body');
-
-//} 
-
-// var formWrapper = $('#formwrapper');
-
-// if (formWrapper.length) {
-// 	//console.log(formWrapper.html());
-// 	console.log(document.getElementsByClassName('invoiceform')[0].nodeName)
-// }
-
-
 contentWrapper.on('scroll', function() {
 	pageBody.addClass('touchmoving');
+	clearTimeout($.data(this, 'scrollTimer'));
+	$.data(this, 'scrollTimer', setTimeout(function() {
+		pageBody.removeClass('touchmoving');
+	}, 150));
 });
 
-contentWrapper.on('touchend', function() {
-	setTimeout(function() {
-		pageBody.removeClass('touchmoving');
-	}, 50);
-});
 
 var isWaitingForActive = false;
 
