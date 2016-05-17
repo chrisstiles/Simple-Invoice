@@ -14,7 +14,8 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(params[:user][:password])
       sign_in :user, resource
-      return render js: "window.location = '#{stored_location_for(resource) || invoices_url}'"
+      @redirect_url = "#{stored_location_for(resource) || invoices_url}"
+      return render 'create.js.erb'
     end
 
     invalid_login_attempt
