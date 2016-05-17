@@ -537,6 +537,10 @@ body.hasfixed #ui-datepicker-div {
 	position:fixed !important;
 }
 
+body.homepage.ios.nofixed #ui-datepicker-div, body.homepage.ios.hasfixed #ui-datepicker-div {
+	position:absolute !important;
+}
+
 body.homepage #mobilescrollwrapper #validationerrors {
 	top:31px;
 }

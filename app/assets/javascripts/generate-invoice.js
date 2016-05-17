@@ -638,6 +638,7 @@ ready = function() {
 			}
 		});
 
+
 		eDueDate.on('focus', function() {
 			$(this).blur();
 		})

@@ -534,7 +534,7 @@ $('.selectallinput').on('click touchstart', function(e) {
 });
 
 
-var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar, #pagewrapper, #usersettingshalf, #userlogohalf, .sessionbox';
+var selScrollable = '#contentwrapper, #mobilesidebarwrapper, #modalwindow, a, .modal, .emailmodal, .button, #formwrapper, #invoicewrapper, #invoicewrapper *, #clientssidebar, #pagewrapper, #usersettingshalf, #userlogohalf, .sessionbox, #herotext';
 // Uses document because document will be topmost level in bubbling
 $document.on('touchmove',function(e){
   e.preventDefault();
