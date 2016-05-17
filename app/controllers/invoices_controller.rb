@@ -276,10 +276,8 @@ class InvoicesController < ApplicationController
     end
 
     def set_logo_dimensions
-      if user_signed_in?
+      if user_signed_in? && current_user.has_current_logos?
         if @invoice.logo.to_s == current_user.display_logo.to_s && params[:invoice][:logo_width].present? && params[:invoice][:logo_height].present? && current_user.logos.present? && @invoice.valid?
-          print "THE SAMEEEE"
-
           logo = current_user.current_logo
 
           logo.logo_width = params[:invoice][:logo_width]

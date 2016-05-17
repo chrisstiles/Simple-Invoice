@@ -670,7 +670,7 @@ contentWrapper.on('scroll', function() {
 	clearTimeout($.data(this, 'scrollTimer'));
 	$.data(this, 'scrollTimer', setTimeout(function() {
 		pageBody.removeClass('touchmoving');
-	}, 100));
+	}, 50));
 });
 
 

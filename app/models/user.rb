@@ -32,6 +32,17 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable
 
 
+	def has_current_logos?
+	    if self.logos.empty?
+	      false
+	    elsif self.logos.where(current_logo: true).first.nil?
+	      false
+	    else
+	      true
+	    end
+    end
+
+
 	def display_logo
 		unless self.logos.empty?
 			logo = self.logos.where(current_logo: true).first
