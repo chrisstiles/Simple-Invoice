@@ -47,9 +47,7 @@
             <div class="cell amountpaidlabel">- Amount Paid</div>
             <div class="cell">
                <%= f.text_field :amount_paid, value: number_with_precision(f.object.amount_paid, precision: 2), autocomplete: "off" %>
-               <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]">
-                <%= number_with_precision(@invoice.amount_paid, precision: 2) %>
-                </span>
+               <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]"><%= number_with_precision(@invoice.amount_paid, precision: 2) %></span>
             </div>
           </div>
           <div class="row balancerow">
