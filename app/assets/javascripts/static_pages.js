@@ -105,6 +105,12 @@ $('.loginform').bind('ajax:start', function() {
 	}
 });
 
+var isMobile = false;
+
+if (pageBody.hasClass('ios') || pageBody.hasClass('android') || pageBody.hasClass('windows_phone')) {
+	isMobile = true;
+}
+
 if (pageBody.hasClass('homepage')) {
 
 var sessionOverlay = $('#sessionoverlay');
@@ -114,7 +120,9 @@ $('.signinbutton').on('click', function(e) {
 	e.preventDefault();
 	if (sessionOverlay.not(':visible')) {
 		setTimeout(function() {
-			signInEmail.focus();
+			if (!isMobile) {
+				signInEmail.focus();
+			}
 		}, 300);
 	} 
 	showSession();
@@ -126,7 +134,9 @@ $('.showregister').on('click', function(e) {
 	e.preventDefault();
 	if (sessionOverlay.not(':visible')) {
 		setTimeout(function() {
-			registerEmail.focus();
+			if (!isMobile) {
+				registerEmail.focus();
+			}
 		}, 300);
 	} 
 	showSession('register');

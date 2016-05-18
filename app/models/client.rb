@@ -2,6 +2,8 @@ class Client < ActiveRecord::Base
 	belongs_to :user
 	has_many :invoices, dependent: :nullify
 
+	before_validation :remove_white_space
+
 	# Validations
 
 	# Required Fields
@@ -24,4 +26,10 @@ class Client < ActiveRecord::Base
 	# Number of clients to show per page with pagination. return to 10 
 	self.per_page = 6
 	PER_PAGE = 6
+
+	private
+
+		def remove_white_space
+			self.name = self.name.squish
+		end
 end
