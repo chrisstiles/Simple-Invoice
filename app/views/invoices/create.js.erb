@@ -184,6 +184,10 @@ homeInvoiceWrapper.addClass('invoicecreated').animate({
 
 $('#tryitout').addClass('invoicecreated');
 
+$('#mobilesidebar').fadeOut(300, function() {
+	$(this).remove();
+});
+
 setTimeout(function() {
 	formWrapper.remove();
 }, 500);
