@@ -164,17 +164,27 @@ $('<input>').attr({
 var confirmationMessage = 'Make sure you have saved the link to your invoice!' + 
     						' The link will remain active for 60 days. You can save it permanently by creating an account now.';
 
-window.addEventListener("beforeunload", function (e) {
+var confirmationListener = function(e) {
 	if (!pageBody.hasClass('sessionchange')) {
 
 	    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
 	    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
 	}
-});
+}
+
+window.addEventListener("beforeunload", confirmationListener);
 
 $(document).on('page:before-change', function(e) {
 	if (!pageBody.hasClass('sessionchange')) {
-		confirm(confirmationMessage);
+
+		if (!confirm(confirmationMessage)) {
+			e.preventDefault();
+			return false;
+
+		} else {
+			window.removeEventListener("beforeunload", confirmationListener);
+			return true;
+		};
 	}
 });
 
