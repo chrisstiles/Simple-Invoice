@@ -656,3 +656,46 @@ body.homepage #mobilescrollwrapper #validationerrors {
 #bottomsectioncontent p a:active {
 	background-color:#2770A2;
 }
+
+/* Footer */
+
+footer {
+	padding:25px 35px;
+	background-color:$dark-blue;
+	color:#fff;
+	font-size:14px;
+	font-weight:400;
+	line-height:1;
+	text-align:right;
+	position:relative;
+	left:0;
+	bottom:0;
+	height:60px;
+	box-sizing:border-box;
+	right:0;
+	z-index: 701;
+	border-top:1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer:before {
+	clear:both;
+	content:"";
+	display:block;
+}
+
+#copy {
+	float:left;
+	text-align:left;
+}
+
+footer a {
+	color:#fff;
+	text-decoration:none;
+	display:inline-block;
+	margin-left:15px;
+}
+
+footer a:hover {
+	color:$light-blue;
+}
+

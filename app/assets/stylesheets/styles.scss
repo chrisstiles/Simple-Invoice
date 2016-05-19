@@ -72,6 +72,12 @@ input::-moz-focus-inner {
 	position:relative;
 }
 
+#pagewrapper:after {
+	clear:both;
+	content:"";
+	display:block;
+}
+
 #pagewrapper.widthfixedsidebar {
 	padding-right:340px;
 	padding-left:29px;
@@ -81,6 +87,11 @@ input::-moz-focus-inner {
 #mobilesidebarwrapper {
 	position:relative;
 	z-index: 700;
+}
+
+#htmlwrapper {
+	position:relative;
+	min-height:calc(100vh - 60px);
 }
 
 body.ios #htmlwrapper, body.android #htmlwrapper {
@@ -113,6 +124,7 @@ body.ios #contentwrapper, body.android #contentwrapper  {
 
 #contentwrapper {
 	padding-top:63px;
+	position:relative;
 }
 
 /***********/
@@ -1287,5 +1299,9 @@ a.logo img {
 
 .removelogo, .modal, .nomodal {
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+#searchresultswrapper.homeresults {
+	margin-bottom:-46px;
 }
 
