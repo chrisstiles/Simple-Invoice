@@ -759,6 +759,11 @@ body.windows.internet.explorer .jobcontrols {
     z-index: 200;
     top: 25px;
     left: 33px;
+    pointer-events:none;
+}
+
+#invoicewrapper.show .notestitle {
+	pointer-events:auto;
 }
 
 /* Rounded checkbox styles */
