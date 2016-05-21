@@ -6,6 +6,8 @@ var pageWrapper = $('#pagewrapper');
 
 if (pageWrapper.hasClass('clientspage')) {
 
+var $window = $(window);
+
 // All client page only code goes here
 
 // Set position and width of pagination and search wrapper
@@ -29,30 +31,47 @@ function setClientFilter() {
 		'width': width
 	});
 
-	pageWrapper.css('top', clientSearch.outerHeight());
+	pageWrapper.css('margin-top', clientSearch.outerHeight());
 
 }
 
 setClientFilter();
 
-// // Add overflow scroll if the box is too large for the screen
-// function checkWrapperHeight() {
-// 	var sidebar = $('#clientssidebar');
-// 	var formHeight = $('.clientsformwrapper').outerHeight();
-// 	var wrapperHeight = sidebar.outerHeight() - $('#newclientbox').outerHeight();
 
-// 	if (formHeight > wrapperHeight) {
-// 		sidebar.css('overflow-y', 'scroll');
-// 	} else {
-// 		sidebar.css('overflow-y', 'auto');
-// 	}
-// }
+var footer = $('footer');
 
-// checkWrapperHeight();
+function checkFooterInView() {
+	var docViewTop = $window.scrollTop();
+	var docViewBottom = docViewTop + $window.height();
+
+	var elemTop = footer.offset().top;
+	var elemBottom = elemTop;
+
+	var isVisible = (elemBottom <= docViewBottom) && (elemTop >= docViewTop);
+
+	if (isVisible) {
+		var offsetVal = getVisibleFooterHeight() + 145;
+		clientsSidebar.css({
+			'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
+		});
+	} else {
+		clientsSidebar.css({
+			'max-height' : 'none'
+		});
+	}
+}
+
+function getVisibleFooterHeight() {
+	var elH = footer.outerHeight(),
+        H   = $window.height(),
+        r   = footer[0].getBoundingClientRect(), t=r.top, b=r.bottom;
+    return Math.max(0, t>0? Math.min(elH, H-t) : (b<H?b:H));
+}
+checkFooterInView()
 
 // Changed fixed positions on window resize
 
-$( window ).resize(function() {
+$window.resize(function() {
 	setClientFilter();
 });
 
@@ -70,7 +89,7 @@ pageWrapper.on('click', '.client', function() {
 
 	var $this = $(this);
 	var id = $this.attr('data-id');
-	if (!$this.hasClass('selected') || $(window).width() <= 885) {
+	if (!$this.hasClass('selected') || $window.width() <= 885) {
 		
 		if (!$this.hasClass('selected')) {
 			pageBody.addClass('loadingclientform');
@@ -147,6 +166,16 @@ pageBody.on('click', '.deleteclient', function() {
 		  });
 	}
 
+});
+
+$(document).on('scroll', function() {
+	checkFooterInView();
+});
+
+$(document).ajaxComplete(checkFooterInView)
+
+$window.on('resize', function() {
+	checkFooterInView();
 });
 
 

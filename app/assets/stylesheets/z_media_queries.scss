@@ -839,6 +839,7 @@
 		bottom:50px;
 		overflow:scroll;
 		-webkit-overflow-scrolling: touch;
+		max-height: none !important;
 	}
 
 	#clientssidebar .clientsformwrapper {
@@ -1357,6 +1358,7 @@
 		left: 50%;
 		position: absolute;
 		transform: translateX(-50%);
+		margin-top:13px;
 	}
 
 	#clientssidebar .clientsformwrapper .saveclienthalf  {

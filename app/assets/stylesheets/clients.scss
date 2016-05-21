@@ -22,7 +22,6 @@
     z-index: 400;
 }
 
-
 #clientfiltering {
 	padding-top:0;
 	z-index: 400;
@@ -46,7 +45,7 @@
 }
 
 #pagewrapper.clientspage {
-	margin-top:0;
+	margin-top:130px;
 }
 
 #clientpagination .pagination > * {
@@ -75,7 +74,9 @@
 	position:fixed;
 	top:100px;
 	z-index: 600;
-	//bottom:35px;
+	bottom:45px;
+	//max-height:calc(100vh - 105px);
+	overflow:scroll;
 	border-left:1px solid #c9c9c9;
 }
 
@@ -227,6 +228,12 @@
 	vertical-align:top;
 }
 
+.clientsformwrapper .deleteclienthalf, .clientsformwrapper .saveclienthalf {
+	height:34px;
+	margin-top:13px;
+	margin-bottom:18px;
+}
+
 .full {
 	width:100%;
 }
@@ -246,7 +253,7 @@
 }
 
 .clientsformwrapper .button {
-	margin-top:13px;
+	//margin-top:13px;
 	float:right;
 }
 

@@ -14,6 +14,10 @@
   width:50%;
 }
 
+#usersettingshalf {
+  min-height:calc(100vh - 205px)
+}
+
 #settingstoggles {
   display:none;
 }
