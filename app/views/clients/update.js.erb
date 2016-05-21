@@ -71,6 +71,8 @@ pageBody.append('<div class="success"> <div class="successtimer"></div><div clas
 validationErrors.removeAttr('style').removeClass('hastransformed').hide();
 $('.formholder').removeAttr('style');
 
+var clientNameField = $('#client_name');
+clientNameField.val(clientNameField.val().replace(/\s+/g,' ').trim());
 
 // Update
 // Render updated list of clients

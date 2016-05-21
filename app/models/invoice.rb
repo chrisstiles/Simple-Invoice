@@ -208,6 +208,8 @@ class Invoice < ActiveRecord::Base
     				self.client_name = "Client"
     			end
     		end
+    	else
+    		self.client_name = self.client_name.squish
     	end
     end
 
