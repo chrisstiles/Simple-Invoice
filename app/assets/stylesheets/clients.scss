@@ -271,11 +271,11 @@
 	padding:6px 15px;
 }
 
-#validationerrors.clienterrors p, #validationerrors.clienterrors .validationtitle, #registervalidationerrors.registererrors p, , #registervalidationerrors.registererrors .validationtitle {
+#validationerrors.clienterrors p, #validationerrors.clienterrors .validationtitle, #registervalidationerrors.registererrors p, #registervalidationerrors.registererrors .validationtitle, #validationerrors.amountpaidvalidation p, #validationerrors.amountpaidvalidation .validationtitle {
 	font-size:13px;
 }
 
-#validationerrors.clienterrors .closeerrors, #registervalidationerrors.registererrors .closeerrors {
+#validationerrors.clienterrors .closeerrors, #registervalidationerrors.registererrors .closeerrors, #validationerrors.amountpaidvalidation .closeerrors {
 	width:21px;
 	height:21px;
 	background-size:15px 15px;

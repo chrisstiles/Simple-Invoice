@@ -32,4 +32,5 @@ class Client < ActiveRecord::Base
 		def remove_white_space
 			self.name = self.name.squish
 		end
+
 end

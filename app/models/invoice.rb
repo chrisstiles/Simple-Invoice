@@ -1,5 +1,6 @@
 class Invoice < ActiveRecord::Base
 	before_save :set_balance
+	before_save :set_client_name_if_needed
 
 	# Relationships
 	belongs_to :user
@@ -192,8 +193,22 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
-	 def generate_token
+	def generate_token
       self.token = SecureRandom.urlsafe_base64(16)
+    end
+
+    def set_client_name_if_needed
+    	if self.client_name.blank?
+    		unless self.client.present?
+    			self.client_name = "Client"
+    		else
+    			if self.client.client_name.present?
+    				self.client_name = self.client.client_name
+    			else
+    				self.client_name = "Client"
+    			end
+    		end
+    	end
     end
 
 end
