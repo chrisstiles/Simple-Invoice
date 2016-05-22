@@ -38,26 +38,45 @@ function setClientFilter() {
 setClientFilter();
 
 
-var footer = $('footer');
+var footer = $('footer:visible');
+
+var mobileFooter = false;
+
+function checkMobileFooter() {
+	if ($window.width() > 1020) {
+		mobileFooter = false;
+	} else {
+		mobileFooter = true;
+	}
+}
+
+checkMobileFooter();
 
 function checkFooterInView() {
-	var docViewTop = $window.scrollTop();
-	var docViewBottom = docViewTop + $window.height();
+	if (footer.length) {
+		var docViewTop = $window.scrollTop();
+		var docViewBottom = docViewTop + $window.height();
 
-	var elemTop = footer.offset().top;
-	var elemBottom = elemTop;
+		var elemTop = footer.offset().top;
+		var elemBottom = elemTop;
 
-	var isVisible = (elemBottom <= docViewBottom) && (elemTop >= docViewTop);
+		var isVisible = (elemBottom <= docViewBottom) && (elemTop >= docViewTop);
 
-	if (isVisible) {
-		var offsetVal = getVisibleFooterHeight() + 145;
-		clientsSidebar.css({
-			'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
-		});
-	} else {
-		clientsSidebar.css({
-			'max-height' : 'none'
-		});
+		if (isVisible) {
+			var offsetVal = getVisibleFooterHeight() + 145;
+
+			if (mobileFooter) {
+				offsetVal += 50;
+			}
+
+			clientsSidebar.css({
+				'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
+			});
+		} else {
+			clientsSidebar.css({
+				'max-height' : 'none'
+			});
+		}
 	}
 }
 
@@ -67,13 +86,7 @@ function getVisibleFooterHeight() {
         r   = footer[0].getBoundingClientRect(), t=r.top, b=r.bottom;
     return Math.max(0, t>0? Math.min(elH, H-t) : (b<H?b:H));
 }
-checkFooterInView()
-
-// Changed fixed positions on window resize
-
-$window.resize(function() {
-	setClientFilter();
-});
+checkFooterInView();
 
 function showMobileClientsForm() {
 	pageBody.addClass('clientsformopen');
@@ -172,9 +185,14 @@ $(document).on('scroll', function() {
 	checkFooterInView();
 });
 
-$(document).ajaxComplete(checkFooterInView)
+$(document).ajaxComplete(checkFooterInView);
 
-$window.on('resize', function() {
+
+$window.resize(function() {
+	footer = $('footer:visible');
+	checkMobileFooter();
+	setClientFilter();
+
 	checkFooterInView();
 });
 

@@ -4,6 +4,7 @@ var ready;
 ready = function() {
 
 var $document = $(document);
+var $window = $(window);
 
 // Fastclick
 $(function() {
@@ -161,6 +162,8 @@ pageBody.on('click', '.closeerrors', function() {
 		}
 		
 	}
+
+	checkContentWrapperHeight();
 });
 
 // Ajax call to delete invoice when button is pressed
@@ -207,7 +210,7 @@ function setHomePagination() {
 	if (homeInvoice.length) {
 		var leftPosition = homeInvoice.first().offset().left - 100;
 		
-		var rightPosition = $(window).width() - $('#homeside').offset().left;
+		var rightPosition = $window.width() - $('#homeside').offset().left;
 
 		pagination.css({
 			'left' : leftPosition,
@@ -305,17 +308,7 @@ $('#user_logo').bind('change', function() {
 });
 
 
-// Changed fixed positions on window resize
-$( window ).resize(function() {
-	if (homePageWrapper.length) {
-		setSidebarPosition();
-		if ($('.homeinvoice').length) {
-			setHomePagination();
-		}
-	}
 
-	checkPaginationLength();
-});
 
 
 // Dropzone
@@ -645,7 +638,7 @@ function checkPaginationLength() {
 		var paginationOffset = 0;
 	}
 	
-	var windowWidth = $(window).width();
+	var windowWidth = $window.width();
 
 	var paginationWidth = 0;
 
@@ -709,6 +702,103 @@ logoToggle.on('click', function(e) {
 	homePageWrapper.addClass('logovisible');
 });
 
+
+// For mobile footer
+
+var footer = $('footer.mobilefooter');
+
+var pageWrapper;
+
+if ($('#invoicewrapper').length) {
+	pageWrapper = $('#invoicewrapper');
+} else {
+	pageWrapper = $('#pagewrapper');
+}
+
+function checkMobileFooter() {
+	if (pageBody.hasClass('homepage')) {
+		return false;
+	}
+
+	if (isMobile) {
+		if ($window.width() > 1020) {
+			footer = $('footer.desktopfooter');
+		} else {
+			footer = $('footer.mobilefooter');
+		}
+
+		return true;
+	}
+
+	if ($window.width() > 1020) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+checkMobileFooter();
+
+function checkContentWrapperHeight() {
+	if (checkMobileFooter()) {
+
+		if (pageBody.hasClass('static')) {
+
+			if (!pageBody.hasClass('homepage')) {
+
+				var contentHeight = pageWrapper.outerHeight(true);
+
+			}
+
+		} else {
+			var contentHeight = pageWrapper.offset().top;
+
+			if ($('#usersettingshalf').length) {
+			
+				contentHeight += $('.clientsformwrapper').outerHeight() + $('#validationerrors').outerHeight();
+
+			} else {
+				if (pageWrapper.outerHeight() > pageWrapper.innerHeight()) {
+					contentHeight += pageWrapper.outerHeight();
+				} else {
+					contentHeight += pageWrapper.innerHeight();
+				}
+			}
+
+			if (pageWrapper.hasClass('clientspage')) {
+				contentHeight += 10;
+			}
+		}
+
+		var contentWrapperHeight = contentWrapper.outerHeight() - footer.outerHeight();
+
+		if (contentWrapperHeight > contentHeight) {
+			contentWrapper.addClass('absmobilefooter');
+		} else {
+			contentWrapper.removeClass('absmobilefooter');
+		}
+
+	}
+}
+
+checkContentWrapperHeight();
+
+$document.ajaxComplete(checkContentWrapperHeight);
+
+
+// Changed fixed positions on window resize
+$window.resize(function() {
+	checkContentWrapperHeight();
+
+	if (homePageWrapper.length) {
+		setSidebarPosition();
+		if ($('.homeinvoice').length) {
+			setHomePagination();
+		}
+	}
+
+	checkPaginationLength();
+});
 
 
 // End misc.js

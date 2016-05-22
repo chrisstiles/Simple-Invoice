@@ -14,33 +14,8 @@
 </head>
 
 
-<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %><%= yield :special_class %>'>
-
-<header>
-	<%= link_to "", root_url, class: "logo" %>
-	<div id="menu">
-		<% if user_signed_in? %>
-		<nav>
-			<%= link_to "Invoices", invoices_path, class: "navinvoices#{current_page('invoices')}" %>
-			<%= link_to "Clients", clients_path, class: "navclients#{current_page('clients')}" %>
-		</nav>
-
-		<%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
-
-		<div id="sessioninfo">
-			<%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "navsignout" %>
-			<%= link_to "Settings", settings_path, class: "navprofile#{current_page('users')}" %>
-		</div>
-
-		<% else %>
-			<div id="sessioninfo" class="notsignedin">
-				<%= link_to "Register", register_path, class: "showregister#{current_page('registrations')}" %>
-				<%= link_to "Sign In", sign_in_path, class: "signinbutton#{current_page('sessions')}" %>
-				<%= link_to "Home", root_url, class: "sessionhome" %>
-			</div>
-		<% end %>	
-	</div>	
-</header>
+<body class='<%= "#{@browser.platform} #{@browser.name.downcase}" %><%= yield :special_class %> <%= controller_name %>'>
+<%= render 'shared/header' %>
 
 <%= yield :outside_content %>
 
@@ -62,17 +37,13 @@
 
 	<%= yield %>
 
-</div>
+	<%= render 'shared/footer', is_mobile: true %>
 
 </div>
 
-<footer>
-	<div id="copy">
-		&copy; <%= Time.now.year %>, Simple Invoice, All Rights Reserved
-	</div>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
-</footer>
+</div>
+
+<%= render 'shared/footer', is_mobile: false %>
 
 </body>
 </html>

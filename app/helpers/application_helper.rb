@@ -103,4 +103,12 @@ module ApplicationHelper
 		end
 	end
 
+	def mobile_footer_class(isMobile)
+		if isMobile
+			raw("class='mobilefooter'")
+		else
+			raw("class='desktopfooter'")
+		end
+	end
+
 end

@@ -316,6 +316,7 @@ body.sessionopen .sessionboxwrapper {
 	right:0;
 	background-color:rgba(255,255,255,.8);
 	display:none;
+	z-index: 200;
 }
 
 .loginloadingspinner .loadingcircle {
@@ -660,7 +661,7 @@ body.homepage #mobilescrollwrapper #validationerrors {
 /* Footer */
 
 footer {
-	padding:25px 35px;
+	padding:0 35px;
 	background-color:$dark-blue;
 	color:#fff;
 	font-size:14px;
@@ -675,6 +676,21 @@ footer {
 	right:0;
 	z-index: 701;
 	border-top:1px solid rgba(255, 255, 255, 0.08);
+	z-index: 1;
+}
+
+footer.mobilefooter {
+	display:none;
+}
+
+body.ios, body.android, body.windows_phone {
+	footer.mobilefooter {
+		display:block;
+	}
+
+	footer.desktopfooter {
+		display:none !important;
+	}
 }
 
 footer:before {
@@ -691,11 +707,23 @@ footer:before {
 footer a {
 	color:#fff;
 	text-decoration:none;
-	display:inline-block;
 	margin-left:15px;
+	float:right;
+}
+
+footer a, #copy {
+	position:relative;
+	line-height:14px;
+	top:50%;
+	margin-top:-7px;
+	display:block;
 }
 
 footer a:hover {
 	color:$light-blue;
+}
+
+body.ios #contentwrapper.absmobilefooter footer, body.android #contentwrapper.absmobilefooter footer, body.windows_phone #contentwrapper.absmobilefooter footer {
+	position:fixed !important;
 }
 

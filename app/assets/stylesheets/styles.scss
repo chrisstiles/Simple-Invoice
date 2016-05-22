@@ -81,6 +81,7 @@ input::-moz-focus-inner {
 #pagewrapper.widthfixedsidebar {
 	padding-right:340px;
 	padding-left:29px;
+	padding-bottom:45px !important;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
@@ -93,6 +94,11 @@ input::-moz-focus-inner {
 	position:relative;
 	min-height:calc(100vh - 60px);
 }
+
+body.static #htmlwrapper {
+	min-height:calc(100vh - 115px);
+}
+
 
 body.ios #htmlwrapper, body.android #htmlwrapper {
 	position:fixed;
@@ -443,9 +449,9 @@ body.ios input.button.small {
 	width:auto;
 }
 
-body.ios .button.deleteinvoice {
+.button.deleteinvoice {
 	position:relative;
-	margin-top:25px;
+	margin-top:29px;
 	left:15px;
 	right:auto;
 	width:252px;
@@ -1202,6 +1208,7 @@ a.logo img {
 
 #publicurl {
 	border-top:1px solid #4d5761;
+	border-bottom:1px solid #4d5761;
 	padding:13px 22px 14px 22px;
 }
 

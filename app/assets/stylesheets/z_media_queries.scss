@@ -177,7 +177,34 @@
 		overflow-y:scroll;
 		overflow-x:hidden;
 		-webkit-overflow-scrolling: touch;
+		//min-height:calc(100vh - 100px);
+	}
 
+	footer.mobilefooter {
+		display:block;
+		position:relative;
+		bottom:0;
+	}
+
+	#contentwrapper.absmobilefooter {
+		min-height:0;
+	}
+
+	#contentwrapper.absmobilefooter footer.mobilefooter {
+		position:absolute;
+		margin-top:0;
+	}
+
+	footer.desktopfooter {
+		display:none;
+	}
+
+	#usersettingshalf {
+		min-height: calc(100vh - 245px);
+	}
+
+	body.ios #contentwrapper.absmobilefooter footer, body.android #contentwrapper.absmobilefooter footer, body.windows_phone #contentwrapper.absmobilefooter footer {
+		position:absolute !important;
 	}
 
 	#htmlwrapper:before {
@@ -685,6 +712,7 @@
 
 	#clientssidebar {
 		margin-top:-25px;
+		bottom:80px;
 	}
 
 	#pagewrapper.userpage {
@@ -808,6 +836,10 @@
   	#bottomsectioncontent p {
 		font-size:20px;
 		margin-right:380px;
+	}
+
+	body.invoices footer, body.clients footer, body.users footer, body.settings footer {
+		display:none !important;
 	}
 
 }
@@ -1129,6 +1161,13 @@
 		color:#808080;
 	}
 
+}
+
+@media screen and (max-height:688px) and (min-width:1020px) {
+	.scrollwrapper {
+		padding-bottom:60px;
+		overflow:scroll;
+	}
 }
 
 @media screen and (max-width:670px) {
@@ -1468,6 +1507,18 @@
 	.registerbreak {
 		display:block;
 	}
+
+	footer {
+		padding: 0 18px;
+	    font-size: 12px;
+	    font-weight: 600;
+	    height:50px;
+	}
+
+	#copy, footer a {
+		margin-top:-6px;
+		line-height:12px;
+	}
 }
 
 @media screen and (max-width: 430px) {
@@ -1543,6 +1594,47 @@
 		display:block;
 		width:180px;
 		margin-top:25px;
+	}
+
+	footer {
+		height:auto;
+		padding:20px;
+	}
+
+	footer:after {
+		clear:both;
+		display:block;
+		content:"";
+	}
+
+	#copy, footer a {
+		position:static;
+		font-size:14px;
+		font-weight:400;
+	}
+
+	#copy {
+		display:block;
+		float:none;
+		text-align: center;
+		line-height:17px;
+		margin:0;
+	}
+
+	footer a {
+		margin-top:15px;
+		width:50%;
+		box-sizing:border-box;
+		padding:0 8px;
+		margin:12px 0 0 0;
+	}
+
+	footer a:first-of-type {
+		text-align: left;
+	}
+
+	footer a:last-of-type {
+		text-align: right;
 	}
 
 }
