@@ -1,4 +1,6 @@
 <%= content_for(:mobilesidebar, true) %>
+<%= provide :special_class, " generateinvoice" %>
+
 <% if @invoice.nil? %>
   <%= provide :title, "No Invoice Found" %>
   <%= render 'not_found' %>

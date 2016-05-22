@@ -137,10 +137,34 @@
 }
 
 @media screen and (min-width:1020px) {
-
 	body.homepage.ios #mobilescrollwrapper #validationerrors, body.homepage.android #mobilescrollwrapper #validationerrors {
 		top:95px;
 		margin-bottom: 15px;
+	}
+
+	body.generateinvoice.ios #mobilescrollwrapper, body.generateinvoice.android #mobilescrollwrapper, body.generateinvoice.windows_phone #mobilescrollwrapper {
+		position:absolute !important;
+		top: 0 !important;
+		bottom:0!important;
+		left:0;
+		right:0;
+		overflow-x:visible;
+		overflow-y:scroll;
+		webkit-overflow-scrolling:touch;
+	}
+
+	body.generateinvoice.ios #htmlwrapper, body.generateinvoice.android #htmlwrapper, body.generateinvoice.windows_phone #htmlwrapper {
+		position:relative;
+	}
+
+	body.generateinvoice.ios footer.mobilefooter, body.generateinvoice.android footer.mobilefooter, body.generateinvoice.windows_phone footer.mobilefooter {
+		display:none !important;
+	}
+
+	body.generateinvoice.ios footer.desktopfooter, body.generateinvoice.android footer.desktopfooter, body.generateinvoice.windows_phone footer.desktopfooter {
+		display:block !important;
+		position:fixed;
+		bottom:0;
 	}
 }
 

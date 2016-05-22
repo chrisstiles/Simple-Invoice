@@ -99,7 +99,6 @@ body.static #htmlwrapper {
 	min-height:calc(100vh - 115px);
 }
 
-
 body.ios #htmlwrapper, body.android #htmlwrapper {
 	position:fixed;
 	-webkit-backface-visibility: hidden;

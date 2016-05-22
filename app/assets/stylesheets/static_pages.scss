@@ -316,7 +316,7 @@ body.sessionopen .sessionboxwrapper {
 	right:0;
 	background-color:rgba(255,255,255,.8);
 	display:none;
-	z-index: 200;
+	z-index: 750;
 }
 
 .loginloadingspinner .loadingcircle {
@@ -676,7 +676,6 @@ footer {
 	right:0;
 	z-index: 701;
 	border-top:1px solid rgba(255, 255, 255, 0.08);
-	z-index: 1;
 }
 
 footer.mobilefooter {
