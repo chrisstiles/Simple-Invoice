@@ -74,4 +74,43 @@ module InvoicesHelper
       end
     end
 
+    def display_content_editable
+      if user_signed_in?
+        if current_page?(controller: 'invoices', action: 'new') || current_page?(controller: 'invoices', action: 'edit')
+          raw(" contenteditable='true'")
+        else
+          ''
+        end
+      else
+        if current_page?(action: 'home')
+          raw(" contenteditable='true'")
+        else
+          ''
+        end
+      end
+    end
+
+
+    def link_to_for(text, action, invoice, method = "get")
+      invoice_type = invoice.display_invoice_type.downcase
+
+      link = "#{action}_#{invoice_type}_path"
+
+      link_to text.to_s, self.send(link, invoice.display_number), method: method.to_sym
+    end
+
+
+    def invoice_link(invoice, action = "", format = "")
+      unless action.blank?
+        action.concat("_")
+      end
+
+      if invoice.is_estimate?
+        Rails.application.routes.url_helpers.send("#{action}estimate_path", invoice.estimate_number, format: format)
+      else
+        Rails.application.routes.url_helpers.send("#{action}invoice_path", invoice.invoice_number, format: format)
+      end
+    end
+
+
 end

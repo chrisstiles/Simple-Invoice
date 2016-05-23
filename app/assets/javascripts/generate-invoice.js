@@ -384,33 +384,25 @@ ready = function() {
 					width: '100%',
 					height: 'auto'
 				});
-
-				// if (targetWidth <= logoWrapperWidth) {
-				// 	invoiceLogoImage.css({
-				// 		width: '100%',
-				// 		height: 'auto'
-				// 	});
-				// 	logoWrapper.css({
-				// 		'max-width': targetWidth,
-				// 		'width': '100%',
-				// 		'height':'auto'
-				// 	});
-				// } else {
-				// 	invoiceLogoImage.css({
-				// 		width: '100%',
-				// 		height: 'auto'
-				// 	});
-				// 	logoWrapper.css({
-				// 		width: logoWrapperWidth,
-				// 		'max-width': '100%',
-				// 		height: 'auto'
-				// 	});
-				// }
 			}
 		}
 	}
 
 	if (editing || creating) {
+		// Toggle invoice number and estimate number
+		var invoiceTypeSelect = $('#invoice_invoice_type');
+		var invoiceNumberSpan = $('#e-invoicenumber');
+		var estimateNumberSpan = $('#e-estimatenumber');
+
+		invoiceTypeSelect.on('change', function() {
+			if ($(this).val().toLowerCase() === 'estimate') {
+				invoiceNumberSpan.hide();
+				estimateNumberSpan.show();
+			} else {
+				invoiceNumberSpan.show();
+				estimateNumberSpan.hide();
+			}
+		});
 
 		// Set focus to textbox when control box is clicked
 		$('.control').on('click', function() {

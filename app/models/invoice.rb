@@ -1,6 +1,10 @@
 class Invoice < ActiveRecord::Base
+	before_validation :configure_invoice_type
+	before_validation :set_invoice_or_estimate_number_blank
+
 	before_save :set_balance
 	before_save :set_client_name_if_needed
+	
 
 	# Relationships
 	belongs_to :user
@@ -18,7 +22,7 @@ class Invoice < ActiveRecord::Base
 	# Store number of jobs not to be deleted
 	attr_accessor :num_jobs
 
-	# Filtering
+##### Filtering
 	default_scope { order(created_at: :desc) }
 
 	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
@@ -45,10 +49,16 @@ class Invoice < ActiveRecord::Base
 	  end
 	}
 
-	# Validations
+##### Validations
+
+	# Allowed types
+	INVOICE_TYPES = ["invoice", "estimate"]
+
+	validates_inclusion_of :invoice_type, in: INVOICE_TYPES,
+ 	message: "{{value}} is not a valid invoice type"
 
 	# Required Fields
-	validates :invoice_number, :date, :due_date, :name, :client_name, :total, presence: true, allow_blank: false
+	validates :date, :due_date, :name, :client_name, :total, presence: true, allow_blank: false
 
 	# Total must be between 0 and 10,000,000
 	validate :invoice_total_in_range
@@ -59,12 +69,16 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
-	# Invoice Number Uniqueness
-	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }, if: 'self.user.present?'
+	# Invoice number uniqueness
+	validates :invoice_number, uniqueness: { case_sensitive: false, scope: :user_id }, if: 'self.user.present? && self.is_invoice?'
+	validates :estimate_number, uniqueness: { case_sensitive: false, scope: :user_id }, if: 'self.user.present? && self.is_estimate?'
 
+	# Validation of numbers
+	validates :invoice_number, :estimate_number, numericality: { greater_than: 0, message: "must be a number greater than zero", allow_blank: true }, if: 'self.user.present?'
+
+	# Validation for home invoice
 	validates :invoice_number, presence: true, 
-	            numericality: { greater_than_or_equal_to: 0, message: "^ Invoice number must be a number greater than or equal to zero", allow_blank: false }
-
+	            numericality: { greater_than: 0, message: "^Invoice number must be a number greater than zero", allow_blank: false }, unless: 'self.user.present?'
 
 	# Length
 	validates :name, :date, :due_date, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line1, length: { maximum: 255 }
@@ -210,6 +224,61 @@ class Invoice < ActiveRecord::Base
     		end
     	else
     		self.client_name = self.client_name.squish
+    	end
+    end
+
+    def configure_invoice_type
+    	invoice_type = self.invoice_type || "invoice"
+    	invoice_type.downcase
+
+    	unless INVOICE_TYPES.include?(invoice_type.to_s)
+    		invoice_type = "invoice"
+    	end
+    	
+    	self.invoice_type = invoice_type
+    end
+
+    def is_estimate?
+    	if self.invoice_type.downcase == "estimate"
+    		true
+    	else
+    		false
+    	end
+    end
+
+    def is_invoice?
+    	if self.invoice_type.downcase == "estimate"
+    		false
+    	else
+    		true
+    	end
+    end
+
+    def set_invoice_or_estimate_number_blank
+    	if self.is_estimate?
+    		self.invoice_number = ""
+    	else
+    		self.estimate_number = ""
+    	end
+    end
+
+    def self.select_invoice_types
+    	INVOICE_TYPES.map(&:capitalize)
+    end
+
+    def display_invoice_type
+    	if self.is_estimate?
+    		"Estimate"
+    	else
+    		"Invoice"
+    	end
+    end
+
+    def display_number
+    	if self.is_estimate?
+    		self.estimate_number
+    	else
+    		self.invoice_number
     	end
     end
 

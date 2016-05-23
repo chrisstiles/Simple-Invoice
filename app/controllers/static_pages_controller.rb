@@ -4,7 +4,6 @@ class StaticPagesController < ApplicationController
 
 	def home
 		@invoice = Invoice.new
-		@editable = "true"
 		@invoice.jobs.build
 	end
 

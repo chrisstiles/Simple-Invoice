@@ -305,6 +305,10 @@
 	display:inline;	
 }
 
+#invoicewrapper #e-estimatenumber {
+	display:none;
+}
+
 .datefield, .duedatefield {
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -486,7 +490,7 @@ section:after {
 	float:right;
 }
 
-#e-invoicenumber, #invoicenumber span {
+#e-invoicenumber, #invoicenumber span, #e-estimatenumber {
 	color:#7a7777;
 	font-weight:700;
 	min-width:15px;

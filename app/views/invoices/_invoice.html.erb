@@ -1,5 +1,4 @@
-
-<a href="<%= invoice_path(invoice.invoice_number) %>" class="mobilehomeinvoice"> 
+<a href="<%= invoice_link(invoice) %>" class="mobilehomeinvoice">
   <div class="mobilebalance">
     Balance:<br>
     <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
@@ -24,7 +23,7 @@
 
 <div class="homeupdatebalance">
 
-<%= form_for(invoice, :url => update_invoice_path(invoice.invoice_number), remote: true) do |f| %>
+<%= form_for(invoice, :url => invoice_link(invoice, "update"), remote: true) do |f| %>
 <%= hidden_field_tag :from_index_page %>
 
 
@@ -64,7 +63,7 @@
   <div class="balancesection">
 
     <div class="vcenter">
-      <div class="balancetitle">Balance:</div>
+      <div class="balancetitle"><%= invoice.display_invoice_type %> Balance:</div>
       <div class="homeinvoicebalance">
        <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
       </div>
@@ -81,8 +80,8 @@
 
 </div>
 
-  <%= link_to "View Invoice", invoice_path(invoice.invoice_number), class: "viewinvoice" %>
-  <%= link_to invoice_path(invoice.invoice_number, format: "pdf"), class: "thirdbutton file" do %>
+  <%= link_to "View Invoice", invoice_link(invoice), class: "viewinvoice" %>
+  <%= link_to invoice_link(invoice, "", "pdf"), class: "thirdbutton file" do %>
       <span>View PDF</span>
   <% end %>
   <a href="#" class="thirdbutton mail emailmodal" data-invoice-number="<%= invoice.invoice_number %>"><span>Email Invoice</span></a>

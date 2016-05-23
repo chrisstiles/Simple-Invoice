@@ -1253,16 +1253,6 @@
 		font-size:12px !important;
 	}
 
-	.clientsformwrapper .half.baseinvoicehalf {
-	  width:calc(35% - 11px);
-	  min-width:120px;
-	}
-
-	.clientsformwrapper .half.hastaxhalf {
-	  width:calc(65% - 11px);
-	  margin-bottom:6px;
-	}
-
 	#herotext h2 .freebreak {
 		display:block;
 	}
@@ -1449,6 +1439,15 @@
 
 	#homesuccesscontent p {
 		font-size:18px;
+	}
+
+	#taxinformation {
+		margin-top:8px;
+		padding-bottom:8px;
+	}
+
+	#profiletax:before, #profiletax:after {
+		display:block;
 	}
 
 }

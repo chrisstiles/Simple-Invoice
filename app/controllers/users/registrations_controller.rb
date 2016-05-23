@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :js
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
-  after_action :create_user_settings, only: [:create]
+  #after_action :create_user_settings, only: [:create]
   after_action :add_homepage_invoice_to_user, only: [:create]
 
   # GET /resource/sign_up
@@ -15,6 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     @user = resource
     if resource.save
+      create_user_settings
       flash[:success] = 'Welcome to Simple Invoice!'
     end
   end

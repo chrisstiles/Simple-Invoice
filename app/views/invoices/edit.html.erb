@@ -14,12 +14,12 @@
 <% end %>
 
 <div id="formwrapper">
-<%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
+<%= form_for(@invoice, :url => invoice_link_to_path('update', @invoice), remote: true) do |f| %>
 
 <div id="toolbar">
   <div id="toolbarcontent">
-    <%= link_to "Back to Invoice", invoice_path, class: "back" %>
-    <%= f.submit 'Save Invoice', tabindex: '-1', class: "button blue willload saveicon" %>
+    <%= link_to "Back to #{@invoice.display_invoice_type}", invoice_link_to_path('', @invoice), class: "back" %>
+    <%= f.submit "Save #{@invoice.display_invoice_type}", tabindex: '-1', class: "button blue willload saveicon" %>
   </div>
 </div>
 
@@ -101,7 +101,7 @@
     
       <section id="invoicenumber">
           <div>
-              Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
+              <%= f.select :invoice_type, options_for_select(Invoice::select_invoice_types, selected: @invoice.display_invoice_type) %> No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span><span id="e-estimatenumber"><%= @invoice.estimate_number %></span>
             </div>
        </section> 
        
@@ -155,7 +155,7 @@
                   <tbody>
                     <tr>
                       <td align="right">Date:</td>
-                      <td class="invoicesetting"><span id="e-date" contenteditable="<%= @editable %>"></span></td>
+                      <td class="invoicesetting"><span id="e-date" <%= display_content_editable %>></span></td>
                     </tr>
                     <tr>
                       <td align="right">Terms:</td>
@@ -176,7 +176,7 @@
                     </tr>
                     <tr>
                       <td align="right">Due Date:</td>
-                      <td class="invoicesetting"><span id="e-duedate" contenteditable="<%= @editable %>"></span></td>
+                      <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>></span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -187,22 +187,22 @@
 
          <div id="userinfo">
             <%= f.text_field :name %>
-                  <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
+                  <span id="e-name" <%= display_content_editable %> placeholder="Name" name="invoice[name]"><%= @invoice.name %></span><br>
                   <%= f.text_field :address_line1 %>
-                  <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address" name="invoice[address_line1]"><%= @invoice.address_line1 %></span><br>
+                  <span id="e-address" <%= display_content_editable %> placeholder="Address" name="invoice[address_line1]"><%= @invoice.address_line1 %></span><br>
                   <%= f.text_field :address_line2 %>
-                  <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip" name="invoice[address_line2]"><%= @invoice.address_line2 %></span><br>
+                  <span id="e-cityzip" <%= display_content_editable %> placeholder="City, State, Zip" name="invoice[address_line2]"><%= @invoice.address_line2 %></span><br>
                   <%= f.text_field :phone %>
-                  <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone" name="invoice[phone]"><%= @invoice.phone %></span>
+                  <span id="e-phone" <%= display_content_editable %> placeholder="Phone" name="invoice[phone]"><%= @invoice.phone %></span>
             </div>
 
              <div id="clientinfo">
                   <%= hidden_field_tag :client_id, @client_id, value: @invoice.client_id %>
           <div class="sectiontitle">Bill To:</div>
-                 <span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
+                 <span id="e-clientname" <%= display_content_editable %> placeholder="Client Name" name="invoice[client_name]"><%= @invoice.client_name %></span><br>
                   <%= f.text_field :client_address_line1 %>
-                  <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address" name="invoice[client_address_line1]"><%= @invoice.client_address_line1 %></span><br>
-                  <%= f.text_field :client_address_line2 %><span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
+                  <span id="e-clientaddress" <%= display_content_editable %> placeholder="Client Address" name="invoice[client_address_line1]"><%= @invoice.client_address_line1 %></span><br>
+                  <%= f.text_field :client_address_line2 %><span id="e-clientcityzip" <%= display_content_editable %> placeholder="Client City, State, Zip" name="invoice[client_address_line2]"><%= @invoice.client_address_line2 %></span><br>
           </div>
        </section>
        
@@ -218,19 +218,19 @@
                         <tr changed="true" class="jobrow">
                           <td align="left" class="jobdescriptioncell">
                                 <%= c.text_area :job_description, class: "job-description-box" %>
-                                <span class="e-jobdescription job_description" contenteditable="<%= @editable %>" placeholder="Type a job description">
+                                <span class="e-jobdescription job_description" <%= display_content_editable %> placeholder="Type a job description">
                                   <%= c.object.job_description %>
                                 </span>
                           </td>
                           <td align="right" class="quantitycell">
                                 <%= c.text_field :job_quantity, class: "job-quantity-box", value: (number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true)) %>
-                                <span class="e-quantity job_quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+                                <span class="e-quantity job_quantity" <%= display_content_editable %> placeholder="Quantity">
                   <%= number_with_precision(c.object.job_quantity, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
                                 </span>
                           </td>
                           <td align="right" class="ratecell">
                                 <%= c.text_field :job_rate, class: "job-rate-box", value: (number_with_precision(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true))  %>
-                                <span class="e-rate job_rate" contenteditable="<%= @editable %>" placeholder="Rate">
+                                <span class="e-rate job_rate" <%= display_content_editable %> placeholder="Rate">
                                   <%= number_to_human(c.object.job_rate, precision: 15, scale: 2, strip_insignificant_zeros: true) %>
                                 </span>
                           </td>
@@ -256,7 +256,7 @@
           <div id="taxinformation">
             <div class="taxamount">
               <%= f.text_field :tax, class: "tax-rate-box onlynumber" %>
-              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= @invoice.tax %></span> <span class="percentage">%</span>
+              Tax: <span class="e-taxamount onlynumber" <%= display_content_editable %>><%= @invoice.tax %></span> <span class="percentage">%</span>
             </div>
             <div class="taxincluded">
               <div class="checkboxholder">
@@ -281,7 +281,7 @@
        <section id="notes">
             <div class="sectiontitle notestitle">Notes:</div>
              <%= f.text_area :notes %>
-            <div id="e-notes" contenteditable="<%= @editable %>" value="<%= @invoice.notes %>" placeholder="Type any notes regarding the invoice here." name="invoice[notes]"></div>
+            <div id="e-notes" <%= display_content_editable %> value="<%= @invoice.notes %>" placeholder="Type any notes regarding the invoice here." name="invoice[notes]"></div>
        </section>
        
     </div>

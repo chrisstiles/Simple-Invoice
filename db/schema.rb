@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411004844) do
+ActiveRecord::Schema.define(version: 20160522210339) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20160411004844) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "invoice_number"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
     t.boolean  "archived",                                      default: false
     t.date     "date"
     t.date     "due_date"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20160411004844) do
     t.string   "token"
     t.integer  "logo_width"
     t.integer  "logo_height"
+    t.string   "invoice_type",                                  default: "invoice"
+    t.integer  "estimate_number",                               default: 1
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"
@@ -86,13 +88,14 @@ ActiveRecord::Schema.define(version: 20160411004844) do
   add_index "logos", ["user_id"], name: "index_logos_on_user_id"
 
   create_table "settings", force: :cascade do |t|
-    t.integer  "base_invoice_number", default: 1
+    t.integer  "base_invoice_number",  default: 1
     t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "has_tax",             default: false
-    t.decimal  "tax",                 default: 0.0
-    t.boolean  "tax_included",        default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "has_tax",              default: false
+    t.decimal  "tax",                  default: 0.0
+    t.boolean  "tax_included",         default: false
+    t.integer  "base_estimate_number", default: 1
   end
 
   add_index "settings", ["user_id"], name: "index_settings_on_user_id"

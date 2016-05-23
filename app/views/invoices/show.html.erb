@@ -21,8 +21,8 @@
 
 <div id="toolbar">
   <div id="toolbarcontent">
-    <%= link_to "Back to Invoices", invoices_path, class: "back" %>
-    <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), tabindex: '-1', class: "button blue editinvoiceicon" %>
+    <%= link_to "Back to #{@invoice.display_invoice_type.pluralize(2)}", invoice_link_to_path('', @invoice, true), class: "back" %>
+    <%= link_to "Edit #{@invoice.display_invoice_type}", invoice_link_to_path('edit', @invoice), tabindex: '-1', class: "button blue editinvoiceicon" %> 
   </div>
 </div>
 
@@ -30,15 +30,18 @@
   <aside id="sidebar">
       <div class="scrollwrapper">
         <div id="controls">
-        <h2 class="showinvoicenumber">Invoice No. <%= @invoice.invoice_number %></h2>
-        <%= link_to 'Edit Invoice', edit_invoice_path(@invoice.invoice_number), class: "showbutton firstshowbutton showeditinvoicebutton" %>
-        <div class="emailmodal showbutton showemailinvoicebutton" data-invoice-number="<%= @invoice.invoice_number %>">Email Invoice</div>
-        <%= link_to 'View PDF', invoice_path(@invoice.invoice_number, format: "pdf"), class: "showbutton viewpdfbutton" %>
+        <h2 class="showinvoicenumber"><%= @invoice.invoice_type.capitalize %> No. <%= @invoice.display_number %></h2>
+
+          <%= link_to 'Edit Estimate', invoice_link(@invoice, "edit"), class: "showbutton firstshowbutton showeditinvoicebutton" %>
+          <div class="emailmodal showbutton showemailinvoicebutton" data-<%= @invoice.display_invoice_type %>-number="<%= @invoice.estimate_number %>">Email Estimate</div>
+         <%= link_to 'View PDF', invoice_link(@invoice, "", "pdf"), class: "showbutton viewpdfbutton" %>
+
         <h2>
           Record Payment
           <span class="showduedate"><%= @invoice.print_days_until_due %></span>
         </h2>
-        <%= form_for(@invoice, :url => update_invoice_path(@invoice.invoice_number), remote: true) do |f| %>
+
+        <%= form_for(@invoice, :url => invoice_link_to_path('update', @invoice), remote: true) do |f| %>
 
         <div id="showrecordpayment">
           <div class="row invoicetotalrow">
@@ -85,7 +88,7 @@
     
     	<section id="invoicenumber">
        		<div>
-            	Invoice No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span>
+            	<%= @invoice.invoice_type.capitalize %> No. <span id="e-invoicenumber"><%= @invoice.display_number %></span>
             </div>
        </section> 
        
@@ -102,7 +105,7 @@
                   <tbody>
                     <tr>
                       <td align="right">Date:</td>
-                      <td class="invoicesetting"><span id="e-date" contenteditable="<%= @editable %>"><%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
+                      <td class="invoicesetting"><span id="e-date"<%= display_content_editable %>><%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
                     <tr>
                       <td align="right">Terms:</td>
@@ -112,7 +115,7 @@
                     </tr>
                     <tr>
                       <td align="right">Due Date:</td>
-                      <td class="invoicesetting"><span id="e-duedate" contenteditable="<%= @editable %>"><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
+                      <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -122,29 +125,29 @@
        <section id="clientinformation">
 
           <div id="userinfo">
-            <span id="e-name" contenteditable="<%= @editable %>" placeholder="Name">
+            <span id="e-name" <%= display_content_editable %> placeholder="Name">
               <%= @invoice.name %>
             </span><br>
-            <span id="e-address" contenteditable="<%= @editable %>" placeholder="Address">
+            <span id="e-address" <%= display_content_editable %> placeholder="Address">
               <%= @invoice.address_line1 %>
             </span><br>
-            <span id="e-cityzip" contenteditable="<%= @editable %>" placeholder="City, State, Zip">
+            <span id="e-cityzip" <%= display_content_editable %> placeholder="City, State, Zip">
               <%= @invoice.address_line2 %>
             </span><br>
-            <span id="e-phone" contenteditable="<%= @editable %>" placeholder="Phone">
+            <span id="e-phone" <%= display_content_editable %> placeholder="Phone">
               <%= @invoice.phone %>
             </span>
           </div>
 
           <div id="clientinfo">
          		<div class="sectiontitle">Bill To:</div>
-         		<span id="e-clientname" contenteditable="<%= @editable %>" placeholder="Client Name">
+         		<span id="e-clientname" <%= display_content_editable %> placeholder="Client Name">
               <%= @invoice.client_name %>
             </span><br>
-              <span id="e-clientaddress" contenteditable="<%= @editable %>" placeholder="Client Address">
+              <span id="e-clientaddress" <%= display_content_editable %> placeholder="Client Address">
               <%= @invoice.client_address_line1 %>
               </span><br>
-              <span id="e-clientcityzip" contenteditable="<%= @editable %>" placeholder="Client City, State, Zip">
+              <span id="e-clientcityzip" <%= display_content_editable %> placeholder="Client City, State, Zip">
               <%= @invoice.client_address_line2 %>
               </span><br>
             </div>
@@ -162,17 +165,17 @@
                 <% @invoice.jobs.each do |job| %>
                   <tr changed="false">
                     <td align="left" class="jobdescriptioncell">
-                      <span class="e-jobdescription" contenteditable="<%= @editable %>">
+                      <span class="e-jobdescription" <%= display_content_editable %>>
                         <%= print_multiline(job.job_description) %>
                       </span>
                     </td>
                     <td align="right" class="quantitycell">
-                      <span class="e-quantity" contenteditable="<%= @editable %>" placeholder="Quantity">
+                      <span class="e-quantity" <%= display_content_editable %> placeholder="Quantity">
                         <%= number_with_precision(job.job_quantity, precision: 2, strip_insignificant_zeros: true, delimiter: ",") %>
                       </span>
                     </td>
                     <td align="right" class="ratecell">
-                      <span class="e-rate" contenteditable="<%= @editable %>" placeholder="Rate">
+                      <span class="e-rate" <%= display_content_editable %> placeholder="Rate">
                         <%= print_number_or_na(job.job_rate) %>
                       </span>
                     </td>
@@ -193,7 +196,7 @@
     
           <div id="taxinformation">
             <div class="taxamount">
-              Tax: <span class="e-taxamount onlynumber" contenteditable="<%= @editable %>"><%= @invoice.tax %></span><span class="percentage">%</span>
+              Tax: <span class="e-taxamount onlynumber" <%= display_content_editable %>><%= @invoice.tax %></span><span class="percentage">%</span>
             </div>
             <div class="taxincluded">
               <%= @invoice.tax_included_text %>
@@ -208,7 +211,7 @@
        
         <section id="notes">
             <div class="sectiontitle notestitle">Notes:</div>
-            <div id="e-notes" contenteditable="<%= @editable %>"><%= print_multiline(@invoice.notes) %></div>
+            <div id="e-notes" <%= display_content_editable %>><%= print_multiline(@invoice.notes) %></div>
        </section>
        
     </div>

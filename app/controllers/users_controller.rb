@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, :password, :password_confirmation, setting_attributes: [:id, :base_invoice_number, :has_tax, :tax, :tax_included])
+			params.require(:user).permit(:email, :name, :address, :city, :state, :zip, :phone, :logo, :password, :password_confirmation, setting_attributes: [:id, :base_invoice_number, :base_estimate_number, :has_tax, :tax, :tax_included])
 		end
 
 		def remove_password_param_if_blank

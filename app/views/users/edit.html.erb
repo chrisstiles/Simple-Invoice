@@ -84,7 +84,12 @@
 								<%= c.text_field :base_invoice_number, class: "onlynumber" %>
 							</div>
 
-							<div class="half nomargin  hastaxhalf">
+							<div class="half baseestimatehalf nomargin">
+					            <%= c.label :base_estimate_number %>
+								<%= c.text_field :base_estimate_number, class: "onlynumber" %>
+							</div>
+
+							<div class="full hastaxhalf">
 								<div class="hastaxtitle">Tax: <span class="hastaxtext">No Tax</span></div>
 								<div id="hastaxwrapper">
 						            <%= c.check_box :has_tax, class: "cmn-toggle cmn-toggle-round taxtoggle" %>

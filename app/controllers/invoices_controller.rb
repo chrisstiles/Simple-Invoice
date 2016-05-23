@@ -1,7 +1,11 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
-
-  #before_action :amount_paid_nil_to_zero, only: [:update]
+  before_action :set_create_invoice, only: [:create]
+  before_action :format_invoice_type, only: [:create, :update]
+  before_action :set_client_if_not_nil, only: [:create, :update]
+  before_action :set_number_of_jobs_not_to_be_deleted, only: [:create, :update]
+  before_action :set_initial_balance, only: [:create]
+  before_action :set_relevant_invoice_or_estimate_number, only: [:edit, :update]
 
   after_action :merge_client_if_name_exists, only: [:create, :update]
   after_action :remove_jobs_set_to_delete, only: [:create, :update]
@@ -18,9 +22,8 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @editable = "false"
     respond_to do |format|
-      if params[:invoice_number]
+      if params[:invoice_number] || params[:estimate_number]
         format.html
       end
       format.pdf do
@@ -58,29 +61,17 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
 
-    @editable = "true"
-    @number = set_invoice_number
+    set_new_invoice_and_estimate_numbers
 
     @invoice.jobs.build
   end
 
   def edit
-    @editable = "true"
   end
 
 
   def create
-    if user_signed_in?
-      @invoice = current_user.invoices.build(invoice_params)
-      @invoice.invoice_number = set_invoice_number
-      @editable = "true"
-      set_client_if_not_nil
-    else
-      @invoice = Invoice.create(invoice_params)
-    end
-
-    set_number_of_jobs_not_to_be_deleted
-    set_initial_balance
+    set_new_invoice_and_estimate_numbers
 
     respond_to do |format|
 
@@ -94,11 +85,10 @@ class InvoicesController < ApplicationController
 
         format.js do 
           if user_signed_in?
-            render js: "window.location = '#{invoice_url(@invoice.invoice_number)}'"
+            render js: "window.location = '#{invoice_link_to_path('', @invoice)}'"
           end
         end
-
-        format.html { render invoice_path(@invoice.invoice_number) }
+        format.html { render invoice_link_to_path('', @invoice) }
       else
         format.html { render :new }
         format.js 
@@ -108,22 +98,11 @@ class InvoicesController < ApplicationController
     
   end
 
-  # PATCH/PUT /invoices/1
-  # PATCH/PUT /invoices/1.json
-  def update
-    #@invoice.jobs.each do |job|
-    #    job.job_quantity.round(2)
-    #    job.job_rate.round(2)
-    #end
-    #@jobs = @invoice.jobs
 
-    set_client_if_not_nil
-    set_number_of_jobs_not_to_be_deleted
-    #set_invoice_balance
+  def update
 
     respond_to do |format|
       if @invoice.update(invoice_params)
-        #merge_client_if_name_exists
         format.html { redirect_to invoice_url(@invoice.invoice_number), flash: { success: 'Payment Recorded!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
@@ -138,7 +117,7 @@ class InvoicesController < ApplicationController
         if params[:from_index_page]
           format.js #{ render js: "window.location = '#{invoices_path}'" }
         else
-          format.js { render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'" }
+          format.js { render js: "window.location = '#{invoice_link_to_path('', @invoice)}'" }
         end
         
       else
@@ -148,8 +127,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.json
   def destroy
     archive_invoice
     flash[:success] = 'Invoice deleted!'
@@ -165,6 +142,8 @@ class InvoicesController < ApplicationController
     def set_invoice
       if params[:invoice_number]
         @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
+      elsif params[:estimate_number]
+        @invoice = current_user.invoices.find_by(estimate_number: params[:estimate_number])
       elsif params[:token]
         @invoice = Invoice.find_by(token: params[:token])
         if @invoice.nil?
@@ -178,40 +157,63 @@ class InvoicesController < ApplicationController
 
     end
 
+    def set_create_invoice
+      if user_signed_in?
+        @invoice = current_user.invoices.build(invoice_params)
+      else
+        @invoice = Invoice.create(invoice_params)
+      end
+    end
+
     def invoice_params
-      params.require(:invoice).permit(:terms, :logo, :invoice_number, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
+      params.require(:invoice).permit(:terms, :logo, :invoice_number, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, :invoice_type, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
     # def email_invoice_params
     #   params.permit(:recipient, :cc, :message)
     # end
 
-    def set_invoice_number
-      base_invoice_number = current_user.setting.base_invoice_number || 1
-      max_current_invoice_number = current_user.invoices.maximum("invoice_number") || 0
+    def invoice_or_estimate_number(invoice_type)
+      is_estimate = if invoice_type == "estimate"
+        true
+      else
+        false
+      end
+
+      if is_estimate
+        base_number = current_user.setting.base_estimate_number || 1
+        max_current_number = current_user.invoices.maximum("estimate_number") || 0
+      else
+        base_number = current_user.setting.base_invoice_number || 1
+        max_current_number = current_user.invoices.maximum("invoice_number") || 0
+      end
 
       if current_user.invoices.empty?
-        return base_invoice_number
+        return base_number
       end
 
-      if base_invoice_number > max_current_invoice_number
-        return base_invoice_number
-      elsif base_invoice_number == max_current_invoice_number
-        return base_invoice_number + 1
+      if base_number > max_current_number
+        return base_number
+      elsif base_number == max_current_number
+        return base_number + 1
       end
 
-      if base_invoice_number < max_current_invoice_number
-        used_invoice_numbers = current_user.invoices.where("invoice_number >= ?", base_invoice_number).pluck(:invoice_number).sort
+      if base_number < max_current_number
 
-        for num in base_invoice_number..max_current_invoice_number
-          unless used_invoice_numbers.include?(num)
-            puts "#{num}"
+        used_numbers = if is_estimate
+          current_user.invoices.where("estimate_number >= ?", base_number).pluck(:estimate_number).sort
+        else
+          current_user.invoices.where("invoice_number >= ?", base_number).pluck(:invoice_number).sort
+        end
+
+        for num in base_number..max_current_number
+          unless used_numbers.include?(num)
             return num
           end
         end
       end
 
-      max_current_invoice_number + 1
+      max_current_number + 1
     end
 
     def archive_invoice
@@ -244,12 +246,14 @@ class InvoicesController < ApplicationController
     end
 
     def set_client_if_not_nil
-      if params.include?(:client_id)
-        client_id = params[:client_id]
-        unless client_id.empty?
-           @invoice.client = current_user.clients.find(params[:client_id])
-        else
-          @invoice.client = nil
+      if user_signed_in?
+        if params.include?(:client_id)
+          client_id = params[:client_id]
+          unless client_id.empty?
+             @invoice.client = current_user.clients.find(params[:client_id])
+          else
+            @invoice.client = nil
+          end
         end
       end
     end
@@ -288,6 +292,41 @@ class InvoicesController < ApplicationController
       end
     end
 
+    def format_invoice_type
+      invoice_type = params[:invoice][:invoice_type]
 
+      if invoice_type.present?
+        invoice_type.downcase!
+        if Invoice::INVOICE_TYPES.include?(invoice_type)
+          @invoice.invoice_type = invoice_type
+        else
+          @invoice.invoice_type = "invoice"
+        end
+      else
+        if @invoice.is_estimate?
+          @invoice.invoice_type = "estimate"
+        else
+          @invoice.invoice_type = "invoice"
+        end
+      end
+
+    end
+
+    def set_new_invoice_and_estimate_numbers
+      if user_signed_in?
+        @invoice.invoice_number = invoice_or_estimate_number("invoice")
+        @invoice.estimate_number = invoice_or_estimate_number("estimate")
+      end
+    end
+
+    def set_relevant_invoice_or_estimate_number
+      if @invoice.is_estimate?
+        @invoice.invoice_number = invoice_or_estimate_number("invoice")
+        @invoice.estimate_number ||= invoice_or_estimate_number("estimate")
+      else
+        @invoice.invoice_number ||= invoice_or_estimate_number("invoice")
+        @invoice.estimate_number = invoice_or_estimate_number("estimate")
+      end
+    end
 
 end
