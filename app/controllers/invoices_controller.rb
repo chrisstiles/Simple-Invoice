@@ -27,7 +27,7 @@ class InvoicesController < ApplicationController
         format.html
       end
       format.pdf do
-        render pdf: "Invoice #{@invoice.invoice_number}", :template => 'invoices/pdf_default.html.erb', show_as_html: params.key?('debug')
+        render pdf: "#{@invoice.display_invoice_type} #{@invoice.display_number}", :template => 'invoices/pdf_default.html.erb', show_as_html: params.key?('debug')
       end
     end
   end
@@ -77,10 +77,10 @@ class InvoicesController < ApplicationController
 
       if @invoice.save
 
-        format.html { redirect_to invoice_path(@invoice.invoice_number), flash: { success: 'Invoice was successfully created!' } }
+        format.html { redirect_to invoice_or_estimate_path, flash: { success: "#{@invoice.display_invoice_type} was successfully created!" } }
         format.json { render :show, status: :ok, location: @invoice }
 
-        flash[:success] = 'Invoice was successfully created!'
+        flash[:success] = "#{@invoice.display_invoice_type} was successfully created!"
         flash.keep(:success)
 
         format.js do 
@@ -88,7 +88,7 @@ class InvoicesController < ApplicationController
             render_js_invoice_or_estimate_path
           end
         end
-        format.html { render invoice_link_to_path('', @invoice) }
+        format.html { render invoice_or_estimate_path }
       else
         format.html { render :new }
         format.js 
@@ -103,14 +103,14 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to invoice_url(@invoice.invoice_number), flash: { success: 'Payment Recorded!' } }
+        format.html { redirect_to invoice_or_estimate_path, flash: { success: 'Payment Recorded!' } }
         format.json { render :show, status: :ok, location: @invoice }
 
         if params[:invoice][:amount_paid].present?
           flash[:success] = 'Payment Recorded!'
           flash.keep(:success)
         else
-          flash[:success] = 'Invoice was successfully updated!'
+          flash[:success] = "#{@invoice.display_invoice_type} was successfully updated!"
           flash.keep(:success)
         end
 
@@ -128,12 +128,14 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
-    archive_invoice
-    flash[:success] = 'Invoice deleted!'
+    #archive_invoice
+    invoice = @invoice
+    @invoice.destroy
+    flash[:success] = "#{invoice.display_invoice_type} deleted!"
     flash.keep(:success)
 
     respond_to do |format|
-      format.js { render js: "window.location = '#{invoices_path}'" }
+      format.js { render js: "window.location = '#{back_to_index_page(invoice)}'" }
     end
   end
 
@@ -329,11 +331,29 @@ class InvoicesController < ApplicationController
       end
     end
 
+    def invoice_or_estimate_path
+      if @invoice.is_estimate?
+        estimate_path(@invoice.estimate_number)
+      else
+        invoice_path(@invoice.invoice_number)
+      end
+    end
+
     def render_js_invoice_or_estimate_path
       if @invoice.is_estimate?
         render js: "window.location = '#{estimate_path(@invoice.estimate_number)}'"
       else
         render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'"
+      end
+    end
+
+    def back_to_index_page(temp_invoice = "")
+      invoice = @invoice || temp_invoice || ""
+
+      if invoice.present? && invoice.is_estimate?
+        estimates_path
+      else
+        invoices_path
       end
     end
 

@@ -112,5 +112,4 @@ module InvoicesHelper
       end
     end
 
-
 end

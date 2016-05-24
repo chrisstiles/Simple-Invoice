@@ -282,4 +282,12 @@ class Invoice < ActiveRecord::Base
     	end
     end
 
+    def display_number_data_attribute
+    	if self.is_estimate?
+    		raw("data-estimatenumber='#{self.estimate_number}'")
+    	else
+    		raw("data-invoicenumber='#{self.invoice_number}'")
+    	end
+    end
+
 end

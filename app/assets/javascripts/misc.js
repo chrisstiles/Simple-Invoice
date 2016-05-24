@@ -168,13 +168,21 @@ pageBody.on('click', '.closeerrors', function() {
 
 // Ajax call to delete invoice when button is pressed
 pageBody.on('click', '.deleteinvoice', function() {
-	var invoiceNumber = $(this).attr('data-invoicenumber');
-	var confirmation = confirm('Are you sure you would like to delete this invoice?')
+	var $this = $(this);
+	var number = $this.attr('data-estimatenumber') || $this.attr('data-invoicenumber');
+
+	if ($this.attr('data-estimatenumber')) {
+		var deleteUrl = '/estimates/' + number;
+		var confirmation = confirm('Are you sure you would like to delete this estimate?');
+	} else {
+		var deleteUrl = '/invoices/' + number;
+		var confirmation = confirm('Are you sure you would like to delete this invoice?');
+	}
 
 	if(confirmation) {
 	    $.ajax({
 	        type: 'delete',
-	        url: '/invoices/' + invoiceNumber,
+	        url: deleteUrl,
 	        dataType: 'script',
 	        async: true
 	        }).done(function( msg ) {
