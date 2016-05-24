@@ -34,7 +34,7 @@
 
           <%= link_to 'Edit Estimate', invoice_link(@invoice, "edit"), class: "showbutton firstshowbutton showeditinvoicebutton" %>
           <div class="emailmodal showbutton showemailinvoicebutton" data-<%= @invoice.display_invoice_type %>-number="<%= @invoice.estimate_number %>">Email Estimate</div>
-         <%= link_to 'View PDF', invoice_link(@invoice, "", "pdf"), class: "showbutton viewpdfbutton" %>
+          <%= link_to 'View PDF', invoice_link(@invoice, "", "pdf"), class: "showbutton viewpdfbutton" %>
 
         <h2>
           Record Payment

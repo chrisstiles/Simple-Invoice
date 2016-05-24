@@ -85,7 +85,7 @@ class InvoicesController < ApplicationController
 
         format.js do 
           if user_signed_in?
-            render js: "window.location = '#{invoice_link_to_path('', @invoice)}'"
+            render_js_invoice_or_estimate_path
           end
         end
         format.html { render invoice_link_to_path('', @invoice) }
@@ -115,9 +115,9 @@ class InvoicesController < ApplicationController
         end
 
         if params[:from_index_page]
-          format.js #{ render js: "window.location = '#{invoices_path}'" }
+          format.js 
         else
-          format.js { render js: "window.location = '#{invoice_link_to_path('', @invoice)}'" }
+          format.js { render_js_invoice_or_estimate_path }
         end
         
       else
@@ -326,6 +326,14 @@ class InvoicesController < ApplicationController
       else
         @invoice.invoice_number ||= invoice_or_estimate_number("invoice")
         @invoice.estimate_number = invoice_or_estimate_number("estimate")
+      end
+    end
+
+    def render_js_invoice_or_estimate_path
+      if @invoice.is_estimate?
+        render js: "window.location = '#{estimate_path(@invoice.estimate_number)}'"
+      else
+        render js: "window.location = '#{invoice_path(@invoice.invoice_number)}'"
       end
     end
 
