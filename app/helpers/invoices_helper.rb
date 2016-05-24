@@ -76,13 +76,13 @@ module InvoicesHelper
 
     def display_content_editable
       if user_signed_in?
-        if current_page?(controller: 'invoices', action: 'new') || current_page?(controller: 'invoices', action: 'edit')
+        if controller_name == "invoices" && (action_name == "new" || action_name == "edit")
           raw(" contenteditable='true'")
         else
           ''
         end
       else
-        if current_page?(action: 'home')
+        if controller_name == "static_pages" && action_name == "home"
           raw(" contenteditable='true'")
         else
           ''
@@ -111,5 +111,14 @@ module InvoicesHelper
         Rails.application.routes.url_helpers.send("#{action}invoice_path", invoice.invoice_number, format: format)
       end
     end
+
+
+    def invoice_type_class(invoice)
+      if invoice.is_estimate?
+        "isestimate"
+      else
+        "isinvoice"
+      end
+    end 
 
 end

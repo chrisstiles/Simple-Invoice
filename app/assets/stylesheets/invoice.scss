@@ -309,6 +309,26 @@
 	display:none;
 }
 
+body.isinvoice #invoicewrapper #e-invoicenumber {
+	display:inline;
+}
+
+body.isinvoice #invoicewrapper #e-estimatenumber {
+	display:none;
+}
+
+body.isestimate #invoicewrapper #e-invoicenumber {
+	display:none;
+}
+
+body.isestimate #invoicewrapper #e-estimatenumber {
+	display:inline;
+}
+
+#invoicewrapper.show #e-invoicenumber {
+	display:inline !important;
+}
+
 .datefield, .duedatefield {
 	-webkit-touch-callout: none;
     -webkit-user-select: none;

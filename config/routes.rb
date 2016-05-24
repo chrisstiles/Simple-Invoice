@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   resources :invoices, param: :invoice_number
 
   patch '/estimates/:estimate_number' => 'invoices#update', as: :update_estimate
-  resources :estimates, param: :estimate_number, controller: 'invoices'
+  get '/estimates/new' => 'invoices#new', as: :new_estimate
+  resources :estimates, param: :estimate_number, controller: 'invoices', except: [:new]
 
   # Email Invoice
   post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :send_email_invoice

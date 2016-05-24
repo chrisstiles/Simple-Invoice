@@ -61,6 +61,7 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
 
+    set_initial_invoice_type_by_url
     set_new_invoice_and_estimate_numbers
 
     @invoice.jobs.build
@@ -318,6 +319,15 @@ class InvoicesController < ApplicationController
       if user_signed_in?
         @invoice.invoice_number = invoice_or_estimate_number("invoice")
         @invoice.estimate_number = invoice_or_estimate_number("estimate")
+      end
+    end
+
+    def set_initial_invoice_type_by_url
+      url = request.path_info
+      if url.include?('estimates')
+        @invoice.invoice_type = 'estimate'
+      else
+        @invoice.invoice_type = 'invoice'
       end
     end
 

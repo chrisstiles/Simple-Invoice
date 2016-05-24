@@ -1,6 +1,6 @@
 <%= content_for(:nophone, true) %>
 <%= content_for(:mobilesidebar, true) %>
-<%= provide :special_class, " generateinvoice" %>
+<%= provide :special_class, " generateinvoice #{invoice_type_class(@invoice)}" %>
 <%= provide :title, "New Invoice" %>
 
 <div id="formwrapper">
@@ -83,7 +83,7 @@
     
       <section id="invoicenumber">
                   <div>
-                  <%= f.select :invoice_type, options_for_select(Invoice::select_invoice_types) %> No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span><span id="e-estimatenumber"><%= @invoice.estimate_number %></span>
+                  <%= f.select :invoice_type, options_for_select(Invoice::select_invoice_types, selected: @invoice.display_invoice_type) %> No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span><span id="e-estimatenumber"><%= @invoice.estimate_number %></span>
             </div>
        </section> 
        
