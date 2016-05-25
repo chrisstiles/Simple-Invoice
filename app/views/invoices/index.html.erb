@@ -11,17 +11,26 @@
   <div id="mobilesidebarwrapper">
       <div id="homeside">
         <div class="homesidesection homefiltersection">
-           <h3>Filter Invoices</h3>
-           <form accept-charset="UTF-8" action="/invoices" method="get" class="homefilter">
+           <h3>Filter <%= @invoice_types.capitalize %></h3>
+           <form accept-charset="UTF-8" action="/<%= @invoice_types %>" method="get" class="homefilter">
               <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
-              <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
+              <% if @is_estimates %>
+                <input type="text" name="estimate_number" class="search invoice_number_search" placeholder="Estimate Number" autocomplete="off">
+              <% else %>
+                <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
+              <% end %>
               <div class="homesortoptions homesideborders">
                  <h4>Sort Invoices By:</h4>
                  <select class="search invoice_sorted_by searchchange" name="sorted_by">
                     <option value="created_at_desc" selected="selected">Created at (newest first)</option>
                     <option value="created_at_asc">Created at (oldest first)</option>
-                    <option value="invoice_number_desc">Invoice Number (highest first)</option>
-                    <option value="invoice_number_asc">Invoice Number (lowest first)</option>
+                    <% if @is_estimates %>
+                      <option value="estimate_number_desc">Estimate Number (highest first)</option>
+                      <option value="estimate_number_asc">Estimate Number (lowest first)</option>
+                    <% else %>
+                      <option value="invoice_number_desc">Invoice Number (highest first)</option>
+                      <option value="invoice_number_asc">Invoice Number (lowest first)</option>
+                    <% end %>
                     <option value="client_name_asc">Client Name (a-z)</option>
                     <option value="client_name_desc">Client Name (z-a)</option>
                  </select>

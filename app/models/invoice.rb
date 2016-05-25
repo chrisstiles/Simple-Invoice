@@ -27,6 +27,7 @@ class Invoice < ActiveRecord::Base
 
 	scope :client_name, -> (client_name) { where("LOWER(client_name) like ?", "#{client_name.downcase}%")}
 	scope :invoice_number, -> (invoice_number) { where("cast(invoice_number as text) like ?", "#{invoice_number.downcase}%")}
+	scope :estimate_number, -> (estimate_number) { where("cast(estimate_number as text) like ?", "#{estimate_number.downcase}%")}
 	scope :currently_due, -> (currently_due) {
 		if currently_due 
 			where("due_date <= ?", Date.today).where("balance > ?", 0)
@@ -44,6 +45,8 @@ class Invoice < ActiveRecord::Base
 	    reorder("LOWER(invoices.client_name) #{ direction }")
 	  when /^invoice_number/
 	    reorder("invoices.invoice_number #{ direction }")
+	  when /^estimate_number/
+	    reorder("invoices.estimate_number #{ direction }")
 	  else
 	    raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
 	  end

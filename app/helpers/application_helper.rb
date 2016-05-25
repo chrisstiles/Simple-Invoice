@@ -95,9 +95,17 @@ module ApplicationHelper
 		action.include?(params[:action])
 	end
 
-	def current_page(page)
+	def current_page(page, invoice_type = '')
 		if controller?(page.to_s)
-			" current"
+			unless invoice_type.empty?
+				if request.original_url.include? invoice_type
+					" current"
+				else
+					""
+				end
+			else
+				" current"
+			end
 		else
 			""
 		end

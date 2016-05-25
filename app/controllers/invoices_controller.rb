@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
+  before_action :set_invoices_or_estimate_index_page, only: [:index]
   before_action :set_create_invoice, only: [:create]
   before_action :format_invoice_type, only: [:create, :update]
   before_action :set_client_if_not_nil, only: [:create, :update]
@@ -12,13 +13,6 @@ class InvoicesController < ApplicationController
   after_action :set_logo_dimensions, only: [:create, :update]
 
   def index
-   @invoices = current_user.invoices.where(archived: false).page(params[:page])
-
-   @invoices = @invoices.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
-   @invoices = @invoices.client_name(params[:client_name]) if params[:client_name].present?
-   @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
-   @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
-
   end
 
   def show
@@ -365,6 +359,26 @@ class InvoicesController < ApplicationController
       else
         invoices_path
       end
+    end
+
+
+    def set_invoices_or_estimate_index_page
+      if request.original_url.include? "estimates"
+        @is_estimates = true
+        @invoice_types = "estimates"
+        @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "estimate").page(params[:page])
+        @invoices = @invoices.estimate_number(params[:estimate_number]) if params[:estimate_number].present?
+      else
+        @is_estimates = false
+        @invoice_types = "invoices"
+        @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "invoice").page(params[:page])
+        @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
+        @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
+      end
+
+       @invoices = @invoices.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
+       @invoices = @invoices.client_name(params[:client_name]) if params[:client_name].present?
+
     end
 
 end
