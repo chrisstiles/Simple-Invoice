@@ -112,7 +112,6 @@ module InvoicesHelper
       end
     end
 
-
     def invoice_type_class(invoice)
       if invoice.is_estimate?
         "isestimate"

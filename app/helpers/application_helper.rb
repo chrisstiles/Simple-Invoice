@@ -98,7 +98,7 @@ module ApplicationHelper
 	def current_page(page, invoice_type = '')
 		if controller?(page.to_s)
 			unless invoice_type.empty?
-				if request.original_url.include? invoice_type
+				if request.path.include? invoice_type
 					" current"
 				else
 					""
