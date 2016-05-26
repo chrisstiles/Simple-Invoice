@@ -37,7 +37,7 @@ class InvoicesController < ApplicationController
   
         InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message], current_user.email).deliver_now
 
-        flash[:success] = 'Invoice was successfully emailed!'
+        flash[:success] = "#{@invoice.display_invoice_type} was successfully emailed!"
         flash.keep(:success)
 
       end
