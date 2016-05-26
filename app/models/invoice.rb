@@ -10,7 +10,7 @@ class Invoice < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :client
 	
-	has_many :jobs
+	has_many :jobs, dependent: :destroy
 
 	accepts_nested_attributes_for :jobs, :client
 
