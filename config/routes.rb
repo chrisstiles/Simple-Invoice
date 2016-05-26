@@ -33,9 +33,12 @@ Rails.application.routes.draw do
   get '/estimates/new' => 'invoices#new', as: :new_estimate
   resources :estimates, param: :estimate_number, controller: 'invoices', except: [:new]
 
-  # Email Invoice
+  # Email Invoice and Estimate
   post 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :send_email_invoice
   get 'invoices/:invoice_number/send' => 'invoices#email_invoice', as: :show_email_invoice
+
+  post 'estimates/:estimate_number/send' => 'invoices#email_invoice', as: :send_email_estimate
+  get 'estimates/:estimate_number/send' => 'invoices#email_invoice', as: :show_email_estimate
 
   get '/pdfs/:token' => 'invoices#show', param: :token, :defaults => { :format => :pdf }, as: :public_invoice
 

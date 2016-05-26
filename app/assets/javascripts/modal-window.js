@@ -132,12 +132,21 @@ ready = function() {
 
     pageBody.on('click', '.emailmodal', function(e) {
         e.preventDefault();
-        var invoiceNumber = $(this).attr('data-invoice-number');
-        showModal('Email Invoice #' + invoiceNumber)
+        var $this = $(this);
+        var number = $this.attr('data-estimatenumber') || $this.attr('data-invoicenumber');
+        
+        if ($this.attr('data-estimatenumber')) {
+            var emailUrl = '/estimates/' + number + '/send';
+            showModal('Email Estimate #' + number);
+        } else {
+            var emailUrl = '/invoices/' + number + '/send';
+            showModal('Email Invoice #' + number);
+        }
+        
             // Get json data and save as variable
             $.ajax({
                 type: 'GET',
-                url: '/invoices/' + invoiceNumber + '/send',
+                url: emailUrl,
                 dataType: 'html',
                 async: true,
                 success: function(data) {

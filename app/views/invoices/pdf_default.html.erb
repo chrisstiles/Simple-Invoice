@@ -336,7 +336,7 @@ section:after {
                     </tr>
                     <tr>
                       <td align="right">Due Date:</td>
-                      <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
+                      <td class="invoicesetting"><span id="e-duedate"><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -431,7 +431,7 @@ section:after {
        <% unless @invoice.notes.blank? %>
           <section id="notes">
               <div class="sectiontitle notestitle">Notes:</div>
-              <div id="e-notes" <%= display_content_editable %>><%= print_multiline(@invoice.notes) %></div>
+              <div id="e-notes"><%= print_multiline(@invoice.notes) %></div>
          </section>
        <% end %>
        

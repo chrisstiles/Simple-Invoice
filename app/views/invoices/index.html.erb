@@ -1,6 +1,6 @@
 <%= provide :title, "Invoices" %>
 <%= content_for(:mobilesidebar, true) %>
-<% if has_any_invoices? %>
+<% if @invoices.any? %>
 
 <%= provide :outside_content  do %>
 
@@ -63,7 +63,7 @@
    
    <div id="searchresultswrapper" class="homeresults">
       <div id="searchnoinvoices" class="noinvoices">
-         <p>No Invoices Found</p>
+         <p>No <%= @invoice_types.capitalize %> Found</p>
          <%= link_to "New Invoice", new_invoice_path, class: "button blue" %>
       </div>
       <div class="loadingspinner">
@@ -81,8 +81,12 @@
    <div id="pagewrapper">
 
       <div id="searchnoinvoices">
-         <p>No Invoices Found</p>
-         <%= link_to "Create Your First Invoice", new_invoice_path, class: "button blue" %>
+        <p>No <%= @invoice_types.capitalize %> Found</p>
+        <% if @is_estimates %>
+          <%= link_to "Create Your First Estimate", new_estimate_path, class: "button blue" %>
+        <% else %>
+          <%= link_to "Create Your First Invoice", new_invoice_path, class: "button blue" %> 
+        <% end %>
       </div>
       <div class="loadingspinner">
          <div class="loadingcircle">

@@ -84,7 +84,12 @@
   <%= link_to invoice_link(invoice, "", "pdf"), class: "thirdbutton file" do %>
       <span>View PDF</span>
   <% end %>
-  <a href="#" class="thirdbutton mail emailmodal" data-invoice-number="<%= invoice.invoice_number %>"><span>Email Invoice</span></a>
+  <% if invoice.is_estimate? %>
+    <a href="#" class="thirdbutton mail emailmodal" data-estimatenumber="<%= invoice.estimate_number %>"><span>Email Estimate</span></a>
+  <% else %>
+    <a href="#" class="thirdbutton mail emailmodal" data-invoicenumber="<%= invoice.invoice_number %>"><span>Email Invoice</span></a>
+  <% end %>
+ 
   <a href="#" class="thirdbutton noborder pig">
 
   <div class="overflowcontainer">
