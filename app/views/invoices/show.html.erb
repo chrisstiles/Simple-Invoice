@@ -6,7 +6,7 @@
   <%= render 'not_found' %>
 <% else %>
 
-<%= provide :title, "Invoice ##{@invoice.invoice_number}" %>
+<%= provide :title, "#{@invoice.display_invoice_type} ##{@invoice.display_number}" %>
 <div id="validationerrors" class="amountpaidvalidation">
   <div class="validationtitle">
   <div class="closeerrors"></div>

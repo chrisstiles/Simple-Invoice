@@ -7,7 +7,7 @@
   <%= render 'not_found' %>
 <% else %>
 
-<%= provide :title, "Edit Invoice ##{@invoice.invoice_number}" %>
+<%= provide :title, "Edit #{@invoice.display_invoice_type} ##{@invoice.display_number}" %>
 
 <% if @validation_failed %>
   <% content_for :body_class, "validationfailed invoicevalidation" %>

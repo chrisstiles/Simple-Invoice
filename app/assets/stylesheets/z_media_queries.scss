@@ -1518,7 +1518,7 @@
 		width:20% !important;
 	}
 
-	.e-jobdescription:before {
+	.e-jobdescription[contenteditable="true"]:before {
 		content:"Description";
 	}
 
