@@ -56,17 +56,38 @@ var delay = (function(){
 
 var searchBoxes = $('.search');
 
+var compareVal;
+
+pageBody.on('keydown', '.search', function() {
+  compareVal = $(this).val();
+});
+
 pageBody.on('keyup', '.search', function(e) {
 
   pageBody.addClass('loadingsearchresults');
 
   var keyCode = e.which;
+  var $this = $(this);
+  var newVal = $this.val();
 
-  if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
-   delay(function(){
-      searchInvoice();
-    }, 80 );
-  } 
+  if (compareVal != newVal) {
+
+    if ($this.hasClass('onlynumber')) {
+      var numberCodes = [16, 190, 9, 37, 38, 39, 40, 46, 8, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 110];
+      if (keycodes.indexOf(keyCode) > -1 && keyCode != 91 && (numberCodes.indexOf(keyCode) >= 0)) {
+        delay(function(){
+          searchInvoice();
+        }, 80 );
+      } 
+    } else {
+      if (keycodes.indexOf(keyCode) > -1 && keyCode != 91) {
+        delay(function(){
+          searchInvoice();
+        }, 80 );
+      } 
+    }
+
+  }
 });
 
 

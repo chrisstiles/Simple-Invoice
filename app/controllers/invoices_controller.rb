@@ -365,12 +365,12 @@ class InvoicesController < ApplicationController
     def set_invoices_or_estimate_index_page
       if request.original_url.include? "estimates"
         @is_estimates = true
-        @invoice_types = "estimates"
+        @invoice_types = "Estimates"
         @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "estimate").page(params[:page])
         @invoices = @invoices.estimate_number(params[:estimate_number]) if params[:estimate_number].present?
       else
         @is_estimates = false
-        @invoice_types = "invoices"
+        @invoice_types = "Invoices"
         @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "invoice").page(params[:page])
         @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
         @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?

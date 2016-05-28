@@ -1,8 +1,9 @@
-<%= provide :title, "Invoices" %>
+<%= provide :title, @invoice_types %>
 <%= content_for(:mobilesidebar, true) %>
+<%= provide :special_class, " is#{@invoice_types.downcase.singularize}" %>
 <% if @invoices.any? %>
 
-<%= provide :outside_content  do %>
+<%= provide :outside_content do %>
 
   <div id="homepagination">
     <%= js_will_paginate @invoices %>
@@ -11,16 +12,12 @@
   <div id="mobilesidebarwrapper">
       <div id="homeside">
         <div class="homesidesection homefiltersection">
-           <h3>Filter <%= @invoice_types.capitalize %></h3>
-           <form accept-charset="UTF-8" action="/<%= @invoice_types %>" method="get" class="homefilter">
+           <h3>Filter <%= @invoice_types %></h3>
+           <form accept-charset="UTF-8" action="/<%= @invoice_types.downcase %>" method="get" class="homefilter">
               <input type="text" name="client_name" class="search client_name_search" placeholder="Client Name" autocomplete="off">
-              <% if @is_estimates %>
-                <input type="text" name="estimate_number" class="search invoice_number_search" placeholder="Estimate Number" autocomplete="off">
-              <% else %>
-                <input type="text" name="invoice_number" class="search invoice_number_search" placeholder="Invoice Number" autocomplete="off">
-              <% end %>
+                <input type="text" name="<%= @invoice_types.downcase.singularize %>_number" class="search invoice_number_search onlynumber" placeholder="<%= @invoice_types.singularize %> Number" autocomplete="off">
               <div class="homesortoptions homesideborders">
-                 <h4>Sort Invoices By:</h4>
+                 <h4>Sort <%= @invoice_types %> By:</h4>
                  <select class="search invoice_sorted_by searchchange" name="sorted_by">
                     <option value="created_at_desc" selected="selected">Created at (newest first)</option>
                     <option value="created_at_asc">Created at (oldest first)</option>
@@ -35,6 +32,7 @@
                     <option value="client_name_desc">Client Name (z-a)</option>
                  </select>
               </div>
+              <% unless @is_estimates %>
               <div class="checkboxholder">
                  <input type="checkbox" id="c1" name="currently_due" class="search invoice_show_currently_due searchchange" />
                  <label for="c1">
@@ -42,17 +40,20 @@
                     <div>Only show invoices currently due and not paid in full.</div>
                  </label>
               </div>
+              <% end %>
            </form>
         </div>
+        <% unless @is_estimates %>
         <div id="invoicesoverview" class="homesidesection">
            <span class="homenumberdue"><%= pluralize(number_of_due_invoices, 'invoice') %> due and not paid in full.</span>
            <div id="hometotaldue" class="homesideborders">
               Total Due: <span <%= 'class=overdue' if total_amount_due > 0 %>><%= number_to_currency(total_amount_due) %>
            </div>
         </div>
+        <% end %>
         <div class="homesidesection">
-           <%= link_to "New Invoice", new_invoice_path, class: "button blue newinvoiceicon" %>
-           <div class="closemobilesidebar button blue">Close</div>
+          <%= new_invoice_button("button blue newinvoiceicon") %>
+          <div class="closemobilesidebar button blue">Close</div>
         </div>
       </div>
 
@@ -63,7 +64,7 @@
    
    <div id="searchresultswrapper" class="homeresults">
       <div id="searchnoinvoices" class="noinvoices">
-         <p>No <%= @invoice_types.capitalize %> Found</p>
+         <p>No <%= @invoice_types %> Found</p>
          <%= link_to "New Invoice", new_invoice_path, class: "button blue" %>
       </div>
       <div class="loadingspinner">
@@ -81,7 +82,7 @@
    <div id="pagewrapper">
 
       <div id="searchnoinvoices">
-        <p>No <%= @invoice_types.capitalize %> Found</p>
+        <p>No <%= @invoice_types %> Found</p>
         <% if @is_estimates %>
           <%= link_to "Create Your First Estimate", new_estimate_path, class: "button blue" %>
         <% else %>

@@ -17,14 +17,14 @@
   <aside id="sidebar">
       <div class="scrollwrapper">
       <div id="controls">
-        <h2>Date and Terms</h2>
+        <h2>Date <span class="invoiceonly">and Terms</span></h2>
           <div class="control datecontrol">
               <div class="alignment">
                   <span>Date</span>
                   <%= f.text_field :date, class: "datefield", readonly: true %>
               </div>
           </div>
-          <div class="control">
+          <div class="control invoiceonly">
               <div class="alignment">
                   <span>Terms</span>
                   <select class="terms">
@@ -41,7 +41,7 @@
                   </select>
               </div>
           </div>
-          <div class="control duedatecontrol">
+          <div class="control duedatecontrol invoiceonly">
               <div class="alignment">
                   <span>Due</span>
                   <%= f.text_field :due_date, class: "duedatefield", readonly: true %>
@@ -118,7 +118,7 @@
                       <td align="right">Date:</td>
                       <td class="invoicesetting"><span id="e-date" <%= display_content_editable %> readonly="readonly"></span></td>
                     </tr>
-                    <tr>
+                    <tr class="invoiceonly">
                       <td align="right">Terms:</td>
                       <td class="invoicesetting">
                         <select class="terms">
@@ -135,7 +135,7 @@
                         </select>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="invoiceonly">
                       <td align="right">Due Date:</td>
                       <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>></span></td>
                     </tr>

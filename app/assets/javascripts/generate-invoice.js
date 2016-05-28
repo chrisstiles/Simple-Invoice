@@ -8,6 +8,8 @@ ready = function() {
 	var showing = invoiceWrapper.hasClass('show');
 	var profileEditing = $('#pagewrapper').hasClass('userpage');
 	var pageBody = $('body');
+	var isEstimatePage = pageBody.hasClass('isestimate');
+	var isInvoicePage = pageBody.hasClass('isinvoice');
 
 	// Code for all page
 
@@ -393,14 +395,23 @@ ready = function() {
 		var invoiceTypeSelect = $('#invoice_invoice_type');
 		var invoiceNumberSpan = $('#e-invoicenumber');
 		var estimateNumberSpan = $('#e-estimatenumber');
+		var invoiceOnlyItems = $('.invoiceonly')
 
 		invoiceTypeSelect.on('change', function() {
 			if ($(this).val().toLowerCase() === 'estimate') {
 				invoiceNumberSpan.hide();
 				estimateNumberSpan.show();
+
+				removeMaxDate();
+				invoiceOnlyItems.hide();
+
 			} else {
 				invoiceNumberSpan.show();
 				estimateNumberSpan.hide();
+
+				setMinDate();
+				invoiceOnlyItems.show();
+
 			}
 		});
 
@@ -463,6 +474,10 @@ ready = function() {
 
 		function setMaxDate() {
 			dateField.datepicker('option', 'maxDate', dueDateField.datepicker('getDate'));
+		}
+
+		function removeMaxDate() {
+			dateField.datepicker('option', 'maxDate', null);
 		}
 
 		// Clone the original values in the terms dropdown to use later
@@ -560,7 +575,13 @@ ready = function() {
 			var invoiceDueDate = dueDateField.attr('date');
 			dueDateField.datepicker('setDate', invoiceDueDate);
 			setTerms();
-			setMaxDate();
+
+			if (isInvoicePage) {
+				setMaxDate();
+			} else {
+				removeMaxDate();
+			}
+
 			setMinDate();
 
 		} else {

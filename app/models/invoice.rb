@@ -60,8 +60,11 @@ class Invoice < ActiveRecord::Base
 	validates_inclusion_of :invoice_type, in: INVOICE_TYPES,
  	message: "{{value}} is not a valid invoice type"
 
-	# Required Fields
-	validates :date, :due_date, :name, :client_name, :total, presence: true, allow_blank: false
+	# Required fields for both invoices and estimates
+	validates :date, :name, :client_name, :total, presence: true, allow_blank: false
+
+	# Required only for invoices, not estimates
+	validates :due_date, presence: true, if: 'self.is_invoice?'
 
 	# Total must be between 0 and 10,000,000
 	validate :invoice_total_in_range
@@ -291,6 +294,10 @@ class Invoice < ActiveRecord::Base
     	else
     		raw("data-invoicenumber='#{self.invoice_number}'")
     	end
+    end
+
+    def terms
+    	(self.due_date - self.date).to_i
     end
 
 end

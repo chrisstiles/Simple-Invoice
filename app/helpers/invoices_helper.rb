@@ -118,6 +118,14 @@ module InvoicesHelper
       else
         "isinvoice"
       end
-    end 
+    end
+
+    def new_invoice_button(classes)
+      if request.original_url.include? "estimates"
+        link_to "New Estimate", new_estimate_path, class: classes
+      else
+        link_to "New Invoice", new_invoice_path, class: classes
+      end
+    end
 
 end

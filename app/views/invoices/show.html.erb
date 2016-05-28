@@ -36,6 +36,8 @@
           <div class="emailmodal showbutton showemailinvoicebutton" data-<%= @invoice.invoice_type %>number="<%= @invoice.display_number %>">Email <%= @invoice.display_invoice_type %></div>
           <%= link_to 'View PDF', invoice_link(@invoice, "", "pdf"), class: "showbutton viewpdfbutton" %>
 
+        <% unless @invoice.is_estimate? %>
+
         <h2>
           Record Payment
           <span class="showduedate"><%= @invoice.print_days_until_due %></span>
@@ -65,6 +67,8 @@
          
         <% end %>
 
+        <% end %>
+
         <div id="publicurl">
           <div>Public URL</div>
           <input type="text" id="publicurlinput" class="selectallinput" value="<%= display_public_invoice_url(@invoice) %>"  readonly />
@@ -72,7 +76,7 @@
         </div>
 
 
-        <div class="button deleteinvoice deleteicon" <%= @invoice.display_number_data_attribute %>">Delete Invoice</div>
+        <div class="button deleteinvoice deleteicon" <%= @invoice.display_number_data_attribute %>">Delete <%= @invoice.display_invoice_type %></div>
 
       </div>
   </aside>
@@ -108,16 +112,18 @@
                       <td align="right">Date:</td>
                       <td class="invoicesetting"><span id="e-date"<%= display_content_editable %>><%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
+                    <% unless @invoice.is_estimate? %>
                     <tr>
                       <td align="right">Terms:</td>
                       <td class="invoicesetting">
-                      	Net <%= get_terms %>
+                      	Net <%= @invoice.terms %>
                       </td>
                     </tr>
                     <tr>
                       <td align="right">Due Date:</td>
                       <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
+                    <% end %>
                   </tbody>
                 </table>
             </div>

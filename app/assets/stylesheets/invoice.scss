@@ -325,6 +325,10 @@ body.isestimate #invoicewrapper #e-estimatenumber {
 	display:inline;
 }
 
+body.isestimate .invoiceonly {
+	display:none;
+}
+
 #invoicewrapper.show #e-invoicenumber {
 	display:inline !important;
 }
@@ -527,6 +531,8 @@ section:after {
 	font-size:16px;
 	margin-right:8px;
 	width:100px;
+	position:relative;
+	top:1px;
 }
 
 #dateterms {
@@ -550,8 +556,18 @@ section:after {
 	padding-left:10px;
 }
 
+#dateterms tr > td:last-of-type {
+	min-width:108px;
+}
+
 .terms {
 	width:100%;
+}
+
+#dateterms .terms {
+	width:calc(100% + 5px);
+	margin-left:-5px;
+	float:left;
 }
 
 .sectiontitle {
