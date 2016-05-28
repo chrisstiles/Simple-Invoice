@@ -36,7 +36,37 @@
 	}
 }
 
-@media screen and (max-width:1280px) {
+@media screen and (max-width:1290px) {
+	nav a, #sessioninfo a {
+		padding-left:25px;
+		padding-right:25px;
+		background-position:25px center;
+	}
+
+	header a.button {
+		margin-left:25px;
+	}
+
+	.navinvoices {
+		padding-left:52px;
+	}
+
+	.navestimates {
+		padding-left:55px;
+	}
+
+	.navclients {
+		padding-left:54px;
+	}
+
+	#sessioninfo .navprofile {
+		padding-left:54px;
+	}
+
+	#sessioninfo .navsignout {
+		padding-left:55px;
+	}
+
 	#bottomsection {
 		padding:55px 90px 50px 95px;
 	}
@@ -85,6 +115,12 @@
 	}
 }
 
+@media screen and (max-width:1180px) {
+	header a.button {
+		display:none !important;
+	}
+}
+
 @media screen and (max-width:1160px) {
 	#bottomsection {
 		padding:45px 90px 40px 95px;
@@ -101,32 +137,6 @@
 }
 
 @media screen and (max-width:1114px) {
-	nav a, #sessioninfo a {
-		padding-left:25px;
-		padding-right:25px;
-		background-position:25px center;
-	}
-
-	header a.button {
-		margin-left:25px;
-	}
-
-	.navinvoices {
-		padding-left:52px;
-	}
-
-	.navclients {
-		padding-left:54px;
-	}
-
-	#sessioninfo .navprofile {
-		padding-left:54px;
-	}
-
-	#sessioninfo .navsignout {
-		padding-left:55px;
-	}
-
 	#usersettingshalf {
 		width:505px;
 	}
@@ -311,6 +321,11 @@
 
 	.navinvoices {
 		background-position: top 10px center;
+	}
+
+	.navestimates {
+		background-position: top 10px center;
+		background-size:19px 17px;
 	}
 
 	.navclients, #sessioninfo .showregister {

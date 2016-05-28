@@ -88,7 +88,8 @@
     
     	<section id="invoicenumber">
        		<div>
-            	<%= @invoice.invoice_type.capitalize %> No. <span id="e-invoicenumber"><%= @invoice.display_number %></span>
+            	<div id="numberwrapper"><%= @invoice.invoice_type.capitalize %> No. <span id="e-invoicenumber"><%= @invoice.display_number %></span>
+              </div>
             </div>
        </section> 
        

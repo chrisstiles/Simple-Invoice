@@ -266,6 +266,12 @@ nav a:active, #sessioninfo a:active {
 	padding-left:62px;
 }
 
+.navestimates {
+	background-image:$estimates-icon;
+	background-size:20px 18px;
+	padding-left:65px;
+}
+
 .navclients, #sessioninfo .showregister {
 	background-image:$clients-icon;
 	background-size:18px 18px;

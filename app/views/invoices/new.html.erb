@@ -83,7 +83,8 @@
     
       <section id="invoicenumber">
                   <div>
-                  <%= f.select :invoice_type, options_for_select(Invoice::select_invoice_types, selected: @invoice.display_invoice_type) %> No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span><span id="e-estimatenumber"><%= @invoice.estimate_number %></span>
+                  <div id="numberwrapper">No. <span id="e-invoicenumber"><%= @invoice.invoice_number %></span><span id="e-estimatenumber"><%= @invoice.estimate_number %></span></div>
+                  <%= f.select :invoice_type, options_for_select(Invoice::select_invoice_types, selected: @invoice.display_invoice_type), {}, { class: "invoicetypeselect" } %>
             </div>
        </section> 
        

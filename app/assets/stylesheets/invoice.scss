@@ -519,6 +519,15 @@ section:after {
 	margin-left:4px;
 }
 
+#numberwrapper, .invoicetypeselect {
+	float:right;
+}
+
+.invoicetypeselect {
+	font-size:16px;
+	margin-right:8px;
+	width:100px;
+}
 
 #dateterms {
 	width:230px;

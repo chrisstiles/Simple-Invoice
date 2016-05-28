@@ -4,7 +4,7 @@
 		<% if user_signed_in? %>
 		<nav>
 			<%= link_to "Invoices", invoices_path, class: "navinvoices#{current_page('invoices', 'invoice')}" %>
-			<%= link_to "Estimates", estimates_path, class: "navinvoices#{current_page('invoices', 'estimate')}" %>
+			<%= link_to "Estimates", estimates_path, class: "navestimates#{current_page('invoices', 'estimate')}" %>
 			<%= link_to "Clients", clients_path, class: "navclients#{current_page('clients')}" %>
 		</nav>
 
