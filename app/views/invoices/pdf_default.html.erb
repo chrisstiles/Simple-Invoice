@@ -310,7 +310,7 @@ section:after {
     <div id="invoice">
     	<section id="invoicenumber">
        		<div>
-            	Invoice No. <span id="e-invoicenumber"><strong><%= @invoice.invoice_number %></strong></span>
+            	<%= @invoice.display_invoice_type %> No. <span id="e-invoicenumber"><strong><%= @invoice.display_number %></strong></span>
             </div>
        </section> 
        
@@ -328,16 +328,18 @@ section:after {
                       <td class="invoicesetting"><span id="e-date">
                       <%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
-                    <tr>
-                      <td align="right">Terms:</td>
-                      <td class="invoicesetting">
-                      	Net <%= get_terms %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">Due Date:</td>
-                      <td class="invoicesetting"><span id="e-duedate"><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
-                    </tr>
+                    <% unless @invoice.is_estimate? %>
+                      <tr>
+                        <td align="right">Terms:</td>
+                        <td class="invoicesetting">
+                        	Net <%= get_terms %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="right">Due Date:</td>
+                        <td class="invoicesetting"><span id="e-duedate"><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
+                      </tr>
+                    <% end %>
                   </tbody>
                 </table>
             </div>

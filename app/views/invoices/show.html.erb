@@ -113,16 +113,16 @@
                       <td class="invoicesetting"><span id="e-date"<%= display_content_editable %>><%= @invoice.date.strftime("%B %-d, %Y") %></span></td>
                     </tr>
                     <% unless @invoice.is_estimate? %>
-                    <tr>
-                      <td align="right">Terms:</td>
-                      <td class="invoicesetting">
-                      	Net <%= @invoice.terms %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">Due Date:</td>
-                      <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
-                    </tr>
+                      <tr>
+                        <td align="right">Terms:</td>
+                        <td class="invoicesetting">
+                        	Net <%= @invoice.terms %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="right">Due Date:</td>
+                        <td class="invoicesetting"><span id="e-duedate" <%= display_content_editable %>><%= @invoice.due_date.strftime("%B %-d, %Y") %></span></td>
+                      </tr>
                     <% end %>
                   </tbody>
                 </table>

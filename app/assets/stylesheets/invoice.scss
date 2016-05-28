@@ -523,6 +523,21 @@ section:after {
 	margin-left:4px;
 }
 
+#e-invoicenumber[contenteditable="true"] {
+	line-height:22px;
+}
+
+#e-invoicenumber[contenteditable="true"]:empty {
+	overflow:hidden;
+	height:26px;
+	box-sizing:border-box;
+	position:relative
+}
+
+#e-invoicenumber[contenteditable="true"]:empty:before {
+	line-height:22px;
+}
+
 #numberwrapper, .invoicetypeselect {
 	float:right;
 }
