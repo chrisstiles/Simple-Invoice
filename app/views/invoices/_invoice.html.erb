@@ -1,11 +1,21 @@
 <a href="<%= invoice_link(invoice) %>" class="mobilehomeinvoice">
   <div class="mobilebalance">
-    Balance:<br>
-    <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
+    <% unless invoice.is_estimate? %>
+      Balance:<br>
+      <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
+    <% else %>
+      Total:<br>
+      <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.total) %></span>
+    <% end %>
   </div>
   <h3><%= invoice.client_name %></h3>
-  <p>Total: <strong><%= number_to_currency(invoice.total) %></strong></p>
-  <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+  <% unless invoice.is_estimate? %>
+    <p>Total: <strong><%= number_to_currency(invoice.total) %></strong></p>
+    <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+  <% else %>
+    <p>Date: <strong><%= invoice.date.strftime("%B %-d, %Y") %></strong></p>
+    <br>
+  <% end %>
 </a>
 
 
@@ -21,66 +31,76 @@
 
 <div class="homeinvoiceinfowrapper">
 
-<div class="homeupdatebalance">
+<% unless invoice.is_estimate? %>
 
-<%= form_for(invoice, :url => invoice_link(invoice, "update"), remote: true) do |f| %>
-<%= hidden_field_tag :from_index_page %>
+  <div class="homeupdatebalance">
+
+  <%= form_for(invoice, :url => invoice_link(invoice, "update"), remote: true) do |f| %>
+  <%= hidden_field_tag :from_index_page %>
 
 
-<div class="homerecordtable">
+  <div class="homerecordtable">
 
-  <div class="row invoicetotalrow">
-    <div class="cell">Invoice Total</div>
-    <div class="cell invoicetotalcell"><%= number_to_currency(invoice.total) %></div>
-  </div>
-
-   <div class="row amountpaidrow">
-    <div class="cell">- Amount Paid</div>
-    <div class="cell">
-
-      <%= f.text_field :amount_paid, value: number_with_precision(invoice.amount_paid, precision: 2), autocomplete: "off" %>
-       <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]"><%= number_with_precision(invoice.amount_paid, precision: 2) %></span>
-
-      <div class="homeamountpaiderror"></div>
-
+    <div class="row invoicetotalrow">
+      <div class="cell">Invoice Total</div>
+      <div class="cell invoicetotalcell"><%= number_to_currency(invoice.total) %></div>
     </div>
+
+     <div class="row amountpaidrow">
+      <div class="cell">- Amount Paid</div>
+      <div class="cell">
+
+        <%= f.text_field :amount_paid, value: number_with_precision(invoice.amount_paid, precision: 2), autocomplete: "off" %>
+         <span class="e-amountpaid" contenteditable="true" name="invoice[amount_paid]"><%= number_with_precision(invoice.amount_paid, precision: 2) %></span>
+
+        <div class="homeamountpaiderror"></div>
+
+      </div>
+    </div>
+
+     <div class="row balancerow">
+      <div class="cell">Invoice Balance</div>
+      <div class="cell balancecell"><%= number_to_currency(invoice.balance) %></div>
+    </div>
+
   </div>
 
-   <div class="row balancerow">
-    <div class="cell">Invoice Balance</div>
-    <div class="cell balancecell"><%= number_to_currency(invoice.balance) %></div>
+  <%= f.submit 'Record Payment', class: "button small greenbutton recordpaymentbutton willload homerecordpayment" %>
+
+  <% end %>
+
   </div>
-
-</div>
-
-<%= f.submit 'Record Payment', class: "button small greenbutton recordpaymentbutton willload homerecordpayment" %>
 
 <% end %>
-
-</div>
 
 <div class="homeinvoiceinfo">
   <div class="balancesection">
 
     <div class="vcenter">
-      <div class="balancetitle"><%= invoice.display_invoice_type %> Balance:</div>
+      <div class="balancetitle">
+      <%= invoice.is_estimate? ? "Estimate Total:" : "Invoice Balance:" %>
+      </div>
       <div class="homeinvoicebalance">
-       <span class="<%= invoice.invoice_status_class %>"><%= number_to_currency(invoice.balance) %></span>
+       <span class="<%= invoice.invoice_status_class %>"><%= invoice.is_estimate? ? number_to_currency(invoice.total) : number_to_currency(invoice.balance) %></span>
       </div>
     </div>
   </div>
   <div class="invoiceinfosection">
-    Invoice Number: <strong><%= invoice.invoice_number %></strong><br>
-    Total: <strong><%= number_to_currency(invoice.total) %></strong><br>
+    <%= invoice.display_invoice_type %> Number: <strong><%= invoice.display_number %></strong><br>
+    <% unless invoice.is_estimate? %>
+      Total: <strong><%= number_to_currency(invoice.total) %></strong><br>
+    <% end %>
     Date: <strong><%= invoice.date.strftime("%B %-d, %Y") %></strong><br>
-    <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+    <% unless invoice.is_estimate? %>
+      <div class="invoicestatus"><%= invoice.print_days_until_due %></div>
+    <% end %>
   </div>
 
 </div>
 
 </div>
 
-  <%= link_to "View Invoice", invoice_link(invoice), class: "viewinvoice" %>
+  <%= link_to "View #{invoice.display_invoice_type}", invoice_link(invoice), class: "viewinvoice" %>
   <%= link_to invoice_link(invoice, "", "pdf"), class: "thirdbutton file" do %>
       <span>View PDF</span>
   <% end %>
@@ -88,17 +108,14 @@
     <a href="#" class="thirdbutton mail emailmodal" data-estimatenumber="<%= invoice.estimate_number %>"><span>Email Estimate</span></a>
   <% else %>
     <a href="#" class="thirdbutton mail emailmodal" data-invoicenumber="<%= invoice.invoice_number %>"><span>Email Invoice</span></a>
+    <a href="#" class="thirdbutton noborder pig">
+      <div class="overflowcontainer">
+      <div class="amountpaidbutton showamountpaid"></div>
+      <div class="amountpaidbutton closeamountpaid"></div>
+      </div>
+      <span>Record Payment</span>
+    </a>
   <% end %>
- 
-  <a href="#" class="thirdbutton noborder pig">
 
-  <div class="overflowcontainer">
-    <div class="amountpaidbutton showamountpaid"></div>
-    <div class="amountpaidbutton closeamountpaid"></div>
-  </div>
-
-    <span>Record Payment</span>
-
-  </a>
   </div>
 

@@ -218,6 +218,15 @@ a.thirdbutton {
 	position:relative;
 }
 
+body.isestimate a.thirdbutton {
+	width:50%;
+}
+
+body.isestimate a.mail {
+	width:50% !important;
+	border-right:none;
+}
+
 .thirdbutton span {
 	margin-top:3px !important;
 	z-index: 300;
