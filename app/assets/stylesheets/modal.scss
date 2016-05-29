@@ -312,11 +312,11 @@ html.noscroll {
  * @author Brian Reavis <brian@thirdroute.com>
  */
 
- .sendemailform {
+.sendemailform {
  	padding:5px 12px;
- }
+}
 
- .emailclientname {
+.emailclientname {
  	float:right;
  	color:#26323f;
  	font-size:19px;
@@ -324,38 +324,57 @@ html.noscroll {
  	text-overflow: ellipsis;
  	text-align: right;
  	white-space: nowrap;
- }
+
+}
 
 input[type="text"].modalinput {
 	height:42px;
-	max-width:245px;
   -webkit-appearance: none;
 }
 
- .modalinput {
-    display: block;
-    outline: none;
-    padding: 8px;
-    box-sizing: border-box;
-    border-radius: 1px;
-    border: 1px solid #d2cccc;
-    font-weight: 400;
-    font-family: 'Libertad', sans-serif;
-    color: #26323f;
-    width: 100%;
-    font-size: 16px;
- }
+.modalinput {
+  display: block;
+  outline: none;
+  padding: 9px 8px;
+  box-sizing: border-box;
+  border-radius: 1px;
+  border: 1px solid #d2cccc;
+  font-weight: 400;
+  font-family: 'Libertad', sans-serif;
+  color: #26323f;
+  width: 100%;
+  font-size: 14px;
+}
 
 .modalinput:focus {
 	border:1px solid $light-blue
 }
 
 .sendemailform label {
-	color: #26323F;
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 5px;
+  color: #26323F;
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#recipients:before, #recipients:after {
+  clear:both;
+  display:block;
+  content:"";
+}
+
+.recipientwrapper {
+  width:40%;
+  float:left;
+  box-sizing:border-box;
+  padding-right:30px;
+}
+
+.ccwrapper {
+  width:60%;
+  float:left;
+  margin-bottom:12px;
 }
 
 .sendemailform textarea {

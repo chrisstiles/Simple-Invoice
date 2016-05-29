@@ -5,10 +5,11 @@ class InvoiceMailer < ApplicationMailer
   #
   #   en.invoice_mailer.email_invoice.subject
   #
-  def email_invoice(invoice, recipient, cc, message, reply_email)
+  def email_invoice(invoice, recipient, cc, subject, message, reply_email)
   	@invoice = invoice
     @recipient = recipient
     @cc = cc.split(",")
+    @subject = subject
     @message = message
     @reply_to = reply_email
 
@@ -17,7 +18,7 @@ class InvoiceMailer < ApplicationMailer
   	)
 
     self.instance_variable_set(:@_lookup_context, nil)
-  	mail :subject => "Your #{@invoice.display_invoice_type}", :to => @recipient, :cc => @cc,:reply_to => "#{@reply_to}"
+  	mail :subject => @subject, :to => @recipient, :cc => @cc,:reply_to => "#{@reply_to}"
   	
   end
 end

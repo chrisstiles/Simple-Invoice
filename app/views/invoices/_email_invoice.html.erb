@@ -12,12 +12,21 @@
 <div class="formholder emailformwrapper">
 <%= form_for @invoice, :url => url_for(:controller => 'invoices', :action => 'email_invoice'), method: "post", remote: true do |f|  %>
 <div class="sendemailform">
-	<div class="emailclientname"><%= @invoice.client_name %></div>
-	<label for="recipient">Recipient</label>
-	<input type="text" name="recipient" class="emailrecipient modalinput" placeholder="Recipient" value="<%= return_client_email_or_blank(@invoice) %>"><br>
+	
+	<div id="recipients">
+		<div class="recipientwrapper">
+			<label for="recipient">Recipient</label>
+			<input type="text" name="recipient" class="emailrecipient modalinput" placeholder="Recipient" value="<%= return_client_email_or_blank(@invoice) %>">
+		</div>
 
-	<label for="cc">CC. Separate with comma</label>
-	<input type="text" name="cc" class="emailcc emailtags" placeholder="CC. Separate with comma"><br>
+		<div class="ccwrapper">
+			<label for="cc">CC. Separate with comma</label>
+			<input type="text" name="cc" class="emailcc emailtags" placeholder="CC. Separate with comma">
+		</div>
+	</div>
+
+	<label for="subject">Subject</label>
+	<input type="text" name="subject" class="emailsubject modalinput" placeholder="Subject" value="<%= email_subject(@invoice) %>"><br>
 
 	<%= label_tag :message, "Message", class: "messagelabel" %>
 	<%= text_area_tag :message, nil, class: "modalinput", placeholder: "Add a message to your invoice" %>

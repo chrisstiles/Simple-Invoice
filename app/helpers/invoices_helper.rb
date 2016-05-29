@@ -52,6 +52,14 @@ module InvoicesHelper
     	end
     end
 
+    def email_subject(invoice)
+      if current_user.name.present?
+        "#{invoice.display_invoice_type} ##{invoice.display_number} from #{current_user.name}"
+      else
+        "#{invoice.display_invoice_type} ##{invoice.display_number}"
+      end
+    end
+
     def display_public_invoice_url(invoice)
     	unless invoice.token.blank? || invoice.token.nil?
     		public_invoice_url(invoice.token)

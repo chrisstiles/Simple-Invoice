@@ -35,7 +35,7 @@ class InvoicesController < ApplicationController
       if @email.valid?
         puts "Valid Email!"
   
-        InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:message], current_user.email).deliver_now
+        InvoiceMailer.email_invoice(@invoice, params[:recipient], params[:cc], params[:subject], params[:message], current_user.email).deliver_now
 
         flash[:success] = "#{@invoice.display_invoice_type} was successfully emailed!"
         flash.keep(:success)

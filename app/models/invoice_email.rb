@@ -3,6 +3,7 @@ class InvoiceEmail
 
 	attribute :recipient
 	attribute :cc
+	attribute :subject
 	attribute :message
 
 	validates :recipient, presence: true, 
@@ -11,6 +12,8 @@ class InvoiceEmail
 	                          "^#{attributes[:value]} is not a valid email" 
 	                        }
 	            } 
+
+	validates :subject, presence: true
 
 	# Ensure all cc emails are valid
 	validate :check_cc_emails
@@ -35,6 +38,7 @@ class InvoiceEmail
 
 	# Length
 	validates :recipient, length: { maximum: 80 }
+	validates :subject, length: { maximum: 200 }
 	validates :cc, length: { maximum: 255 }
 	validates :message, length: { maximum: 600 }
 
