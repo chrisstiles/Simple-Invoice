@@ -572,8 +572,11 @@ ready = function() {
 			var invoiceDate = dateField.attr('date');
 			dateField.datepicker('setDate', invoiceDate);
 
+			setMinDate();
+
 			var invoiceDueDate = dueDateField.attr('date');
 			dueDateField.datepicker('setDate', invoiceDueDate);
+
 			setTerms();
 
 			if (isInvoicePage) {
@@ -582,7 +585,6 @@ ready = function() {
 				removeMaxDate();
 			}
 
-			setMinDate();
 
 		} else {
 			setDueDate();
