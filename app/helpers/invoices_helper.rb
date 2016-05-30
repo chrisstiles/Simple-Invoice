@@ -128,6 +128,11 @@ module InvoicesHelper
     end
 
     def new_invoice_button(classes)
+      # if classes.include? "mobilelink"
+        
+      # else
+
+      # end
       if request.original_url.include? "estimates"
         link_to "New Estimate", new_estimate_path, class: classes
       else
