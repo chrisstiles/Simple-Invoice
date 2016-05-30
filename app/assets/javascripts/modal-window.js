@@ -8,13 +8,14 @@ ready = function() {
 
     var pageBody = $('body');
     var pageHtml = $('html');
+    var $document = $(document);
 
     // Generate the modal window and title
 
     function showModal(title) {
-        var scrollAmount = $(document).scrollTop();
+        var scrollAmount = $document.scrollTop();
 
-        if ($(document).height() > $(window).height()) {
+        if ($document.height() > $(window).height()) {
              var scrollTop = ($('html').scrollTop()) ? $('html').scrollTop() : $('body').scrollTop(); // Works for Chrome, Firefox, IE...
              $('html').addClass('noscroll').css('top',-scrollTop);         
         }
@@ -57,7 +58,7 @@ ready = function() {
     });
 
     // Close modal when escape key is pressed
-    $(document).on('keyup', function(e) {
+    $document.on('keyup', function(e) {
         if (e.keyCode == 27 && $('#modalwindow').length) {
             closeModal();
         }
@@ -335,6 +336,27 @@ ready = function() {
     // Close modal when new client is clicked
 
     pageBody.on('click', '.noclients a', closeModal);
+
+    var loadingSpinnerHtml = '<div class="loadingspinner modalloadingspinner"> <div class="loadingcircle"> <div class="throbber-loader">Loading...</div></div></div>';
+    var validationOverlayHtml = '<div class="modalvalidationoverlay"></div>'
+
+    pageBody.on('click', '.emailinvoicebutton', function() {
+        var modalWindow = $('#modalwindow');
+
+        modalWindow.find('.throbber-loader').remove();
+        $(loadingSpinnerHtml).appendTo($('.emailformwrapper')).fadeIn(300);
+
+        // var modalValidation = modalWindow.find('#modalvalidationerrors');
+        // $(validationOverlayHtml).appendTo(modalValidation).fadeIn(300);
+    });
+
+    $document.ajaxStop(function() {
+        var modalWindow = $('#modalwindow');
+        if (modalWindow.is(':visible') && modalWindow.length) {
+            $('.modalloadingspinner').remove();
+            //$('.modalvalidationoverlay').remove();
+        }
+    });
 
 };
 

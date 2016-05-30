@@ -135,4 +135,37 @@ module InvoicesHelper
       end
     end
 
+    def default_message(invoice)
+      client = invoice.client_name || "Valued Client"
+
+      if current_user.name.present?
+        salutation = ",\n#{current_user.name}"
+      else
+        salutation = ""
+      end
+
+      greeting = "Dear #{client},\n"
+
+      if invoice.is_estimate?
+        "#{greeting}"\
+        "Thank you for your interest in working with me. You may find your #{invoice.invoice_type} attached.\n\n"\
+        "Regards#{salutation}"
+      else
+        thank_you = "Thank you for your business. You may find your #{invoice.invoice_type} attached."
+        if invoice.overdue?
+          "#{greeting}"\
+          "#{thank_you} Please pay at your earliest convenience. This is a friendly reminder that "\
+          "the balance of #{number_to_currency(invoice.balance)} was due by #{invoice.due_date.strftime("%B %d, %Y")}\n\n"\
+          "Regards#{salutation}"
+        else
+          "#{greeting}"\
+          "#{thank_you}"\
+          "Please pay the balance of #{number_to_currency(invoice.balance)} by #{invoice.due_date.strftime("%B %d, %Y")}\n\n"\
+          "Regards#{salutation}"
+        end
+      end
+
+     
+    end
+
 end

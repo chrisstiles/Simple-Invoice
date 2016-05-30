@@ -1292,6 +1292,19 @@
 	.sessionbox .sessionerrortext {
 		top:85px;
 	}
+
+	.recipientwrapper {
+		padding-right:0;
+		margin-bottom:15px;
+	}
+
+	.recipientwrapper, .ccwrapper {
+		width:100%;
+	}
+
+	.selectize-input {
+		max-width:none;
+	}
 }
 
 @media screen and (max-width:600px) {

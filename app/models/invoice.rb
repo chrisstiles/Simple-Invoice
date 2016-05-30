@@ -139,7 +139,7 @@ class Invoice < ActiveRecord::Base
 
 	# Is overdue? method
 	def overdue?
-		if self.due_date.future? || self.is_estimate?
+		if self.due_date.future? || self.is_estimate? || self.paid_off?
 			false
 		else
 			true

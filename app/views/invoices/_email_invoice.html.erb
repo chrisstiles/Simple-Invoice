@@ -29,7 +29,7 @@
 	<input type="text" name="subject" class="emailsubject modalinput" placeholder="Subject" value="<%= email_subject(@invoice) %>"><br>
 
 	<%= label_tag :message, "Message", class: "messagelabel" %>
-	<%= text_area_tag :message, nil, class: "modalinput", placeholder: "Add a message to your invoice" %>
+	<%= text_area_tag :message, default_message(@invoice), class: "modalinput", placeholder: "Add a message to your invoice" %>
 
 	<%= f.submit "Email Invoice", class: "emailinvoicebutton button blue willload" %>
 </div>	
