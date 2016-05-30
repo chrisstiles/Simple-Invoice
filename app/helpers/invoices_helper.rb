@@ -120,10 +120,22 @@ module InvoicesHelper
     end
 
     def invoice_type_class(invoice)
-      if invoice.is_estimate?
+      if invoice.present? && invoice.is_estimate?
         "isestimate"
       else
         "isinvoice"
+      end
+    end
+
+    def url_is_estimate?
+      request.original_url.include? "estimates"
+    end
+
+    def invoice_type_by_url
+      if url_is_estimate?
+        "Estimate"
+      else
+        "Invoice"
       end
     end
 
@@ -133,7 +145,7 @@ module InvoicesHelper
       # else
 
       # end
-      if request.original_url.include? "estimates"
+      if url_is_estimate?
         link_to "New Estimate", new_estimate_path, class: classes
       else
         link_to "New Invoice", new_invoice_path, class: classes

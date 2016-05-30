@@ -325,12 +325,14 @@ class InvoicesController < ApplicationController
     end
 
     def set_relevant_invoice_or_estimate_number
-      if @invoice.is_estimate?
-        @invoice.invoice_number = invoice_or_estimate_number("invoice")
-        @invoice.estimate_number ||= invoice_or_estimate_number("estimate")
-      else
-        @invoice.invoice_number ||= invoice_or_estimate_number("invoice")
-        @invoice.estimate_number = invoice_or_estimate_number("estimate")
+      if @invoice.present?
+        if @invoice.is_estimate?
+          @invoice.invoice_number = invoice_or_estimate_number("invoice")
+          @invoice.estimate_number ||= invoice_or_estimate_number("estimate")
+        else
+          @invoice.invoice_number ||= invoice_or_estimate_number("invoice")
+          @invoice.estimate_number = invoice_or_estimate_number("estimate")
+        end
       end
     end
 

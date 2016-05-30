@@ -2,8 +2,7 @@
 <%= provide :special_class, " generateinvoice #{invoice_type_class(@invoice)}" %>
 
 <% if @invoice.nil? %>
-  <%= provide :title, "No Invoice Found" %>
-  <%= render 'not_found' %>
+  <%= render 'not_found', invoice_type: invoice_type_by_url %>
 <% else %>
 
 <%= provide :title, "#{@invoice.display_invoice_type} ##{@invoice.display_number}" %>

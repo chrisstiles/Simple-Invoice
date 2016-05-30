@@ -1,6 +1,7 @@
+<%= provide :title, "No Invoice Found" %>
 <div id="pagewrapper">
       <div id="searchnoinvoices">
-         <p>No Invoice Found</p>
-         <%= link_to "Create Invoice", new_invoice_path, class: "button blue" %>
+         <p>No <%= invoice_type %> Found</p>
+         <%= new_invoice_button("button blue") %>
       </div>
 </div>
