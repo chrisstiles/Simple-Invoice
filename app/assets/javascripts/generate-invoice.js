@@ -318,26 +318,147 @@ ready = function() {
 
 		// Max length for tax box
 
-		function checkMaxLength(el) {
-			var newLength = $.trim(el.text().replace('.', '')).length
+		function checkMaxLength(el, maxLength, canHavDecimals) {
+			var number = el.text();
+			var decimalPlaces = 0;
 
-			if (newLength > 10) {
+			if (canHavDecimals) {
+				var newLength = $.trim(number.replace('.', '')).length
+				var decimalPosition = number.indexOf('.');
+
+				if (decimalPosition > -1) {
+					decimalPlaces = numDecimalPlaces(parseFloat(number));
+					var range = window.getSelection().getRangeAt(0);
+					var caretPosition = getCharacterOffsetWithin(range, el[0]);
+
+					if (caretPosition > decimalPosition) {
+						if (decimalPlaces >= 2) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+
+			} else {
+				var newLength = $.trim(number).length
+			}
+
+			if (newLength >= maxLength) {
 				return true
 			} else {
 				return false
 			}
 		}
 
+		function getCharacterOffsetWithin(range, node) {
+		    var treeWalker = document.createTreeWalker(
+		        node,
+		        NodeFilter.SHOW_TEXT,
+		        function(node) {
+		            var nodeRange = document.createRange();
+		            nodeRange.selectNode(node);
+		            return nodeRange.compareBoundaryPoints(Range.END_TO_END, range) < 1 ?
+		                NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+		        },
+		        false
+		    );
+
+		    var charCount = 0;
+		    while (treeWalker.nextNode()) {
+		        charCount += treeWalker.currentNode.length;
+		    }
+		    if (range.startContainer.nodeType == 3) {
+		        charCount += range.startOffset;
+		    }
+		    return charCount;
+		}
+
+		function numDecimalPlaces(num) {
+			var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			if (!match) { return 0; }
+			return Math.max(
+			   0,
+			   // Number of digits right of decimal point.
+			   (match[1] ? match[1].length : 0)
+			   // Adjust for scientific notation.
+			   - (match[2] ? +match[2] : 0));
+		}
+
+		function getSelectionTextAndContainerElement() {
+		    var text = "", containerElement = null;
+		    if (typeof window.getSelection != "undefined") {
+		        var sel = window.getSelection();
+					if (sel.rangeCount) {
+						var node = sel.getRangeAt(0).commonAncestorContainer;
+						containerElement = node.nodeType == 1 ? node : node.parentNode;
+						text = sel.toString();
+					}
+			    } else if (typeof document.selection != "undefined" &&
+			               document.selection.type != "Control") {
+			        var textRange = document.selection.createRange();
+			        containerElement = textRange.parentElement();
+			        text = textRange.text;
+			    }
+			    return {
+			        text: text,
+			        containerElement: containerElement
+			    };
+			}
+
+			function numberTest(n) {
+		 	return !isNaN(parseFloat(n)) && isFinite(n);
+		}
+
 		pageBody.on('keypress', '.e-taxamount, .e-quantity, .e-rate', function(e) {
 			var keyCode = e.keyCode || e.which;
-			if (checkMaxLength($(this))) {
-				if (keyCode == 190 || keyCode == 110 || keyCode == 46) {
+			var $this = $(this);
+
+			var isDecimalPlace = (keyCode === 190 || keyCode == 110 || keyCode === 46);
+
+			var selection = getSelectionTextAndContainerElement();
+			var hasSelectedText = false;
+		
+			if (isDecimalPlace && ($this.text().indexOf(".") > -1) && selection.text.indexOf(".") === -1) {
+				e.preventDefault();
+				return false;
+			} 
+
+			if (checkMaxLength($this, 10, true)) {
+
+				if ($(selection.containerElement).is($this) && numberTest(selection.text)) {
+					hasSelectedText = true;
+				}
+
+				if (isDecimalPlace || hasSelectedText) {
 					return true
 				} else {
 					e.preventDefault();
 				}
 			}
 		});
+
+		pageBody.on('keypress', '#e-invoicenumber[contenteditable="true"]', function(e) {
+			var keyCode = e.keyCode || e.which;
+			var $this = $(this);
+			var isDecimalPlace = (keyCode === 190 || keyCode == 110 || keyCode === 46);
+
+			if (isDecimalPlace) {
+				e.preventDefault();
+				return false;
+			}
+
+			var selection = getSelectionTextAndContainerElement();
+
+			if (checkMaxLength($this, 15, false)) {
+				if ($(selection.containerElement).is($this) && selection.text !== "") {
+					return true
+				} else {
+					e.preventDefault();
+				}
+			}
+
+		})
 
 
 	// Set initial logo dimensions
