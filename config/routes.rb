@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :users
 
@@ -51,6 +55,10 @@ Rails.application.routes.draw do
   resources :logos, only: [:create, :destroy]
 
   resources :settings, only: [:update]
+
+  # Error pages
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
 
   # The priority is based upon order of creation: first created -> highest priority.

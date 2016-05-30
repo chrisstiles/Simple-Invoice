@@ -53,7 +53,7 @@ class InvoicesController < ApplicationController
 
   def new
     @invoice = Invoice.new
-
+    
     set_initial_invoice_type_by_url
     set_new_invoice_and_estimate_numbers
 
