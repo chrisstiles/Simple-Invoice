@@ -313,7 +313,7 @@ html.noscroll {
  */
 
 .sendemailform {
- 	padding:5px 12px;
+ 	padding:30px 12px 5px 12px;
 }
 
 .emailclientname {
@@ -806,6 +806,7 @@ input[type="text"].modalinput {
 
 #modalcontent.emailformmodal {
 	padding-bottom:0;
+  padding-top:0;
 }
 
 #modalcontent .formholder {
@@ -829,6 +830,10 @@ input[type="text"].modalinput {
   bottom:0;
   z-index: 300;
   background-color:rgba(255,255,255,.85);
+}
+
+#modalcontent #modalvalidationerrors.emailinvoicevalidation {
+  top:25px;
 }
 
 .modalvalidationoverlay {

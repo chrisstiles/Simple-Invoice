@@ -444,6 +444,7 @@ body.ios input.button {
     -webkit-appearance: none;
     -moz-appearance:none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    opacity: 1 !important;
 }
 
 .button.loading {
