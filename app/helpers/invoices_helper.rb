@@ -39,7 +39,6 @@ module InvoicesHelper
         end
       end
 
-      print "TOTAL DUE: #{total_due} :: Count: #{invoices.count}"
       total_due
       
     end

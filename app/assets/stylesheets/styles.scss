@@ -319,6 +319,59 @@ nav a:active, #sessioninfo a:active {
 	transform:translateY(-50%);
 }
 
+select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border-radius:2px;
+		border:1px solid #c7c7c7;
+		font-family: 'Libertad', sans-serif;
+		color:$dark-blue;
+		font-weight:400;
+		font-size:12px;
+		height:28px;
+		line-height: 12px;
+		padding:0 0 0 10px;
+		box-sizing:border-box;
+		background:#fafafa;
+		background-image:
+			$select-arrows-icon,
+			linear-gradient(to left, #fafafa, #fafafa),
+			linear-gradient(to right, #f2f2f2, #f2f2f2);
+		background-position:
+			calc(100% - 10px) 50%,
+			0 0,
+			100% 0;
+		background-size:
+			7px 14px,
+			calc(100% - 27px) 100%,
+			27px 100%;
+		background-repeat: no-repeat;
+		vertical-align: middle;
+		outline:none;
+}
+
+select:focus {
+	outline:none;
+}
+
+select::-moz-focus-inner {
+	border: 0;
+} 
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover, select:focus {
+	border:1px solid $light-blue;
+}
+
 body.ios input.button {
 	line-height:0;
 	height:34px;

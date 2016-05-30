@@ -413,6 +413,7 @@ section:after {
 	text-align:right;
 	color:#b3afaf;
 	font-size:23px;
+	line-height:1;
 	font-weight:400;
 }
 
@@ -542,12 +543,13 @@ section:after {
 	float:right;
 }
 
-.invoicetypeselect {
-	font-size:16px;
+select.invoicetypeselect {
 	margin-right:8px;
-	width:100px;
+	width:110px;
 	position:relative;
-	top:1px;
+	top:-2px;
+	margin-bottom:-3px;
+	height:26px;
 }
 
 #dateterms {
@@ -579,9 +581,10 @@ section:after {
 	width:100%;
 }
 
-#dateterms .terms {
+#dateterms select.terms {
+	height:25px;
+	margin:2px 0 2px -5px;
 	width:calc(100% + 5px);
-	margin-left:-5px;
 	float:left;
 }
 
