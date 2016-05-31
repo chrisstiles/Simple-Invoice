@@ -2,6 +2,10 @@
 
 /* Home Page */
 
+body.homepage.static #htmlwrapper {
+	min-height:calc(100vh - 60px);
+}
+
 body.homepage #formwrapper {
 	padding-top:61px;
 	transition:transform .3s;

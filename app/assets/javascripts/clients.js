@@ -10,6 +10,11 @@ var isClientsPage = pageWrapper.hasClass('clientspage');
 var homeSide = $('#homeside');
 var isHomePage = false;
 
+var clientFilter = $('#clientfiltering');
+var clientContainer = $('#clientscontainer');
+var clientSearch = $('#clientsearch');
+var clientsSidebar = $('#clientssidebar');
+
 if (homeSide.length) {
 	isHomePage = true;
 }
@@ -45,7 +50,8 @@ function checkFooterInView() {
 
 			if (isClientsPage) {
 				clientsSidebar.css({
-					'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
+					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+					'overflow' : 'scroll'
 				});
 			} else if (isHomePage) {
 				homeSide.css({
@@ -56,7 +62,8 @@ function checkFooterInView() {
 		} else {
 			if (isClientsPage) {
 				clientsSidebar.css({
-					'max-height' : 'none'
+					'max-height' : 'none',
+					'overflow' : 'auto'
 				});
 			} else if (isHomePage) {
 				homeSide.css({
@@ -95,11 +102,6 @@ if (isClientsPage) {
 // All client page only code goes here
 
 // Set position and width of pagination and search wrapper
-
-var clientFilter = $('#clientfiltering');
-var clientContainer = $('#clientscontainer');
-var clientSearch = $('#clientsearch');
-var clientsSidebar = $('#clientssidebar');
 
 function setClientFilter() {
 	var width = clientContainer.outerWidth();
