@@ -146,6 +146,10 @@ pageBody.on('click', '.closeerrors', function() {
 		parentEl = $this.parents('#modalvalidationerrors');
 		parentEl.parents('#modalcontent').scrollTop(0);
 	}
+
+	if (pageBody.hasClass('generateinvoice')) {
+		$('footer').removeAttr('style');
+	}
 	
 	parentEl.removeAttr('style').removeClass('hastransformed').hide();
 	if (!pageBody.hasClass('show')) {

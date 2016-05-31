@@ -130,7 +130,16 @@ if (pageBody.hasClass('homepage')) {
 
 	invoiceWrapper.css({
 		'top': negativeValidationsHeight,
-		'margin-bottom' : 15,
+		//'margin-bottom' : 15,
+		'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+		'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+		'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+		'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+		'transform'         : 'translateY(' + validationsHeight + 'px)'
+	});
+
+	$('footer').css({
+		'margin-top': negativeValidationsHeight,
 		'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
 		'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
 		'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
