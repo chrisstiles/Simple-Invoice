@@ -138,16 +138,17 @@ if (pageBody.hasClass('homepage')) {
 		'transform'         : 'translateY(' + validationsHeight + 'px)'
 	});
 
-	$('footer').css({
-		'margin-top': negativeValidationsHeight,
-		'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
-		'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
-		'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
-		'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
-		'transform'         : 'translateY(' + validationsHeight + 'px)'
-	});
-
-
+	if (!pageBody.hasClass('ios') && !pageBody.hasClass('android') && !pageBody.hasClass('windows_phone')) {
+		$('footer').css({
+			'margin-top': negativeValidationsHeight,
+			'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+			'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+			'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+			'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+			'transform'         : 'translateY(' + validationsHeight + 'px)'
+		});
+	}
+	
 }
 
 <% else %>

@@ -144,13 +144,25 @@ var invoiceWrapper = $('#invoicewrapper');
 
 invoiceWrapper.css({
 	'top': negativeValidationsHeight,
-	'margin-bottom' : 15,
+	//'margin-bottom' : 15,
   '-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
   '-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
   '-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
   '-o-transform'      : 'translateY(' + validationsHeight + 'px)',
   'transform'         : 'translateY(' + validationsHeight + 'px)'
 });
+
+if (!pageBody.hasClass('ios') && !pageBody.hasClass('android') && !pageBody.hasClass('windows_phone')) {
+			$('footer').css({
+				'margin-top': negativeValidationsHeight,
+				'-webkit-transform' : 'translateY(' + validationsHeight + 'px)',
+				'-moz-transform'    : 'translateY(' + validationsHeight + 'px)',
+				'-ms-transform'     : 'translateY(' + validationsHeight + 'px)',
+				'-o-transform'      : 'translateY(' + validationsHeight + 'px)',
+				'transform'         : 'translateY(' + validationsHeight + 'px)'
+			});
+		}
+
 
 
 } else {
@@ -212,7 +224,6 @@ invoiceWrapper.css({
 		  '-o-transform'      : 'translateY(-' + validationsHeight + 'px)',
 		  'transform'         : 'translateY(-' + validationsHeight + 'px)'
 		});
-
 		
 			validationErrors.addClass('hastransformed');
 		}
