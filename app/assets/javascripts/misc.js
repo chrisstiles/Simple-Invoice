@@ -205,7 +205,7 @@ var homeSide = $('#homeside');
 function setSidebarPosition() {
 	
 	var leftPosition = homePageWrapper.offset().left + homePageWrapper.outerWidth();
-	$('#homeside').css('left', leftPosition);
+	homeSide.css('left', leftPosition);
 
 }
 

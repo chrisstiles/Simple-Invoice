@@ -346,9 +346,9 @@ function checkDatePicker(goingToFixed) {
 					'position' : 'fixed',
 					'top' : datePickerOffset
 				});
-			} else {
+			}// else {
 				//datePicker.hide();
-			}
+			//}
 		}
 
 	}
@@ -357,6 +357,17 @@ function checkDatePicker(goingToFixed) {
 $document.on('scroll', function() {
 	checkScroll();
 });
+
+$document.ajaxStop(checkSubpixel);
+
+$('.closeerrors').on('click', function() {
+	if (pageBody.hasClass('homepage')) {
+		setTimeout(function() {
+			checkSubpixel();
+		}, 300)
+	}
+});
+
 
 $window.on('resize', function() {
 	checkScreenHeight();

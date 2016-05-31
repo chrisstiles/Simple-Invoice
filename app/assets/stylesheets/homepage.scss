@@ -422,6 +422,10 @@ a.noborder {
 	z-index: 300;
 }
 
+#homeside.hasscroll {
+	overflow:scroll;
+}
+
 .homesidesection {
 	padding:25px 0 25px 25px;
 	border-bottom:1px solid #c9c9c9;

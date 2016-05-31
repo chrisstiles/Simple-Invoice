@@ -146,7 +146,7 @@
 	}
 }
 
-@media screen and (min-width:1020px) {
+@media screen and (min-width:1021px) {
 	body.homepage.ios #mobilescrollwrapper #validationerrors, body.homepage.android #mobilescrollwrapper #validationerrors {
 		top:95px;
 		margin-bottom: 15px;
@@ -424,6 +424,8 @@
 		box-sizing:border-box;
 		border-left:none;
 		padding:0;
+		overflow:auto !important;
+		max-height: none !important;
 	}
 
 	#pagewrapper.widthfixedsidebar {

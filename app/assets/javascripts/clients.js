@@ -3,42 +3,16 @@ ready = function() {
 
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');
-
-if (pageWrapper.hasClass('clientspage')) {
-
 var $window = $(window);
 
-// All client page only code goes here
-
-// Set position and width of pagination and search wrapper
-
-var clientFilter = $('#clientfiltering');
-var clientContainer = $('#clientscontainer');
-var clientSearch = $('#clientsearch');
-var clientsSidebar = $('#clientssidebar');
-
-function setClientFilter() {
-	var width = clientContainer.outerWidth();
-	var clientContainerPosition = clientContainer.offset();
-
-	clientSearch.css({
-		'left': clientContainerPosition.left,
-		'width': width
-	});
-
-	clientsSidebar.css({
-		'left': clientContainerPosition.left + width - 1,
-		'width': width
-	});
-
-	pageWrapper.css('margin-top', clientSearch.outerHeight());
-
-}
-
-setClientFilter();
-
-
 var footer = $('footer:visible');
+var isClientsPage = pageWrapper.hasClass('clientspage');
+var homeSide = $('#homeside');
+var isHomePage = false;
+
+if (homeSide.length) {
+	isHomePage = true;
+}
 
 var mobileFooter = false;
 
@@ -69,13 +43,27 @@ function checkFooterInView() {
 				offsetVal += 50;
 			}
 
-			clientsSidebar.css({
-				'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
-			});
+			if (isClientsPage) {
+				clientsSidebar.css({
+					'max-height' : 'calc(100vh - ' + offsetVal + 'px)'
+				});
+			} else if (isHomePage) {
+				homeSide.css({
+					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+					'overflow': 'scroll'
+				});
+			}
 		} else {
-			clientsSidebar.css({
-				'max-height' : 'none'
-			});
+			if (isClientsPage) {
+				clientsSidebar.css({
+					'max-height' : 'none'
+				});
+			} else if (isHomePage) {
+				homeSide.css({
+					'max-height' : 'calc(100vh - 145px)',
+					'overflow': 'auto'
+				});
+			}
 		}
 	}
 }
@@ -86,7 +74,53 @@ function getVisibleFooterHeight() {
         r   = footer[0].getBoundingClientRect(), t=r.top, b=r.bottom;
     return Math.max(0, t>0? Math.min(elH, H-t) : (b<H?b:H));
 }
+
 checkFooterInView();
+
+$(document).on('scroll', function() {
+	checkFooterInView();
+});
+
+$(document).ajaxComplete(checkFooterInView);
+
+$window.resize(function() {
+	footer = $('footer:visible');
+	checkMobileFooter();
+
+	checkFooterInView();
+});
+
+if (isClientsPage) {
+
+// All client page only code goes here
+
+// Set position and width of pagination and search wrapper
+
+var clientFilter = $('#clientfiltering');
+var clientContainer = $('#clientscontainer');
+var clientSearch = $('#clientsearch');
+var clientsSidebar = $('#clientssidebar');
+
+function setClientFilter() {
+	var width = clientContainer.outerWidth();
+	var clientContainerPosition = clientContainer.offset();
+
+	clientSearch.css({
+		'left': clientContainerPosition.left,
+		'width': width
+	});
+
+	clientsSidebar.css({
+		'left': clientContainerPosition.left + width - 1,
+		'width': width
+	});
+
+	pageWrapper.css('margin-top', clientSearch.outerHeight());
+
+}
+
+setClientFilter();
+
 
 function showMobileClientsForm() {
 	pageBody.addClass('clientsformopen');
@@ -181,19 +215,8 @@ pageBody.on('click', '.deleteclient', function() {
 
 });
 
-$(document).on('scroll', function() {
-	checkFooterInView();
-});
-
-$(document).ajaxComplete(checkFooterInView);
-
-
 $window.resize(function() {
-	footer = $('footer:visible');
-	checkMobileFooter();
 	setClientFilter();
-
-	checkFooterInView();
 });
 
 
