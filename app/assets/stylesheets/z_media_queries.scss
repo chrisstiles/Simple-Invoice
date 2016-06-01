@@ -10,6 +10,12 @@
 	}
 }
 
+@media screen and (max-height:650px) {
+	#homeside {
+		top:80px;
+	}
+}
+
 @media screen and (max-height:780px) {
 	.sessionbox {
 		top:90px;
@@ -704,11 +710,6 @@
 		height:45px;
 	}
 
-	#controls h2 {
-		padding:13px 22px;
-		font-size:16px;
-	}
-
 	.clients-modal span {
 		left:-10px;
 		top:50%;
@@ -1208,11 +1209,26 @@
 
 }
 
-@media screen and (max-height:688px) and (min-width:1020px) {
+@media screen and (max-height:598px) and (min-width:1020px) {
 	.scrollwrapper {
 		padding-bottom:60px;
-		overflow:scroll;
+		overflow-y:scroll;
 	}
+
+	.clients-modal span {
+		left: -10px;
+		top: 50%;
+		transform: translate(-100%, -50%);
+		margin-top: 0;
+	}
+
+	.clients-modal span:before {
+		left:100%;
+		top:50%;
+		transform:translateY(-50%) rotate(90deg);
+		margin-left:-3px;
+	}
+
 }
 
 @media screen and (max-width:670px) {

@@ -355,6 +355,13 @@ body.isestimate .invoiceonly {
 	background-color:#E7F5FF;
 }
 
+.e-amountpaid[contenteditable="true"]:empty  {
+	background-color:#5e6771;
+	padding-top:10px;
+	box-sizing:border-box;
+	height:39px;
+}
+
 .haserror {
 	background-color:#FFC1C1 !important;
 	z-index: 2;
@@ -458,7 +465,6 @@ section:after {
 	max-width:300px;
 	font-size:13px;
 	font-weight:600;
-	line-height:14px;
 }
 
 #userinfo {
@@ -1096,4 +1102,9 @@ input.cmn-toggle-round:checked + label:after {
 
 #invoicewrapper a {
 	color:$light-blue;
+}
+
+body.generateinvoice footer.desktopfooter {
+	z-index:100;
+	padding-left:317px;
 }

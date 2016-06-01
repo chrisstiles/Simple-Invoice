@@ -48,27 +48,31 @@ function checkFooterInView() {
 				offsetVal += 50;
 			}
 
+			if (isHomePage) {
+				offsetVal -= 50; 
+			}
+
 			if (isClientsPage) {
 				clientsSidebar.css({
 					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-					'overflow' : 'scroll'
+					'overflow-y' : 'scroll'
 				});
 			} else if (isHomePage) {
 				homeSide.css({
 					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-					'overflow': 'scroll'
+					'overflow-y': 'scroll'
 				});
 			}
 		} else {
 			if (isClientsPage) {
 				clientsSidebar.css({
 					'max-height' : 'none',
-					'overflow' : 'auto'
+					'overflow-y' : 'auto'
 				});
 			} else if (isHomePage) {
 				homeSide.css({
-					'max-height' : 'calc(100vh - 145px)',
-					'overflow': 'auto'
+					'max-height' : 'none',
+					'overflow-y': 'auto'
 				});
 			}
 		}

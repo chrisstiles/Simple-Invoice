@@ -604,9 +604,10 @@ a.logo img {
     text-overflow: ellipsis;
 	background-color:rgba(255,255,255,.09);
 	display:block;
-	padding:19px 22px;
+	padding:0 22px;
+	line-height:45px;
 	font-weight:600;
-	font-size:17px;
+	font-size:15px;
 	margin:0;
 	border-bottom:1px solid rgba(255,255,255,.1);
 	border-top:1px solid rgba(255,255,255,.1);
@@ -844,8 +845,9 @@ a.logo img {
     top: 100%;
     font-size: 13px;
     transform: translateX(-50%);
-    padding: 8px 14px;
+    padding: 0 14px;
     font-size: 13px;
+    line-height:32px;
     visibility:hidden;
     opacity:0;
     transition: all .2s;
@@ -860,7 +862,6 @@ a.logo img {
 	content:"";
 	display:block;
 	position:absolute;
-	border-style: inset;
 	top:-5px;
 	left:50%;
 	transform:translateX(-50%) rotate(360deg);
@@ -1195,18 +1196,18 @@ a.logo img {
 
 #showrecordpayment .cell {
 	display:inline-block;
-	line-height:1;
+	line-height:39px;
 	text-overflow: ellipsis;
 }
 
 #showrecordpayment .row > div:first-of-type {
 	float:left;
-	padding-top:11px;
+	padding-top:0;
 }
 
 #showrecordpayment .row > div:last-of-type {
 	float:right;
-	padding-top:12px;
+	padding-top:0;
 }
 
 .cell.amountpaidlabel {
@@ -1227,11 +1228,11 @@ a.logo img {
     overflow:hidden;
     float: right;
     min-width: 74px;
-    height:39px;
+    line-height: 39px;
     background-color:#5e6771;
-    margin:-12px -22px 0 0;
+    margin:0 -22px 0 0;
     text-align:left;
-    padding:12px 22px 0 22px;
+    padding:0 22px 0 22px;
     box-sizing:border-box;
     max-width:120px;
 } 
