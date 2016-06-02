@@ -121,6 +121,13 @@
 	}
 }
 
+@media screen and (max-width:1200px) {
+	#homeside {
+		left:auto;
+		right:0;
+	}
+}
+
 @media screen and (max-width:1180px) {
 	header a.button {
 		display:none !important;

@@ -202,17 +202,6 @@ pageBody.on('click', '.deleteinvoice', function() {
 var homePageWrapper = $('#pagewrapper');
 var homeSide = $('#homeside');
 
-function setSidebarPosition() {
-	
-	var leftPosition = homePageWrapper.offset().left + homePageWrapper.outerWidth();
-	homeSide.css('left', leftPosition);
-
-}
-
-if (homePageWrapper.length) {
-	setSidebarPosition();
-}
-
 // Set position of pagination if it exists
 var searchResults = $('#searchresults');
 
@@ -803,7 +792,6 @@ $window.resize(function() {
 	checkContentWrapperHeight();
 
 	if (homePageWrapper.length) {
-		setSidebarPosition();
 		if ($('.homeinvoice').length) {
 			setHomePagination();
 		}
