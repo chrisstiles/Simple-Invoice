@@ -59,7 +59,14 @@ function checkFooterInView() {
 		}
 
 		var footerOffset = getWindowOffset(footer);
-		var fixedElementBottomOffset = fixedElement.offset().top + fixedElement.outerHeight();
+
+		var fixedElementBottomOffset;
+
+		if (fixedElement.length) {
+			fixedElementBottomOffset = fixedElement.offset().top + fixedElement.outerHeight()
+		} else {
+			fixedElementBottomOffset = 0;
+		}
 
 		if ((isVisible && footerOffset <= fixedElementBottomOffset + 45) || fixedElementBottomOffset >= $window.height()) {
 
