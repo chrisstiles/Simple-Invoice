@@ -31,6 +31,10 @@ function checkMobileFooter() {
 
 checkMobileFooter();
 
+function getWindowOffset(el) {
+	return (el.offset().top - $window.scrollTop());
+}
+
 function checkFooterInView() {
 	if (footer.length) {
 		var docViewTop = $window.scrollTop();
@@ -41,40 +45,36 @@ function checkFooterInView() {
 
 		var isVisible = (elemBottom <= docViewBottom) && (elemTop >= docViewTop);
 
-		if (isVisible) {
-			var offsetVal = getVisibleFooterHeight() + 145;
+		var offsetVal = getVisibleFooterHeight() + 145;
 
-			if (mobileFooter) {
-				offsetVal += 50;
-			}
+		if (mobileFooter) {
+			offsetVal += 50;
+		}
 
-			if (isHomePage) {
-				offsetVal -= 50; 
-			}
+		fixedElement = clientsSidebar;
 
-			if (isClientsPage) {
-				clientsSidebar.css({
-					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-					'overflow-y' : 'scroll'
-				});
-			} else if (isHomePage) {
-				homeSide.css({
-					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-					'overflow-y': 'scroll'
-				});
-			}
+		if (isHomePage) {
+			offsetVal -= 50;
+			fixedElement = homeSide;
+		}
+
+		var footerOffset = getWindowOffset(footer);
+		var fixedElementBottomOffset = fixedElement.offset().top + fixedElement.outerHeight();
+
+		if ((isVisible && footerOffset <= fixedElementBottomOffset + 45) || fixedElementBottomOffset >= $window.height()) {
+
+			fixedElement.css({
+				'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+				'overflow-y' : 'scroll'
+			});
+			
 		} else {
-			if (isClientsPage) {
-				clientsSidebar.css({
-					'max-height' : 'none',
-					'overflow-y' : 'auto'
-				});
-			} else if (isHomePage) {
-				homeSide.css({
-					'max-height' : 'none',
-					'overflow-y': 'auto'
-				});
-			}
+		
+			fixedElement.css({
+				'max-height' : 'none',
+				'overflow-y' : 'scroll'
+			});
+		
 		}
 	}
 }
