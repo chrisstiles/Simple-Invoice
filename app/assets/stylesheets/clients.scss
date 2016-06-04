@@ -72,11 +72,13 @@
 
 #clientssidebar {
 	position:fixed;
-	padding-right:25px;
+	padding-right:35px;
 	top:100px;
 	z-index: 600;
 	bottom:45px;
+	box-sizing:border-box;
 	border-left:1px solid #c9c9c9;
+	overflow:visible;
 }
 
 #newclientbox {
@@ -179,6 +181,7 @@
     padding-bottom: 3px;
     display: block;
     color:$dark-blue;
+    float:left;
 }
 
 .clientsformwrapper select {

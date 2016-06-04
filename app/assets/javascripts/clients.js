@@ -4,6 +4,7 @@ ready = function() {
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');
 var $window = $(window);
+var $document = $(document);
 
 var footer = $('footer:visible');
 var isClientsPage = pageWrapper.hasClass('clientspage');
@@ -31,8 +32,44 @@ function checkMobileFooter() {
 
 checkMobileFooter();
 
+function getScrollBarWidth() {
+	var inner = document.createElement('p');
+	inner.style.width = "100%";
+	inner.style.height = "200px";
+
+	var outer = document.createElement('div');
+	outer.style.position = "absolute";
+	outer.style.top = "0px";
+	outer.style.left = "0px";
+	outer.style.visibility = "hidden";
+	outer.style.width = "200px";
+	outer.style.height = "150px";
+	outer.style.overflow = "hidden";
+	outer.appendChild (inner);
+
+	document.body.appendChild (outer);
+	var w1 = inner.offsetWidth;
+	outer.style.overflow = 'scroll';
+	var w2 = inner.offsetWidth;
+	if (w1 == w2) w2 = outer.clientWidth;
+
+	document.body.removeChild (outer);
+
+	return (w1 - w2);
+};
+
+var scrollBarWidth = getScrollBarWidth();
+
 function getWindowOffset(el) {
 	return (el.offset().top - $window.scrollTop());
+}
+
+var containerWidth = clientContainer.outerWidth();
+var clientContainerPosition = clientContainer.offset();
+
+function setClientVariables() {
+	containerWidth = clientContainer.outerWidth();
+	clientContainerPosition = clientContainer.offset();
 }
 
 function checkFooterInView() {
@@ -60,27 +97,47 @@ function checkFooterInView() {
 
 		var footerOffset = getWindowOffset(footer);
 
-		var fixedElementBottomOffset;
+		var fixedElementBottomOffset, fixedWidth;
 
 		if (fixedElement.length) {
-			fixedElementBottomOffset = fixedElement.offset().top + fixedElement.outerHeight()
+			fixedElementBottomOffset = fixedElement.offset().top + fixedElement.outerHeight();
 		} else {
 			fixedElementBottomOffset = 0;
 		}
 
 		if ((isVisible && footerOffset <= fixedElementBottomOffset + 45) || fixedElementBottomOffset >= $window.height()) {
 
-			fixedElement.css({
-				'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-				'overflow-y' : 'scroll'
-			});
+			if (clientsSidebar.length) {
+				fixedElement.css({
+						'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+						'overflow-y' : 'scroll',
+						'padding-right' : 35 - scrollBarWidth
+					});
+
+			} else {
+				fixedElement.css({
+					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+					'overflow-y' : 'scroll'
+				});
+			}
+	
 			
 		} else {
-		
-			fixedElement.css({
-				'max-height' : 'none',
-				'overflow-y' : 'scroll'
-			});
+			fixedElement.scrollTop(0);
+			if (isHomePage) {
+				fixedElement.css({
+					'max-height' : 'none',
+					'overflow-y' : 'visible',
+					'width' : 270,
+					'margin-right' : 0
+				});
+			} else {
+				fixedElement.css({
+					'max-height' : 'none',
+					'overflow-y' : 'visible',
+					'padding-right' : 35
+				});
+			}
 		
 		}
 	}
@@ -95,16 +152,16 @@ function getVisibleFooterHeight() {
 
 checkFooterInView();
 
-$(document).on('scroll', function() {
+$document.on('scroll', function() {
 	checkFooterInView();
 });
 
-$(document).ajaxComplete(checkFooterInView);
+$document.ajaxComplete(checkFooterInView);
 
 $window.resize(function() {
 	footer = $('footer:visible');
+	setClientFilter();
 	checkMobileFooter();
-
 	checkFooterInView();
 });
 
@@ -115,17 +172,16 @@ if (isClientsPage) {
 // Set position and width of pagination and search wrapper
 
 function setClientFilter() {
-	var width = clientContainer.outerWidth();
-	var clientContainerPosition = clientContainer.offset();
+	setClientVariables();
 
 	clientSearch.css({
 		'left': clientContainerPosition.left,
-		'width': width
+		'width': containerWidth
 	});
 
 	clientsSidebar.css({
-		'left': clientContainerPosition.left + width - 1,
-		'width': width
+		'left': clientContainerPosition.left + containerWidth - 1,
+		'width': containerWidth
 	});
 
 	pageWrapper.css('margin-top', clientSearch.outerHeight());
@@ -227,11 +283,6 @@ pageBody.on('click', '.deleteclient', function() {
 	}
 
 });
-
-$window.resize(function() {
-	setClientFilter();
-});
-
 
 }
 

@@ -433,7 +433,7 @@
 		position:static;
 		transform:none;
 		color:#fff;
-		width:100%;
+		width:100% !important;
 		box-sizing:border-box;
 		border-left:none;
 		padding:0;
@@ -917,12 +917,12 @@
 		left:0 !important;
 		width:auto!important;
 		right:0;
-		padding:0;
+		padding:0 !important;
 		margin-top:0;
 		top:50px;
 		transform:translateX(100%);
 		bottom:50px;
-		overflow:scroll;
+		overflow:scroll !important;
 		-webkit-overflow-scrolling: touch;
 		max-height: none !important;
 	}
@@ -1626,6 +1626,12 @@
 
 	#pagewrapper.smallbox {
 		margin:15px;
+	}
+
+	.passwordhalf, .confirmpasswordhalf {
+		width:100%;
+		float:none;
+		margin-right:0;
 	}
 }
 
