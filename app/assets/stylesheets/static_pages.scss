@@ -195,7 +195,7 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 
 .sessionbox {
 	border:1px solid #E2E2E2;
-	padding:44px 80px 70px 80px;
+	padding:44px 60px 70px 60px;
 	width:100%;
 	max-width:490px;
 	box-sizing:border-box;
@@ -280,7 +280,7 @@ body.sessionopen .sessionboxwrapper {
     width: 100%;
     box-sizing: border-box;
     outline: none;
-    padding: 14px 20px;
+    padding: 12px 17px;
     border-radius: 1px;
     border: 1px solid #E6E6E6;
     font-weight: 400;
@@ -311,6 +311,15 @@ body.sessionopen .sessionboxwrapper {
 	font-size:15px;
 	color:#707070;
 	margin-bottom:4px;
+}
+
+.passwordhalf, .confirmpasswordhalf {
+	width:calc(50% - 9px);
+	float:left;
+}
+
+.passwordhalf {
+	margin-right:18px;
 }
 
 .loginloadingspinner {
@@ -353,6 +362,22 @@ body.sessionopen .sessionboxwrapper {
 	visibility:visible;
 	opacity:1;
 	transform:translateY(0);
+}
+
+#registervalidationerrors.registererrors {
+	animation-name:registerValidationSlideUp;
+}
+
+@keyframes registerValidationSlideUp {
+	from {
+		opacity:0;
+		transform:translateY(50px);
+	}
+
+	to {
+		opacity:1;
+		transform:translateY(-15px);
+	}
 }
 
 .sessionbox .button.blue, .staticwrapper .button.blue {

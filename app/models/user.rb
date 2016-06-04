@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
 	accepts_nested_attributes_for :setting
 
+	before_save :remove_white_space
+
+	after_create :send_welcome_email
+
 	# Remember user by default
 	def remember_me
 		true
@@ -21,6 +25,8 @@ class User < ActiveRecord::Base
 			false
 		end
 	end
+
+	validates :name, presence: true
 
 	# Length
 	validates :email, length: { maximum: 80 }
@@ -81,5 +87,23 @@ class User < ActiveRecord::Base
 			''
 		end
 	end
+
+	def proper_name
+		unless self.name.empty?
+			self.name.gsub(/\b(?<!['’`])[a-z]/) { $&.capitalize }
+		else
+			"User"
+		end
+	end
+
+	private 
+
+		def remove_white_space
+			self.name = self.name.squish
+		end
+
+		def send_welcome_email
+			UserMailer.welcome(self).deliver_now
+		end
 
 end

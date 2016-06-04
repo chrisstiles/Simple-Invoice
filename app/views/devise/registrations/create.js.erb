@@ -42,6 +42,20 @@ errorInput.addClass('haserror');
 
 <% end %>
 
+var errorHolderText = errorHolder.text();
+
+if (errorHolderText.indexOf('Name') > -1 && errorHolderText.indexOf('Email') > -1) {
+	var nameHTML = "";
+	$('#registervalidationerrors.registererrors .errorholder p').each(function() {
+		var $this = $(this);
+		if ($this.text().indexOf('Name') > -1) {
+			nameHTML += $this[0].outerHTML;
+			$this.remove();
+		}
+	});
+	errorHolder.prepend($(nameHTML));
+} 
+
 var validationsHeight = validationErrors.outerHeight(),
 	negativeValidationsHeight = -1 * validationsHeight;
 
@@ -50,7 +64,7 @@ validationErrors.css({
 	'display' : 'block'
 });
 
-validationsHeight += 15;
+//validationsHeight += 15;
 
 $('.registerformholder').css({
   '-webkit-transform' : 'translate3d(0, ' + validationsHeight + 'px, 0)',

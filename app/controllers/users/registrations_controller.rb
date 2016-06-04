@@ -74,6 +74,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def sign_up_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
   def add_homepage_invoice_to_user
     if params[:homepage_token].present?
       invoice = Invoice.find_by(token: params[:homepage_token])

@@ -18,11 +18,18 @@
         <%= f.label :email %>
         <%= f.email_field :email, class: "registeremail", placeholder: "Email address" %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "Name" %>
 
-        <%= f.label :password_confirmation, "Confirm Password" %>
-        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
+        <div class="passwordhalf">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+        </div>
+
+        <div class="confirmpasswordhalf">
+            <%= f.label :password_confirmation, "Confirm Password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
+        </div>
 
        <p class="staticsubmit"> <%= f.submit "Sign up", class: "button blue willload registerbutton" %></p>
     <% end %>

@@ -53,7 +53,7 @@ module InvoicesHelper
 
     def email_subject(invoice)
       if current_user.name.present?
-        "#{invoice.display_invoice_type} ##{invoice.display_number} from #{current_user.name}"
+        "#{invoice.display_invoice_type} ##{invoice.display_number} from #{current_user.proper_name}"
       else
         "#{invoice.display_invoice_type} ##{invoice.display_number}"
       end
@@ -156,7 +156,7 @@ module InvoicesHelper
       client = invoice.client_name || "Valued Client"
 
       if current_user.name.present?
-        salutation = ",\n#{current_user.name}"
+        salutation = ",\n#{current_user.proper_name}"
       else
         salutation = ""
       end
