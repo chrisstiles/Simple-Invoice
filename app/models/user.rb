@@ -96,10 +96,16 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def first_name
+		self.proper_name.split(" ")[0]
+	end
+
 	private 
 
 		def remove_white_space
-			self.name = self.name.squish
+			if self.name.present?
+				self.name = self.name.squish
+			end
 		end
 
 		def send_welcome_email

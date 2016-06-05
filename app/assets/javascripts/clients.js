@@ -109,10 +109,10 @@ function checkFooterInView() {
 
 			if (clientsSidebar.length) {
 				fixedElement.css({
-						'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
-						'overflow-y' : 'scroll',
-						'padding-right' : 35 - scrollBarWidth
-					});
+					'max-height' : 'calc(100vh - ' + offsetVal + 'px)',
+					'overflow-y' : 'scroll',
+					'padding-right' : 35 - scrollBarWidth
+				});
 
 			} else {
 				fixedElement.css({
@@ -160,7 +160,6 @@ $document.ajaxComplete(checkFooterInView);
 
 $window.resize(function() {
 	footer = $('footer:visible');
-	setClientFilter();
 	checkMobileFooter();
 	checkFooterInView();
 });
@@ -189,6 +188,10 @@ function setClientFilter() {
 }
 
 setClientFilter();
+
+$window.resize(function() {
+	setClientFilter();
+})
 
 
 function showMobileClientsForm() {
