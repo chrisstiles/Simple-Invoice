@@ -7,6 +7,6 @@ class UserMailer < ApplicationMailer
   #
   def welcome(user)
   	@user = user
-    mail to: @user.email
+    mail to: @user.email, subject: "Welcome to Simple Invoice"
   end
 end
