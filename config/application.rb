@@ -31,6 +31,10 @@ module Invoicer
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.precompile += %w( .svg .eot .woff .ttf)
 
+    Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
+      config.assets.paths << path
+    end
+
     config.exceptions_app = self.routes
   end
 end

@@ -1,4 +1,222 @@
-<h1>Welcome to Simple Invoice!</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+-->
+<title>Welcome to Simple Invoice</title>
 
-<p>Dear <%= @user.proper_name %>,</p>
-<p>Thank you for using simple invoice!</p>
+<!--[if !mso]><!-- -->
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+
+<!--<![endif]-->
+
+<style type="text/css">
+
+	/* reset */
+	#outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */ 
+	.ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */  
+	.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} 
+	table td {border-collapse: collapse;} /* Outlook 07, 10 padding issue fix */
+	table {border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; } /* remove spacing around Outlook 07, 10 tables */
+
+	
+	/* bring inline */
+	p {margin: 0; padding: 0; font-size: 14px; line-height:22px; color:#616060;font-family: 'Open Sans', sans-serif;} 
+	img {display: block; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+	a img {border: none;} 
+	a {text-decoration: none; color: #41a9ee; font-weight:600} /* text link */
+	a:hover {text-decoration:underline;}
+	a.phone {text-decoration: none; color: #000001 !important; pointer-events: auto; cursor: default;} /* phone link, use as wrapper on phone numbers */
+	span {font-size: 13px; line-height: 17px; color: #000001;}
+	
+	body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	-webkit-overflow-scrolling: touch;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-text-size-adjust: 100%;
+	}
+	
+	.maintable {
+	  background-color:#fff;
+	}
+	
+	.mobilebreak {
+		display:none;
+	}
+  
+  	@media screen and (max-width:670px) {
+		.bottomlinks {
+			padding-left:35px;
+			padding-right:35px;	
+		}
+	}
+	
+  
+	@media screen and (max-width:600px) {
+		.wrappertable {
+			padding-top:0 !important;
+			padding-bottom:0 !important;
+		}
+
+		.maintable {
+			display:block !important;
+			width:100% !important; 
+		}
+	}
+	
+	@media screen and (max-width:470px) {
+		.step {
+			table-layout:fixed;	
+		}
+		
+		.numbercell {
+			width:50px !important;	
+		}
+		
+		.spacercell {
+			width:15px !important;
+		}
+	}
+  
+	
+	@media screen and (max-width:430px) {
+		.mobilebreak {
+			display:block !important;
+		}
+	}
+  
+</style>
+<!--[if gte mso 9]>
+  <style>
+  /* Target Outlook 2007 and 2010 */
+  </style>
+<![endif]-->
+</head>
+<body style="width: 100%;margin: 0;padding: 0;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;background-color: #eaeaea;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;text-rendering: optimizeLegibility;-webkit-overflow-scrolling: touch;font-family: 'Open Sans', sans-serif;">
+
+<!-- Wrapper table -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr>
+  <td style="padding-top:50px; padding-bottom:50px" class="wrappertable">
+      
+<!-- Main Content -->  
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="maintable" style="background-color: #fff;">
+    <tbody>
+        <tr>
+        	<td>
+            	
+            </td>
+        </tr>
+        <tr>
+        	<td align="center" style="background-color:#41a9ee; text-align:center; padding-top:20px; padding-bottom:20px">
+           	  <img src="<%= image_url("email/email-logo-white.png") %>" width="171" height="29" alt="" style="display: inline-block;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></td>
+        </tr>
+        <tr>
+        	<td style="padding-top:50px; padding-bottom:47px; padding-right:40px; padding-left:40px;">
+            	<p align="center" style="font-size: 22px;color: #41a9ee;margin: 0;margin-bottom:25px;padding: 0;line-height: 22px;font-family: 'Open Sans', sans-serif;">Welcome to <br class="mobilebreak" style="display: none;">Simple Invoice, <%= @user.first_name %></p>
+                <p style="margin: 0;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">Simple Invoice makes it easy for freelancers to invoice and quote your clients. Take control of your finances by tracking which clients have paid you, and which invoices are still outstanding. We keep it simple and free by providing just the features freelancers need, without all the unnecessary complication.</p>
+            </td>
+        </tr>
+        <tr>
+        	<td style="background-color:#f7f7f7; padding-top:12px; padding-bottom:12px; padding-right:40px; padding-left:40px; color:#41a9ee; font-weight:600; line-height:22px; font-size:17px" align="center">
+            	A few steps you might want to take to get started</td>
+        </tr>
+        <tr>
+        	<td>
+            
+            <!-- Step 1 -->
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ececec" class="step">
+        	  <tbody>
+        	    <tr>
+        	      <td width="10%" valign="top" class="numbercell" style="color:#41a9ee; text-align:right; font-weight:400; font-size:42px; padding-top:32px;">1</td>
+        	      <td width="3%" valign="top" style="padding-top:35px" class="spacercell">&nbsp;</td>
+        	      <td width="87%" valign="top" style="padding-top:35px; padding-right:40px; padding-bottom:40px;">
+                  <p style="font-size: 18px;margin-bottom: 10px;margin-top: 5px;padding: 0;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">Upload your logo</p>
+                  <p style="margin-bottom: 8px;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">Upload your logo from the <a href="https://www.simpleinvoice.io/settings" style="text-decoration: none;color: #41a9ee;font-weight: 600;">settings page</a> and it will be added by default to your invoices and esimates. When creating your invoice you have the option to resize or hide your logo. </p>
+<p style="margin: 0;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;"><a href="https://www.simpleinvoice.io/settings" style="text-decoration: none;color: #41a9ee;font-weight: 600;">Upload logo</a></p>
+                  </td>
+      	      </tr>
+      	    </tbody>
+      	  </table>
+          
+          <!-- Step 2 -->
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ececec" class="step">
+        	  <tbody>
+        	    <tr>
+        	      <td width="10%" valign="top" class="numbercell" style="color:#41a9ee; text-align:right; font-weight:400; font-size:42px; padding-top:32px;">2</td>
+        	      <td width="3%" valign="top" style="padding-top:35px" class="spacercell">&nbsp;</td>
+        	      <td width="87%" valign="top" style="padding-top:35px; padding-right:40px; padding-bottom:40px;">
+                  <p style="font-size: 18px;margin-bottom: 10px;margin-top: 5px;padding: 0;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">Finish your profile</p>
+                  <p style="margin-bottom: 8px;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">You can add additional information such as your address from the <a href="https://www.simpleinvoice.io/settings" style="text-decoration: none;color: #41a9ee;font-weight: 600;">settings page</a>. This information will be added by default when you create an invoice. This will save you from having to enter it each time, and you can easily change this information while creating an invoice. </p>
+<p style="margin: 0;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;"><a href="https://www.simpleinvoice.io/settings" style="text-decoration: none;color: #41a9ee;font-weight: 600;">Finish profile</a></p>
+                  </td>
+      	      </tr>
+      	    </tbody>
+      	  </table>
+          
+          
+          <!-- Step 3 -->
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ececec" class="step">
+        	  <tbody>
+        	    <tr>
+        	      <td width="10%" valign="top" class="numbercell" style="color:#41a9ee; text-align:right; font-weight:400; font-size:42px; padding-top:32px;">3</td>
+        	      <td width="3%" valign="top" style="padding-top:35px" class="spacercell">&nbsp;</td>
+        	      <td width="87%" valign="top" style="padding-top:35px; padding-right:40px; padding-bottom:40px;">
+                  <p style="font-size: 18px;margin-bottom: 10px;margin-top: 5px;padding: 0;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">Add in your clients</p>
+                  <p style="margin-bottom: 8px;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;">From the <a href="https://www.simpleinvoice.io/clients" style="text-decoration: none;color: #41a9ee;font-weight: 600;">clients page</a>, you can quickly add all your current clients to Simple Invoice. Saving your clients allows you to easily add them an invoice or estimate. </p>
+<p style="margin: 0;padding: 0;font-size: 14px;line-height: 22px;color: #616060;font-family: 'Open Sans', sans-serif;"><a href="https://www.simpleinvoice.io/clients" style="text-decoration: none;color: #41a9ee;font-weight: 600;">Add clients</a></p>
+                  </td>
+      	      </tr>
+      	    </tbody>
+      	  </table>
+          
+          
+          <!-- End Steps -->
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding-top:55px; padding-bottom:65px" align="center">
+          	<p style="color: #777777;font-weight: 600;font-size: 13px;margin-bottom: 10px;padding: 0;line-height: 22px;font-family: 'Open Sans', sans-serif;">Or if you are ready to get started.</p>
+            
+            
+            <!-- Call to Action Button -->
+            
+                <div><!--[if mso]>
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.simpleinvoice.io/invoices/new" style="height:40px;v-text-anchor:middle;width:250px;" arcsize="8%" stroke="f" fillcolor="#41a9ee">
+        <w:anchorlock/>
+        <center>
+      <![endif]-->
+          <a href="https://www.simpleinvoice.io/invoices/new" style="background-color: #41a9ee;border-radius: 3px;color: #ffffff;display: inline-block;font-family: 'Open Sans', sans-serif;font-size: 17px;line-height: 40px;text-align: center;text-decoration: none;width: 250px;-webkit-text-size-adjust: none;font-weight: 600;">Create Invoice</a>
+      <!--[if mso]>
+        </center>
+      </v:roundrect>
+    <![endif]--></div>
+            
+            
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#eaeaea; padding-top:25px" class="bottomlinks">
+          	
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="color:#777777; font-size:13px">
+              <tbody>
+                <tr>
+                  <td width="50%"><a href="https://www.simpleinvoice.io" style="color: #777777;text-decoration: none;font-weight: 600;">Simple Invoice</a></td>
+                  <td width="50%" align="right"><a href="https://www.simpleinvoice.io/about" style="color: #777777;text-decoration: none;font-weight: 600;">About</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.simpleinvoice.io/contact" style="color: #777777;text-decoration: none;font-weight: 600;">Contact</a></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </td>
+        </tr>
+    </tbody>
+</table>
+      
+      
+</td></tr></tbody></table>
+</body>
+</html>
