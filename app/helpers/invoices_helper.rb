@@ -185,4 +185,20 @@ module InvoicesHelper
      
     end
 
+    def mobile_create_button
+      if url_is_estimate?
+        link_to "", new_estimate_path, class: "mobilecreatebutton"
+      else
+        link_to "", new_invoice_path, class: "mobilecreatebutton"
+      end
+    end
+
+    def mobile_home_create_button
+      if url_is_estimate?
+        link_to "New Estimate", new_estimate_path, class: "mobilehomecreatebutton button blue newinvoiceicon"
+      else
+        link_to "New Invoice", new_invoice_path, class: "mobilehomecreatebutton button blue newinvoiceicon"
+      end
+    end
+
 end

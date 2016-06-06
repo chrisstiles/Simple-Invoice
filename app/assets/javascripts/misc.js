@@ -222,8 +222,10 @@ function setHomePagination() {
 		if ($('.pagination').length) {
 			pagination.show();
 			searchResults.addClass('haspagination');
+			homePageWrapper.addClass('haspagination');
 		} else {
 			searchResults.removeClass('haspagination');
+			homePageWrapper.removeClass('haspagination');
 			pagination.hide();
 		}
 

@@ -378,9 +378,13 @@
 		border-left:!important;
 	}
 
-	#mobilesidebar {
+	#mobilesidebar, .mobilecreatebutton {
 		display:block;
 		z-index: 9999;
+	}
+
+	.mobilehomecreatebutton {
+		display:block;
 	}
 
 	.sessionbox {
@@ -1555,6 +1559,19 @@
 
 	p.staticsubmit .button.blue {
 		float:none;
+	}
+
+	.mobilehomecreatebutton {
+		max-width: none;
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: -15px;
+		margin-bottom: 21px;
+	}
+
+	#pagewrapper.haspagination .mobilehomecreatebutton {
+		margin-bottom:25px;
+		margin-top:-15px;
 	}
 }
 
