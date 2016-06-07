@@ -512,6 +512,8 @@ ready = function() {
 	}
 
 	if (editing || creating) {
+		$('.mobilecreatebutton').remove();
+
 		// Toggle invoice number and estimate number
 		var invoiceTypeSelect = $('#invoice_invoice_type');
 		var invoiceNumberSpan = $('#e-invoicenumber');
