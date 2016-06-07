@@ -177,7 +177,7 @@ module InvoicesHelper
         else
           "#{greeting}"\
           "#{thank_you}"\
-          "Please pay the balance of #{number_to_currency(invoice.balance)} by #{invoice.due_date.strftime("%B %d, %Y")}\n\n"\
+          " Please pay the balance of #{number_to_currency(invoice.balance)} by #{invoice.due_date.strftime("%B %d, %Y")}\n\n"\
           "Regards#{salutation}"
         end
       end
