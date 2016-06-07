@@ -516,12 +516,15 @@ ready = function() {
 		var invoiceTypeSelect = $('#invoice_invoice_type');
 		var invoiceNumberSpan = $('#e-invoicenumber');
 		var estimateNumberSpan = $('#e-estimatenumber');
-		var invoiceOnlyItems = $('.invoiceonly')
+		var invoiceOnlyItems = $('.invoiceonly');
+		var saveButton = $('#toolbarcontent .saveicon');
 
 		invoiceTypeSelect.on('change', function() {
 			if ($(this).val().toLowerCase() === 'estimate') {
 				invoiceNumberSpan.hide();
 				estimateNumberSpan.show();
+
+				saveButton.val("Save Estimate");
 
 				removeMaxDate();
 				invoiceOnlyItems.hide();
@@ -529,6 +532,8 @@ ready = function() {
 			} else {
 				invoiceNumberSpan.show();
 				estimateNumberSpan.hide();
+
+				saveButton.val("Save Invoice");
 
 				setMinDate();
 				invoiceOnlyItems.show();
