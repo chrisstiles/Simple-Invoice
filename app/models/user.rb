@@ -100,6 +100,17 @@ class User < ActiveRecord::Base
 		self.proper_name.split(" ")[0]
 	end
 
+	require 'mail'
+	def email_from_address
+		unless self.name.empty?
+			address = Mail::Address.new self.email
+			address.display_name = self.proper_name
+			address.format
+		else
+			self.email
+		end
+	end
+
 	private 
 
 		def remove_white_space

@@ -7,7 +7,7 @@ class InvoiceMailer < ApplicationMailer
   #
   def email_invoice(user, invoice, recipient, cc, subject, message)
   	@invoice = invoice
-    @from = user.email || "noreply@simpleinvoice.com"
+    @from = user.email_from_address #user.email || "noreply@simpleinvoice.com"
     @recipient = recipient
     @cc = cc.split(",")
     @subject = subject
