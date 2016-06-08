@@ -90,7 +90,7 @@ ready = function() {
                 success: function(data) {
 
                     if (data.length == 0) {
-                        addModalContent('<div id="modalcontent"><div class="noclients"><span>No Clients Found</span><a href="/clients/" class="button blue" target="_blank">Create your first client</a></div></div>')
+                        addModalContent('<div id="modalcontent"><div class="noclients"><span>No Clients Found</span><a href="/clients/" class="button blue" target="_blank">Create Your First Client</a></div></div>')
                     } else {
 
                         // Append all clients and info to modal window
