@@ -8,7 +8,8 @@ class InvoiceMailer < ApplicationMailer
   def email_invoice(user, invoice, recipient, cc, subject, message)
   	@invoice = invoice
     #user.email_from_address
-    @from =  user.email || "Simple Invoice <noreply@simpleinvoice.com>"
+    @from =  "#{user.proper_name} <noreply@simpleinvoice.com>"
+    @reply_to = user.email || "noreply@simpleinvoice.io"
     @recipient = recipient
     @cc = cc.split(",")
     @subject = subject
@@ -19,7 +20,7 @@ class InvoiceMailer < ApplicationMailer
   	)
 
     self.instance_variable_set(:@_lookup_context, nil)
-  	mail from: @from, subject: @subject, to: @recipient, cc: @cc
+  	mail from: @from, subject: @subject, to: @recipient, cc: @cc, reply_to: @reply_to
   	
   end
 end
