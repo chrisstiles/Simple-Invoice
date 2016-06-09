@@ -16,6 +16,23 @@
 	}
 }
 
+@media screen and (min-height:781px) {
+	body.safari .sessionbox {
+		top:90px;
+		bottom:30px;
+		transform:translate(-50%, 0);
+		animation-name:fadeIn;
+	}
+
+	body.safari .throbber-loader:not(:required) {
+		transform:translate(-50%, -47%);
+	}
+
+	body.safari .loginloadingspinner {
+		bottom:77px;
+	}
+}
+
 @media screen and (max-height:780px) {
 	.sessionbox {
 		top:90px;
