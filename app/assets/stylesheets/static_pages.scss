@@ -339,6 +339,11 @@ body.sessionopen .sessionboxwrapper {
 	transform:translate(-50%,-50%);
 }
 
+.sessionboxwrapper .loginloadingspinner .loadingcircle {
+	top:auto;
+	bottom:-20px;
+}
+
 .sessionerror h3, .sessionerror h1 {
 	transform:translateY(-10px);
 }
@@ -547,7 +552,7 @@ p.staticsubmit {
 }
 
 #pagewrapper.staticwrapper .loginloadingspinner {
-	bottom:-55px;
+	bottom:0;
 }
 
 #pagewrapper.staticwrapper .throbber-loader:not(:required) {

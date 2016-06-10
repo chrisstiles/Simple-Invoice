@@ -1323,6 +1323,10 @@ a.logo img {
     height:50px;
 }
 
+body.static .mobilecreatebutton {
+	display:none !important;
+}
+
 .mobilehomecreatebutton {
 	display:none;
 	margin:-12px auto 25px auto;
