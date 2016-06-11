@@ -9,6 +9,7 @@ ready = function() {
     var pageBody = $('body');
     var pageHtml = $('html');
     var $document = $(document);
+    var htmlAndBody = $('html, body');
 
     // Generate the modal window and title
 
@@ -16,15 +17,19 @@ ready = function() {
         var scrollAmount = $document.scrollTop();
 
         if ($document.height() > $(window).height()) {
-             var scrollTop = ($('html').scrollTop()) ? $('html').scrollTop() : $('body').scrollTop(); // Works for Chrome, Firefox, IE...
-             $('html').addClass('noscroll').css('top',-scrollTop);         
+             var scrollTop = (pageHtml.scrollTop()) ? pageHtml.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
+             pageHtml.addClass('noscroll').css('top',-scrollTop);         
         }
 
-        $('html').addClass('noscroll').css('top',-scrollTop);   
+        pageHtml.addClass('noscroll').css('top',-scrollTop);   
         
         pageBody.append('<div id="modalwrapper"><div id="modaloverlay"></div><div id="modalwindow"><div id="modaltitle"><div class="closemodal"></div><span>' + title + '</span></div><div class="throbber-loader">Loading...</div></div></div>');
 
     }
+
+    $('.pagination a').on('click', function() {
+       htmlAndBody.scrollTop(0).removeAttr('style');
+    });
 
     function addModalContent(content, fade) {
     	var html = content
@@ -39,7 +44,7 @@ ready = function() {
     function closeModal() {
         
         var scrollTop = parseInt($('html').css('top'));
-        $('html').removeClass('noscroll');
+        pageHtml.removeClass('noscroll');
         $('html,body').scrollTop(-scrollTop);
 
         $('#modalwrapper').remove();
