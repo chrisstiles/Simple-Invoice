@@ -29,6 +29,7 @@ class InvoicesController < ApplicationController
   def email_invoice
 
     if request.format.js?
+      
       @email = InvoiceEmail.new(params)
 
       if @email.valid?
