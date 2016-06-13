@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
   get 'pdfs/no-invoice-found' => 'static_pages#no_invoice_found', as: :no_invoice_found
 
+  get '/contact' => 'static_pages#contact', as: :contact
+  post '/contact' => 'static_pages#send_contact', as: :send_contact
+
   root 'static_pages#home'
 
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
