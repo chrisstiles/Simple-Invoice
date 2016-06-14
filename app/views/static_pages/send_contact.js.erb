@@ -1,0 +1,88 @@
+var pageBody = $('body'),
+	validationErrors = $('#registervalidationerrors.registererrors'),
+	errorHolder = $('#registervalidationerrors.registererrors .errorholder');
+
+setTimeout(function() {
+	var oldContent = $('.buttoncontent').text();
+	var button = $('.hasloadingtext');
+
+	if (button.is('input')) {
+		button.val(oldContent);
+		button.prop('disabled', false);
+	} else {
+	button.text(oldContent);
+	}
+
+	button.removeClass('loading hasloadingtext');
+	$('.buttoncontent').empty().remove();
+	
+}, 200);
+
+<% if @email.errors.any? %>
+
+errorHolder.empty();
+
+<% @email.errors.each do |key, message| %>
+
+var errorInput = $("*[name='contact_email[<%= key %>]']");
+errorInput.addClass('haserror');
+
+<% end %>
+
+<% @email.errors.full_messages.each do |message| %>
+	
+	var message = '<%= message %>'
+	errorHolder.append('<p>' + message + '</p>');
+
+<% end %>
+
+var errorHolderText = errorHolder.text();
+
+if (errorHolderText.indexOf('Name') > -1 && errorHolderText.indexOf('Email') > -1) {
+	var nameHTML = "";
+	$('#registervalidationerrors.registererrors .errorholder p').each(function() {
+		var $this = $(this);
+		if ($this.text().indexOf('Name') > -1) {
+			nameHTML += $this[0].outerHTML;
+			$this.remove();
+		}
+	});
+	errorHolder.prepend($(nameHTML));
+} 
+
+var validationsHeight = validationErrors.outerHeight(),
+	negativeValidationsHeight = -1 * validationsHeight;
+
+validationErrors.css({
+	'margin-bottom' : negativeValidationsHeight,
+	'display' : 'block'
+});
+
+//validationsHeight += 15;
+
+$('.registerformholder').css({
+  '-webkit-transform' : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-moz-transform'    : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-ms-transform'     : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  '-o-transform'      : 'translate3d(0, ' + validationsHeight + 'px, 0)',
+  'transform'         : 'translate3d(0, ' + validationsHeight + 'px, 0)'
+});
+
+
+var registerBox = $('.registerbox');
+var registerBoxPadding = parseInt(registerBox.css('padding-bottom'));
+
+registerBox.css({
+	'padding-bottom' : validationsHeight + 50
+});
+
+
+<% else %>
+
+
+pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
+<% flash.discard %>
+
+
+<% end %>
+

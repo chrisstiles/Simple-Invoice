@@ -8,9 +8,29 @@ class StaticPagesController < ApplicationController
 	end
 
 	def contact
+		@email = ContactEmail.new
 	end
 
 	def send_contact
+		if request.format.js?
+			@email = ContactEmail.new(params[:contact_email])
+			if @email.valid?
+
+				if user_signed_in?
+					@user = current_user
+				else
+					@user = nil
+				end
+
+				ContactMailer.contact_form(params[:contact_email][:name], params[:contact_email][:message], params[:contact_email][:email], @user).deliver_now
+				flash[:success] = "Submission successful!"
+				flash.keep(:success)
+			end
+		end
+
+		respond_to do |format|
+      		format.js
+   	 	end
 	end
 
 	def no_invoice_found

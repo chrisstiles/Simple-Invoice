@@ -1,6 +1,31 @@
 <%= provide :title, "Contact Us" %>
 <%= provide :special_class, " static" %>
-<div id="pagewrapper" class="staticwrapper">
-	<h1>Contact Us</h1>
-	<p>Contact Page</p>
+<div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox">
+
+  <h1>Contact Us</h1>
+
+  <div id="registervalidationerrors" class="registererrors">
+    <div class="validationtitle">
+    <div class="closeerrors"></div>
+    Please correct the following errors
+    </div>
+     <div class="errorholder"></div>
+  </div>
+
+<div class="formholder registerformholder">
+    <%= form_for(@email, url: send_contact_path, remote: true, html: { class: "registerform" }) do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "Name" %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: "Email address" %>
+
+        <%= f.label :message %>
+        <%= f.text_area :message, class: "modalinput", placeholder: "Your message" %>
+
+       	<p class="staticsubmit"> <%= f.submit "Submit", class: "button blue willload registerbutton" %></p>
+    <% end %>
+</div>
+
 </div>

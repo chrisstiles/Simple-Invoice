@@ -33,7 +33,6 @@ class InvoicesController < ApplicationController
       @email = InvoiceEmail.new(params)
 
       if @email.valid?
-        puts "Valid Email!"
   
         InvoiceMailer.email_invoice(current_user, @invoice, params[:recipient], params[:cc], params[:subject], params[:message]).deliver_now
 
