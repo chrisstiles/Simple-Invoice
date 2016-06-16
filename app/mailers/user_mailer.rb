@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
   #
   def welcome(user)
   	@user = user
-  	@from = "Simple Invoice <noreply@simpleinvoice.io>"
+  	@from = "Simple Invoice <info@simpleinvoice.io>"
     mail from: @from, to: @user.email, subject: "Welcome to Simple Invoice"
   end
 end

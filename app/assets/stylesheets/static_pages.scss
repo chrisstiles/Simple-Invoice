@@ -275,7 +275,8 @@ body.sessionopen .sessionboxwrapper {
 .sessionbox input[type="password"], 
 #pagewrapper.staticwrapper input[type="text"], 
 #pagewrapper.staticwrapper input[type="email"], 
-#pagewrapper.staticwrapper input[type="password"] {
+#pagewrapper.staticwrapper input[type="password"],
+#pagewrapper.staticwrapper textarea {
 	display:block;
     width: 100%;
     box-sizing: border-box;
@@ -296,7 +297,8 @@ body.sessionopen .sessionboxwrapper {
 .sessionbox input[type="password"]:focus, 
 #pagewrapper.staticwrapper input[type="text"]:focus, 
 #pagewrapper.staticwrapper input[type="email"]:focus, 
-#pagewrapper.staticwrapper input[type="password"]:focus {
+#pagewrapper.staticwrapper input[type="password"]:focus,
+#pagewrapper.staticwrapper textarea:focus {
 	border:1px solid $light-blue;
 }
 
