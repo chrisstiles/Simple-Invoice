@@ -56,6 +56,10 @@ input[type=text]::-ms-clear {
   height: 0;
 }
 
+textarea {
+	resize:none;
+}
+
 a, a:hover, a:active, a:focus {
 	outline: 0 !important;
 }

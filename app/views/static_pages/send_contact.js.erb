@@ -1,6 +1,6 @@
 var pageBody = $('body'),
-	validationErrors = $('#registervalidationerrors.registererrors'),
-	errorHolder = $('#registervalidationerrors.registererrors .errorholder');
+	validationErrors = $('#validationerrors.clienterrors'),
+	errorHolder = $('#errorholder');
 
 setTimeout(function() {
 	var oldContent = $('.buttoncontent').text();
@@ -40,7 +40,7 @@ var errorHolderText = errorHolder.text();
 
 if (errorHolderText.indexOf('Name') > -1 && errorHolderText.indexOf('Email') > -1) {
 	var nameHTML = "";
-	$('#registervalidationerrors.registererrors .errorholder p').each(function() {
+	$('#validationerrors.clienterrors #errorholder p').each(function() {
 		var $this = $(this);
 		if ($this.text().indexOf('Name') > -1) {
 			nameHTML += $this[0].outerHTML;
@@ -82,6 +82,21 @@ registerBox.css({
 
 pageBody.append('<div class="success"> <div class="successtimer"></div><div class="closesuccess"></div><span><%= flash[:success] %></span></div>');
 <% flash.discard %>
+
+$('.closeerrors').trigger('click');
+var contactFormHolder = $('.contactformholder');
+var newHeight = $('#contactsuccess').outerHeight() + 15;
+contactFormHolder.addClass('emailsent');
+contactFormHolder.animate({
+	'height': newHeight,
+	},
+	{
+	complete: function() {
+		alert('test');
+		$('#contactform').remove();
+	}
+}, 300);
+
 
 
 <% end %>

@@ -1,31 +1,46 @@
 <%= provide :title, "Contact Us" %>
 <%= provide :special_class, " static" %>
-<div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox">
+<div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox nosidepadding">
 
   <h1>Contact Us</h1>
 
-  <div id="registervalidationerrors" class="registererrors">
+  <div id="validationerrors" class="clienterrors">
     <div class="validationtitle">
-    <div class="closeerrors"></div>
-    Please correct the following errors
-    </div>
-     <div class="errorholder"></div>
+      <div class="closeerrors"></div>
+      Please correct the following errors
+      </div>
+    <div id="errorholder"></div>
   </div>
 
 <div class="formholder registerformholder">
-    <%= form_for(@email, url: send_contact_path, remote: true, html: { class: "registerform" }) do |f| %>
 
-        <%= f.label :name %>
-        <%= f.text_field :name, placeholder: "Name" %>
+  <div class="contactformholder">
 
-        <%= f.label :email %>
-        <%= f.email_field :email, placeholder: "Email address" %>
+      <div id="contactsuccess">
+        <div id="contactsuccesscontent">
+          Thank you for your submission. We will get back to you as soon as possible.
+        </div>
+      </div>
 
-        <%= f.label :message %>
-        <%= f.text_area :message, class: "modalinput", placeholder: "Your message" %>
+      <div id="contactform">
+        <%= form_for(@email, url: send_contact_path, remote: true, html: { class: "registerform" }) do |f| %>
 
-       	<p class="staticsubmit"> <%= f.submit "Submit", class: "button blue willload registerbutton" %></p>
-    <% end %>
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "Name" %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email, placeholder: "Email address" %>
+
+          <%= f.label :message %>
+          <%= f.text_area :message, class: "modalinput contactmessage", placeholder: "Your message" %>
+
+          <p class="staticsubmit"> <%= f.submit "Submit", class: "button blue willload registerbutton" %></p>
+
+        <% end %>
+      </div>
+
+  </div>
+
 </div>
 
 </div>

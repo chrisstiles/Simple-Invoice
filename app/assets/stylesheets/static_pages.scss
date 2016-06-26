@@ -507,7 +507,7 @@ p.staticsubmit {
 	margin-top:30px;
 }
 
-.passwordformholder {
+.passwordformholder, .contactformholder {
 	position:relative;
 	height:150px;
 	overflow:hidden;
@@ -515,7 +515,11 @@ p.staticsubmit {
 	width:100%;
 }
 
-#passwordsuccess, #passwordform {
+.contactformholder {
+	height:345px;
+}
+
+#passwordsuccess, #passwordform, #contactform, #contactsuccess {
 	width:100%;
 	padding:0 80px;
 	box-sizing:border-box;
@@ -525,12 +529,12 @@ p.staticsubmit {
 	transition:all .3s;
 }
 
-#passwordsuccess {
+#passwordsuccess, #contactsuccess {
 	transform:translateX(100%);
 	padding:0 30px;	
 }
 
-#passwordsuccesscontent {
+#passwordsuccesscontent, #contactsuccesscontent {
 	background-color:#e8f9ef;
 	border:1px solid #2ecc71;
 	color:#3B5A48;
@@ -541,15 +545,15 @@ p.staticsubmit {
 	border-radius:2px;
 }
 
-.passwordformholder.emailsent {
+.passwordformholder.emailsent, .contactformholder.emailsent {
 	height:110px;
 }
 
-.passwordformholder.emailsent #passwordsuccess {
+.passwordformholder.emailsent #passwordsuccess, .contactformholder.emailsent #contactsuccess {
 	transform:translateX(0);
 }
 
-.passwordformholder.emailsent #passwordform {
+.passwordformholder.emailsent #passwordform, .contactformholder.emailsent #contactform {
 	transform:translateX(-100%);
 }
 
@@ -761,5 +765,9 @@ footer a:hover {
 
 body.ios #contentwrapper.absmobilefooter footer, body.android #contentwrapper.absmobilefooter footer, body.windows_phone #contentwrapper.absmobilefooter footer {
 	position:fixed !important;
+}
+
+textarea.contactmessage {
+	height:100px;
 }
 
