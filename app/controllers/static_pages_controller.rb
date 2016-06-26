@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
 	before_action :redirect_if_logged_in, only: [:home]
-	before_action :authenticate_user!, :except => [:home, :no_invoice_found, :contact, :send_contact]
+	before_action :authenticate_user!, :except => [:home, :no_invoice_found, :contact, :send_contact, :about]
 
 	def home
 		@invoice = Invoice.new
@@ -31,6 +31,9 @@ class StaticPagesController < ApplicationController
 		respond_to do |format|
       		format.js
    	 	end
+	end
+
+	def about
 	end
 
 	def no_invoice_found

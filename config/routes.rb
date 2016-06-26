@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   get '/contact' => 'static_pages#contact', as: :contact
   post '/contact' => 'static_pages#send_contact', as: :send_contact
 
+  get '/about' => 'static_pages#about', as: :about
+
   root 'static_pages#home'
 
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice
