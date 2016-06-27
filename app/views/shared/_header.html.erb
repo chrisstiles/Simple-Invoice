@@ -1,5 +1,5 @@
 <header>
-	<%= link_to "", root_url, class: "logo" %>
+	<%= link_to "", edit_user_password_path, class: "logo" %>
 	<div id="menu">
 		<% if user_signed_in? %>
 		<nav>
@@ -11,7 +11,7 @@
 		<%= new_invoice_button("button blue newinvoiceicon") %>
 
 		<div id="sessioninfo">
-			<%= link_to "Log Out", destroy_user_session_path, :method => :delete, class: "navsignout" %>
+			<%= link_to "Log Out", sign_out_path, :method => :delete, class: "navsignout" %>
 			<%= link_to "Settings", settings_path, class: "navprofile#{current_page('users')}" %>
 		</div>
 

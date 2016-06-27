@@ -107,6 +107,10 @@ group :development do
 
   gem "better_errors"
 
+  gem "rails_best_practices"
+  gem "rubycritic", require: false
+  gem 'rubocop', require: false
+
 end
 
 group :production do

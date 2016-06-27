@@ -27,9 +27,9 @@ class ClientsController < ApplicationController
 		@client = Client.new
 	end
 
-	def show
-		redirect_to clients_path
-	end
+	# def show
+	# 	redirect_to clients_path
+	# end
 
 	def create
 		@client = current_user.clients.build(client_params)
