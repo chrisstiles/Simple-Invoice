@@ -86,7 +86,12 @@
 	float:right;
 }
 
-.homerecordtable .e-amountpaid:hover, .homerecordtable .e-amountpaid:focus {
+.homerecordtable .e-amountpaid[contenteditable="true"]:empty {
+	height:37px;
+	padding-top:9px;
+}
+
+.homerecordtable .e-amountpaid:hover, .homerecordtable .e-amountpaid:focus, .homerecordtable .e-amountpaid[contenteditable="true"]:empty {
 	background-color:#e7e7e7;
 }
 
