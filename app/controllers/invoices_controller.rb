@@ -165,10 +165,6 @@ class InvoicesController < ApplicationController
       params.require(:invoice).permit(:terms, :logo, :invoice_number, :date, :due_date, :name, :address_line1, :address_line2, :phone, :client_name, :client_address_line1, :client_address_line2, :client_id, :notes, :amount_paid, :total, :has_tax, :tax, :tax_included, :numjobs, :logo_width, :logo_height, :user_logo_width, :user_logo_height, :invoice_type, jobs_attributes: [ :id, :job_description, :job_quantity, :job_rate, :will_delete ])
     end
 
-    # def email_invoice_params
-    #   params.permit(:recipient, :cc, :message)
-    # end
-
     def invoice_or_estimate_number(invoice_type)
       is_estimate = if invoice_type == "estimate"
         true
