@@ -829,8 +829,3 @@ $(document).on('page:restore', function() {
 
 });
 
-// Track Google Analytics pageview on page change with turbolinks
-$(document).on('page:change', function() {
-	ga('send', 'pageview', window.location.pathname);
-});
-
