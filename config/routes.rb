@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about', as: :about
 
+  get '/privacy_policy' => 'static_pages#privacy_policy', as: :privacy_policy
+
   root 'static_pages#home'
 
   patch '/invoices/:invoice_number' => 'invoices#update', as: :update_invoice

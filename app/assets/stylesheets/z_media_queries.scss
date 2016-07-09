@@ -1374,6 +1374,76 @@
 	}
 }
 
+@media screen and (max-width:565px) {
+	/*
+	footer {
+		padding: 0 18px;
+	    font-size: 12px;
+	    font-weight: 600;
+	    height:50px;
+	}
+
+	#copy, footer a {
+		margin-top:-6px;
+		line-height:12px;
+	}
+	*/
+
+	.copy, footer a {
+		position:static;
+		font-size:14px;
+		font-weight:400;
+	}
+
+	.copy {
+		display:block;
+		float:none;
+		text-align: center;
+		line-height:17px;
+		margin:0;
+	}
+
+	.footernav {
+		float:none;
+		display:block;
+		width:100%;
+		box-sizing:border-box;
+		margin:0;
+		text-align: center;
+	}
+
+	.footernav:before, .copy:after {
+		clear:both;
+		content:"";
+		display:block;
+	}
+
+	footer .footernav a {
+		width:50%;
+		box-sizing:border-box;
+		margin:0;
+		padding:0 3px;
+		float:none;
+	}
+
+	footer .footernav a:first-of-type {
+		text-align: left;
+	}
+
+	footer .footernav a:last-of-type {
+		text-align: right;
+	}
+
+	footer a.privacylink {
+	    border-left: none;
+	    display: block;
+	    text-align: center;
+	    width: 100%;
+	    padding: 0;
+	    margin: 6px 0;
+	}
+}
+
 @media screen and (max-width:540px) {
 	#invoicelogo {
 		width:100%;
@@ -1622,17 +1692,6 @@
 		display:block;
 	}
 
-	footer {
-		padding: 0 18px;
-	    font-size: 12px;
-	    font-weight: 600;
-	    height:50px;
-	}
-
-	#copy, footer a {
-		margin-top:-6px;
-		line-height:12px;
-	}
 }
 
 @media screen and (max-width: 430px) {
@@ -1727,34 +1786,10 @@
 		content:"";
 	}
 
-	#copy, footer a {
-		position:static;
+	#pagewrapper.staticwrapper p, #pagewrapper.staticwrapper li {
 		font-size:14px;
-		font-weight:400;
-	}
-
-	#copy {
-		display:block;
-		float:none;
-		text-align: center;
-		line-height:17px;
-		margin:0;
-	}
-
-	footer a {
-		margin-top:15px;
-		width:50%;
-		box-sizing:border-box;
-		padding:0 8px;
-		margin:12px 0 0 0;
-	}
-
-	footer a:first-of-type {
-		text-align: left;
-	}
-
-	footer a:last-of-type {
-		text-align: right;
+		color:#4c4c4c;
+		line-height:1.45em;
 	}
 
 }

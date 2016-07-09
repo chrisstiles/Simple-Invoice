@@ -462,7 +462,7 @@ body.sessionopen .sessionboxwrapper {
 	margin-bottom:55px;
 }
 
-#pagewrapper.staticwrapper p {
+#pagewrapper.staticwrapper p, #pagewrapper.staticwrapper li {
     color: #707070;
     font-size:16px;
     line-height:1.5em;
@@ -739,7 +739,7 @@ footer:before {
 	display:block;
 }
 
-#copy {
+.copy {
 	float:left;
 	text-align:left;
 }
@@ -747,11 +747,14 @@ footer:before {
 footer a {
 	color:#fff;
 	text-decoration:none;
-	margin-left:15px;
 	float:right;
 }
 
-footer a, #copy {
+.footernav {
+	float:right;
+}
+
+.footernav, .copy {
 	position:relative;
 	line-height:14px;
 	top:50%;
@@ -759,8 +762,19 @@ footer a, #copy {
 	display:block;
 }
 
+footer .footernav a {
+	margin-left:15px;
+}
+
 footer a:hover {
 	color:$light-blue;
+}
+
+footer a.privacylink {
+	display:inline-block;
+	margin-left:10px;
+	padding-left:10px;
+	border-left:1px solid #fff;
 }
 
 body.ios #contentwrapper.absmobilefooter footer, body.android #contentwrapper.absmobilefooter footer, body.windows_phone #contentwrapper.absmobilefooter footer {
