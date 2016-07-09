@@ -58,6 +58,10 @@
     ga('create', 'UA-80143810-1', 'auto');
     ga('send', 'pageview');
 
+    // Track Google Analytics pageview on page change with turbolinks
+    $(document).on('page:change', function() {
+      ga('send', 'pageview', window.location.pathname);
+    });
   </script>
 <% end %>
 </body>
