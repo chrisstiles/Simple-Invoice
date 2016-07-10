@@ -786,7 +786,13 @@ textarea.contactmessage {
 }
 
 #sociallinks {
-	position:relative;
-	top:9px;
+	height:32px;
+	position:absolute;
+	top:50%;
+	margin-top:-16px;
+}
+
+#sociallinks .at-share-tbx-element .at-share-btn {
+	margin:0 2px !important;
 }
 
