@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
   <% if content_for?(:nophone) %><meta name="format-detection" content="telephone=no"><% end %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => "reload" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => "reload" %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -59,7 +59,7 @@
     ga('send', 'pageview');
 
     // Track Google Analytics pageview on page change with turbolinks
-    $(document).on('page:change', function() {
+    $(document).on('turbolinks:change', function() {
       ga('send', 'pageview', window.location.pathname);
     });
   </script>

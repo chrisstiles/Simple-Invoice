@@ -1,7 +1,4 @@
-Turbolinks.enableProgressBar();
-
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
 
 var $document = $(document);
 var $window = $(window);
@@ -14,7 +11,7 @@ $(function() {
 // Cookie user's timezone
 function set_time_zone_offset() {
     var current_time = new Date();
-    $.cookie('time_zone', current_time.getTimezoneOffset());
+    Cookies.set('time_zone', current_time.getTimezoneOffset());
 }
 
 set_time_zone_offset();
@@ -27,15 +24,19 @@ $('html').removeClass('noscroll');
 
 pageBody.on('submit', 'form', function(e) {
 	var $this = $(this);
-	if ($this.attr('data-remote') == "true") {
+	console.log('submit');
+	if ($this.attr('data-remote') === "true") {
 		if ($this.attr('disabled') === 'disabled') {
+			console.log('test 1');
 			e.preventDefault();
 			return false
 		} else {
+			console.log('test 2');
 			$this.attr('disabled', 'disabled');
 		}
 	}
 });
+
 
 // Show loading animation after user clicks generate PDF, while the PDF loads (on index page)
 
@@ -804,14 +805,11 @@ $window.resize(function() {
 
 
 // End misc.js
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});
 
 
 // Run this when using the back button and turbolinks loads from cache
-$(document).on('page:restore', function() {
+$(document).on('turbolinks:restore', function() {
 
 	$('html').removeClass('noscroll');
 

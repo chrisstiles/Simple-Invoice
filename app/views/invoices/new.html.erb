@@ -92,21 +92,21 @@
 
             <% unless no_current_logos? %>
               <div id="invoicelogo">
-                  <%= f.hidden_field :logo, value: current_user.display_logo.url %>
+                  <%= f.hidden_field :logo, value: @user_logo_url %>
 
-                  <%= f.hidden_field :logo_width, value: current_user.current_logo.logo_width, class: "logowidthfield" %>
-                  <%= f.hidden_field :logo_height, value: current_user.current_logo.logo_height, class: "logoheightfield" %>
+                  <%= f.hidden_field :logo_width, value: @logo.logo_width, class: "logowidthfield" %>
+                  <%= f.hidden_field :logo_height, value: @logo.logo_height, class: "logoheightfield" %>
 
                   <div id="haslogo">
                     <div id="logoresize">
-                      <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: current_user.current_logo.logo_width, height: current_user.current_logo.logo_height } %>
+                      <%= image_tag @user_logo_url, class: "invoicelogoimage", data: { width: @logo.logo_width, height: @logo.logo_height } %>
                     </div>
                   <div id="removelogobutton" class="removelogo">
                     <span>Remove Logo</span>
                   </div>
                 </div>
                 <div id="nologo">
-                  <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo.url %>">Add Logo</div>
+                  <div class="button blue addlogobutton" data-logo-url="<%= @user_logo_url %>">Add Logo</div>
                 </div>
               </div>
             <% end %>

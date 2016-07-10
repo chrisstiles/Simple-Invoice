@@ -1,5 +1,4 @@
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
 
 	// Tell if the user is editing 
 	var invoiceWrapper = $('#invoicewrapper');
@@ -1453,7 +1452,5 @@ ready = function() {
 
 	}
 
-};
+});
 
-$(document).ready(ready);
-$(document).on('page:load', ready);

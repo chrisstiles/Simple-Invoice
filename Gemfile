@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 # Use specific Ruby Version
-ruby "2.2.4"
+ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.1'
+gem 'rails', '5.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -19,7 +19,10 @@ gem "autoprefixer-rails"
 gem "hirb"
 
 # Pagination
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate'
+
+# Javascript cookie helpers
+gem 'js_cookie_rails'
 
 # Validations for non ActiveRecord models
 gem 'active_attr'
@@ -31,7 +34,13 @@ gem 'custom_error_message'
 gem 'browser-timezone-rails'
 
 # Admin panel
-gem 'rails_admin'
+# Commenting out original rails_admin gem to resolve dependency issues with Rails 5.
+# gem 'rails_admin'
+
+# Adding builds of rails_admin gems not currently released. 
+gem 'rails_admin', github: 'sferik/rails_admin'
+gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
+gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 
 # Authorization
 gem 'cancancan', '~> 1.10'
@@ -101,9 +110,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Rails panel in Chrome Extension for development
-  gem 'meta_request'
 
   gem "better_errors"
 

@@ -184,7 +184,7 @@ var confirmationListener = function(e) {
 
 window.addEventListener("beforeunload", confirmationListener);
 
-$(document).on('page:before-change', function(e) {
+$(document).on('turbolinks:before-change', function(e) {
 	if (!pageBody.hasClass('sessionchange')) {
 
 		if (!confirm(confirmationMessage)) {

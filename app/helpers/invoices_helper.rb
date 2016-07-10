@@ -67,20 +67,6 @@ module InvoicesHelper
     	end
     end
 
-    def no_current_logos?
-      if user_signed_in?
-        if current_user.logos.empty?
-          true
-        elsif current_user.logos.where(current_logo: true).first.nil?
-          true
-        else
-          false
-        end
-      else
-        true
-      end
-    end
-
     def display_content_editable
       if user_signed_in?
         if controller_name == "invoices" && (action_name == "new" || action_name == "edit")

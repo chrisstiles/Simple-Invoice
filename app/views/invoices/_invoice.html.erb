@@ -35,9 +35,8 @@
 
   <div class="homeupdatebalance">
 
-  <%= form_for(invoice, :url => invoice_link(invoice, "update"), remote: true) do |f| %>
+  <%= form_for(invoice, url: invoice_link(invoice, "update"), remote: true) do |f| %>
   <%= hidden_field_tag :from_index_page %>
-
 
   <div class="homerecordtable">
 

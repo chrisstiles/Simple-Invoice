@@ -1,5 +1,4 @@
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
 
     // Links with the class of modal will open the modal window
     //var modal = $('.modal');
@@ -363,7 +362,5 @@ ready = function() {
         }
     });
 
-};
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

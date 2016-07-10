@@ -42,6 +42,22 @@ class ApplicationController < ActionController::Base
 
 	helper_method :invoice_link_to_path
 
+	def no_current_logos?
+      if user_signed_in?
+        if current_user.logos.empty?
+          true
+        elsif current_user.logos.where(current_logo: true).first.nil?
+          true
+        else
+          false
+        end
+      else
+        true
+      end
+    end
+
+    helper_method :no_current_logos?
+
   private
 
 	def get_module_name

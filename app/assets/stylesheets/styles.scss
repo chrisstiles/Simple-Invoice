@@ -43,6 +43,12 @@ html.turbolinks-progress-bar::before {
   z-index: 9999;
 }
 
+.turbolinks-progress-bar {
+	background-color: #2479b1 !important;
+	height: 2px !important;
+	z-index: 9999;
+}
+
 #nprogress .peg {
 	box-shadow: 0 0 10px $light-blue, 0 0 5px $dark-blue !important;
 }
@@ -52,8 +58,8 @@ input {
 }
 
 input[type=text]::-ms-clear {
-  width: 0;
-  height: 0;
+	width: 0;
+	height: 0;
 }
 
 textarea {

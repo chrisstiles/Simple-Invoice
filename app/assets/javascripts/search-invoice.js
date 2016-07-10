@@ -1,5 +1,4 @@
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
 
 var pageBody = $('body');
 
@@ -241,7 +240,4 @@ $(document)
 });
 
 
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

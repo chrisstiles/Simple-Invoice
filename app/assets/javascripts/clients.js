@@ -1,5 +1,4 @@
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
 
 var pageBody = $('body');
 var pageWrapper = $('#pagewrapper');
@@ -289,7 +288,4 @@ pageBody.on('click', '.deleteclient', function() {
 
 }
 
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

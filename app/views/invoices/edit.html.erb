@@ -120,14 +120,14 @@
 
                         <div id="haslogo">
                           <div id="logoresize">
-                            <%= image_tag current_user.display_logo.url, class: "invoicelogoimage", data: { width: current_user.current_logo.logo_width, height: current_user.current_logo.logo_height } %>
+                            <%= image_tag @user_logo_url, class: "invoicelogoimage", data: { width: @logo.logo_width, height: @logo.logo_height } %>
                           </div>
                       <div id="removelogobutton" class="removelogo">
                         <span>Remove Logo</span>
                       </div>
                     </div>
                     <div id="nologo">
-                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo_url %>">Add Logo</div>
+                      <div class="button blue addlogobutton" data-logo-url="<%= @user_logo_url %>">Add Logo</div>
                     </div>
 
 
@@ -143,7 +143,7 @@
                       </div>
                     </div>
                     <div id="nologo">
-                      <div class="button blue addlogobutton" data-logo-url="<%= current_user.display_logo_url %>">Add Logo</div>
+                      <div class="button blue addlogobutton" data-logo-url="<%= @user_logo_url %>">Add Logo</div>
                     </div>
                   <% end %>
                   

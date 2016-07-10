@@ -1,5 +1,7 @@
 class InvoicesController < ApplicationController
+  before_action :get_user_invoices
   before_action :set_invoice, only: [:show, :edit, :update, :destroy, :email_invoice]
+  before_action :get_user_logo, only: [:new, :edit]
   before_action :set_invoices_or_estimate_index_page, only: [:index]
   before_action :set_create_invoice, only: [:create]
   before_action :format_invoice_type, only: [:create, :update]
@@ -134,12 +136,27 @@ class InvoicesController < ApplicationController
   end
 
   private
+
+    def get_user_invoices
+      if user_signed_in?
+        @user_invoices = current_user.invoices
+      end
+    end
+
+    def get_user_logo
+      if user_signed_in?
+        unless no_current_logos?
+          @logo = current_user.current_logo
+          @user_logo_url = current_user.display_logo.url
+        end
+      end
+    end
    
     def set_invoice
       if params[:invoice_number]
-        @invoice = current_user.invoices.find_by(invoice_number: params[:invoice_number])
+        @invoice = @user_invoices.find_by(invoice_number: params[:invoice_number])
       elsif params[:estimate_number]
-        @invoice = current_user.invoices.find_by(estimate_number: params[:estimate_number])
+        @invoice = @user_invoices.find_by(estimate_number: params[:estimate_number])
       elsif params[:token]
         @invoice = Invoice.find_by(token: params[:token])
         if @invoice.nil?
@@ -155,7 +172,7 @@ class InvoicesController < ApplicationController
 
     def set_create_invoice
       if user_signed_in?
-        @invoice = current_user.invoices.build(invoice_params)
+        @invoice = @user_invoices.build(invoice_params)
       else
         @invoice = Invoice.create(invoice_params)
       end
@@ -193,9 +210,9 @@ class InvoicesController < ApplicationController
       if base_number < max_current_number
 
         used_numbers = if is_estimate
-          current_user.invoices.where("estimate_number >= ?", base_number).pluck(:estimate_number).sort
+          @user_invoices.where("estimate_number >= ?", base_number).pluck(:estimate_number).sort
         else
-          current_user.invoices.where("invoice_number >= ?", base_number).pluck(:invoice_number).sort
+          @user_invoices.where("invoice_number >= ?", base_number).pluck(:invoice_number).sort
         end
 
         for num in base_number..max_current_number
@@ -238,9 +255,9 @@ class InvoicesController < ApplicationController
     end
 
     def set_client_if_not_nil
-      if user_signed_in?
+      if user_signed_in? && !params[:from_index_page]
         if params.include?(:client_id)
-          client_id = params[:client_id]
+          client_id = params[:client_id].dup
           unless client_id.empty?
              @invoice.client = current_user.clients.find(params[:client_id])
           else
@@ -251,7 +268,7 @@ class InvoicesController < ApplicationController
     end
 
    def merge_client_if_name_exists
-      if user_signed_in?
+      if user_signed_in? && !params[:from_index_page]
         if @invoice.valid?
           client_id = @invoice.client_id
           client_name = @invoice.client_name
@@ -272,12 +289,12 @@ class InvoicesController < ApplicationController
     end
 
     def set_logo_dimensions
-      if user_signed_in? && current_user.has_current_logos?
+      if user_signed_in? && current_user.has_current_logos? && !params[:from_index_page]
         if @invoice.logo.to_s == current_user.display_logo.to_s && params[:invoice][:logo_width].present? && params[:invoice][:logo_height].present? && current_user.logos.present? && @invoice.valid?
           logo = current_user.current_logo
 
-          logo.logo_width = params[:invoice][:logo_width]
-          logo.logo_height = params[:invoice][:logo_height]
+          logo.logo_width = params[:invoice][:logo_width].dup
+          logo.logo_height = params[:invoice][:logo_height].dup
           logo.save
 
         end
@@ -285,7 +302,12 @@ class InvoicesController < ApplicationController
     end
 
     def format_invoice_type
-      invoice_type = params[:invoice][:invoice_type]
+
+      if params[:invoice][:invoice_type].present?
+        invoice_type = params[:invoice][:invoice_type].dup
+      else
+        invoice_type = nil
+      end
 
       if invoice_type.present?
         invoice_type.downcase!
@@ -363,12 +385,12 @@ class InvoicesController < ApplicationController
       if request.original_url.include? "estimates"
         @is_estimates = true
         @invoice_types = "Estimates"
-        @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "estimate").page(params[:page])
+        @invoices = @user_invoices.where("archived = ? AND invoice_type = ?", false, "estimate").page(params[:page])
         @invoices = @invoices.estimate_number(params[:estimate_number]) if params[:estimate_number].present?
       else
         @is_estimates = false
         @invoice_types = "Invoices"
-        @invoices = current_user.invoices.where("archived = ? AND invoice_type = ?", false, "invoice").page(params[:page])
+        @invoices = @user_invoices.where("archived = ? AND invoice_type = ?", false, "invoice").page(params[:page])
         @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
         @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
       end

@@ -1,5 +1,5 @@
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
+
 var pageBody = $('body');
 var pageHTML = $('html');
 var $document = $(document);
@@ -60,8 +60,10 @@ function startStaticLoading() {
 	
 }
 
+var loginForm = $('.loginform');
+
 function endStaticLoading() {
-	if ($('.loginform').length) {
+	if (loginForm.length) {
 		$('#pagewrapper').addClass('sessionerror');
 	}
   	revertButtonText();
@@ -85,7 +87,8 @@ $('.staticloading').on('click', function() {
 });
 
 // Ajax login form
-$('.loginform').bind('ajax:start', function() {
+
+loginForm.bind('ajax:start', function() {
 	if (staticWrapper.length) {
 		startStaticLoading();
 	} else {
@@ -377,9 +380,6 @@ $window.on('resize', function() {
 });
 
 
-
 }
-};
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

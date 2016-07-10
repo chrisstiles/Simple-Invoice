@@ -24,7 +24,10 @@ module Invoicer
     config.active_record.raise_in_transactional_callbacks = true
 
     # Serve assets in Heroku
-    config.serve_static_files = true
+    config.public_file_server.enabled = true
+    config.public_file_server.headers = {
+      'Cache-Control' => 'public, max-age=3600'
+    }
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
@@ -32,5 +35,9 @@ module Invoicer
     config.assets.precompile += %w( .svg .eot .woff .ttf)
 
     config.exceptions_app = self.routes
+
+    config.action_controller.per_form_csrf_tokens = true
+    config.action_controller.forgery_protection_origin_check = true
+
   end
 end
