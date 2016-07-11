@@ -24,14 +24,11 @@ $('html').removeClass('noscroll');
 
 pageBody.on('submit', 'form', function(e) {
 	var $this = $(this);
-	console.log('submit');
 	if ($this.attr('data-remote') === "true") {
 		if ($this.attr('disabled') === 'disabled') {
-			console.log('test 1');
 			e.preventDefault();
 			return false
 		} else {
-			console.log('test 2');
 			$this.attr('disabled', 'disabled');
 		}
 	}

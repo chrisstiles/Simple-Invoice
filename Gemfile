@@ -85,7 +85,7 @@ gem "nilify_blanks"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
- gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 
 gem 'sass-rails'
 
