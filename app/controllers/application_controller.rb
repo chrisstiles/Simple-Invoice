@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
 	}
 
-	around_filter :set_time_zone
+	around_action :set_time_zone
 
 	rescue_from CanCan::AccessDenied do |exception|
 		redirect_to main_app.root_path, :alert => exception.message

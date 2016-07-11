@@ -8,11 +8,13 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    params[:user].merge!(remember_me: 1)
-    resource = User.find_for_database_authentication(email: params[:user][:email])
+    #params[:user].merge!(remember_me: 1)
+    user_params = params[:user].dup
+    user_params[:remember_me] = 1
+    resource = User.find_for_database_authentication(email: user_params[:email])
     return invalid_login_attempt unless resource
 
-    if resource.valid_password?(params[:user][:password])
+    if resource.valid_password?(user_params[:password])
       sign_in :user, resource
       @redirect_url = "#{stored_location_for(resource) || invoices_url}"
       return render 'create.js.erb'
