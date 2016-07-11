@@ -6,7 +6,7 @@
 <%= provide :outside_content do %>
 
   <div id="homepagination">
-    <%= js_will_paginate @invoices %>
+    <%= js_will_paginate @invoices, previous_label: 'Previous', next_label: 'Next' %>
   </div>
 
   <div id="mobilesidebarwrapper">

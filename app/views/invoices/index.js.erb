@@ -50,7 +50,7 @@ function setHomePagination() {
 	//$('#homepagination').detach().prependTo('body');
 }
 
-<% pagination = escape_javascript(js_will_paginate @invoices) %>
+<% pagination = escape_javascript(js_will_paginate @invoices, previous_label: 'Previous', next_label: 'Next') %>
 $("#homepagination").html("<%= pagination %>");
 
 if (homePageWrapper.length) {

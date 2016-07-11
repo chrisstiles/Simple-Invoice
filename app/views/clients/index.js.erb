@@ -1,7 +1,7 @@
 <% js = escape_javascript(render 'list') %>
 //$('#clientfiltering').remove();
 $("#searchresults").html("<%= js %>");
-<% pagination = escape_javascript(js_will_paginate @clients, inner_window: 3, :params => {:id=>nil, :method=>'get', :controller=>'clients', :action=>'index'}) %>
+<% pagination = escape_javascript(js_will_paginate @clients, previous_label: 'Previous', next_label: 'Next', inner_window: 3, :params => {:id=>nil, :method=>'get', :controller=>'clients', :action=>'index'}) %>
 $("#clientpagination").html("<%= pagination %>");
 
 var pageBody = $('body');

@@ -22,8 +22,8 @@
 en:
   hello: "Hello world"
   will_paginate:
-    previous_label: Previous
-    next_label: Next
+    previous_label: "Previous"
+    next_label: "Next"
   errors:
     messages:
       extension_white_list_error: 'Invalid file type. Please upload a jpg, png, or gif logo.'
