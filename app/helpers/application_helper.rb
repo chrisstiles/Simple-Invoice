@@ -22,7 +22,7 @@ module ApplicationHelper
 				image_tag image.logo.gsub('https', 'http'), width: @invoice.logo_width, height: @invoice.logo_height
 			else
 				#unless params.has_key?(:debug)
-					wicked_pdf_image_tag image.logo.gsub('https', 'http'), width: @invoice.logo_width, height: @invoice.logo_height
+					image_tag image_url(image.logo.gsub('https', 'http')), width: @invoice.logo_width, height: @invoice.logo_height
 				#else
 				#	image_tag image.logo, width: @invoice.logo_width, height: @invoice.logo_height
 				#end
