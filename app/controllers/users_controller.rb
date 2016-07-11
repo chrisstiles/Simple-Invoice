@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 		remove_password_param_if_blank
 		respond_to do |format|
 			if @user.update(user_params)
-				sign_in :user, @user, bypass: true
+				bypass_sign_in(@user)
 				flash[:success] = 'Profile successfully updated!'
           		flash.keep(:success)
 				format.html { redirect_to edit_user_path }
