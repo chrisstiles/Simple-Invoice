@@ -30,6 +30,28 @@ module ApplicationHelper
 		end
 	end
 
+	def pdf_stylesheet_tag(stylesheet)
+		raw("<link rel=\"stylesheet\" media=\"screen\" href=\"#{asset_path(stylesheet)}\" />")
+	end
+
+	def inline_stylesheet_contents(stylesheet)
+		asset = Rails.application.assets.find_asset(stylesheet)
+		raw("<style>#{Rails.application.assets[stylesheet].to_s}</style>")
+	end
+
+	def read_asset(source)
+      if Rails.configuration.assets.compile == false
+        if asset_path(source) =~ URI_REGEXP
+          require 'open-uri'
+          open(asset_pathname(source), 'r:UTF-8') {|f| f.read }
+        else
+          IO.read(asset_pathname(source))
+        end
+      else
+        Rails.application.assets.find_asset(source).to_s
+      end
+    end
+
 	def get_terms
 		(@invoice.due_date - @invoice.date).to_i
 	end
