@@ -35,7 +35,6 @@ module ApplicationHelper
 	end
 
 	def inline_stylesheet_contents(stylesheet)
-		asset = Rails.application.assets.find_asset(stylesheet)
 		raw("<style>#{Rails.application.assets[stylesheet].to_s}</style>")
 	end
 
