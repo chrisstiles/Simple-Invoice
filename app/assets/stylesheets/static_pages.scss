@@ -203,7 +203,7 @@ body.nofixed #sidebar, body.nofixed #mobilesidebarwrapper, body.nofixed .scrollw
 	top:50%;
 	left:50%;
 	transform:translate(-50%, -50%);
-	animation-name: fadeInUp;
+	animation-name: fadeIn;
 	animation-delay: .2s;
 	animation-duration: .8s;
 	animation-fill-mode:forwards;
@@ -256,6 +256,16 @@ body.sessionopen .sessionboxwrapper {
 
 	to {
 		transform:translate(-50%, -50%);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity:0;
+	}
+
+	to {
 		opacity: 1;
 	}
 }
