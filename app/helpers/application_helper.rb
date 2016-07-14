@@ -21,11 +21,7 @@ module ApplicationHelper
 			if Rails.env.production?
 				image_tag image.logo.gsub('https', 'http'), width: @invoice.logo_width, height: @invoice.logo_height
 			else
-				#unless params.has_key?(:debug)
-					image_tag image_url(image.logo.gsub('https', 'http')), width: @invoice.logo_width, height: @invoice.logo_height
-				#else
-				#	image_tag image.logo, width: @invoice.logo_width, height: @invoice.logo_height
-				#end
+				image_tag image_url(image.logo.gsub('https', 'http')), width: @invoice.logo_width, height: @invoice.logo_height
 			end
 		end
 	end

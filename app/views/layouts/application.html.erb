@@ -3,10 +3,7 @@
 <head>
   <title><%= page_title %></title>
   <%= favicon_link_tag 'favicon.png' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <%= render 'shared/meta_tags' %>
   <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
   <% if content_for?(:nophone) %><meta name="format-detection" content="telephone=no"><% end %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => "reload" %>
