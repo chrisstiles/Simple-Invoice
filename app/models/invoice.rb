@@ -137,13 +137,19 @@ class Invoice < ActiveRecord::Base
 
 	validates :logo_width, :logo_height, numericality: true, allow_blank: true
 
-
-	# Is overdue? method
 	def overdue?
 		if self.due_date.future? || self.is_estimate? || self.paid_off?
 			false
 		else
 			true
+		end
+	end
+
+	def due_today?
+		if self.due_date.today?
+			true
+		else
+			false
 		end
 	end
 
