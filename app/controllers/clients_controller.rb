@@ -2,8 +2,6 @@ class ClientsController < ApplicationController
 	before_action :set_client, only: [:edit, :update, :destroy]
 	after_action :add_new_client_to_existing_invoices, only: [:create, :update]
 	after_action :update_client_name_on_invoices, only: [:update]
-	before_action :authenticate_user!
-	#after_action :set_non_primary_clients_to_false, only: [:create, :update]
 
 	def index
 		@client = Client.new
@@ -26,10 +24,6 @@ class ClientsController < ApplicationController
 	def new
 		@client = Client.new
 	end
-
-	# def show
-	# 	redirect_to clients_path
-	# end
 
 	def create
 		@client = current_user.clients.build(client_params)
@@ -105,7 +99,7 @@ class ClientsController < ApplicationController
 
 		def add_new_client_to_existing_invoices
 			matched_invoices = current_user.invoices.where('lower(client_name) = ?', @client.name.downcase)
-			
+
 			matched_invoices.each do |invoice|
 				invoice.client = @client
 				invoice.client_name = @client.name
