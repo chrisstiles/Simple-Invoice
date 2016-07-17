@@ -634,6 +634,9 @@ $(document).on('turbolinks:load', function() {
 		});
 
 		// Change terms based on two date fields
+
+		var termsSelect = $('.terms');
+
 		function setTerms() {
 			var d1 = dateField.datepicker('getDate'),
 				d2 = dueDateField.datepicker('getDate');
@@ -647,16 +650,18 @@ $(document).on('turbolinks:load', function() {
 
 			// Function to set difference as selected
 			function setSelected() {
-				$('*[data-term="30"]').attr('selected', false);
-				$('*[data-term="' + diff + '"]').attr('selected', 'selected');
+				////termsSelect.find('option:selected').attr('selected', false);
+				//$('*[data-term="30"]').attr('selected', false);
+				//$('*[data-term="' + diff + '"]').attr('selected', 'selected');
 			}
 
 			// Loop through the dropdown of terms to see if the difference exists. If it does, set that option to selected
 			var exists = false;
 			$('.terms option').each(function() {
-				if ($(this).data('term') === diff) {
+				var $this = $(this);
+				if ($this.data('term') === diff) {
 					exists = true;
-					setSelected();
+					termsSelect.val($this.text());
 					return false;
 				}
 			});
@@ -704,13 +709,13 @@ $(document).on('turbolinks:load', function() {
 			var invoiceDueDate = dueDateField.attr('date');
 			dueDateField.datepicker('setDate', invoiceDueDate);
 
-			setTerms();
-
 			if (isInvoicePage) {
 				setMaxDate();
 			} else {
 				removeMaxDate();
 			}
+
+			setTerms();
 
 
 		} else {
