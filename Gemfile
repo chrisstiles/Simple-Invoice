@@ -27,6 +27,9 @@ gem 'js_cookie_rails'
 # Validations for non ActiveRecord models
 gem 'active_attr'
 
+# Add support for Cross-Origin Resource Sharing
+gem 'rack-cors'
+
 # Allow completely custom error messages
 gem 'custom_error_message'
 

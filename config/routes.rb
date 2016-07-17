@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  match '*path', via: :all, to: 'errors#not_found',
+      constraints: CloudfrontConstraint.new
+  
   get 'errors/not_found'
 
   get 'errors/internal_server_error'

@@ -323,6 +323,7 @@ GEM
     powerpack (0.1.1)
     puma (3.4.0)
     rack (2.0.1)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0)
@@ -474,6 +475,7 @@ DEPENDENCIES
   nilify_blanks
   pg (= 0.18.4)
   puma
+  rack-cors
   rack-pjax!
   rails (= 5.0.0)
   rails_12factor (= 0.0.2)
