@@ -65,6 +65,8 @@
 .homerecordtable .row > div:last-of-type {
 	color:$light-blue;
 	position:static !important;
+	overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .homerecordtable .amountpaidrow:hover {
