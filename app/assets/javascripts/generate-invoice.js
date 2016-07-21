@@ -648,13 +648,6 @@ $(document).on('turbolinks:load', function() {
 			var timeDiff = Math.abs(d2.getTime() - d1.getTime());
 			var diff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
-			// Function to set difference as selected
-			function setSelected() {
-				////termsSelect.find('option:selected').attr('selected', false);
-				//$('*[data-term="30"]').attr('selected', false);
-				//$('*[data-term="' + diff + '"]').attr('selected', 'selected');
-			}
-
 			// Loop through the dropdown of terms to see if the difference exists. If it does, set that option to selected
 			var exists = false;
 			$('.terms option').each(function() {
