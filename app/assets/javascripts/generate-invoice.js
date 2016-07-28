@@ -648,6 +648,7 @@ $(document).on('turbolinks:load', function() {
 			var timeDiff = Math.abs(d2.getTime() - d1.getTime());
 			var diff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
+
 			// Loop through the dropdown of terms to see if the difference exists. If it does, set that option to selected
 			var exists = false;
 			$('.terms option').each(function() {
@@ -674,7 +675,7 @@ $(document).on('turbolinks:load', function() {
 				// Remove an previously appended items, then append the new option and set is as selected.	
 				terms.html(originalTerms);
 				terms.append('<option disabled>──────────</option><option ' + dataTerm + ' selected="selected">' + diff + ' ' + plural + '</option>');
-				setSelected();
+				
 			}
 		}
 
