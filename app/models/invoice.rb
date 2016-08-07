@@ -242,7 +242,7 @@ class Invoice < ActiveRecord::Base
 
     def configure_invoice_type
     	invoice_type = self.invoice_type || "invoice"
-    	invoice_type.downcase
+    	invoice_type.downcase!
 
     	unless INVOICE_TYPES.include?(invoice_type.to_s)
     		invoice_type = "invoice"

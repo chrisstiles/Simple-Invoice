@@ -115,7 +115,7 @@
 
 .homeinvoice h3 {
 	margin:0;
-	padding:12px 0 11px 0;
+	padding:12px 10px 11px 10px;
 	line-height:1;
 	background-color:$dark-blue;
 	color:#fff;
@@ -126,6 +126,7 @@
 	white-space: nowrap;
 	overflow:hidden;
 	position:relative;
+	text-overflow:ellipsis;
 	z-index: 300;
 }
 

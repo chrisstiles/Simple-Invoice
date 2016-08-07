@@ -626,6 +626,7 @@ a.logo img {
 	border-bottom:1px solid rgba(255,255,255,.1);
 	border-top:1px solid rgba(255,255,255,.1);
 	position:relative;
+	z-index: 200;
 }
 
 #controls h2.showinvoicenumber {

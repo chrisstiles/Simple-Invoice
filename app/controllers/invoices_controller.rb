@@ -309,6 +309,8 @@ class InvoicesController < ApplicationController
         invoice_type = nil
       end
 
+      puts "FIND THIS 1 #{invoice_type}"
+
       if invoice_type.present?
         invoice_type.downcase!
         if Invoice::INVOICE_TYPES.include?(invoice_type)
