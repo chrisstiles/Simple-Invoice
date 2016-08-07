@@ -3,9 +3,10 @@
 <head>
   <title><%= page_title %></title>
   <%= render 'shared/meta_tags' %>
+  <% if content_for?(:nocache) %><meta name="turbolinks-cache-control" content="no-cache"><% end %>
   <% if content_for?(:nophone) %><meta name="format-detection" content="telephone=no"><% end %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => "reload" %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => "reload" %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': "reload" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': "reload" %>
   <%= csrf_meta_tags %>
 </head>
 

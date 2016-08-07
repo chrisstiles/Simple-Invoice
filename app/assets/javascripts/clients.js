@@ -199,7 +199,10 @@ function showMobileClientsForm() {
 
 function hideMobileClientsForm() {
 	pageBody.removeClass('clientsformopen');
-	//$('.selected').removeClass('selected');
+}
+
+function removeSelection() {
+	$('.selected').removeClass('selected');
 }
 
 // Add selected class and perform ajax request for edit form
@@ -214,7 +217,7 @@ pageWrapper.on('click', '.client', function() {
 			getClient(id);
 		}
 
-		$('.selected').removeClass('selected');
+		removeSelection();
 		$this.addClass('selected');
 
 		showMobileClientsForm();
@@ -223,7 +226,7 @@ pageWrapper.on('click', '.client', function() {
 });
 
 $('.mobilenewclient').on('click', function(e) {
-	$('.selected').removeClass('selected');
+	removeSelection();
 	showMobileClientsForm();
 	currentSelected = "";
 });
@@ -251,12 +254,25 @@ function getClient(id) {
 
 // Get html for new form and render it when the new form button is pressed.
 
-var newFormHtml = $('#clientssidebar').html();
+var newFormHtml;
+var newFormCache = sessionStorage.getItem("newFormHtml");
+
+document.addEventListener("turbolinks:before-cache", function() {
+	if ($('.selected').length) {
+		sessionStorage.setItem("newFormHtml", newFormHtml);
+	}
+});
+
+if (newFormCache && newFormCache.length) {
+	newFormHtml = newFormCache;
+} else {
+	newFormHtml  = $('#clientssidebar').html();
+}
 
 pageBody.on('click', '.newclientbutton', function(e) {
 	e.preventDefault();
 	pageBody.find('#clientssidebar').html(newFormHtml);
-	$('.selected').removeClass('selected');
+	removeSelection();
 });
 
 // Change the client name in title form as user types

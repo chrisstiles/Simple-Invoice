@@ -28,7 +28,7 @@
       <div id="controls">
         <h2>Date <span class="invoiceonly">and Terms</span></h2>
           <div class="control datecontrol">
-            <div class="alignment">
+            <div class="alignment" data-turbolinks-permanent>
                   <span>Date</span>
                   <%= f.text_field :date, class: "datefield", 'date' => @invoice.date.strftime("%B %d, %Y"), readonly: true %>
               </div>
@@ -51,7 +51,7 @@
               </div>
           </div>
           <div class="control duedatecontrol invoiceonly">
-            <div class="alignment">
+            <div class="alignment" data-turbolinks-permanent>
                   <span>Due</span>
                   <%= f.text_field :due_date, class: "duedatefield", 'date' => @invoice.due_date.strftime("%B %d, %Y"), readonly: true %>
               </div>

@@ -806,7 +806,7 @@ $window.resize(function() {
 
 
 // Run this when using the back button and turbolinks loads from cache
-$(document).on('turbolinks:restore', function() {
+$(document).on('turbolinks:visit', function() {
 
 	$('html').removeClass('noscroll');
 

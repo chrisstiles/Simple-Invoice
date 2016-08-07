@@ -1,6 +1,20 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
+	var invoiceWrapper = $('#invoicewrapper');
+	var editing = invoiceWrapper.hasClass('edit');
+	var creating = invoiceWrapper.hasClass('new');
+	if (creating || editing) {
+		sessionStorage.removeItem("datePickersCache");
+		sessionStorage.removeItem("invoiceType");
+	}
+});
 
-	// Tell if the user is editing 
+$(document).on('turbolinks:visit', function() {
+	$.datepicker.initialized = false;
+});
+
+$(document).on('turbolinks:load', function() {
+	
+	var $document = $(document);
 	var invoiceWrapper = $('#invoicewrapper');
 	var editing = invoiceWrapper.hasClass('edit');
 	var creating = invoiceWrapper.hasClass('new');
@@ -9,8 +23,6 @@ $(document).on('turbolinks:load', function() {
 	var pageBody = $('body');
 	var isEstimatePage = pageBody.hasClass('isestimate');
 	var isInvoicePage = pageBody.hasClass('isinvoice');
-
-	// Code for all page
 
 	// Add loading content to buttons on press
 
@@ -63,32 +75,31 @@ $(document).on('turbolinks:load', function() {
 
 	// Function to prevent pasting formatted text in content editable
 
-		var _onPaste_StripFormatting_IEPaste = false;
+	var _onPaste_StripFormatting_IEPaste = false;
 
-            function OnPaste_StripFormatting(elem, e) {
+        function OnPaste_StripFormatting(elem, e) {
 
-                if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+            if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+                e.preventDefault();
+                var text = e.originalEvent.originalEvent.clipboardData.getData('text/plain');
+                window.document.execCommand('insertText', false, text);
+            }
+            else if (e.clipboardData && e.clipboardData.getData) {
+                e.preventDefault();
+                var text = e.clipboardData.getData('text/plain');
+                window.document.execCommand('insertText', false, text);
+            }
+            else if (window.clipboardData && window.clipboardData.getData) {
+                // Stop stack overflow
+                if (!_onPaste_StripFormatting_IEPaste) {
+                    _onPaste_StripFormatting_IEPaste = true;
                     e.preventDefault();
-                    var text = e.originalEvent.originalEvent.clipboardData.getData('text/plain');
-                    window.document.execCommand('insertText', false, text);
+                    window.document.execCommand('ms-pasteTextOnly', false);
                 }
-                else if (e.clipboardData && e.clipboardData.getData) {
-                    e.preventDefault();
-                    var text = e.clipboardData.getData('text/plain');
-                    window.document.execCommand('insertText', false, text);
-                }
-                else if (window.clipboardData && window.clipboardData.getData) {
-                    // Stop stack overflow
-                    if (!_onPaste_StripFormatting_IEPaste) {
-                        _onPaste_StripFormatting_IEPaste = true;
-                        e.preventDefault();
-                        window.document.execCommand('ms-pasteTextOnly', false);
-                    }
-                    _onPaste_StripFormatting_IEPaste = false;
-                }
-
+                _onPaste_StripFormatting_IEPaste = false;
             }
 
+        }
 
 
 		// Bind the input fields and content editable fields.
@@ -122,7 +133,7 @@ $(document).on('turbolinks:load', function() {
 
 
 		// Change input field when content editable changes
-		$(document).on('keydown keyup', '[contenteditable=true]', function() {
+		$document.on('keydown keyup', '[contenteditable=true]', function() {
 			var $this = $(this);
 			
 			var value = $this.text();
@@ -185,13 +196,13 @@ $(document).on('turbolinks:load', function() {
 			}
 		}
 
-		$(document).on('keydown', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search, .onlynumber', function(e) {
+		$document.on('keydown', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search, .onlynumber', function(e) {
 			return isNumber(e);
 		});
 
 
 		// Prevent pasting in quantity and rate fields
-		$(document).on('paste', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search, .onlynumber', function(e) {
+		$document.on('paste', '.e-quantity, .e-rate, #e-amountpaid, .e-amountpaid, .invoice_number_search, .onlynumber', function(e) {
 			e.preventDefault();
 			$(this).text('');
 		});
@@ -520,26 +531,54 @@ $(document).on('turbolinks:load', function() {
 		var invoiceOnlyItems = $('.invoiceonly');
 		var saveButton = $('#toolbarcontent .saveicon');
 
-		invoiceTypeSelect.on('change', function() {
-			if ($(this).val().toLowerCase() === 'estimate') {
+		var invoiceTypeCache = sessionStorage.getItem("invoiceType"),
+			hasCachedInvoiceType;
+
+		if (invoiceTypeCache && invoiceTypeCache.length) {
+			hasCachedInvoiceType = true;
+		} else {
+			hasCachedInvoiceType = false;
+		}
+
+		function setInvoiceTypeField(isInitial) {
+			var isEstimate = false;
+			if (isInitial && hasCachedInvoiceType) {
+				invoiceTypeSelect.val(invoiceTypeCache);
+				if (invoiceTypeCache.toLowerCase() === 'estimate') {
+					isEstimate = true;
+				}
+			} else {
+				if (invoiceTypeSelect.val().toLowerCase() === 'estimate') {
+					isEstimate = true;
+				}
+			}
+
+			if (isEstimate) {
 				invoiceNumberSpan.hide();
 				estimateNumberSpan.show();
-
 				saveButton.val("Save Estimate");
 
-				removeMaxDate();
-				invoiceOnlyItems.hide();
-
+				if (!isInitial) {
+					removeMaxDate();
+					invoiceOnlyItems.hide();
+				}
 			} else {
 				invoiceNumberSpan.show();
 				estimateNumberSpan.hide();
 
 				saveButton.val("Save Invoice");
 
-				setMinDate();
-				invoiceOnlyItems.show();
-
+				if (!isInitial) {
+					setMinDate();
+					invoiceOnlyItems.show();
+				}
 			}
+		}
+
+		setInvoiceTypeField(true);
+
+		invoiceTypeSelect.on('change', function() {
+			setInvoiceTypeField(false);
 		});
 
 		// Set focus to textbox when control box is clicked
@@ -565,25 +604,63 @@ $(document).on('turbolinks:load', function() {
 		});
 
 		//Initialize datepickers
-		var dateField = $('.datefield');
-		dateField.datepicker({
+		var dateControl = $('.datecontrol');
+		var dueDateControl = $('.duedatecontrol');
+
+		// Store whether or not the datepickers have already been initialized by turbolinks
+		var datePickersCache = sessionStorage.getItem("datePickersCache"),
+			hasCachedDates;
+
+		if (datePickersCache && datePickersCache.length) {
+			hasCachedDates = true;
+		} else {
+			hasCachedDates = false;
+		}
+
+		var dateField, dueDateField;
+
+		function setDateFields() {
+			dateField = $('.datefield');
+			dueDateField = $('.duedatefield');
+		}
+
+		setDateFields();
+
+		var dateFieldHtmlCache, dueDateFieldHtmlCache;
+
+		if (hasCachedDates) {
+			dateFieldHtmlCache = sessionStorage.getItem("datePickerHtmlCache");
+			dueDateFieldHtmlCache = sessionStorage.getItem("dueDatePickerHtmlCache");
+		} else {
+			dateFieldHtmlCache = dateField[0].outerHTML;
+			dueDateFieldHtmlCache = dueDateField[0].outerHTML;
+		}
+
+		document.addEventListener("turbolinks:before-cache", function() {
+			sessionStorage.setItem("datePickersCache", "true");
+			sessionStorage.setItem("invoiceType", invoiceTypeSelect.val());
+		});
+
+		if (hasCachedDates) {
+			$('.hasDatepicker').removeClass('hasDatepicker');
+			setDateFields();
+			jQuery.datepicker.dpDiv.appendTo( jQuery('body') );
+		}
+
+		$.datepicker.setDefaults({
 			dateFormat: "MM d, yy",
 			altFormat: "dd-mm-yy",
 			showAnim: "",
 			hideIfNoPrevNext: true
 		});
 
+		dateField.datepicker();
+
 		dateField.datepicker('setDate', '+0');
 
-		var dueDateField = $('.duedatefield'),
-			term = $('.terms').find(':selected').data('term');
+		var term = $('.terms').find(':selected').data('term');
 
-		dueDateField.datepicker({
-			dateFormat: "MM d, yy",
-			altFormat: "dd-mm-yy",
-			hideIfNoPrevNext: true,
-			showAnim: "",
-		});
+		dueDateField.datepicker();
 
 		function setDueDate() {
 			term = $('.terms').find(':selected').data('term');
@@ -638,16 +715,16 @@ $(document).on('turbolinks:load', function() {
 		var termsSelect = $('.terms');
 
 		function setTerms() {
-			var d1 = dateField.datepicker('getDate'),
-				d2 = dueDateField.datepicker('getDate');
+			var d1 = dateField.datepicker('getDate');
+			var d2 = dueDateField.datepicker('getDate');
 
 			// Get the difference between the two dates and then divide by the number of milliseconds in a day	
 			//var diff = Math.floor((d2.getTime() - d1.getTime()) / 86400000);
 
 			// Get the difference between two dates
+
 			var timeDiff = Math.abs(d2.getTime() - d1.getTime());
 			var diff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-
 
 			// Loop through the dropdown of terms to see if the difference exists. If it does, set that option to selected
 			var exists = false;
@@ -711,10 +788,9 @@ $(document).on('turbolinks:load', function() {
 
 			setTerms();
 
-
 		} else {
 			setDueDate();
-		}
+		}		
 
 
 		eDate.html(dateField.val());
@@ -804,7 +880,7 @@ $(document).on('turbolinks:load', function() {
 			dueDateField.datepicker('show');
 		});
 
-		$(document).on("click", function(e) {
+		$document.on("click", function(e) {
 		    var elem = $(e.target);
 		    if(!elem.hasClass("hasDatepicker") && 
 		        !elem.hasClass("ui-datepicker") && 
@@ -1384,42 +1460,6 @@ $(document).on('turbolinks:load', function() {
 	// Code just for the show page
 
 	if (showing) {
-
-		// $(document).on('click', '.recordpaymentbutton', function() {
-
-		// });
-
-		// // Focus amount paid box when row is clicked
-
-		// $('.amountpaidrow').on('click', function() {
-		// 	$(this).find('span').focus();
-		// });
-
-		// var amountPaid = $('.e-amountpaid');
-
-		// amountPaid.on('focus', function() {
-		// 	$(this).closest('.row').addClass('active');
-		// });
-
-		// amountPaid.on('blur', function() {
-		// 	$(this).closest('.row').removeClass('active');
-		// });
-
-		// // Prevent amount paid entered from being higher than invoice total
-
-		// amountPaid.on('keyup', function(e) {
-		// 	var $this = $(this);
-		// 	var amountPaid = parseFloat($this.text(), 10);
-		// 	var invoiceTotal =  parseFloat(Number( $('.invoicetotalcell').text().replace(/[^0-9\.]+/g,"")), 10);
-
-		// 	if (amountPaid > invoiceTotal) {
-		// 		$this.addClass('toomuch');
-		// 	} else {
-		// 		$this.removeClass('toomuch');
-		// 	}
-		// });
-
-		// Delete <br> tag in show if the span is empty
 
 		$('span').each(function() {
 

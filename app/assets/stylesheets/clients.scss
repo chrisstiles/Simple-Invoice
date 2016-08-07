@@ -312,3 +312,11 @@ textarea.haserror:focus {
 #clientssidebar #toolbar {
 	display:none;
 }
+
+
+.cachestore {
+	position:absolute;
+	left:9999px;
+	display:none;
+	visibility:hidden;
+}

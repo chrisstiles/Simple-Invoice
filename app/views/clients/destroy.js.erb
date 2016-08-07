@@ -7,7 +7,7 @@ clientsFormWrapper.html("<%= js %>");
 
  $.ajax({
 	type: 'GET',
-	url: '/clients/page=' + currentPage,
+	url: '/clients/?page=' + currentPage,
 	dataType: 'script',
 	async: true
 	}).done(function( msg ) {
