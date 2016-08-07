@@ -542,35 +542,37 @@ $(document).on('turbolinks:load', function() {
 
 		function setInvoiceTypeField(isInitial) {
 			var isEstimate = false;
-			if (isInitial && hasCachedInvoiceType) {
-				invoiceTypeSelect.val(invoiceTypeCache);
-				if (invoiceTypeCache.toLowerCase() === 'estimate') {
-					isEstimate = true;
+			if (invoiceTypeSelect.length) {
+				if (isInitial && hasCachedInvoiceType) {
+					invoiceTypeSelect.val(invoiceTypeCache);
+					if (invoiceTypeCache.toLowerCase() === 'estimate') {
+						isEstimate = true;
+					}
+				} else {
+					if (invoiceTypeSelect.val().toLowerCase() === 'estimate') {
+						isEstimate = true;
+					}
 				}
-			} else {
-				if (invoiceTypeSelect.val().toLowerCase() === 'estimate') {
-					isEstimate = true;
-				}
-			}
 
-			if (isEstimate) {
-				invoiceNumberSpan.hide();
-				estimateNumberSpan.show();
-				saveButton.val("Save Estimate");
+				if (isEstimate) {
+					invoiceNumberSpan.hide();
+					estimateNumberSpan.show();
+					saveButton.val("Save Estimate");
 
-				if (!isInitial) {
-					removeMaxDate();
-					invoiceOnlyItems.hide();
-				}
-			} else {
-				invoiceNumberSpan.show();
-				estimateNumberSpan.hide();
+					if (!isInitial) {
+						removeMaxDate();
+						invoiceOnlyItems.hide();
+					}
+				} else {
+					invoiceNumberSpan.show();
+					estimateNumberSpan.hide();
 
-				saveButton.val("Save Invoice");
+					saveButton.val("Save Invoice");
 
-				if (!isInitial) {
-					setMinDate();
-					invoiceOnlyItems.show();
+					if (!isInitial) {
+						setMinDate();
+						invoiceOnlyItems.show();
+					}
 				}
 			}
 		}
