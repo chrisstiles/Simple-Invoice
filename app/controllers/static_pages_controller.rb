@@ -45,7 +45,7 @@ class StaticPagesController < ApplicationController
 	private
 		def redirect_if_logged_in
 			if user_signed_in?
-				redirect_to invoices_path
+				redirect_to invoices_url
 			end
 		end
 end

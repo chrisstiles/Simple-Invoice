@@ -13,10 +13,11 @@ $(document).on('turbolinks:load', function() {
     // Generate the modal window and title
 
     function showModal(title) {
-        var scrollAmount = $document.scrollTop();
+        var scrollAmount = $document.scrollTop(),
+            scrollTop = 0;
 
         if ($document.height() > $(window).height()) {
-             var scrollTop = (pageHtml.scrollTop()) ? pageHtml.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
+             scrollTop = (pageHtml.scrollTop()) ? pageHtml.scrollTop() : pageBody.scrollTop(); // Works for Chrome, Firefox, IE...
              pageHtml.addClass('noscroll').css('top',-scrollTop);         
         }
 
