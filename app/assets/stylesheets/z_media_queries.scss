@@ -1351,7 +1351,7 @@
 		padding:45px 40px 70px 40px;
 	}
 
-	#passwordsuccess, #passwordform {
+	#passwordsuccess, #passwordform, #contactform, #contactsuccess {
 		padding:0 40px;
 	}
 
@@ -1415,6 +1415,11 @@
 		float:none;
 	}
 
+	footer {
+		height:auto;
+		padding:20px;
+	}
+
 	footer .footernav a:first-of-type {
 		text-align: left;
 	}
@@ -1430,6 +1435,12 @@
 	    width: 100%;
 	    padding: 0;
 	    margin: 6px 0;
+	}
+
+	footer:after {
+		clear:both;
+		display:block;
+		content:"";
 	}
 }
 
@@ -1762,17 +1773,6 @@
 		display:block;
 		width:180px;
 		margin-top:25px;
-	}
-
-	footer {
-		height:auto;
-		padding:20px;
-	}
-
-	footer:after {
-		clear:both;
-		display:block;
-		content:"";
 	}
 
 	#pagewrapper.staticwrapper p, #pagewrapper.staticwrapper li {

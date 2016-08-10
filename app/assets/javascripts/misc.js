@@ -786,6 +786,18 @@ checkContentWrapperHeight();
 
 $document.ajaxComplete(checkContentWrapperHeight);
 
+// Prevent CSS transitions while resizing
+var resizingTimer;
+var toggleBodyResizingClass = function() {
+	pageBody.addClass('resizing');
+	clearTimeout(resizingTimer);
+	resizingTimer = setTimeout(doneResizing, 30);
+};
+
+function doneResizing() {
+	pageBody.removeClass('resizing');
+}
+
 
 // Changed fixed positions on window resize
 $window.resize(function() {
@@ -798,6 +810,8 @@ $window.resize(function() {
 	}
 
 	checkPaginationLength();
+
+	toggleBodyResizingClass();
 });
 
 
