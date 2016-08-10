@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	has_many :invoices, dependent: :destroy
 	has_many :clients, dependent: :destroy
 	has_many :logos, dependent: :destroy
+	has_many :user_emails, dependent: :destroy
 	has_one :setting, dependent: :destroy
 
 	accepts_nested_attributes_for :setting

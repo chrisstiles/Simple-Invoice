@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522210339) do
+ActiveRecord::Schema.define(version: 20160810010034) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -25,9 +24,8 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
-
-  add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "invoice_number"
@@ -51,17 +49,16 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.decimal  "balance",              precision: 15, scale: 4
     t.string   "logo",                                          default: ""
     t.boolean  "has_tax",                                       default: false
-    t.decimal  "tax",                                           default: 0.0
+    t.decimal  "tax",                                           default: "0.0"
     t.boolean  "tax_included",                                  default: false
     t.string   "token"
     t.integer  "logo_width"
     t.integer  "logo_height"
     t.string   "invoice_type",                                  default: "invoice"
     t.integer  "estimate_number",                               default: 1
+    t.index ["client_id"], name: "index_invoices_on_client_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
-
-  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id"
-  add_index "invoices", ["user_id"], name: "index_invoices_on_user_id"
 
   create_table "jobs", force: :cascade do |t|
     t.text     "job_description"
@@ -71,9 +68,8 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
     t.boolean  "will_delete",                              default: false
+    t.index ["invoice_id"], name: "index_jobs_on_invoice_id"
   end
-
-  add_index "jobs", ["invoice_id"], name: "index_jobs_on_invoice_id"
 
   create_table "logos", force: :cascade do |t|
     t.integer  "user_id"
@@ -83,9 +79,8 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.boolean  "current_logo", default: true
     t.integer  "logo_width"
     t.integer  "logo_height"
+    t.index ["user_id"], name: "index_logos_on_user_id"
   end
-
-  add_index "logos", ["user_id"], name: "index_logos_on_user_id"
 
   create_table "settings", force: :cascade do |t|
     t.integer  "base_invoice_number",  default: 1
@@ -93,12 +88,22 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.boolean  "has_tax",              default: false
-    t.decimal  "tax",                  default: 0.0
+    t.decimal  "tax",                  default: "0.0"
     t.boolean  "tax_included",         default: false
     t.integer  "base_estimate_number", default: 1
+    t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
-  add_index "settings", ["user_id"], name: "index_settings_on_user_id"
+  create_table "user_emails", force: :cascade do |t|
+    t.string   "recipients"
+    t.string   "message"
+    t.integer  "invoice_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_user_emails_on_invoice_id"
+    t.index ["user_id"], name: "index_user_emails_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -124,9 +129,8 @@ ActiveRecord::Schema.define(version: 20160522210339) do
     t.string   "zip"
     t.string   "phone"
     t.boolean  "is_admin",               default: false, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

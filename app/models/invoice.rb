@@ -11,6 +11,7 @@ class Invoice < ActiveRecord::Base
 	belongs_to :client
 	
 	has_many :jobs, dependent: :destroy
+	has_many :user_emails
 
 	accepts_nested_attributes_for :jobs, :client
 

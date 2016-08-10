@@ -38,6 +38,13 @@ class InvoicesController < ApplicationController
   
         InvoiceMailer.email_invoice(current_user, @invoice, params[:recipient], params[:cc], params[:subject], params[:message]).deliver_now
 
+        user_email = @invoice.user_emails.create
+        user_email.record_email_send(recipient: params[:recipient], cc: params[:cc], message: params[:message])
+
+        current_user.user_emails << user_email
+        
+        user_email.save
+
         flash[:success] = "#{@invoice.display_invoice_type} was successfully emailed!"
         flash.keep(:success)
 
