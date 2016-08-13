@@ -18,7 +18,5 @@ class UserEmail < ApplicationRecord
   	self.recipients = recipients
   	self.message = message
 
-  	puts "FIND THIS: #{recipients} :: #{message}"
-
   end
 end
