@@ -903,6 +903,16 @@
 
 }
 
+@media screen and (max-width:930px) {
+	#pagewrapper.staticwrapper {
+		margin:35px;
+	}
+
+	#pagewrapper.smallbox {
+		margin:55px auto 55px auto;
+	}
+}
+
 @media screen and (max-width:885px) {
 	.homeinvoice {
 		float:none;
@@ -1363,21 +1373,7 @@
 	}
 }
 
-@media screen and (max-width:565px) {
-	/*
-	footer {
-		padding: 0 18px;
-	    font-size: 12px;
-	    font-weight: 600;
-	    height:50px;
-	}
-
-	#copy, footer a {
-		margin-top:-6px;
-		line-height:12px;
-	}
-	*/
-
+@media screen and (max-width:590px) {
 	.copy, footer a {
 		position:static;
 		font-size:14px;
@@ -1408,7 +1404,6 @@
 	}
 
 	footer .footernav a {
-		width:50%;
 		box-sizing:border-box;
 		margin:0;
 		padding:0 3px;
@@ -1420,21 +1415,13 @@
 		padding:20px;
 	}
 
-	footer .footernav a:first-of-type {
-		text-align: left;
-	}
-
-	footer .footernav a:last-of-type {
-		text-align: right;
-	}
-
 	footer a.privacylink {
 	    border-left: none;
 	    display: block;
 	    text-align: center;
 	    width: 100%;
 	    padding: 0;
-	    margin: 6px 0;
+	    margin: 6px 0 13px 0;
 	}
 
 	footer:after {
@@ -1717,8 +1704,9 @@
     	margin-right: 0;
 	}
 
-	#pagewrapper.smallbox {
+	#pagewrapper.staticwrapper {
 		margin:15px;
+		padding:30px 25px 55px 25px;
 	}
 
 	.passwordhalf, .confirmpasswordhalf {
