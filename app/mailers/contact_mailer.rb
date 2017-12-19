@@ -13,4 +13,5 @@ class ContactMailer < ApplicationMailer
 
   	mail subject: "Simple Invoice Contact Form", to: "info@simpleinvoice.io", reply_to: @email
   end
+  
 end

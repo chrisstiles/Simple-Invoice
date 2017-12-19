@@ -401,10 +401,8 @@ class InvoicesController < ApplicationController
         @invoices = @invoices.invoice_number(params[:invoice_number]) if params[:invoice_number].present?
         @invoices = @invoices.currently_due(params[:currently_due]) if params[:currently_due].present?
       end
-
        @invoices = @invoices.sorted_by(params[:sorted_by]) if params[:sorted_by].present?
        @invoices = @invoices.client_name(params[:client_name]) if params[:client_name].present?
-
     end
 
 end
