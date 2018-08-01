@@ -1,3 +1,5 @@
+Dropzone.autoDiscover = false;
+
 $(document).on('turbolinks:load', function() {
 
 var $document = $(document);

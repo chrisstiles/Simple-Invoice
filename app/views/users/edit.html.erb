@@ -50,7 +50,7 @@
 
 					<div class="half">
 						<%= f.label :state %>
-						<%= f.select :state, options_for_select(us_states, selected: @user.state), prompt: "Select a state", class: "half" %>
+						<%= f.text_field :state, placeholder: "State" %>
 					</div>
 
 					<div class="half nomargin">
