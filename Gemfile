@@ -9,7 +9,7 @@ gem 'rails', '5.0.0.1'
 gem 'uglifier', '>= 1.3.0'
 
 # Generate PDFs
-gem 'wicked_pdf', '0.9.9'
+gem 'wicked_pdf', '0.9.9' 
 gem 'wkhtmltopdf-binary'
 
 # Autoprefix CSS
