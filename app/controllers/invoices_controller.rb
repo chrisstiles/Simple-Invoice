@@ -23,7 +23,10 @@ class InvoicesController < ApplicationController
         format.html
       end
       format.pdf do
-        render pdf: "#{@invoice.display_invoice_type} #{@invoice.display_number}", :template => 'invoices/pdf_default.html.erb', show_as_html: params.key?('debug')
+        render pdf: "#{@invoice.display_invoice_type} #{@invoice.display_number}",
+              template: 'invoices/pdf_default.html.erb',
+              page_size: 'Letter',
+              show_as_html: params.key?('debug')
       end
     end
   end

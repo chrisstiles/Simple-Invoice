@@ -9,7 +9,7 @@ gem 'rails', '5.0.0.1'
 gem 'uglifier', '>= 1.3.0'
 
 # Generate PDFs
-gem 'wicked_pdf', '0.9.9'
+gem 'wicked_pdf', '1.1.0'
 gem 'wkhtmltopdf-binary'
 
 # Autoprefix CSS
@@ -38,12 +38,12 @@ gem 'browser-timezone-rails'
 
 # Admin panel
 # Commenting out original rails_admin gem to resolve dependency issues with Rails 5.
-# gem 'rails_admin'
+gem 'rails_admin'
 
 # Adding builds of rails_admin gems not currently released. 
-gem 'rails_admin', github: 'sferik/rails_admin'
-gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
-gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+# gem 'rails_admin', github: 'sferik/rails_admin'
+# gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
+# gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 
 # Authorization
 gem 'cancancan', '~> 1.10'

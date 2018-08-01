@@ -7,14 +7,15 @@
 
 <style>
 
+html,
 body {
   margin:0 !important;
   padding: 0 !important;
   font-family:'Libertad';
+  text-rendering: optimizeLegibility;
 }
 
 #pdfinvoicewrapper {
-	width:8.5in;
   top:0;
   right:0;
   left:0;
@@ -33,7 +34,6 @@ body {
   left:0;
   z-index: 200;
   width:8.5in;
-  background:red;
   opacity:.5;
 }
 
@@ -70,7 +70,6 @@ tr.lastrow td {
 /* Default theme code */
 
 #invoice {
-	background:#fff;
   width:calc(100% - 50px);
 	display:block;
   font-size:17px;
