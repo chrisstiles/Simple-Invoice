@@ -6,7 +6,7 @@ ruby "2.3.1"
 gem 'rails', '5.0.0.1'
 
 # Force add www to domain
-gem 'rack-www'
+# gem 'rack-www'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
