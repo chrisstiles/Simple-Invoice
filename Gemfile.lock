@@ -305,6 +305,8 @@ GEM
       rack (>= 1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-www (2.3.0)
+      rack (< 3.0)
     rails (5.0.0.1)
       actioncable (= 5.0.0.1)
       actionmailer (= 5.0.0.1)
@@ -470,6 +472,7 @@ DEPENDENCIES
   pg (= 0.18.4)
   puma
   rack-cors
+  rack-www
   rails (= 5.0.0.1)
   rails_12factor (= 0.0.2)
   rails_admin
@@ -492,4 +495,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   2.0.2
+   1.16.2
