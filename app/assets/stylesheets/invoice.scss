@@ -738,23 +738,25 @@ body.windows.internet.explorer .jobcontrols {
 	border-radius:50%;
 }
 
-.delete {
-	background-image:$delete-icon;
-}
+.jobcontrols {
+	.delete {
+		background-image:$delete-icon;
+	}
 
-.delete:hover {
-	background-color:#fae9e7;
-}
+	.delete:hover {
+		background-color:#fae9e7;
+	}
 
-.delete.disabled {
-	cursor:default;
-	opacity:.5;
-	-webkit-filter: grayscale(1);
-	filter: grayscale(1);
-}
+	.delete.disabled {
+		cursor:default;
+		opacity:.5;
+		-webkit-filter: grayscale(1);
+		filter: grayscale(1);
+	}
 
-.delete.disabled:hover {
-	background-color:transparent;	
+	.delete.disabled:hover {
+		background-color:transparent;	
+	}
 }
 
 .insert:hover {

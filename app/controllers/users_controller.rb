@@ -30,6 +30,16 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+
+		if current_user.id == @user.id
+			@user.destroy
+			redirect_to root_url
+			flash[:success] = 'Profile successfully deleted!'
+		end
+	end
+
 	private
 
 		def set_user

@@ -518,7 +518,6 @@ body.ios input.button.small {
 }
 
 .button.deleteinvoice, .button.deleteclient, .button.deletelogo {
-	background-color:#df4535;
 	position:absolute;
 	bottom:15px;
 	display:block;
@@ -546,15 +545,23 @@ body.ios input.button.small {
 .button.deletelogo {
 	position:relative;
 	display: inline-block;
-    float: right;
+	float: right;
 }
 
-.button.deleteinvoice:hover, .button.deleteclient:hover, .button.deletelogo:hover {
-	background-color:#c9392a;
-}
+.button {
+	&.delete,
+	&.deleteclient,
+	&.deletelogo {
+		background-color:#df4535;
+		
+		&:hover {
+			background-color:#c9392a;
+		}
 
-.button.deleteinvoice:active, .button.deleteclient:active, .button.deletelogo:active  {
-	background-color:#9f2a1e;
+		&:active {
+			background-color:#9f2a1e;
+		}
+	}
 }
 
 /***********/

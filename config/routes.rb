@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     post 'sign-in' => 'users/sessions#create', as: :user_session
     delete 'sign_out' => 'users/sessions#destroy'
 
+    # Forgot password
     get "forgot-password", to: "users/passwords#new", as: :forgot_password
+
+    # Delete account
+    delete "users/:id", to: "users#destroy"
   end
 
   get 'pdfs/no-invoice-found' => 'static_pages#no_invoice_found', as: :no_invoice_found

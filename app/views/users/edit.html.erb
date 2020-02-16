@@ -122,7 +122,14 @@
 						</div>
 					</div>
 
-				</div>	
+				</div>
+
+				<div id="deleteprofile">
+					<div class="clientformtitle">Delete Your Account</div>
+					<p>Click the button below to delete your Simple Invoice account. <strong>This action cannot be undone!</strong> Your account, invoices and settings will be permanently deleted.</p>
+					
+					<%= link_to "Delete Account", current_user, data: { confirm: "Are you sure you would like to permanently delete your account?" }, class: "button delete deleteicon", method: :delete %>
+				</div>
 
 			<% end %>
 
