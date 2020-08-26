@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
 	before_save :remove_white_space
 
-	after_create :send_welcome_email
+	# after_create :send_welcome_email
 
 	# Remember user by default
 	def remember_me
