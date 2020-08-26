@@ -4,35 +4,5 @@
 <div id="pagewrapper" class="staticwrapper smallbox paddinganimate registerbox">
 
   <h1>Create a Simple <br class="mobilebreak registerbreak">Invoice Account</h1>
-
-  <div id="registervalidationerrors" class="registererrors">
-    <div class="validationtitle">
-    <div class="closeerrors"></div>
-    Please correct the following errors
-    </div>
-     <div class="errorholder"></div>
-  </div>
-
-<div class="formholder registerformholder">
-    <%= form_for(:user, url: registration_path(:user), remote: true, html: { class: "registerform" }) do |f| %>
-        <%= f.label :email %>
-        <%= f.email_field :email, class: "registeremail", placeholder: "Email address" %>
-
-        <%= f.label :name %>
-        <%= f.text_field :name, placeholder: "Name" %>
-
-        <div class="passwordhalf">
-            <%= f.label :password %>
-            <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
-        </div>
-
-        <div class="confirmpasswordhalf">
-            <%= f.label :password_confirmation, "Confirm Password" %>
-            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
-        </div>
-
-       <p class="staticsubmit"> <%= f.submit "Sign up", class: "button blue willload registerbutton" %></p>
-    <% end %>
-</div>
-
+  <p style="text-align:center">Registration is temporarily disabled</p>
 </div>
