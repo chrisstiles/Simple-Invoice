@@ -12,12 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    @user = resource
-    if resource.save
-      create_user_settings
-      flash[:success] = 'Welcome to Simple Invoice!'
-    end
+    # super
+    flash[:error] = 'New user registration has been temporarily disabled. Please try again soon.'
+    # @user = resource
+    # if resource.save
+    #   create_user_settings
+    #   flash[:success] = 'Welcome to Simple Invoice!'
+    # end
   end
 
   # GET /resource/edit
